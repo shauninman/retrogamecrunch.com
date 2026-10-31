@@ -8,9 +8,12 @@ fieldset.archive-form{border:0;padding:0;margin:0;min-inline-size:0;position:rel
 #footer-wrap ul.nav{overflow:visible}
 
 img {
-	image-rendering: pixelated;
-	image-rendering: crisp-edges;
-	image-rendering: -webkit-optimize-contrast;
-	image-rendering: -moz-crisp-edges;
-	-ms-interpolation-mode: nearest-neighbor;
+    /* Legacy browser fallbacks */
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: -moz-crisp-edges;
+    -ms-interpolation-mode: nearest-neighbor;
+
+    /* Modern browsers */
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
 }
