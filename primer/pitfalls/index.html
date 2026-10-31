@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Pitfalls! • Retro Game Crunch</title>
+<script>if((window.devicePixelRatio===undefined?1:window.devicePixelRatio)>1)document.cookie='HTTP_IS_RETINA=1;path=/';</script>
+<meta name="google-site-verification" content="0n15O71rkhohq8oudSJ4AhQ9ZHGrtYQGzZ-hj6_NTGI">
+<meta name="viewport" id="viewport" content="width=800">
+<link rel="stylesheet" href="/styles/rgc.q688883a0dcaa.css">
+<link rel="stylesheet" href="/scripts/highlight/styles/zenburn.css">
+<script src="/scripts/highlight/highlight.pack.js"></script>
+<script src="/scripts/jquery-1.8.3.min.js"></script>
+
+<script src="/scripts/mediaelement/mediaelement-and-player.min.js"></script>
+<link rel="stylesheet" href="/scripts/mediaelement/mediaelementplayer.css">
+<script>
+hljs.tabReplace = '    ';
+hljs.initHighlightingOnLoad();
+
+$(function()
+{
+	$('audio').mediaelementplayer(/* Options */);
+	
+	// disable :hover on touch devices
+	// based on https://gist.github.com/4404503 
+	// via https://twitter.com/javan/status/284873379062890496
+	// + https://twitter.com/pennig/status/285790598642946048
+	// re https://retrogamecrunch.com/tmp/hover
+	if ('createTouch' in document)
+	{
+		$('html').addClass('touch');
+		try
+		{
+			var ignore = /:hover\b/;
+			for (var i=0; i<document.styleSheets.length; i++)
+			{
+				var sheet = document.styleSheets[i];
+				for (var j=sheet.cssRules.length-1; j>=0; j--)
+				{
+					var rule = sheet.cssRules[j];
+					if (rule.type === CSSRule.STYLE_RULE && ignore.test(rule.selectorText))
+					{
+						sheet.deleteRule(j);
+					}
+				}
+			}
+		}
+		catch(e){}
+	}
+});
+
+var then = 1387576800000;
+var deadline = '2013-12-20 22:00:00 UTC';
+var last_mins = -1;
+window.setInterval(function()
+{
+	var now = (new Date).getTime();
+	var remaining = then - now;
+	if (remaining < 0) remaining = 0;
+
+	var sec = 1000;
+	var min = 60 * sec;
+	var hour = 60 * min;
+	var day = 24 * hour;
+
+	var days = Math.floor(remaining / day);
+	remaining -= days * day;
+	var hours = Math.floor(remaining / hour);
+	remaining -= hours * hour;
+	var mins = Math.floor(remaining / min);
+	
+	if (last_mins == mins) return; // prevent unnecessary redraws
+	last_mins = mins;
+
+	var html = '';
+
+	if (days) 	html += '<span class="remaining-days">'+days+' day'+(days>1?'s':'')+'</span> ';
+	if (hours) 	html += '<span class="remaining-days">'+hours+' hour'+(hours>1?'s':'')+'</span> ';
+	if (mins) 	html += '<span class="remaining-days">'+mins+' minute'+(mins>1?'s':'')+'</span> ';
+
+	// DELAY
+	// if (html=='') html = 'To be determined';
+	if (html=='') html = 'Just a few moments';
+
+	$('span.countdown').html(html);
+}, 1 * 1000);
+</script>
+
+
+<link rel="stylesheet" href="/archive.css"><link rel="canonical" href="https://retrogamecrunch.com/primer/pitfalls/"></head>
+<body>
+	<div class="wrap wrap-top">
+		<div id="logo-unit">
+			<a id="logo" href="/"><img src="/images/logo-black.png" width="204" height="98" alt="Retro Game Crunch"></a>
+			<a id="funded" href="http://www.kickstarter.com/projects/shauninman/retro-game-crunch-six-games-in-six-months"><img src="/images/funded-with.png" width="116" height="112" alt="Funded with Kickstarter"></a>
+		</div><div id="mini-login">
+	
+</div><div id="status">
+			<div class="currently">
+				<strong>Currently</strong>
+				<a href="/games/6/shuten/">Recovering from Shūten Complete</a>
+			</div></div><ul class="nav nav-main">
+			<li><a href="/">Home</a></li>
+			<li><a href="/games/">Games</a></li>			<li><a href="/rewards/">Rewards</a></li>
+			<li><a href="/journal/">Journal</a></li>
+			<li><a href="/primer/" class="current">Primer</a></li>
+			<li><a href="/about/">About</a></li>
+			<li><a href="/contact/">Contact</a></li>
+		</ul>
+	</div><div class="wide"><div class="wrap">
+					<ul class="nav nav-alt nav-primer">
+				<li><a href="/primer/tools/">Tools</a></li>
+				<li><a href="/primer/getting-started/">Getting Started</a></li>
+				<li><a href="/primer/level-up/">Level Up</a></li>
+				<li><a href="/primer/players-gonna-play/">Players Gonna Play</a></li>
+				<li><a href="/primer/catch-em-all/">Catch ‘em All</a></li>
+				<li><a href="/primer/pitfalls/" class="current">Pitfalls!</a></li>
+				<li><a href="/primer/sound-off/">Sound Off</a></li>
+			</ul>
+				</div></div><div class="wrap wrap-bottom">
+		<div class="content">
+		<h1>Pitfalls!</h1>
+
+<p>Our unassuming protagonist has had it easy so far. The <a href="/primer/players-gonna-play/">ball</a> bounces around <a href="/primer/level-up/">our level</a> with some <a href="/primer/catch-em-all/">harmless, hovering pods</a>. Let’s throw some danger his way. Crossover time! Enter the platformer’s arch-enemy: the bottomless pit.</p>
+
+<h2>Pity the Fall</h2>
+
+<p>For our pits, we’re going to make use of Flixel’s super nice auto-tiling feature. For that, we’ll use two pit tilesets. The two tilesets are named the same, so pay attention! :) </p>
+
+<p>Download the <a href="/primer/downloads/bin/pits.png">simpler of the two</a> and add it to your project’s <em>bin</em> folder. (It’s really not much to look at—one blank tile, one filled.)</p>
+
+<p><img src="/primer/downloads/bin/pits.png" alt="pits.png"></p>
+
+<p>Then download the more <a href="/primer/downloads/pits.png">complex of the two</a> and add it to your project’s <em>assets</em> folder. (That’s inside the src folder, remember?) This tileset includes all the corners and caps necessary to frame pretty much any irregularly-shaped pit you can throw at it.</p>
+
+<p><img src="/primer/downloads/pits.png" alt="pits.png"></p>
+
+<p>Now open your level.tmx in Tiled. Create a new Tile Layer (Layer &gt; Add Tile Layer) and name it pits. Then add a new Tileset (Map &gt; New Tileset…) using the pits.png in your project’s bin folder. Using the Stamp tool draw in some pits. Once you’re done, your level.tmx should look something like this:</p>
+
+<p><img src="/primer/images/tiled-pits.png" alt="tiled-pits.png"></p>
+
+<p><em>Tiled Gotcha:</em> It’s very easy to get turned around in Tiled. You <em>can</em> draw on your bg layer with your pit tileset but you usually don’t mean to. If you are trying to draw on your map and nothing seems to be happening or it doesn’t look right in game, make sure the correct tool, layer, tileset, and tile are selected. Turning layers on and off is an easy way to spot the source of the problem. (Photoshop’s custom cursors for each tool don’t seem so excessive now, do they?)</p>
+
+<p>Save level.tmx and open FDT.</p>
+
+<h2>The Pits</h2>
+
+<p>First we need to get our pits drawing in game, then we’ll hook up the related behavior. Open ROM.as and embed pits.png by adding:</p>
+
+<pre><code>[Embed(source="assets/pits.png")] static public var ImgPits : Class;
+</code></pre>
+
+<p>ROM.as should now look like this:</p>
+
+<pre><code>package {
+    public class ROM {
+        [Embed(source="assets/bg.png")] static public var ImgBg : Class;
+        [Embed(source="assets/pits.png")] static public var ImgPits : Class;
+        [Embed(source="assets/ball.png")] static public var ImgBall : Class;
+        [Embed(source="assets/pod.png")] static public var ImgPod : Class;
+    }
+}
+</code></pre>
+
+<p>Open PlayState.as and beneath:</p>
+
+<pre><code>private var background:FlxTilemap = new FlxTilemap();
+</code></pre>
+
+<p>Add:</p>
+
+<pre><code>private var pits:FlxTilemap = new FlxTilemap();
+</code></pre>
+
+<p>Then, inside the loadStateFromTmx() function, beneath:</p>
+
+<pre><code>add(background);
+</code></pre>
+
+<p>Add:</p>
+
+<pre><code>var csvPits:String = tmx.getLayer('pits').toCsv(tmx.getTileSet('pits'));
+pits.loadMap(csvPits, ROM.ImgPits, 16, 16, FlxTilemap.AUTO);
+add(pits);
+</code></pre>
+
+<p>Note the FlxTilemap.AUTO in our call to loadMap(). This tells Flixel to take our simple tilemap and automatically replace all corners and caps with the appropriate tile from our more complex tilemap.</p>
+
+<p>Now run your game. You should see something like this:</p>
+
+<p><img src="/primer/images/pitted.gif" alt="pitted.gif"></p>
+
+<h2>Mostly Harmless</h2>
+
+<p>If you bounced around the updated level (and why wouldn’t you?) you found that the pits are currently harmless. A game designer’s work is never done! Let’s add some bite to their bark.</p>
+
+<p>We’re anticipating adding enemies later that can also be knocked into the pit so we’re going to abstract this next bit of code out into a new Actor class. Here’s how it’s going to work:</p>
+
+<ol>
+<li>Check if the actor overlaps any pit tiles.</li>
+<li>If so, add pit gravity to the actor to pull them towards the center of any overlapped pit tile.</li>
+<li>If all four corners of an actor overlap a pit tile then the actor has fallen into the pit.</li>
+</ol>
+
+<p>Back in FDT, create Actor.as (File &gt; New &gt; ActionScript Class). Enter the Class name Actor, enter the Superclass org.flixel.FlxSprite, check “Explicitly invoke superclass constructor”, and click the Finish button.</p>
+
+<p>Replace the contents of Actor.as with:</p>
+
+<pre><code>package {
+    import org.flixel.*;
+    import org.flixel.system.FlxTile;
+
+    public class Actor extends FlxSprite {
+        static public const pitGravity:Number = 20;
+
+        public var px:Number = 0;
+        public var py:Number = 0;
+        public var inPitTL:Boolean = false;
+        public var inPitTR:Boolean = false;
+        public var inPitBR:Boolean = false;
+        public var inPitBL:Boolean = false;
+
+        public var didFallIntoPit:Boolean = false;
+
+        public function Actor(X:Number=0, Y:Number=0, SimpleGraphic:Class = null) {
+            super(X, Y, SimpleGraphic);
+        }
+
+        override public function update():void {
+            if (!didFallIntoPit) {
+                // halve pit gravity if player is already moving towards the pit
+                if ((velocity.x &gt; 0 &amp;&amp; px &gt; 0) || (velocity.x &lt; 0 &amp;&amp; px &lt; 0)) px /= 2;
+                if ((velocity.y &lt; 0 &amp;&amp; py &lt; 0) || (velocity.y &lt; 0 &amp;&amp; py &lt; 0)) py /= 2;
+                velocity.x += px;
+                velocity.y += py;
+            }
+
+            super.update();
+
+            if (!didFallIntoPit) {
+                // if all four corners are inside the pit
+                if (inPitTL &amp;&amp; inPitTR &amp;&amp; inPitBR &amp;&amp; inPitBL) {
+                    didFallIntoPit = true;
+                    alive = false;
+                    fallIntoPit();
+                }
+            }
+
+            // reset
+            px = py = 0;
+            inPitTL = inPitTR = inPitBR = inPitBL = false;
+        }
+
+        public function fallIntoPit():void {
+            // override in subclass
+        }
+
+        public function afterOverlapPit():void {
+            // clamp pit gravity
+            if (px &gt; pitGravity)    px = pitGravity;
+            if (px &lt; -pitGravity)   px = -pitGravity;
+            if (py &gt; pitGravity)    py = pitGravity;
+            if (py &lt; -pitGravity)   py = -pitGravity;
+        }
+
+        static public function overlapPit(tile:FlxTile, actor:Actor):Boolean {
+            // if actor overlaps pit tile
+            if ((actor.x + actor.width &gt; tile.x) &amp;&amp; (actor.x &lt; tile.x + tile.width) &amp;&amp; (actor.y + actor.height &gt; tile.y) &amp;&amp; (actor.y &lt; tile.y + tile.height)) {
+                // distance between the actor and the pit tile
+                var dx:Number = actor.x - tile.x;
+                var dy:Number = actor.y - tile.y;
+
+                // figure out in which direction to apply pit gravity, if any
+                actor.px += dx&gt;0?-pitGravity:dx&lt;0?pitGravity:0;
+                actor.py += dy&gt;0?-pitGravity:dy&lt;0?pitGravity:0;
+
+                var rActorTop:Number = Math.round(actor.y);
+                var rActorLeft:Number = Math.round(actor.x);
+                var rActorRight:Number = Math.round(actor.x+actor.width);
+                var rActorBottom:Number = Math.round(actor.y+actor.height);
+
+                var rTileTop:Number = Math.round(tile.y);
+                var rTileLeft:Number = Math.round(tile.x);
+                var rTileRight:Number = Math.round(tile.x+tile.width);
+                var rTileBottom:Number = Math.round(tile.y+tile.height);
+
+                // check all four corners
+                if (rActorTop &gt;= rTileTop) {
+                    if (rActorLeft &gt;= rTileLeft)    actor.inPitTL = true;
+                    if (rActorRight &lt;= rTileRight)  actor.inPitTR = true;
+                }
+                if (rActorBottom &lt;= rTileBottom) {
+                    if (rActorLeft &gt;= rTileLeft)    actor.inPitBL = true;
+                    if (rActorRight &lt;= rTileRight)  actor.inPitBR = true;
+                }
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+    }
+}
+</code></pre>
+
+<p>Phew! That’s our three item list translated into code. What’s neat about this implementation is that two adjacent pit tiles will cancel each other’s gravity. When an actor overlaps two tiles horizontally, it is only pulled vertically (and vice versa). Also of note, in the update() function we halve pit gravity when the player is already moving in that direction so the player has a little more time to react.</p>
+
+<h2>Pitball</h2>
+
+<p><img src="/primer/downloads/pit/ball.png" alt="ball.png"></p>
+
+<p>Download the updated <a href="/primer/downloads/pit/ball.png">ball.png</a> and replace the old one in your project’s assets folder. Open up Ball.as and replace:</p>
+
+<pre><code>public class Ball extends FlxSprite {
+</code></pre>
+
+<p>with:</p>
+
+<pre><code>public class Ball extends Actor {
+</code></pre>
+
+<p>Then beneath:</p>
+
+<pre><code>addAnimation("bounce", [0,1,2,3], 10);
+</code></pre>
+
+<p>add:</p>
+
+<pre><code>addAnimation("fall", [4,5,6,7,7,7,7,7,7,7,7,7,7,7,7], 10, false);
+</code></pre>
+
+<p>What’s with all the sevens? Falling is a non-looping animation. We’re going to use the animation’s finished state to determine when to reload the level after the player dies. The extra sevens extend the duration of the entire animation to 1.5 seconds. Just enough time for the player to reflect on their mistake.</p>
+
+<p>Next, we need to override the fallIntoPit() function to use our new animation:</p>
+
+<pre><code>override public function fallIntoPit():void {
+    play("fall");
+}
+</code></pre>
+
+<p>With these changes, Ball.as should now look like this:</p>
+
+<pre><code>package {
+    import org.flixel.FlxSprite;
+
+    public class Ball extends Actor {
+        public function Ball(X:Number, Y:Number) {
+            super(X, Y);
+            loadGraphic(ROM.ImgBall, true, true, 16, 16);
+            addAnimation("bounce", [0,1,2,3], 10);
+            addAnimation("fall", [4,5,6,7,7,7,7,7,7,7,7,7,7,7,7], 10, false);
+            play("bounce");
+            offset.y = 4;
+        }
+    }
+
+    override public function fallIntoPit():void {
+        play("fall");
+    }
+}
+</code></pre>
+
+<p>Finally, open PlayState.as. We need to check for pit overlaps and disable user input if the ball has fallen into a pit and died. At the bottom of the update() function add:</p>
+
+<pre><code>pits.overlapsWithCallback(ball, Actor.overlapPit);
+ball.afterOverlapPit();
+
+if (ball.didFallIntoPit &amp;&amp; ball.finished) {
+    FlxG.switchState(new PlayState);
+}
+</code></pre>
+
+<p>Then find:</p>
+
+<pre><code>if (FlxG.keys.RIGHT) {
+    ball.velocity.x = ballVelocity;
+}
+else if (FlxG.keys.LEFT) {
+    ball.velocity.x = -ballVelocity;
+}
+
+if (FlxG.keys.UP) {
+    ball.velocity.y = -ballVelocity;
+}
+else if (FlxG.keys.DOWN) {
+    ball.velocity.y = ballVelocity;
+}
+</code></pre>
+
+<p>and wrap it in a conditional, like so:</p>
+
+<pre><code>if (ball.alive) {
+    if (FlxG.keys.RIGHT) {
+        ball.velocity.x = ballVelocity;
+    }
+    else if (FlxG.keys.LEFT) {
+        ball.velocity.x = -ballVelocity;
+    }
+
+    if (FlxG.keys.UP) {
+        ball.velocity.y = -ballVelocity;
+    }
+    else if (FlxG.keys.DOWN) {
+        ball.velocity.y = ballVelocity;
+    }
+}
+</code></pre>
+
+<p>With this Primer’s additions, PlayState.as should now look like this:</p>
+
+<pre><code>package {
+    import org.flixel.*;
+    // TMX Loading
+    import net.pixelpracht.tmx.*;
+    import flash.events.Event;
+    import flash.net.URLLoader;
+    import flash.net.URLRequest;
+
+    public class PlayState extends FlxState {
+        private var hasLoaded:Boolean = false;
+        private var background:FlxTilemap = new FlxTilemap();
+        private var pits:FlxTilemap = new FlxTilemap();
+        private var ball:Ball;
+        private var podGroup:FlxGroup = new FlxGroup();
+
+        override public function create():void {
+            // initiate variables, add sprites, tilemaps, etc
+
+            loadTmxFile();
+        }
+
+        // Level loading
+        private function loadTmxFile():void {
+            var loader:URLLoader = new URLLoader();
+            loader.addEventListener(Event.COMPLETE, onTmxLoaded);
+            loader.load(new URLRequest('level.tmx'));
+        }
+
+        private function onTmxLoaded(e:Event) : void {
+            var loader:URLLoader = e.target as URLLoader;
+            var xml:XML = new XML(loader.data);
+            var tmx:TmxMap = new TmxMap(xml);
+            loadStateFromTmx(tmx);
+            hasLoaded = true; // allow updates
+        }
+
+        private function loadStateFromTmx(tmx:TmxMap) : void {
+            var csvBg:String = tmx.getLayer('bg').toCsv(tmx.getTileSet('bg'));
+            background.loadMap(csvBg, ROM.ImgBg, 16, 16, FlxTilemap.OFF,0,0,2);
+            add(background);
+
+            var csvPits:String = tmx.getLayer('pits').toCsv(tmx.getTileSet('pits'));
+            pits.loadMap(csvPits, ROM.ImgPits, 16, 16, FlxTilemap.AUTO);
+            add(pits);
+
+            var group : TmxObjectGroup = tmx.getObjectGroup('entities');
+            for each (var object:TmxObject in group.objects) {
+                spawnObject(object);
+            }
+            add(podGroup);
+            add(ball);
+
+            FlxG.camera.setBounds(0, 0, background.width, background.height, true);
+            FlxG.camera.follow(ball, FlxCamera.STYLE_TOPDOWN_TIGHT);
+        }
+
+        private function spawnObject(obj : TmxObject) : void {
+            switch(obj.type) {
+                case "Ball":
+                    ball = new Ball(obj.x, obj.y);
+                break;
+
+                case "Pod":
+                    podGroup.add(new Pod(obj.x, obj.y));
+                break;
+            }
+        }
+
+        override public function update():void {
+            // listen for user input, move sprites, etc
+
+            if (!hasLoaded) return;
+
+            if (FlxG.keys.justPressed("ENTER")) {
+                FlxG.switchState(new PlayState); // reload to test map changes
+            }
+
+            // handle user input
+            var ballVelocity:Number = 64;
+
+            ball.velocity.x = 0;
+            ball.velocity.y = 0;
+
+            if (ball.alive) {
+                if (FlxG.keys.RIGHT) {
+                    ball.velocity.x = ballVelocity;
+                }
+                else if (FlxG.keys.LEFT) {
+                    ball.velocity.x = -ballVelocity;
+                }
+
+                if (FlxG.keys.UP) {
+                    ball.velocity.y = -ballVelocity;
+                }
+                else if (FlxG.keys.DOWN) {
+                    ball.velocity.y = ballVelocity;
+                }
+            }
+
+            // update after user input
+            super.update();
+
+            // collision logic
+            FlxG.collide(background, ball);
+            FlxG.overlap(podGroup, ball, collectPod);
+
+            // it's the pits!
+            pits.overlapsWithCallback(ball, Actor.overlapPit);
+            ball.afterOverlapPit();
+
+            if (ball.didFallIntoPit &amp;&amp; ball.finished) {
+                FlxG.switchState(new PlayState);
+            }
+        }
+
+        private function collectPod(aPod:Pod, aBall:Ball):void {
+            aBall; // silence FDT warning about unused arg
+            aPod.kill();
+        }
+    }
+}
+</code></pre>
+
+<p>Now run your game and “accidentally” get too close to a pit. Try to recover. Let yourself fall in. Next time we’ll wrap up by <a href="/primer/sound-off/">adding music and sound effects</a>.</p>
+	</div><div class="copy">
+		Copyright © 2012–<span class="dateyear"></span> 
+		<a href="/">Retro Game Crunch</a>.
+	</div></div><script>
+$(function()
+{
+	$('.spoilers-toggle').on('touchstart click', function(event)
+	{
+		if(event.handled !== true)
+		{
+			$(this).parent().toggleClass('open');
+			event.handled = true;
+		}
+		return false;
+	});
+})
+</script>
+<script src="/archive.js"></script><script>cleanup();</script></body>
+</html>

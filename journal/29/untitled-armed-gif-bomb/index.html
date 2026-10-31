@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Untitled: Armed Gif Bomb • Retro Game Crunch</title>
+<script>if((window.devicePixelRatio===undefined?1:window.devicePixelRatio)>1)document.cookie='HTTP_IS_RETINA=1;path=/';</script>
+<meta name="google-site-verification" content="0n15O71rkhohq8oudSJ4AhQ9ZHGrtYQGzZ-hj6_NTGI">
+<meta name="viewport" id="viewport" content="width=800">
+<link rel="stylesheet" href="/styles/rgc.q688883a0dcaa.css">
+<link rel="stylesheet" href="/scripts/highlight/styles/zenburn.css">
+<script src="/scripts/highlight/highlight.pack.js"></script>
+<script src="/scripts/jquery-1.8.3.min.js"></script>
+
+<script src="/scripts/mediaelement/mediaelement-and-player.min.js"></script>
+<link rel="stylesheet" href="/scripts/mediaelement/mediaelementplayer.css">
+<script>
+hljs.tabReplace = '    ';
+hljs.initHighlightingOnLoad();
+
+$(function()
+{
+	$('audio').mediaelementplayer(/* Options */);
+	
+	// disable :hover on touch devices
+	// based on https://gist.github.com/4404503 
+	// via https://twitter.com/javan/status/284873379062890496
+	// + https://twitter.com/pennig/status/285790598642946048
+	// re https://retrogamecrunch.com/tmp/hover
+	if ('createTouch' in document)
+	{
+		$('html').addClass('touch');
+		try
+		{
+			var ignore = /:hover\b/;
+			for (var i=0; i<document.styleSheets.length; i++)
+			{
+				var sheet = document.styleSheets[i];
+				for (var j=sheet.cssRules.length-1; j>=0; j--)
+				{
+					var rule = sheet.cssRules[j];
+					if (rule.type === CSSRule.STYLE_RULE && ignore.test(rule.selectorText))
+					{
+						sheet.deleteRule(j);
+					}
+				}
+			}
+		}
+		catch(e){}
+	}
+});
+
+var then = 1387576800000;
+var deadline = '2013-12-20 22:00:00 UTC';
+var last_mins = -1;
+window.setInterval(function()
+{
+	var now = (new Date).getTime();
+	var remaining = then - now;
+	if (remaining < 0) remaining = 0;
+
+	var sec = 1000;
+	var min = 60 * sec;
+	var hour = 60 * min;
+	var day = 24 * hour;
+
+	var days = Math.floor(remaining / day);
+	remaining -= days * day;
+	var hours = Math.floor(remaining / hour);
+	remaining -= hours * hour;
+	var mins = Math.floor(remaining / min);
+	
+	if (last_mins == mins) return; // prevent unnecessary redraws
+	last_mins = mins;
+
+	var html = '';
+
+	if (days) 	html += '<span class="remaining-days">'+days+' day'+(days>1?'s':'')+'</span> ';
+	if (hours) 	html += '<span class="remaining-days">'+hours+' hour'+(hours>1?'s':'')+'</span> ';
+	if (mins) 	html += '<span class="remaining-days">'+mins+' minute'+(mins>1?'s':'')+'</span> ';
+
+	// DELAY
+	// if (html=='') html = 'To be determined';
+	if (html=='') html = 'Just a few moments';
+
+	$('span.countdown').html(html);
+}, 1 * 1000);
+</script>
+
+
+<link rel="stylesheet" href="/archive.css"><link rel="canonical" href="https://retrogamecrunch.com/journal/29/untitled-armed-gif-bomb/"></head>
+<body>
+	<div class="wrap wrap-top">
+		<div id="logo-unit">
+			<a id="logo" href="/"><img src="/images/logo-black.png" width="204" height="98" alt="Retro Game Crunch"></a>
+			<a id="funded" href="http://www.kickstarter.com/projects/shauninman/retro-game-crunch-six-games-in-six-months"><img src="/images/funded-with.png" width="116" height="112" alt="Funded with Kickstarter"></a>
+		</div><div id="mini-login">
+	
+</div><div id="status">
+			<div class="currently">
+				<strong>Currently</strong>
+				<a href="/games/6/shuten/">Recovering from Shūten Complete</a>
+			</div></div><ul class="nav nav-main">
+			<li><a href="/">Home</a></li>
+			<li><a href="/games/">Games</a></li>			<li><a href="/rewards/">Rewards</a></li>
+			<li><a href="/journal/" class="current">Journal</a></li>
+			<li><a href="/primer/">Primer</a></li>
+			<li><a href="/about/">About</a></li>
+			<li><a href="/contact/">Contact</a></li>
+		</ul>
+	</div><div class="wide"><div class="wrap">
+					<ul class="nav nav-alt nav-journal">
+									<li><a href="/journal/28/throw-away/">Throw away</a></li>
+													<li><a href="/journal/30/game-two-four-players/">Game Two, Four Players</a></li>
+							</ul>
+				</div></div><div class="wrap wrap-bottom">
+		<div class="content">
+		
+		
+	<div class="post">
+		<h1>Untitled: Armed Gif Bomb</h1>
+		<div class="byline">
+			Posted by <strong>Shaun</strong> 
+							<span class="datetime" data-timezone="UTC" data-timestamp="1362147937">2013/03/01 14:25:37</span>					</div>
+		<p>Instruments of destruction (and glider):</p>
+
+<p><img src="/shared/images/game-2/pumpjack-3.gif" alt="pumpjack-3.gif">
+<img src="/shared/images/game-2/drill-para-drill.gif" alt="drill-para-drill.gif">
+<img src="/shared/images/game-2/marauder-glide-2.gif" alt="marauder-glide-2.gif"></p>
+
+<p>You get an arm! And you get an arm!</p>
+
+<p><img src="/shared/images/game-2/guardian-upper.gif" alt="guardian-upper.gif">
+<img src="/shared/images/game-2/guardian-whip-new.gif" alt="guardian-whip-new.gif">
+<img src="/shared/images/game-2/guardian-strong-new.gif" alt="guardian-strong-new.gif">
+<img src="/shared/images/game-2/marauder-walk-3.gif" alt="marauder-walk-3.gif">
+<img src="/shared/images/game-2/stabber-walk-3.gif" alt="stabber-walk-3.gif">
+<img src="/shared/images/game-2/hopper-walk-3.gif" alt="hopper-walk-3.gif">
+<img src="/shared/images/game-2/brute-walk-3.gif" alt="brute-walk-3.gif"></p>
+	</div>
+	
+		<h2>3 Comments</h2>
+<div class="comments">
+		<div class="comment" id="comment-166">
+		<div class="who">Jesse</div>
+		<div class="what"><p>There’s so much detail and personality in these graphics that it’s not even funny. I am getting very exciting for Game #2!</p>
+
+<p>(Also, the purple color scheme of the enemies makes me think this might be some kind of spiritual sequel/companion game to Super Clew Land.)</p>
+</div>
+		<div class="when"><a href="#comment-166" class="datetime" data-timezone="UTC" data-timestamp="1362154029">2013/03/01 16:07:09</a></div>
+	</div>
+		<div class="comment" id="comment-167">
+		<div class="who">DimerHunton</div>
+		<div class="what"><p>Love the second enemy with the machete and mask!</p>
+</div>
+		<div class="when"><a href="#comment-167" class="datetime" data-timezone="UTC" data-timestamp="1362274744">2013/03/03 01:39:04</a></div>
+	</div>
+		<div class="comment" id="comment-175">
+		<div class="who">Sephirenn</div>
+		<div class="what"><p>Woooo 2 days left! Can’t wait to see how it turns out! Been quiet around here :)</p>
+</div>
+		<div class="when"><a href="#comment-175" class="datetime" data-timezone="UTC" data-timestamp="1363807290">2013/03/20 19:21:30</a></div>
+	</div>
+	</div>		</div><div class="copy">
+		Copyright © 2012–<span class="dateyear"></span> 
+		<a href="/">Retro Game Crunch</a>.
+	</div></div><script>
+$(function()
+{
+	$('.spoilers-toggle').on('touchstart click', function(event)
+	{
+		if(event.handled !== true)
+		{
+			$(this).parent().toggleClass('open');
+			event.handled = true;
+		}
+		return false;
+	});
+})
+</script>
+<script src="/archive.js"></script><script>cleanup();</script></body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Rewards • Retro Game Crunch</title>
+<script>if((window.devicePixelRatio===undefined?1:window.devicePixelRatio)>1)document.cookie='HTTP_IS_RETINA=1;path=/';</script>
+<meta name="google-site-verification" content="0n15O71rkhohq8oudSJ4AhQ9ZHGrtYQGzZ-hj6_NTGI">
+<meta name="viewport" id="viewport" content="width=800">
+<link rel="stylesheet" href="/styles/rgc.q688883a0dcaa.css">
+<link rel="stylesheet" href="/scripts/highlight/styles/zenburn.css">
+<script src="/scripts/highlight/highlight.pack.js"></script>
+<script src="/scripts/jquery-1.8.3.min.js"></script>
+
+<script src="/scripts/mediaelement/mediaelement-and-player.min.js"></script>
+<link rel="stylesheet" href="/scripts/mediaelement/mediaelementplayer.css">
+<script>
+hljs.tabReplace = '    ';
+hljs.initHighlightingOnLoad();
+
+$(function()
+{
+	$('audio').mediaelementplayer(/* Options */);
+	
+	// disable :hover on touch devices
+	// based on https://gist.github.com/4404503 
+	// via https://twitter.com/javan/status/284873379062890496
+	// + https://twitter.com/pennig/status/285790598642946048
+	// re https://retrogamecrunch.com/tmp/hover
+	if ('createTouch' in document)
+	{
+		$('html').addClass('touch');
+		try
+		{
+			var ignore = /:hover\b/;
+			for (var i=0; i<document.styleSheets.length; i++)
+			{
+				var sheet = document.styleSheets[i];
+				for (var j=sheet.cssRules.length-1; j>=0; j--)
+				{
+					var rule = sheet.cssRules[j];
+					if (rule.type === CSSRule.STYLE_RULE && ignore.test(rule.selectorText))
+					{
+						sheet.deleteRule(j);
+					}
+				}
+			}
+		}
+		catch(e){}
+	}
+});
+
+var then = 1387576800000;
+var deadline = '2013-12-20 22:00:00 UTC';
+var last_mins = -1;
+window.setInterval(function()
+{
+	var now = (new Date).getTime();
+	var remaining = then - now;
+	if (remaining < 0) remaining = 0;
+
+	var sec = 1000;
+	var min = 60 * sec;
+	var hour = 60 * min;
+	var day = 24 * hour;
+
+	var days = Math.floor(remaining / day);
+	remaining -= days * day;
+	var hours = Math.floor(remaining / hour);
+	remaining -= hours * hour;
+	var mins = Math.floor(remaining / min);
+	
+	if (last_mins == mins) return; // prevent unnecessary redraws
+	last_mins = mins;
+
+	var html = '';
+
+	if (days) 	html += '<span class="remaining-days">'+days+' day'+(days>1?'s':'')+'</span> ';
+	if (hours) 	html += '<span class="remaining-days">'+hours+' hour'+(hours>1?'s':'')+'</span> ';
+	if (mins) 	html += '<span class="remaining-days">'+mins+' minute'+(mins>1?'s':'')+'</span> ';
+
+	// DELAY
+	// if (html=='') html = 'To be determined';
+	if (html=='') html = 'Just a few moments';
+
+	$('span.countdown').html(html);
+}, 1 * 1000);
+</script>
+
+
+<link rel="stylesheet" href="/archive.css"><link rel="canonical" href="https://retrogamecrunch.com/rewards/"></head>
+<body>
+	<div class="wrap wrap-top">
+		<div id="logo-unit">
+			<a id="logo" href="/"><img src="/images/logo-black.png" width="204" height="98" alt="Retro Game Crunch"></a>
+			<a id="funded" href="http://www.kickstarter.com/projects/shauninman/retro-game-crunch-six-games-in-six-months"><img src="/images/funded-with.png" width="116" height="112" alt="Funded with Kickstarter"></a>
+		</div><div id="status">
+			<div class="currently">
+				<strong>Currently</strong>
+				<a href="/games/6/shuten/">Recovering from Shūten Complete</a>
+			</div></div><ul class="nav nav-main">
+			<li><a href="/">Home</a></li>
+			<li><a href="/games/">Games</a></li>			<li><a href="/rewards/" class="current">Rewards</a></li>
+			<li><a href="/journal/">Journal</a></li>
+			<li><a href="/primer/">Primer</a></li>
+			<li><a href="/about/">About</a></li>
+			<li><a href="/contact/">Contact</a></li>
+		</ul>
+	</div><div class="wrap wrap-bottom">
+		<div class="content"><h1>Rewards</h1>
+<div class="rewards">
+<h2>The Complete Collection <span>all-in-one fun</span></h2>
+			<ul>
+				<li>
+					<img src="/shared/images/retro-game-crunch-mac.png" width="240" height="160" alt="">
+				</li>
+				<li class="disclaimers">
+					<p><strong>Humble Gift Key</strong> As a thank you to our backers, we provided each of them a single-use Humble gift key for the complete, all-in-one, Retro Game Crunch Collection.</p>
+					<p>Thank you for all the themes, feedback, and pledges—without you these games would not exist!</p>
+					<p>Everyone else can get it now on <a href="http://store.steampowered.com/app/290040">Steam</a>.</p>
+				</li>
+			</ul>
+			
+<h2>Soundtracks <span>that square wave sure can sing</span>
+</h2>
+			<ul>
+								<li>
+<img src="/shared/images/osv-shuten-mp3.png" width="240" height="160" alt="">
+Shūten<br><a href="https://8bitmatt.bandcamp.com/album/shu-ten-original-sound-version">Bandcamp</a>
+</li>
+<li>
+<img src="/shared/images/osv-brains-and-hearts-mp3.png" width="240" height="160" alt="">
+Brains &amp; Hearts<br><a href="https://8bitmatt.bandcamp.com/album/brains-hearts-original-sound-version">Bandcamp</a>
+</li>
+<li>
+<img src="/shared/images/osv-wub-wub-wescue-mp3.png" width="240" height="160" alt="">
+Wub-Wub Wescue<br><a href="https://8bitmatt.bandcamp.com/album/beat-drop-wub-wub-wescue-original-sound-version">Bandcamp</a>
+</li>
+<li>
+<img src="/shared/images/osv-paradox-lost-mp3.png" width="240" height="160" alt="">
+Paradox Lost<br><a href="https://8bitmatt.bandcamp.com/album/paradox-lost-original-sound-version">Bandcamp</a>
+</li>
+<li>
+<img src="/shared/images/osv-gaiattack-mp3.png" width="240" height="160" alt="">
+GAIAttack!<br><a href="https://8bitmatt.bandcamp.com/album/gaiattack-original-sound-version">Bandcamp</a>
+</li>
+<li>
+<img src="/shared/images/osv-end-of-line-mp3.png" width="240" height="160" alt="">
+End of Line<br><a href="https://8bitmatt.bandcamp.com/album/end-of-line-original-sound-version">Bandcamp</a>
+</li>
+<li>
+<img src="/shared/images/osv-super-clew-land.png" width="240" height="160" alt="">
+Super Clew Land<br><a href="https://8bitmatt.bandcamp.com/album/super-clew-land-original-sound-version">Bandcamp</a>
+</li>
+</ul>
+			
+					<h2 id="pixel-fonts">Pixel Fonts <span>chock full of vitamin ABC</span>
+</h2>
+			<ul>
+								<li>
+					<a href="/downloads/fonts/font-terminus.zip"><img src="/shared/images/font-terminus.png" width="240" height="160" alt="">
+					Terminus</a> </li>
+								<li>
+					<a href="/downloads/fonts/font-brain-slab.zip"><img src="/shared/images/font-brain-slab.png" width="240" height="160" alt="">
+					Brain Slab</a> </li>
+								<li>
+					<a href="/downloads/fonts/font-bambooyeah.zip"><img src="/shared/images/font-bambooyeah.png" width="240" height="160" alt="">
+					Bambooyeah</a> </li>
+								<li>
+					<a href="/downloads/fonts/font-paradox.zip"><img src="/shared/images/font-paradox.png" width="240" height="160" alt="">
+					Paradox</a> </li>
+								<li>
+					<a href="/downloads/fonts/font-unmentionable.zip"><img src="/shared/images/font-unmentionable.png" width="240" height="160" alt="">
+					Unmentionable</a> </li>
+								<li>
+					<a href="/downloads/fonts/font-eof.zip"><img src="/shared/images/font-eof.png" width="240" height="160" alt="">
+					EOF</a> </li>
+								<li>
+					<a href="/downloads/fonts/font-clew-hand.zip"><img src="/shared/images/font-clew-hand.png" width="240" height="160" alt="">
+					Clew Hand</a> </li>
+							</ul>
+				
+					<h2>Wallpapers <span>for your desktop, tablet, and pocket</span>
+</h2>
+			<ul>
+								<li>
+					<a href="/downloads/wallpapers/wallpapers-rgc.zip"><img src="/shared/images/wallpapers-rgc.png" width="240" height="160" alt="">
+					Retro Game Crunch</a> </li>
+								<li>
+					<a href="/downloads/wallpapers/wallpapers-clews.zip"><img src="/shared/images/wallpapers-clews.png" width="240" height="160" alt="">
+					Four Clews</a> </li>
+								<li>
+					<a href="/downloads/wallpapers/wallpapers-flip.zip"><img src="/shared/images/wallpapers-flip.png" width="240" height="160" alt="">
+					Flip &amp; AMI</a> </li>
+							</ul>
+			</div>
+</div><div class="copy">
+		Copyright © 2012–<span class="dateyear"></span> 
+		<a href="/">Retro Game Crunch</a>.
+	</div></div><script>
+$(function()
+{
+	$('.spoilers-toggle').on('touchstart click', function(event)
+	{
+		if(event.handled !== true)
+		{
+			$(this).parent().toggleClass('open');
+			event.handled = true;
+		}
+		return false;
+	});
+})
+</script>
+<script src="/archive.js"></script><script>cleanup();</script></body>
+</html>

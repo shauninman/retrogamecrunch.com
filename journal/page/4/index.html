@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Journal • Retro Game Crunch</title>
+<script>if((window.devicePixelRatio===undefined?1:window.devicePixelRatio)>1)document.cookie='HTTP_IS_RETINA=1;path=/';</script>
+<meta name="google-site-verification" content="0n15O71rkhohq8oudSJ4AhQ9ZHGrtYQGzZ-hj6_NTGI">
+<meta name="viewport" id="viewport" content="width=800">
+<link rel="stylesheet" href="/styles/rgc.q688883a0dcaa.css">
+<link rel="stylesheet" href="/scripts/highlight/styles/zenburn.css">
+<script src="/scripts/highlight/highlight.pack.js"></script>
+<script src="/scripts/jquery-1.8.3.min.js"></script>
+
+<script src="/scripts/mediaelement/mediaelement-and-player.min.js"></script>
+<link rel="stylesheet" href="/scripts/mediaelement/mediaelementplayer.css">
+<script>
+hljs.tabReplace = '    ';
+hljs.initHighlightingOnLoad();
+
+$(function()
+{
+	$('audio').mediaelementplayer(/* Options */);
+	
+	// disable :hover on touch devices
+	// based on https://gist.github.com/4404503 
+	// via https://twitter.com/javan/status/284873379062890496
+	// + https://twitter.com/pennig/status/285790598642946048
+	// re https://retrogamecrunch.com/tmp/hover
+	if ('createTouch' in document)
+	{
+		$('html').addClass('touch');
+		try
+		{
+			var ignore = /:hover\b/;
+			for (var i=0; i<document.styleSheets.length; i++)
+			{
+				var sheet = document.styleSheets[i];
+				for (var j=sheet.cssRules.length-1; j>=0; j--)
+				{
+					var rule = sheet.cssRules[j];
+					if (rule.type === CSSRule.STYLE_RULE && ignore.test(rule.selectorText))
+					{
+						sheet.deleteRule(j);
+					}
+				}
+			}
+		}
+		catch(e){}
+	}
+});
+
+var then = 1387576800000;
+var deadline = '2013-12-20 22:00:00 UTC';
+var last_mins = -1;
+window.setInterval(function()
+{
+	var now = (new Date).getTime();
+	var remaining = then - now;
+	if (remaining < 0) remaining = 0;
+
+	var sec = 1000;
+	var min = 60 * sec;
+	var hour = 60 * min;
+	var day = 24 * hour;
+
+	var days = Math.floor(remaining / day);
+	remaining -= days * day;
+	var hours = Math.floor(remaining / hour);
+	remaining -= hours * hour;
+	var mins = Math.floor(remaining / min);
+	
+	if (last_mins == mins) return; // prevent unnecessary redraws
+	last_mins = mins;
+
+	var html = '';
+
+	if (days) 	html += '<span class="remaining-days">'+days+' day'+(days>1?'s':'')+'</span> ';
+	if (hours) 	html += '<span class="remaining-days">'+hours+' hour'+(hours>1?'s':'')+'</span> ';
+	if (mins) 	html += '<span class="remaining-days">'+mins+' minute'+(mins>1?'s':'')+'</span> ';
+
+	// DELAY
+	// if (html=='') html = 'To be determined';
+	if (html=='') html = 'Just a few moments';
+
+	$('span.countdown').html(html);
+}, 1 * 1000);
+</script>
+
+
+<link rel="stylesheet" href="/archive.css"><link rel="canonical" href="https://retrogamecrunch.com/journal/page/4/"></head>
+<body>
+	<div class="wrap wrap-top">
+		<div id="logo-unit">
+			<a id="logo" href="/"><img src="/images/logo-black.png" width="204" height="98" alt="Retro Game Crunch"></a>
+			<a id="funded" href="http://www.kickstarter.com/projects/shauninman/retro-game-crunch-six-games-in-six-months"><img src="/images/funded-with.png" width="116" height="112" alt="Funded with Kickstarter"></a>
+		</div><div id="mini-login">
+	
+</div><div id="status">
+			<div class="currently">
+				<strong>Currently</strong>
+				<a href="/games/6/shuten/">Recovering from Shūten Complete</a>
+			</div></div><ul class="nav nav-main">
+			<li><a href="/">Home</a></li>
+			<li><a href="/games/">Games</a></li>			<li><a href="/rewards/">Rewards</a></li>
+			<li><a href="/journal/" class="current">Journal</a></li>
+			<li><a href="/primer/">Primer</a></li>
+			<li><a href="/about/">About</a></li>
+			<li><a href="/contact/">Contact</a></li>
+		</ul>
+	</div><div class="wrap wrap-bottom">
+		<div class="content">
+			<div class="posts">
+			<div class="post">
+			<h1><a href="/journal/41/half-time-break/">Half-time Break</a></h1>
+			<div class="byline">Posted by <strong>Rusty</strong> <span class="datetime" data-timezone="UTC" data-timestamp="1369939537">2013/05/30 18:45:37</span></div>
+			<p>Rusty here. I have some unfortunate news. Crunching on the first three games has taken a toll on my hands and wrists. My wrists are inflamed from a Repetitive Stress Injury (RSI). This makes using a keyboard and mouse painful. My body needs time to rest and heal.</p>
+
+<p>So we’re taking a four-week break before starting the next crunch. I wish we could start the next game now, but I’d be risking permanent damage to my wrists. I’m sorry to delay the project and I appreciate your understanding and patience.</p>
+
+<p>We look forward to starting Game 4 at the end of June.</p>
+		</div>
+			<div class="post">
+			<h1><a href="/journal/40/paradox-lost-found/">Paradox Lost, Found</a></h1>
+			<div class="byline">Posted by <strong>Shaun</strong> <span class="datetime" data-timezone="UTC" data-timestamp="1369328574">2013/05/23 17:02:54</span></div>
+			<p>The complete version of Game 3 is done! You can download Paradox Lost from your <a href="/rewards/">Rewards</a> page <em>right now</em>.</p>
+
+<p><img src="/shared/images/game-3/paradox-lost-icon.png" alt="paradox-lost-icon.png"></p>
+
+<p>This game is huge. Two bosses. Three eras. Eleven abilities. Fifteen tracks. Twenty-eight prisoners. Eighty-eight rooms. Break out the graph paper, you’re gonna need a map, huge.</p>
+		</div>
+			<div class="post">
+			<h1><a href="/journal/39/evolution/">Evolution</a></h1>
+			<div class="byline">Posted by <strong>Shaun</strong> <span class="datetime" data-timezone="UTC" data-timestamp="1366992842">2013/04/26 16:14:02</span></div>
+			<p>Clew, in his penultimate form:</p>
+
+<p><img src="/shared/images/game-3/clew-wings.gif" alt="clew-wings.gif"></p>
+
+<p>Abby, with Paradox Wings:</p>
+
+<p><img src="/shared/images/game-3/abby-paradox-wings.gif" alt="abby-paradox-wings.gif"></p>
+
+<p>I’ve definitely noticed an improvement in my spriting over the past few months.</p>
+		</div>
+			<div class="post">
+			<h1><a href="/journal/38/cant-stop-time-2/">Can’t Stop Time 2</a></h1>
+			<div class="byline">Posted by <strong>Shaun</strong> <span class="datetime" data-timezone="UTC" data-timestamp="1366768890">2013/04/24 02:01:30</span></div>
+			<p>My first pass at caves (still needs work), which become mines in the present, and finally bunkers in the future:</p>
+
+<p><img src="/shared/images/game-3/cave-past.png" alt="cave-past.png">
+<img src="/shared/images/game-3/cave-present.png" alt="cave-present.png">
+<img src="/shared/images/game-3/cave-future.png" alt="cave-future.png"></p>
+
+<p>Knocking these out at about 2 a day. One more area (which we’ll probably keep hush about—SPOILERS) then it’s onto enemies!</p>
+		</div>
+			<div class="post">
+			<h1><a href="/journal/37/cant-stop-time/">Can’t Stop Time</a></h1>
+			<div class="byline">Posted by <strong>Shaun</strong> <span class="datetime" data-timezone="UTC" data-timestamp="1366648513">2013/04/22 16:35:13</span></div>
+			<p>Fleshing out tilesets and backgrounds for the various areas of the game (we’re currently planning three, each existing in three distinct time periods). The first, I completed this weekend, is the forest: past, present, and future.</p>
+
+<p>(The bubble around Abby is a new power-up, a window into the adjacent time period.)</p>
+
+<p><img src="/shared/images/game-3/forest-past.png" alt="forest-past.png">
+<img src="/shared/images/game-3/forest-present.png" alt="forest-present.png">
+<img src="/shared/images/game-3/forest-future.png" alt="forest-future.png"></p>
+
+<p>Next, we delve into the island’s caves…</p>
+		</div>
+			<div class="post">
+			<h1><a href="/journal/36/rgc-podcast-episode-2/">RGC Podcast, Episode 2</a></h1>
+			<div class="byline">Posted by <strong>Shaun</strong> <span class="datetime" data-timezone="UTC" data-timestamp="1366123299">2013/04/16 14:41:39</span></div>
+			<p><img src="/shared/images/podcast-2-400.png" alt="podcast-2-400.png"></p>
+
+<p>Our second podcast is a <a href="/games/2/gaiattack/">GAIAttack</a> postmortem. There’s spoilers, so if you haven’t played through the <a href="/rewards/">complete version</a>, you might want to do that first!</p>
+
+<p>Listen in the browser: </p>
+
+<p><audio src="/shared/podcasts/02%20RGC%20Podcast%202_%20GAIAttack.mp3" type="audio/mp3" controls="controls"><a href="/shared/podcasts/02%20RGC%20Podcast%202_%20GAIAttack.mp3">02 RGC Podcast 2_ GAIAttack.mp3</a></audio></p>
+
+<p>Or <a href="/shared/podcasts/02%20RGC%20Podcast%202_%20GAIAttack.mp3">download it for later</a>.</p>
+
+<p>(If you only signed up for 3 months of Retro Game Crunch, you don’t have access to the podcast. You can upgrade your account <a href="/account/">here</a>.)</p>
+		</div>
+			<div class="post">
+			<h1><a href="/journal/35/an-extension/">An Extension</a></h1>
+			<div class="byline">Posted by <strong>Shaun</strong> <span class="datetime" data-timezone="UTC" data-timestamp="1366038648">2013/04/15 15:10:48</span></div>
+			<p><strong>tl;dr: We are anticipating taking an extra 7 days on the  Paradox Lost polish period so Shaun can help out his Mom who is undergoing chemotherapy.</strong></p>
+
+<p>As those of you who follow me on Twitter might <a href="https://twitter.com/shauninman/status/320206966628704256">already know</a>, my mom has been diagnosed with cancer. The chemo has been really hard on her. A few years ago my parents moved from Boston to Denver. They love the new city but don’t have the family support network they would have had in the New England area.</p>
+
+<p>I’ve always said that I can do what I do from anywhere with an internet connection. Working in a distributed team, any of the pieces can change location without disrupting the others. Rusty moved from Sacramento to Austin the week before the End of Line crunch—and that game turned out great. </p>
+
+<p>So to help out my parents, I bought a one way ticket and temporarily relocated to Denver right before our last crunch.  A big part of being here is just being here; Mom isn’t alone for 10 hours a day. The other big part is taking her to her regular chemo treatments. </p>
+
+<p>Rusty and Matt have been great through all this (she was diagnosed during the End of Line polish period) and have agreed that we should extend the polish period on Paradox Lost by 7 days so I don’t fall behind while helping care for my mom.</p>
+
+<p>The <a href="/games/3/paradox-lost/">Paradox Lost</a> polish period starts today!</p>
+		</div>
+			<div class="post">
+			<h1><a href="/journal/34/cant-stop-animated-gif-ing/">Can’t Stop Animated Gif-ing</a></h1>
+			<div class="byline">Posted by <strong>Shaun</strong> <span class="datetime" data-timezone="UTC" data-timestamp="1365367956">2013/04/07 20:52:36</span></div>
+			<p><img src="/shared/images/game-3/abby-idle-unarmed.gif" alt="abby-idle-unarmed.gif">
+<img src="/shared/images/game-3/abby-run-unarmed.gif" alt="abby-run-unarmed.gif">
+<img src="/shared/images/game-3/abby-duck-unarmed.gif" alt="abby-duck-unarmed.gif">
+<img src="/shared/images/game-3/abby-jump-unarmed.gif" alt="abby-jump-unarmed.gif">
+<img src="/shared/images/game-3/abby-charge-suction.gif" alt="abby-charge-suction.gif">
+<img src="/shared/images/game-3/abby-shoot-burst.gif" alt="abby-shoot-burst.gif">
+<img src="/shared/images/game-3/abby-run-up.gif" alt="abby-run-up.gif">
+<img src="/shared/images/game-3/hopper-teeth.gif" alt="hopper-teeth.gif"></p>
+		</div>
+		</div>
+<p>
+	<a href="/journal/page/5/"><img src="/images/btn-older.png" height="30"></a>	
+	<a href="/journal/page/3/"><img src="/images/btn-newer.png" height="30"></a>	
+</p>
+	
+	</div><div class="copy">
+		Copyright © 2012–<span class="dateyear"></span> 
+		<a href="/">Retro Game Crunch</a>.
+	</div></div><script>
+$(function()
+{
+	$('.spoilers-toggle').on('touchstart click', function(event)
+	{
+		if(event.handled !== true)
+		{
+			$(this).parent().toggleClass('open');
+			event.handled = true;
+		}
+		return false;
+	});
+})
+</script>
+<script src="/archive.js"></script><script>cleanup();</script></body>
+</html>

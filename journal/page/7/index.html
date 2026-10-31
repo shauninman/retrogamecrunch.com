@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Journal • Retro Game Crunch</title>
+<script>if((window.devicePixelRatio===undefined?1:window.devicePixelRatio)>1)document.cookie='HTTP_IS_RETINA=1;path=/';</script>
+<meta name="google-site-verification" content="0n15O71rkhohq8oudSJ4AhQ9ZHGrtYQGzZ-hj6_NTGI">
+<meta name="viewport" id="viewport" content="width=800">
+<link rel="stylesheet" href="/styles/rgc.q688883a0dcaa.css">
+<link rel="stylesheet" href="/scripts/highlight/styles/zenburn.css">
+<script src="/scripts/highlight/highlight.pack.js"></script>
+<script src="/scripts/jquery-1.8.3.min.js"></script>
+
+<script src="/scripts/mediaelement/mediaelement-and-player.min.js"></script>
+<link rel="stylesheet" href="/scripts/mediaelement/mediaelementplayer.css">
+<script>
+hljs.tabReplace = '    ';
+hljs.initHighlightingOnLoad();
+
+$(function()
+{
+	$('audio').mediaelementplayer(/* Options */);
+	
+	// disable :hover on touch devices
+	// based on https://gist.github.com/4404503 
+	// via https://twitter.com/javan/status/284873379062890496
+	// + https://twitter.com/pennig/status/285790598642946048
+	// re https://retrogamecrunch.com/tmp/hover
+	if ('createTouch' in document)
+	{
+		$('html').addClass('touch');
+		try
+		{
+			var ignore = /:hover\b/;
+			for (var i=0; i<document.styleSheets.length; i++)
+			{
+				var sheet = document.styleSheets[i];
+				for (var j=sheet.cssRules.length-1; j>=0; j--)
+				{
+					var rule = sheet.cssRules[j];
+					if (rule.type === CSSRule.STYLE_RULE && ignore.test(rule.selectorText))
+					{
+						sheet.deleteRule(j);
+					}
+				}
+			}
+		}
+		catch(e){}
+	}
+});
+
+var then = 1387576800000;
+var deadline = '2013-12-20 22:00:00 UTC';
+var last_mins = -1;
+window.setInterval(function()
+{
+	var now = (new Date).getTime();
+	var remaining = then - now;
+	if (remaining < 0) remaining = 0;
+
+	var sec = 1000;
+	var min = 60 * sec;
+	var hour = 60 * min;
+	var day = 24 * hour;
+
+	var days = Math.floor(remaining / day);
+	remaining -= days * day;
+	var hours = Math.floor(remaining / hour);
+	remaining -= hours * hour;
+	var mins = Math.floor(remaining / min);
+	
+	if (last_mins == mins) return; // prevent unnecessary redraws
+	last_mins = mins;
+
+	var html = '';
+
+	if (days) 	html += '<span class="remaining-days">'+days+' day'+(days>1?'s':'')+'</span> ';
+	if (hours) 	html += '<span class="remaining-days">'+hours+' hour'+(hours>1?'s':'')+'</span> ';
+	if (mins) 	html += '<span class="remaining-days">'+mins+' minute'+(mins>1?'s':'')+'</span> ';
+
+	// DELAY
+	// if (html=='') html = 'To be determined';
+	if (html=='') html = 'Just a few moments';
+
+	$('span.countdown').html(html);
+}, 1 * 1000);
+</script>
+
+
+<link rel="stylesheet" href="/archive.css"><link rel="canonical" href="https://retrogamecrunch.com/journal/page/7/"></head>
+<body>
+	<div class="wrap wrap-top">
+		<div id="logo-unit">
+			<a id="logo" href="/"><img src="/images/logo-black.png" width="204" height="98" alt="Retro Game Crunch"></a>
+			<a id="funded" href="http://www.kickstarter.com/projects/shauninman/retro-game-crunch-six-games-in-six-months"><img src="/images/funded-with.png" width="116" height="112" alt="Funded with Kickstarter"></a>
+		</div><div id="mini-login">
+	
+</div><div id="status">
+			<div class="currently">
+				<strong>Currently</strong>
+				<a href="/games/6/shuten/">Recovering from Shūten Complete</a>
+			</div></div><ul class="nav nav-main">
+			<li><a href="/">Home</a></li>
+			<li><a href="/games/">Games</a></li>			<li><a href="/rewards/">Rewards</a></li>
+			<li><a href="/journal/" class="current">Journal</a></li>
+			<li><a href="/primer/">Primer</a></li>
+			<li><a href="/about/">About</a></li>
+			<li><a href="/contact/">Contact</a></li>
+		</ul>
+	</div><div class="wrap wrap-bottom">
+		<div class="content">
+			<div class="posts">
+			<div class="post">
+			<h1><a href="/journal/17/atom-smasher/">Atom Smasher</a></h1>
+			<div class="byline">Posted by <strong>Shaun</strong> <span class="datetime" data-timezone="UTC" data-timestamp="1358573164">2013/01/19 05:26:04</span></div>
+			<p>Trying to collect my thoughts on level design, and more specifically, puzzle design for End of Line. I’ve started documenting all the atoms available, just like I did for The Last Rocket. (I’m borrowing my  loose definition of an atom, an action/outcome pair, from <a href="http://www.raphkoster.com/2012/01/24/an-atomic-theory-of-fun-game-design/">Raph Koster</a>.)</p>
+
+<p>This is what I see as the current atoms available for EOL puzzles (doesn’t include new elements added late this week):</p>
+
+<pre><code>MICRO
+
+Active
+
+    - kill yourself to get to another area of the map
+    - kill yourself to return to origin
+    - kill yourself to attract a flyer
+    - kill yourself to attract a hopper
+    - kill a flyer to prevent repair (of hoppers, terminals, and EOL)
+    - kill a flyer to clear a path
+    - kill a hopper to prevent repair (of terminals and EOL)
+    - kill a hopper to attract a flyer
+    - kill a hopper to press a switch
+    - kill a hopper to clear a path
+    - kill a terminal to attract a flyer
+    - kill a terminal to attract a hopper
+
+    - attract a flyer to press a switch
+    - attract a hopper to press a switch
+    - attract an ice hopper to create a path
+
+    - push a crate to clear a path
+    - push a crate to press a switch
+    - push a crate to release a switch
+    - push a crate onto a conveyor to...
+
+    - press a switch to lower a gate
+    - press a switch to raise a gate
+    - release a switch to lower a gate
+    - release a switch to raise a gate
+
+    - collect fire to cross fire
+    - collect fire to kill fire flyer
+    - collect fire to kill fire hopper
+    - collect fire to kill iron crate
+
+    - collect ice to cross water
+    - collect ice to kill ice flyer
+    - collect ice to kill ice hopper
+
+Passive
+
+    - convey yourself
+    - convey a crate
+
+    - pass through an open gate
+    - pass through a destroyed iron crate
+    - pass over ice hopper ice path
+
+Compound
+
+    - use gates to control hopper flow
+    - push crate across ice (hopper or Ice EOL created)
+    - push a crate into the path of a hopper to press a switch
+
+MACRO
+
+    - kill all iron crates
+    - kill all flyers
+    - kill all hoppers
+    - (optional) kill all terminals (for special ending?)
+    - kill yourself on
+        - spikes
+        - fire (except Fire EOL)
+        - melting ice (except Ice EOL)
+
+ENVIRO
+
+    - place conveyors to prevent crate movement
+    - place conveyors to prevent hopper movement
+    - kill a hopper on spikes
+    - a hoppers path towards a switch creates a timer
+    - obscure switches with crates
+    - obscure switches with iron crates
+    - obscure switches with flyers
+    - flyers as first responders (hoppers don't repair if a flyer is available)
+</code></pre>
+
+<p>And those are just the ones we’ve discovered so far. Level design, and especially puzzle design, is a time consuming process. First you need to define your mechanics and invent some props. Then you explore and learn how they interact. It’s that foundation and insight that allows you to discover interesting combinations that result in challenging puzzles.</p>
+		</div>
+			<div class="post">
+			<h1><a href="/journal/16/cutting-corners/">Cutting Corners</a></h1>
+			<div class="byline">Posted by <strong>Shaun</strong> <span class="datetime" data-timezone="UTC" data-timestamp="1358528553">2013/01/18 17:02:33</span></div>
+			<p>One thing that makes a game feel more polished is “corner rounding” or “collision softening”. Especially in a top down game like End of Line. What am I on about? </p>
+
+<p>You know when you miss a single tile opening by a few pixels and your character comes to a complete stop? Corner rounding sees the slight mis-alignment and nudges the character in the right direction so they don’t get snagged on the corner.</p>
+
+<p>Here’s basically how we do it: Before we resolve player collisions with the foreground we test for overlap with individual tiles. Based on the size and position of the rectangle created by the overlap, we determine which direction to nudge the player in. We also take some steps to ensure that the player doesn’t lose any velocity as a result of the forgivable collision.</p>
+
+<p>Here’s (kind of) what that looks like in code:</p>
+
+<pre><code>package {
+    import org.flixel.*;
+    import org.flixel.system.FlxTile;
+
+    public class Actor extends FlxSprite {
+        // collision softening
+        public var softener:Number = 1.0; // pixels to move per frame during softening
+        public var totalCollisions : uint = 0;
+        public var softenX : Number = 0;
+        public var softenY : Number = 0;
+
+        public function Actor(X:Number, Y:Number,SimpleGraphic:Class=null) {
+            super(X, Y,SimpleGraphic);
+        }
+
+        override public function postUpdate():void
+        {
+            // reset for next update
+            totalCollisions = 0;
+            softenX = 0;
+            softenY = 0;
+
+            super.postUpdate();
+        }
+
+        static public function softCollide(tilemap:FlxTilemap, actor:Actor):Boolean {
+            if (tilemap.overlapsWithCallback(actor, actor.softenCollisions)) {
+
+                // apply softening
+                if (actor.totalCollisions == 1) {
+                    actor.x += actor.softenX;
+                    actor.y += actor.softenY;
+                }
+
+                // save pre-collision velocity
+                var oldVX:Number = actor.velocity.x;
+                var oldVY:Number = actor.velocity.y;
+
+                var collided:Boolean = FlxG.collide(tilemap, actor);
+
+                // restore pre-collision velocity if softening was applied
+                if (collided &amp;&amp; actor.totalCollisions == 1) {
+                    actor.velocity.x = oldVX;
+                    actor.velocity.y = oldVY;
+                }
+                return collided;
+            }
+            return false;
+        }
+
+        public function softenCollisionsX(tile : FlxTile, actor : Actor, softness : Number = 6) : void {
+            actor; // should be this
+
+            var diffX : Number = 0;
+            if (x &lt; tile.x) {
+                // self to left
+                diffX = x + width - tile.x;
+                if (diffX &lt;= softness) {
+                    softenX = -softener;
+                }
+            } else {
+                // self to right
+                diffX = tile.x + tile.width - x;
+                if (diffX &lt;= softness) {
+                    softenX = softener;
+                }
+            }
+        }
+
+        public function softenCollisionsY(tile : FlxTile, actor : Actor, softness : Number = 6) : void {
+            actor; // should be this
+
+            var diffY : Number = 0;
+            if (y &lt; tile.y) {
+                // self above
+                diffY = y + height - tile.y;
+                if (diffY &lt;= softness) {
+                    softenY = -softener;
+                }
+            } else {
+                // self below
+                diffY = tile.y + tile.height - y;
+                if (diffY &lt;= softness) {
+                    softenY = softener;
+                }
+            }
+        }
+
+        public function softenCollisions(tile : FlxTile, actor : Actor) : Boolean {
+            if ((x + width &gt; tile.x) &amp;&amp; (x &lt; tile.x + tile.width) &amp;&amp; (y + height &gt; tile.y) &amp;&amp; (y &lt; tile.y + tile.height)) {
+                if (totalCollisions &lt; 1) {
+                    if (velocity.x == 0) {
+                        // moving vertically
+                        softenCollisionsX(tile, actor);
+                    } else if (velocity.y == 0) {
+                        // moving horizontally
+                        softenCollisionsY(tile, actor);
+                    }
+                }
+                totalCollisions++;
+            }
+            return true;
+        }
+    }
+}
+</code></pre>
+
+<p>Then in our PlayState.as update() function, instead of calling:</p>
+
+<pre><code>FlxG.collide(foreground, player);
+</code></pre>
+
+<p>We call:</p>
+
+<pre><code>Actor.softCollide(foreground, player);
+</code></pre>
+
+<p>And voilà!</p>
+		</div>
+			<div class="post">
+			<h1><a href="/journal/15/hot-mess/">Hot Mess</a></h1>
+			<div class="byline">Posted by <strong>Shaun</strong> <span class="datetime" data-timezone="UTC" data-timestamp="1358527551">2013/01/18 16:45:51</span></div>
+			<p>You’ve seen <a href="/journal/12/ice-ice-baby/">Ice EOL’s ability</a>. Fire EOL melts immovable iron crates. Here’s a quick look at how the animation evolved.</p>
+
+<p>First attempt was too slow:</p>
+
+<p><img src="/shared/images/game-1/iron/firewall.gif" alt="firewall.gif"></p>
+
+<p>Better:</p>
+
+<p><img src="/shared/images/game-1/iron/firewall-alt-2.gif" alt="firewall-alt-2.gif"></p>
+
+<p>The follow through looked good too:</p>
+
+<p><img src="/shared/images/game-1/iron/steel-block-melt-all.gif" alt="steel-block-melt-all.gif"></p>
+
+<p>Except the trail it left created problems when destroying from above or below so I panicked and created a simpler, animation that could be used from all directions:</p>
+
+<p><img src="/shared/images/game-1/iron/iron-wall-melt-uni.gif" alt="iron-wall-melt-uni.gif"></p>
+
+<p>I hated this and went to bed, defeated. The next morning I woke up and revisited the original idea and ended on this:</p>
+
+<p><img src="/shared/images/game-1/iron/iron-wall-melt-up.gif" alt="iron-wall-melt-up.gif">
+<img src="/shared/images/game-1/iron/iron-wall-melt-right.gif" alt="iron-wall-melt-right.gif">
+<img src="/shared/images/game-1/iron/iron-wall-down.gif" alt="iron-wall-down.gif"></p>
+
+<p>Last but not least I revisited my <a href="/journal/4/piece-by-piecemeal/">head first, feet then fists, and finally torso process</a> and created EOL’s recoil animation:</p>
+
+<p><img src="/shared/images/game-1/iron/bot-recoil-down.gif" alt="bot-recoil-down.gif">
+<img src="/shared/images/game-1/iron/bot-recoil-right.gif" alt="bot-recoil-right.gif">
+<img src="/shared/images/game-1/iron/bot-recoil-up.gif" alt="bot-recoil-up.gif"></p>
+		</div>
+			<div class="post">
+			<h1><a href="/journal/14/keeper-of-houses/">Keeper of Houses</a></h1>
+			<div class="byline">Posted by <strong>Shaun</strong> <span class="datetime" data-timezone="UTC" data-timestamp="1358526034">2013/01/18 16:20:34</span></div>
+			<p>I’m about to lay down a flurry of posts (some art, some code, some level design thoughts) but first: housekeeping.</p>
+
+<p>Shirt and poster orders have been sent off to our friends at <a href="http://www.unitedpixelworkers.com">United Pixelworkers</a> and <a href="http://www.buyolympia.com/">Buy Olympia</a>! These guys are handling fulfillment too, so there won’t be so much as a hiccup in our End of Line’s polishing phase.</p>
+
+<p>One more thing: From any login page, non-backers can now chip in $25 and get the equivalent rewards. If you pledged $1 or $15, you can chip in the difference from <a href="/account/">Your Account</a> page to get the same level of access. So if you or any friends feel like they’re missing out, problem solved!</p>
+		</div>
+			<div class="post">
+			<h1><a href="/journal/13/reset/">Reset</a></h1>
+			<div class="byline">Posted by <strong>Rusty</strong> <span class="datetime" data-timezone="UTC" data-timestamp="1358384021">2013/01/17 00:53:41</span></div>
+			<p>At first, we didn’t add a reset key. We wanted puzzles beatable at all times. Player’s wouldn’t be able to trap themselves or remove key objects from reach.</p>
+
+<p>But as our list of game objects increased, this became more and more difficult. Creating puzzles was slower because we needed to test for and prevent every unbeatable scenario. Levels also required more elements to handle these scenarios. Many rooms were cornered by conveyer belts to remove stuck boxes from walls.</p>
+
+<p><img src="/shared/images/game-1/pre-enter.png" alt="Before the Reset Key">  </p>
+
+<p>Some games use player death to reset puzzles, but this wasn’t an option for <em>End of Life</em>: players often progress through levels by dying.</p>
+
+<p>So we added a reset key. Players can now press the Return key to reset a level. Designing puzzles is faster and more focused. Levels are less cluttered.</p>
+
+<p><img src="/shared/images/game-1/post-enter.png" alt="After the Reset Key">  </p>
+		</div>
+			<div class="post">
+			<h1><a href="/journal/12/ice-ice-baby/">Ice, Ice, Baby</a></h1>
+			<div class="byline">Posted by <strong>Shaun</strong> <span class="datetime" data-timezone="UTC" data-timestamp="1358300656">2013/01/16 01:44:16</span></div>
+			<p>EOL rocks the ice like a vandal.</p>
+
+<iframe width="480" height="360" src="https://www.youtube.com/embed/lnTqVzvKk_8?rel=0" frameborder="0" allowfullscreen></iframe>
+		</div>
+			<div class="post">
+			<h1><a href="/journal/11/pushy/">Pushy</a></h1>
+			<div class="byline">Posted by <strong>Shaun</strong> <span class="datetime" data-timezone="UTC" data-timestamp="1358174815">2013/01/14 14:46:55</span></div>
+			<p><img src="/shared/images/game-1/eol-push-down.gif" alt="eol-push-down.gif">
+<img src="/shared/images/game-1/eol-push-up.gif" alt="eol-push-up.gif">
+<img src="/shared/images/game-1/eol-push-right.gif" alt="eol-push-right.gif"></p>
+		</div>
+			<div class="post">
+			<h1><a href="/journal/10/end-of-line-polished-gifbomb-1/">End of Line: Polished Gifbomb 1</a></h1>
+			<div class="byline">Posted by <strong>Shaun</strong> <span class="datetime" data-timezone="UTC" data-timestamp="1357962682">2013/01/12 03:51:22</span></div>
+			<p>Will they all make it in? Only time will tell.</p>
+
+<p><img src="/shared/images/game-1/saw-bot.gif" alt="saw-bot.gif">
+<img src="/shared/images/game-1/flip-spikes.gif" alt="flip-spikes.gif"></p>
+
+<p><img src="/shared/images/game-1/water-lap.gif" alt="water-lap.gif">
+<img src="/shared/images/game-1/flame-pit.gif" alt="flame-pit.gif">
+<img src="/shared/images/game-1/electric-panel.gif" alt="electric-panel.gif"></p>
+
+<p><img src="/shared/images/game-1/laser.gif" alt="laser.gif">
+<img src="/shared/images/game-1/element-station.gif" alt="element-station.gif"></p>
+
+<p>And one non-gif to close out the day:</p>
+
+<p><img src="/shared/images/game-1/elem-stations.png" alt="elem-stations.png"></p>
+		</div>
+		</div>
+<p>
+	<a href="/journal/page/8/"><img src="/images/btn-older.png" height="30"></a>	
+	<a href="/journal/page/6/"><img src="/images/btn-newer.png" height="30"></a>	
+</p>
+	
+	</div><div class="copy">
+		Copyright © 2012–<span class="dateyear"></span> 
+		<a href="/">Retro Game Crunch</a>.
+	</div></div><script>
+$(function()
+{
+	$('.spoilers-toggle').on('touchstart click', function(event)
+	{
+		if(event.handled !== true)
+		{
+			$(this).parent().toggleClass('open');
+			event.handled = true;
+		}
+		return false;
+	});
+})
+</script>
+<script src="/archive.js"></script><script>cleanup();</script></body>
+</html>

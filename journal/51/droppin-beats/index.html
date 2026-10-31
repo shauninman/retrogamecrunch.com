@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Droppin’ Beats • Retro Game Crunch</title>
+<script>if((window.devicePixelRatio===undefined?1:window.devicePixelRatio)>1)document.cookie='HTTP_IS_RETINA=1;path=/';</script>
+<meta name="google-site-verification" content="0n15O71rkhohq8oudSJ4AhQ9ZHGrtYQGzZ-hj6_NTGI">
+<meta name="viewport" id="viewport" content="width=800">
+<link rel="stylesheet" href="/styles/rgc.q688883a0dcaa.css">
+<link rel="stylesheet" href="/scripts/highlight/styles/zenburn.css">
+<script src="/scripts/highlight/highlight.pack.js"></script>
+<script src="/scripts/jquery-1.8.3.min.js"></script>
+
+<script src="/scripts/mediaelement/mediaelement-and-player.min.js"></script>
+<link rel="stylesheet" href="/scripts/mediaelement/mediaelementplayer.css">
+<script>
+hljs.tabReplace = '    ';
+hljs.initHighlightingOnLoad();
+
+$(function()
+{
+	$('audio').mediaelementplayer(/* Options */);
+	
+	// disable :hover on touch devices
+	// based on https://gist.github.com/4404503 
+	// via https://twitter.com/javan/status/284873379062890496
+	// + https://twitter.com/pennig/status/285790598642946048
+	// re https://retrogamecrunch.com/tmp/hover
+	if ('createTouch' in document)
+	{
+		$('html').addClass('touch');
+		try
+		{
+			var ignore = /:hover\b/;
+			for (var i=0; i<document.styleSheets.length; i++)
+			{
+				var sheet = document.styleSheets[i];
+				for (var j=sheet.cssRules.length-1; j>=0; j--)
+				{
+					var rule = sheet.cssRules[j];
+					if (rule.type === CSSRule.STYLE_RULE && ignore.test(rule.selectorText))
+					{
+						sheet.deleteRule(j);
+					}
+				}
+			}
+		}
+		catch(e){}
+	}
+});
+
+var then = 1387576800000;
+var deadline = '2013-12-20 22:00:00 UTC';
+var last_mins = -1;
+window.setInterval(function()
+{
+	var now = (new Date).getTime();
+	var remaining = then - now;
+	if (remaining < 0) remaining = 0;
+
+	var sec = 1000;
+	var min = 60 * sec;
+	var hour = 60 * min;
+	var day = 24 * hour;
+
+	var days = Math.floor(remaining / day);
+	remaining -= days * day;
+	var hours = Math.floor(remaining / hour);
+	remaining -= hours * hour;
+	var mins = Math.floor(remaining / min);
+	
+	if (last_mins == mins) return; // prevent unnecessary redraws
+	last_mins = mins;
+
+	var html = '';
+
+	if (days) 	html += '<span class="remaining-days">'+days+' day'+(days>1?'s':'')+'</span> ';
+	if (hours) 	html += '<span class="remaining-days">'+hours+' hour'+(hours>1?'s':'')+'</span> ';
+	if (mins) 	html += '<span class="remaining-days">'+mins+' minute'+(mins>1?'s':'')+'</span> ';
+
+	// DELAY
+	// if (html=='') html = 'To be determined';
+	if (html=='') html = 'Just a few moments';
+
+	$('span.countdown').html(html);
+}, 1 * 1000);
+</script>
+
+
+<link rel="stylesheet" href="/archive.css"><link rel="canonical" href="https://retrogamecrunch.com/journal/51/droppin-beats/"></head>
+<body>
+	<div class="wrap wrap-top">
+		<div id="logo-unit">
+			<a id="logo" href="/"><img src="/images/logo-black.png" width="204" height="98" alt="Retro Game Crunch"></a>
+			<a id="funded" href="http://www.kickstarter.com/projects/shauninman/retro-game-crunch-six-games-in-six-months"><img src="/images/funded-with.png" width="116" height="112" alt="Funded with Kickstarter"></a>
+		</div><div id="mini-login">
+	
+</div><div id="status">
+			<div class="currently">
+				<strong>Currently</strong>
+				<a href="/games/6/shuten/">Recovering from Shūten Complete</a>
+			</div></div><ul class="nav nav-main">
+			<li><a href="/">Home</a></li>
+			<li><a href="/games/">Games</a></li>			<li><a href="/rewards/">Rewards</a></li>
+			<li><a href="/journal/" class="current">Journal</a></li>
+			<li><a href="/primer/">Primer</a></li>
+			<li><a href="/about/">About</a></li>
+			<li><a href="/contact/">Contact</a></li>
+		</ul>
+	</div><div class="wide"><div class="wrap">
+					<ul class="nav nav-alt nav-journal">
+									<li><a href="/journal/50/wub-wub-wescue-unleashed-pug-intended/">Wub-Wub Wescue Unleashed (Pug Intended) </a></li>
+													<li><a href="/journal/52/wub-wub-wesuwection/">Wub-Wub Wesuwection</a></li>
+							</ul>
+				</div></div><div class="wrap wrap-bottom">
+		<div class="content">
+		
+		
+	<div class="post">
+		<h1>Droppin’ Beats</h1>
+		<div class="byline">
+			Posted by <strong>Matt</strong> 
+							<span class="datetime" data-timezone="UTC" data-timestamp="1377477167">2013/08/26 00:32:47</span>					</div>
+		<p>Making Wub-Wub Wescue was a journey. You’ll soon hear all the details in the upcoming podcast and Shaun’s postmortem. We had four total versions of the game, which came with their own sets of music.</p>
+
+<h2>Beat Drop - Three Day Jam</h2>
+
+<p>For the initial three day jam I wrote twelve short songs, each with a different musical style. Only five songs were used for levels in the release; while two other songs were used for the title and ending screens. During the three day jam I got my hands into the programming too! I worked on making the floor tiles play notes that fit with the music. I used the SiON as3 library to make sound with small snippets of mml I wrote. </p>
+
+<p>The idea behind this iteration of the game was that you’d be collecting records to unlock new parts of the song that’s currently playing. It starts with just bass and drums, then you unlock the rhythm (or background voices) of the song. Finally, you unlock the melody or lead voice. Each song essentially had three versions.</p>
+
+<p>Here’s the twelve songs from the three day jam (all parts unlocked):</p>
+
+<h3>Song 1</h3>
+
+<p><audio src="/shared/music/game-4/beat/song-1.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/beat/song-1.mp3">song 1</a></audio></p>
+
+<h3>Song 2</h3>
+
+<p>This song eventually turned into the end credits theme for Wub-Wub Wescue! I loved it from the very start. I knew it was special. I wasn’t the only one either. My ex-girlfriend (girlfriend at the time of creation) loved it so much she wanted this as a ringtone on her phone. When a girl wants a song as her ringtone there’s no higher compliment.</p>
+
+<p><audio src="/shared/music/game-4/beat/song-2.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/beat/song-2.mp3">song 2</a></audio></p>
+
+<h3>Song 3</h3>
+
+<p><audio src="/shared/music/game-4/beat/song-3.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/beat/song-3.mp3">song 3</a></audio></p>
+
+<h3>Song 4</h3>
+
+<p><audio src="/shared/music/game-4/beat/song-4.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/beat/song-4.mp3">song 4</a></audio></p>
+
+<h3>Song 5</h3>
+
+<p><audio src="/shared/music/game-4/beat/song-5.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/beat/song-5.mp3">song 5</a></audio></p>
+
+<h3>Song 6</h3>
+
+<p>This was used for the ending screen.</p>
+
+<p><audio src="/shared/music/game-4/beat/song-6.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/beat/song-6.mp3">song 6</a></audio></p>
+
+<h3>Song 7</h3>
+
+<p><audio src="/shared/music/game-4/beat/song-7.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/beat/song-7.mp3">song 7</a></audio></p>
+
+<h3>Song 8</h3>
+
+<p>This is the title music!</p>
+
+<p><audio src="/shared/music/game-4/beat/song-8.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/beat/song-8.mp3">song 8</a></audio></p>
+
+<h3>Song 9</h3>
+
+<p><audio src="/shared/music/game-4/beat/song-9.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/beat/song-9.mp3">song 9</a></audio></p>
+
+<h3>Song 10</h3>
+
+<p>I actually wrote the first iteration of this musical idea during  GAIAttack development.</p>
+
+<p><audio src="/shared/music/game-4/beat/song-10.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/beat/song-10.mp3">song 10</a></audio></p>
+
+<h3>Song 11</h3>
+
+<p><audio src="/shared/music/game-4/beat/song-11.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/beat/song-11.mp3">song 11</a></audio></p>
+
+<h3>Song 12</h3>
+
+<p>This song also started back in the GAIAttack days. Neither this nor #10 made it into any version of the game so maybe one day I’ll get to use them. :)</p>
+
+<p><audio src="/shared/music/game-4/beat/song-12.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/beat/song-12.mp3">song 12</a></audio></p>
+
+<h2>Beat Drop - Post Jam</h2>
+
+<p>After the jam we were still exploring the Beat Drop game idea and were planning to use all twelve songs. So I guess technically there was no new music for this version of the game. I believe I might have re-visited some of the songs to try and polish ideas or extend their length but nothing major.</p>
+
+<h2>Record Game (working title)</h2>
+
+<p>We felt like we weren’t getting anywhere and the game still wasn’t fun. At this point we were exploring the idea of having platforms morph into different shapes based on the music. We thought it might be interesting to make everything randomly generated so levels and music were never the same. To accomplish this I composed songs in really short segments. Each “stem” of the music could be played in any order, any number of times. The idea comes from a project, that Shaun told me about, called <a href="http://musicforshuffle.com">“Music for Shuffle”</a>.</p>
+
+<p>I wanted to explore new music styles I hadn’t worked with before and I was listening to a lot of middle eastern style music; Song1 is HEAVILY influenced by this. I composed two songs before we moved on to a better game idea.</p>
+
+<p>Here’s all the stems:</p>
+
+<h3>Song 1 Stem 1</h3>
+
+<p><audio src="/shared/music/game-4/record/Song1Stem1.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/record/Song1Stem1.mp3">song 1 stem 1</a></audio></p>
+
+<h3>Song 1 Stem 2</h3>
+
+<p><audio src="/shared/music/game-4/record/Song1Stem2.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/record/Song1Stem2.mp3">song 1 stem 2</a></audio></p>
+
+<h3>Song 1 Stem 3</h3>
+
+<p><audio src="/shared/music/game-4/record/Song1Stem3.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/record/Song1Stem3.mp3">song 1 stem 3</a></audio></p>
+
+<h3>Song 1 Stem 4</h3>
+
+<p><audio src="/shared/music/game-4/record/Song1Stem4.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/record/Song1Stem4.mp3">song 1 stem 4</a></audio></p>
+
+<h3>Song 1 Stem 5</h3>
+
+<p><audio src="/shared/music/game-4/record/Song1Stem5.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/record/Song1Stem5.mp3">song 1 stem 5</a></audio></p>
+
+<h3>Song 1 Stem 6</h3>
+
+<p><audio src="/shared/music/game-4/record/Song1Stem6.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/record/Song1Stem6.mp3">song 1 stem 6</a></audio></p>
+
+<h3>Song 1 Stem 7</h3>
+
+<p><audio src="/shared/music/game-4/record/Song1Stem7.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/record/Song1Stem7.mp3">song 1 stem 7</a></audio></p>
+
+<h3>Song 1 Stem 8</h3>
+
+<p><audio src="/shared/music/game-4/record/Song1Stem8.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/record/Song1Stem8.mp3">song 1 stem 8</a></audio></p>
+
+<h3>Song 1 Stem 9</h3>
+
+<p><audio src="/shared/music/game-4/record/Song1Stem9.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/record/Song1Stem9.mp3">song 1 stem 9</a></audio></p>
+
+<h3>Song 1 Stem 10</h3>
+
+<p><audio src="/shared/music/game-4/record/Song1Stem10.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/record/Song1Stem10.mp3">song 1 stem 10</a></audio></p>
+
+<h3>Song 1 Stem 11</h3>
+
+<p><audio src="/shared/music/game-4/record/Song1Stem11.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/record/Song1Stem11.mp3">song 1 stem 11</a></audio></p>
+
+<h3>Song 1 Stem 12</h3>
+
+<p><audio src="/shared/music/game-4/record/Song1Stem12.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/record/Song1Stem12.mp3">song 1 stem 12</a></audio></p>
+
+<h3>Song 1 Stem 13</h3>
+
+<p><audio src="/shared/music/game-4/record/Song1Stem13.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/record/Song1Stem13.mp3">song 1 stem 13</a></audio></p>
+
+<h3>Song 2 Stem 1</h3>
+
+<p><audio src="/shared/music/game-4/record/Song2Stem1.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/record/Song2Stem1.mp3">song 2 stem 1</a></audio></p>
+
+<h3>Song 2 Stem 2</h3>
+
+<p><audio src="/shared/music/game-4/record/Song2Stem2.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/record/Song2Stem2.mp3">song 2 stem 2</a></audio></p>
+
+<h3>Song 2 Stem 3</h3>
+
+<p><audio src="/shared/music/game-4/record/Song2Stem3.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/record/Song2Stem3.mp3">song 2 stem 3</a></audio></p>
+
+<h3>Song 2 Stem 4</h3>
+
+<p><audio src="/shared/music/game-4/record/Song2Stem4.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/record/Song2Stem4.mp3">song 2 stem 4</a></audio></p>
+
+<h3>Song 2 Stem 5</h3>
+
+<p><audio src="/shared/music/game-4/record/Song2Stem5.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/record/Song2Stem5.mp3">song 2 stem 5</a></audio></p>
+
+<h3>Song 2 Stem 6</h3>
+
+<p><audio src="/shared/music/game-4/record/Song2Stem6.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/record/Song2Stem6.mp3">song 2 stem 6</a></audio></p>
+
+<h3>Song 2 Stem 7</h3>
+
+<p><audio src="/shared/music/game-4/record/Song2Stem7.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/record/Song2Stem7.mp3">song 2 stem 7</a></audio></p>
+
+<h3>Song 2 Stem 8</h3>
+
+<p><audio src="/shared/music/game-4/record/Song2Stem8.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/record/Song2Stem8.mp3">song 2 stem 8</a></audio></p>
+
+<h2>Wub-Wub Wescue (Doggy Kong - working title)</h2>
+
+<p>I took a really different approach to music with Wub-Wub. All the level music consists of drum beats only. I used the noise channel and DPCM samples. It gives the game a very jungle-like vibe. With no melody or other distractions the player can really focus on the beat and how obstacles in the level react to the music. I wrote ten beats total, only six made it into the final game. Each beat has a slower version (when the slow-mo charm is used) but for brevity I’m only going to include the full speed versions here.</p>
+
+<p>The beats (+ title and boss themes):</p>
+
+<h3>beat 1</h3>
+
+<p><audio src="/shared/music/game-4/wub/beat-1.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/wub/beat-1.mp3">beat 1</a></audio></p>
+
+<h3>beat 2</h3>
+
+<p><audio src="/shared/music/game-4/wub/beat-2.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/wub/beat-2.mp3">beat 2</a></audio></p>
+
+<h3>beat 3</h3>
+
+<p><audio src="/shared/music/game-4/wub/beat-3.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/wub/beat-3.mp3">beat 3</a></audio></p>
+
+<h3>beat 4</h3>
+
+<p><audio src="/shared/music/game-4/wub/beat-4.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/wub/beat-4.mp3">beat 4</a></audio></p>
+
+<h3>beat 5</h3>
+
+<p><audio src="/shared/music/game-4/wub/beat-5.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/wub/beat-5.mp3">beat 5</a></audio></p>
+
+<h3>beat 6</h3>
+
+<p><audio src="/shared/music/game-4/wub/beat-6.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/wub/beat-6.mp3">beat 6</a></audio></p>
+
+<h3>beat 7</h3>
+
+<p><audio src="/shared/music/game-4/wub/beat-7.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/wub/beat-7.mp3">beat 7</a></audio></p>
+
+<h3>beat 8</h3>
+
+<p><audio src="/shared/music/game-4/wub/beat-8.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/wub/beat-8.mp3">beat 8</a></audio></p>
+
+<h3>beat 9</h3>
+
+<p><audio src="/shared/music/game-4/wub/beat-9.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/wub/beat-9.mp3">beat 9</a></audio></p>
+
+<h3>beat 10</h3>
+
+<p><audio src="/shared/music/game-4/wub/beat-10.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/wub/beat-10.mp3">beat 10</a></audio></p>
+
+<h3>Title theme</h3>
+
+<p><audio src="/shared/music/game-4/wub/title.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/wub/title.mp3">title theme</a></audio></p>
+
+<h3>Boss theme</h3>
+
+<p>The end boss theme is the only jungle beat to have a bassline (or melody).</p>
+
+<p><audio src="/shared/music/game-4/wub/boss.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/wub/boss.mp3">boss theme</a></audio></p>
+
+<p>Sound design was really fun. I enjoyed making the atmospheric jungle sounds like bugs and birds. Those sounds play randomly throughout the entire game. I also really enjoyed making the “charm” songs; the phonograph versions and the extra cute Wub-Wub bark versions. Wub-wub’s bark is probably my favorite sound effect. I used the Konami VRC6 sawtooth to create the bark.</p>
+
+<p><audio src="/shared/music/game-4/wub/wub-bark.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/wub/wub-bark.mp3">Wub-Wub bark</a></audio></p>
+
+<p>Speaking of Konami expansion audio chips, I used the VRC7 for the first time ever. The end credits theme uses it for all the lead voices. My favorite is the middle of the song, it has an 80’s synth sound. As noted earlier, this song started out as the second piece of music I wrote for the entire project! I love it.</p>
+
+<p><audio src="/shared/music/game-4/wub/credits-full.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/wub/credits-full.mp3">credits theme</a></audio></p>
+
+<h2>Bonus: Album Releases</h2>
+
+<p>If you didn’t select a high enough backer level on Kickstarter to get the soundtracks… good news! All of the Retro Game Crunch albums are going to be available for anyone to purchase. The first release “End of Line” just went live! <a href="http://8bitmatt.bandcamp.com/album/end-of-line-original-sound-version">Check it out!</a></p>
+	</div>
+	
+		<h2>1 Comment</h2>
+<div class="comments">
+		<div class="comment" id="comment-304">
+		<div class="who">Scared</div>
+		<div class="what"><p>So much good music! Thanks for sharing it with us.</p>
+</div>
+		<div class="when"><a href="#comment-304" class="datetime" data-timezone="UTC" data-timestamp="1377619708">2013/08/27 16:08:28</a></div>
+	</div>
+	</div>		</div><div class="copy">
+		Copyright © 2012–<span class="dateyear"></span> 
+		<a href="/">Retro Game Crunch</a>.
+	</div></div><script>
+$(function()
+{
+	$('.spoilers-toggle').on('touchstart click', function(event)
+	{
+		if(event.handled !== true)
+		{
+			$(this).parent().toggleClass('open');
+			event.handled = true;
+		}
+		return false;
+	});
+})
+</script>
+<script src="/archive.js"></script><script>cleanup();</script></body>
+</html>

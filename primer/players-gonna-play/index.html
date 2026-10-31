@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Players Gonna Play • Retro Game Crunch</title>
+<script>if((window.devicePixelRatio===undefined?1:window.devicePixelRatio)>1)document.cookie='HTTP_IS_RETINA=1;path=/';</script>
+<meta name="google-site-verification" content="0n15O71rkhohq8oudSJ4AhQ9ZHGrtYQGzZ-hj6_NTGI">
+<meta name="viewport" id="viewport" content="width=800">
+<link rel="stylesheet" href="/styles/rgc.q688883a0dcaa.css">
+<link rel="stylesheet" href="/scripts/highlight/styles/zenburn.css">
+<script src="/scripts/highlight/highlight.pack.js"></script>
+<script src="/scripts/jquery-1.8.3.min.js"></script>
+
+<script src="/scripts/mediaelement/mediaelement-and-player.min.js"></script>
+<link rel="stylesheet" href="/scripts/mediaelement/mediaelementplayer.css">
+<script>
+hljs.tabReplace = '    ';
+hljs.initHighlightingOnLoad();
+
+$(function()
+{
+	$('audio').mediaelementplayer(/* Options */);
+	
+	// disable :hover on touch devices
+	// based on https://gist.github.com/4404503 
+	// via https://twitter.com/javan/status/284873379062890496
+	// + https://twitter.com/pennig/status/285790598642946048
+	// re https://retrogamecrunch.com/tmp/hover
+	if ('createTouch' in document)
+	{
+		$('html').addClass('touch');
+		try
+		{
+			var ignore = /:hover\b/;
+			for (var i=0; i<document.styleSheets.length; i++)
+			{
+				var sheet = document.styleSheets[i];
+				for (var j=sheet.cssRules.length-1; j>=0; j--)
+				{
+					var rule = sheet.cssRules[j];
+					if (rule.type === CSSRule.STYLE_RULE && ignore.test(rule.selectorText))
+					{
+						sheet.deleteRule(j);
+					}
+				}
+			}
+		}
+		catch(e){}
+	}
+});
+
+var then = 1387576800000;
+var deadline = '2013-12-20 22:00:00 UTC';
+var last_mins = -1;
+window.setInterval(function()
+{
+	var now = (new Date).getTime();
+	var remaining = then - now;
+	if (remaining < 0) remaining = 0;
+
+	var sec = 1000;
+	var min = 60 * sec;
+	var hour = 60 * min;
+	var day = 24 * hour;
+
+	var days = Math.floor(remaining / day);
+	remaining -= days * day;
+	var hours = Math.floor(remaining / hour);
+	remaining -= hours * hour;
+	var mins = Math.floor(remaining / min);
+	
+	if (last_mins == mins) return; // prevent unnecessary redraws
+	last_mins = mins;
+
+	var html = '';
+
+	if (days) 	html += '<span class="remaining-days">'+days+' day'+(days>1?'s':'')+'</span> ';
+	if (hours) 	html += '<span class="remaining-days">'+hours+' hour'+(hours>1?'s':'')+'</span> ';
+	if (mins) 	html += '<span class="remaining-days">'+mins+' minute'+(mins>1?'s':'')+'</span> ';
+
+	// DELAY
+	// if (html=='') html = 'To be determined';
+	if (html=='') html = 'Just a few moments';
+
+	$('span.countdown').html(html);
+}, 1 * 1000);
+</script>
+
+
+<link rel="stylesheet" href="/archive.css"><link rel="canonical" href="https://retrogamecrunch.com/primer/players-gonna-play/"></head>
+<body>
+	<div class="wrap wrap-top">
+		<div id="logo-unit">
+			<a id="logo" href="/"><img src="/images/logo-black.png" width="204" height="98" alt="Retro Game Crunch"></a>
+			<a id="funded" href="http://www.kickstarter.com/projects/shauninman/retro-game-crunch-six-games-in-six-months"><img src="/images/funded-with.png" width="116" height="112" alt="Funded with Kickstarter"></a>
+		</div><div id="mini-login">
+	
+</div><div id="status">
+			<div class="currently">
+				<strong>Currently</strong>
+				<a href="/games/6/shuten/">Recovering from Shūten Complete</a>
+			</div></div><ul class="nav nav-main">
+			<li><a href="/">Home</a></li>
+			<li><a href="/games/">Games</a></li>			<li><a href="/rewards/">Rewards</a></li>
+			<li><a href="/journal/">Journal</a></li>
+			<li><a href="/primer/" class="current">Primer</a></li>
+			<li><a href="/about/">About</a></li>
+			<li><a href="/contact/">Contact</a></li>
+		</ul>
+	</div><div class="wide"><div class="wrap">
+					<ul class="nav nav-alt nav-primer">
+				<li><a href="/primer/tools/">Tools</a></li>
+				<li><a href="/primer/getting-started/">Getting Started</a></li>
+				<li><a href="/primer/level-up/">Level Up</a></li>
+				<li><a href="/primer/players-gonna-play/" class="current">Players Gonna Play</a></li>
+				<li><a href="/primer/catch-em-all/">Catch ‘em All</a></li>
+				<li><a href="/primer/pitfalls/">Pitfalls!</a></li>
+				<li><a href="/primer/sound-off/">Sound Off</a></li>
+			</ul>
+				</div></div><div class="wrap wrap-bottom">
+		<div class="content">
+		<h1>Players Gonna Play</h1>
+
+<p>Welcome back! Where were we? Well, we started by downloading and installing some free game development <a href="/primer/tools/">tools</a>, we set up our <a href="/primer/getting-started/">first project</a>, then we built our <a href="/primer/level-up/">first level</a> and loaded it into our game. Today we’ll be tackling sprites, the camera, and user input. On with the show!</p>
+
+<h2>Sprites</h2>
+
+<p>Time to add the player. Download the <a href="/primer/downloads/ball.png">bouncing ball spritesheet</a>:</p>
+
+<p><img src="/primer/downloads/ball.png" alt="ball.png"></p>
+
+<p>Move the file into your project’s assets folder.</p>
+
+<p>Open up FDT and open ROM.as and embed the ball spritesheet by adding:</p>
+
+<pre><code>[Embed(source="assets/ball.png")] static public var ImgBall : Class;
+</code></pre>
+
+<p>ROM.as should now look like this:</p>
+
+<pre><code>package {
+    public class ROM {
+        [Embed(source="assets/bg.png")] static public var ImgBg : Class;
+        [Embed(source="assets/ball.png")] static public var ImgBall : Class;
+    }
+}
+</code></pre>
+
+<p>Now create a new Ball ActionScript Class in your project (File &gt; New &gt; ActionScript Class). Set the Class name to Ball, the Superclass to org.flixel.FlxSprite, check “Explicitly invoke superclass constructor”, and click the Finish button.</p>
+
+<p>In Ball.as, we need to remove the unnecessary SimpleGraphic argument from the constructor and super calls. Replace:</p>
+
+<pre><code>public function Ball(X : Number = 0, Y : Number = 0, SimpleGraphic : Class = null) {
+</code></pre>
+
+<p>with:</p>
+
+<pre><code>public function Ball(X : Number = 0, Y : Number = 0) {
+</code></pre>
+
+<p>And:</p>
+
+<pre><code>super(X, Y, SimpleGraphic);
+</code></pre>
+
+<p>with:</p>
+
+<pre><code>super(X, Y);
+</code></pre>
+
+<p>Let’s load our spritesheet! Add the following inside the Ball constructor:</p>
+
+<pre><code>loadGraphic(ROM.ImgBall, true, false, 16, 16);
+addAnimation("bounce", [0,1,2,3], 10);
+play("bounce");
+offset.y = 4;
+</code></pre>
+
+<p>This <a href="http://flixel.org/docs/org/flixel/FlxSprite.html#loadGraphic()">loads</a> our spritesheet, let’s Flixel know that this is an animated graphic, tells Flixel not to reverse the graphic, and defines an individual frame size as 16 by 16 pixels. Next we define and play the bounce <a href="http://flixel.org/docs/org/flixel/FlxSprite.html#addAnimation()">animation</a>. Then we set the y offset to 4 to visually center the bouncing ball in the middle of our tilemap’s tiles.</p>
+
+<p>With these additions Ball.as should look like this:</p>
+
+<pre><code>package {
+    import org.flixel.FlxSprite;
+
+    public class Ball extends FlxSprite {
+        public function Ball(X:Number, Y:Number) {
+            super(X, Y);
+            loadGraphic(ROM.ImgBall, true, true, 16, 16);
+            addAnimation("bounce", [0,1,2,3], 10);
+            play("bounce");
+            offset.y = 4;
+        }
+    }
+}
+</code></pre>
+
+<p>Close Ball.as and open up PlayState.as. </p>
+
+<h2>Let’s Bounce</h2>
+
+<p>In PlayState.as find:</p>
+
+<pre><code>private var background:FlxTilemap = new FlxTilemap();
+</code></pre>
+
+<p>and beneath that add:</p>
+
+<pre><code>private var ball:Ball;
+</code></pre>
+
+<p>Then, inside the loadStateFromTmx() function, beneath:</p>
+
+<pre><code>add(background);
+</code></pre>
+
+<p>add:</p>
+
+<pre><code>ball = new Ball(16,16);
+add(ball);
+</code></pre>
+
+<p>Now run your game. The ball should be in the upper left corner! Let’s respond to user input. Back in PlayState.as scroll to the update() function. Beneath:</p>
+
+<pre><code>if (!hasLoaded) return;
+</code></pre>
+
+<p>add:</p>
+
+<pre><code>// handle user input
+var ballVelocity:Number = 64;
+
+ball.velocity.x = 0;
+ball.velocity.y = 0;
+
+if (FlxG.keys.RIGHT) {
+    ball.velocity.x = ballVelocity;
+}
+else if (FlxG.keys.LEFT) {
+    ball.velocity.x = -ballVelocity;
+}
+
+if (FlxG.keys.UP) {
+    ball.velocity.y = -ballVelocity;
+}
+else if (FlxG.keys.DOWN) {
+    ball.velocity.y = ballVelocity;
+}
+
+// update after user input
+super.update();
+
+// collision logic
+FlxG.collide(background, ball);
+</code></pre>
+
+<p>That’s a lot of code. Let’s walk through it. First, we define a ballVelocity variable so as we’re building and playtesting we don’t have to change the number in multiple places. Next, we zero the ball’s current velocity, cancelling any movement started on a previous frame, before updating the velocity based on new <a href="http://flixel.org/docs/org/flixel/system/input/Keyboard.html">user input</a>. <code>super.update();</code> effectively applies our velocity changes and updates the ball’s animation automatically. Finally, we collide the ball with our background’s solid tiles so it can’t bounce through walls.</p>
+
+<p>Before running the game we have one last thing to do: hook up the camera. Inside the loadStateFromTmx() function, beneath:</p>
+
+<pre><code>add(ball);
+</code></pre>
+
+<p>add:</p>
+
+<pre><code>FlxG.camera.setBounds(0, 0, background.width, background.height, true);
+FlxG.camera.follow(ball, FlxCamera.STYLE_TOPDOWN_TIGHT);
+</code></pre>
+
+<p>This <a href="http://flixel.org/docs/org/flixel/FlxCamera.html#setBounds()">locks</a> the camera to the dimensions of our tilemap and tells it to <a href="http://flixel.org/docs/org/flixel/FlxCamera.html#follow()">follow</a> the ball. </p>
+
+<p>With all the new additions, PlayState.as should now look like this:</p>
+
+<pre><code>package {
+    import org.flixel.*;
+    // TMX Loading
+    import net.pixelpracht.tmx.*;
+    import flash.events.Event;
+    import flash.net.URLLoader;
+    import flash.net.URLRequest;
+
+    public class PlayState extends FlxState {
+        private var hasLoaded:Boolean = false;
+        private var background:FlxTilemap = new FlxTilemap();
+        private var ball:Ball;
+
+        override public function create():void {
+            // initiate variables, add sprites, tilemaps, etc
+
+            loadTmxFile();
+        }
+
+        // Level loading
+        private function loadTmxFile():void {
+            var loader:URLLoader = new URLLoader();
+            loader.addEventListener(Event.COMPLETE, onTmxLoaded);
+            loader.load(new URLRequest('level.tmx'));
+        }
+
+        private function onTmxLoaded(e:Event) : void {
+            var loader:URLLoader = e.target as URLLoader;
+            var xml:XML = new XML(loader.data);
+            var tmx:TmxMap = new TmxMap(xml);
+            loadStateFromTmx(tmx);
+            hasLoaded = true; // allow updates
+        }
+
+        private function loadStateFromTmx(tmx:TmxMap) : void {
+            var csvBg:String = tmx.getLayer('bg').toCsv(tmx.getTileSet('bg'));
+            background.loadMap(csvBg, ROM.ImgBg, 16, 16, FlxTilemap.OFF,0,0,2);
+            add(background);
+
+            ball = new Ball(16,16);
+            add(ball);
+
+            FlxG.camera.setBounds(0, 0, background.width, background.height, true);
+            FlxG.camera.follow(ball, FlxCamera.STYLE_TOPDOWN_TIGHT);
+        }
+
+        override public function update():void {
+            // listen for user input, move sprites, etc
+
+            if (!hasLoaded) return;
+
+            // handle user input
+            var ballVelocity:Number = 64;
+
+            ball.velocity.x = 0;
+            ball.velocity.y = 0;
+
+            if (FlxG.keys.RIGHT) {
+                ball.velocity.x = ballVelocity;
+            }
+            else if (FlxG.keys.LEFT) {
+                ball.velocity.x = -ballVelocity;
+            }
+
+            if (FlxG.keys.UP) {
+                ball.velocity.y = -ballVelocity;
+            }
+            else if (FlxG.keys.DOWN) {
+                ball.velocity.y = ballVelocity;
+            }
+
+            // update after user input
+            super.update();
+
+            // collision logic
+            FlxG.collide(background, ball);
+        }
+    }
+}
+</code></pre>
+
+<p>Now run your game. Use the arrow keys to bounce around your map! Next time we’ll <a href="/primer/catch-em-all/">add collectibles</a> and share a trick to streamline your level design process.</p>
+	</div><div class="copy">
+		Copyright © 2012–<span class="dateyear"></span> 
+		<a href="/">Retro Game Crunch</a>.
+	</div></div><script>
+$(function()
+{
+	$('.spoilers-toggle').on('touchstart click', function(event)
+	{
+		if(event.handled !== true)
+		{
+			$(this).parent().toggleClass('open');
+			event.handled = true;
+		}
+		return false;
+	});
+})
+</script>
+<script src="/archive.js"></script><script>cleanup();</script></body>
+</html>

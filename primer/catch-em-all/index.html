@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Catch ‘em All • Retro Game Crunch</title>
+<script>if((window.devicePixelRatio===undefined?1:window.devicePixelRatio)>1)document.cookie='HTTP_IS_RETINA=1;path=/';</script>
+<meta name="google-site-verification" content="0n15O71rkhohq8oudSJ4AhQ9ZHGrtYQGzZ-hj6_NTGI">
+<meta name="viewport" id="viewport" content="width=800">
+<link rel="stylesheet" href="/styles/rgc.q688883a0dcaa.css">
+<link rel="stylesheet" href="/scripts/highlight/styles/zenburn.css">
+<script src="/scripts/highlight/highlight.pack.js"></script>
+<script src="/scripts/jquery-1.8.3.min.js"></script>
+
+<script src="/scripts/mediaelement/mediaelement-and-player.min.js"></script>
+<link rel="stylesheet" href="/scripts/mediaelement/mediaelementplayer.css">
+<script>
+hljs.tabReplace = '    ';
+hljs.initHighlightingOnLoad();
+
+$(function()
+{
+	$('audio').mediaelementplayer(/* Options */);
+	
+	// disable :hover on touch devices
+	// based on https://gist.github.com/4404503 
+	// via https://twitter.com/javan/status/284873379062890496
+	// + https://twitter.com/pennig/status/285790598642946048
+	// re https://retrogamecrunch.com/tmp/hover
+	if ('createTouch' in document)
+	{
+		$('html').addClass('touch');
+		try
+		{
+			var ignore = /:hover\b/;
+			for (var i=0; i<document.styleSheets.length; i++)
+			{
+				var sheet = document.styleSheets[i];
+				for (var j=sheet.cssRules.length-1; j>=0; j--)
+				{
+					var rule = sheet.cssRules[j];
+					if (rule.type === CSSRule.STYLE_RULE && ignore.test(rule.selectorText))
+					{
+						sheet.deleteRule(j);
+					}
+				}
+			}
+		}
+		catch(e){}
+	}
+});
+
+var then = 1387576800000;
+var deadline = '2013-12-20 22:00:00 UTC';
+var last_mins = -1;
+window.setInterval(function()
+{
+	var now = (new Date).getTime();
+	var remaining = then - now;
+	if (remaining < 0) remaining = 0;
+
+	var sec = 1000;
+	var min = 60 * sec;
+	var hour = 60 * min;
+	var day = 24 * hour;
+
+	var days = Math.floor(remaining / day);
+	remaining -= days * day;
+	var hours = Math.floor(remaining / hour);
+	remaining -= hours * hour;
+	var mins = Math.floor(remaining / min);
+	
+	if (last_mins == mins) return; // prevent unnecessary redraws
+	last_mins = mins;
+
+	var html = '';
+
+	if (days) 	html += '<span class="remaining-days">'+days+' day'+(days>1?'s':'')+'</span> ';
+	if (hours) 	html += '<span class="remaining-days">'+hours+' hour'+(hours>1?'s':'')+'</span> ';
+	if (mins) 	html += '<span class="remaining-days">'+mins+' minute'+(mins>1?'s':'')+'</span> ';
+
+	// DELAY
+	// if (html=='') html = 'To be determined';
+	if (html=='') html = 'Just a few moments';
+
+	$('span.countdown').html(html);
+}, 1 * 1000);
+</script>
+
+
+<link rel="stylesheet" href="/archive.css"><link rel="canonical" href="https://retrogamecrunch.com/primer/catch-em-all/"></head>
+<body>
+	<div class="wrap wrap-top">
+		<div id="logo-unit">
+			<a id="logo" href="/"><img src="/images/logo-black.png" width="204" height="98" alt="Retro Game Crunch"></a>
+			<a id="funded" href="http://www.kickstarter.com/projects/shauninman/retro-game-crunch-six-games-in-six-months"><img src="/images/funded-with.png" width="116" height="112" alt="Funded with Kickstarter"></a>
+		</div><div id="mini-login">
+	
+</div><div id="status">
+			<div class="currently">
+				<strong>Currently</strong>
+				<a href="/games/6/shuten/">Recovering from Shūten Complete</a>
+			</div></div><ul class="nav nav-main">
+			<li><a href="/">Home</a></li>
+			<li><a href="/games/">Games</a></li>			<li><a href="/rewards/">Rewards</a></li>
+			<li><a href="/journal/">Journal</a></li>
+			<li><a href="/primer/" class="current">Primer</a></li>
+			<li><a href="/about/">About</a></li>
+			<li><a href="/contact/">Contact</a></li>
+		</ul>
+	</div><div class="wide"><div class="wrap">
+					<ul class="nav nav-alt nav-primer">
+				<li><a href="/primer/tools/">Tools</a></li>
+				<li><a href="/primer/getting-started/">Getting Started</a></li>
+				<li><a href="/primer/level-up/">Level Up</a></li>
+				<li><a href="/primer/players-gonna-play/">Players Gonna Play</a></li>
+				<li><a href="/primer/catch-em-all/" class="current">Catch ‘em All</a></li>
+				<li><a href="/primer/pitfalls/">Pitfalls!</a></li>
+				<li><a href="/primer/sound-off/">Sound Off</a></li>
+			</ul>
+				</div></div><div class="wrap wrap-bottom">
+		<div class="content">
+		<h1>Catch ‘em All</h1>
+
+<p>And we’re back! Last time, we added a bouncing ball and <a href="/primer/players-gonna-play/">hooked up the controls</a> so a player can move it around our previously created <a href="/primer/level-up/">map</a>. Today, we’ll introduce collectibles, add them (and the player) to our level in Tile, and hook up level reloading without recompiling the SWF. As your game and levels become more complex this becomes a huge time saver. Tweak, reload, playtest, repeat!</p>
+
+<h2>Objects in the Rear View</h2>
+
+<p>Let’s start by revisiting our level and adding some objects. Open up level.tmx in Tiled. Create a new object layer (Layer &gt; Add Object Layer) and name the new layer entities. Objects in Tiled are one of its most powerful features but also one of its clumsiest.</p>
+
+<p><img src="/primer/images/tiled-layers.png" alt="tiled-layers.png"></p>
+
+<p><em>Tiled Gotcha 1:</em> The default width and height of a newly created object is 0 tiles. With these default dimensions an object appears to have a width and height of 2 tiles. The object’s actual x and y position is the top left corner <em>of the bottom right tile</em> it covers. Comically unintuitive.</p>
+
+<p><em>Tiled Gotcha 2:</em> When setting or changing an object’s properties, <em>always</em> tab to the next property. Otherwise, Tiled will not save the updated value when you hit Enter/Return to confirm the changes and dismiss the Object Properties window. This may not be a problem if you manually click the OK button.</p>
+
+<p><img src="/primer/images/tiled-object-tools-insert.png" alt="tiled-object-tools-insert.png"></p>
+
+<p>Select the Insert Object tool and click somewhere on your map. Your first object! Now we need to give it a type. Control-click on the bottom right corner of the new object and select Object Properties… from the contextual menu. Set type to Ball and click the OK button. </p>
+
+<p><img src="/primer/images/tiled-object-tools-select.png" alt="tiled-object-tools-select.png"></p>
+
+<p>Select the Select Object tool and click and drag the bottom right corner of the object to reposition it. (If the object gets stuck to the mouse, click the bottom right corner again to drop it. So buggy!)</p>
+
+<p>Insert and position five more objects. Set their type to Pod. When you’re done your level.tmx should look something like this:</p>
+
+<p><img src="/primer/images/tiled-objects.png" alt="tiled-objects.png"></p>
+
+<p>Don’t forget to save level.tmx when you’re done!</p>
+
+<h2>Pod Race</h2>
+
+<p>Now let’s update the project to make use of the objects we just added. We’ll start by adding collectibles. Download the <a href="/primer/downloads/pod.png">hovering pod spritesheet</a>:</p>
+
+<p><img src="/primer/downloads/pod.png" alt="pod.png"></p>
+
+<p>Move the file into your project’s assets folder.</p>
+
+<p>Open up FDT and open ROM.as and embed the pod spritesheet by adding:</p>
+
+<pre><code>[Embed(source="assets/pod.png")] static public var ImgPod : Class;
+</code></pre>
+
+<p>ROM.as should now look like this:</p>
+
+<pre><code>package {
+    public class ROM {
+        [Embed(source="assets/bg.png")] static public var ImgBg : Class;
+        [Embed(source="assets/ball.png")] static public var ImgBall : Class;
+        [Embed(source="assets/pod.png")] static public var ImgPod : Class;
+    }
+}
+</code></pre>
+
+<p>Now create a new Pod ActionScript Class in your project (File &gt; New &gt; ActionScript Class). Set the Class name to Pod, the Superclass to org.flixel.FlxSprite, check “Explicitly invoke superclass constructor”, and click the Finish button.</p>
+
+<p>In Pod.as, we need to remove the unnecessary SimpleGraphic argument from the constructor and super calls. Replace:</p>
+
+<pre><code>public function Pod(X : Number = 0, Y : Number = 0, SimpleGraphic : Class = null) {
+</code></pre>
+
+<p>with:</p>
+
+<pre><code>public function Pod(X : Number = 0, Y : Number = 0) {
+</code></pre>
+
+<p>And:</p>
+
+<pre><code>super(X, Y, SimpleGraphic);
+</code></pre>
+
+<p>with:</p>
+
+<pre><code>super(X+4, Y+4);
+</code></pre>
+
+<p>We’re going to make the hitbox of each pod smaller than its frame so we need to offset its position by the difference. The frame will be 16x16 pixels and the hitbox will be 8x8 so we need to subtract each of frame dimension from its corresponding hitbox dimension and then halve the result. Since width and height are the same we only need to do this math once (phew!). 16 - 8 = 8. 8 / 2 = 4. So we position each pod at X+4, Y+4 when we call the super() constructor.</p>
+
+<p>Let’s load our spritesheet! Add the following inside the Pod constructor:</p>
+
+<pre><code>loadGraphic(ROM.ImgPod, true, false, 16, 16);
+addAnimation("hover", [0,1,2,3], 10);
+play("hover");
+width = 8;
+height = 8;
+offset.x = 4;
+offset.y = 8;
+</code></pre>
+
+<p>This should look familiar. We set up Ball.as almost exactly the same way except we use a custom hitbox size by setting the width and height, and the corresponding offsets with offset.x and offset.y. (In this case offset.y is greater than offset.x because we want our pod to appear as if it is hanging in the air, not sitting on the ground.)</p>
+
+<p>With these additions Pod.as should look like this:</p>
+
+<pre><code>package {
+    import org.flixel.FlxSprite;
+
+    public class Pod extends FlxSprite {
+        public function Pod(X:Number, Y:Number) {
+            super(X+4, Y+4);
+            loadGraphic(ROM.ImgPod, true, false, 16, 16);
+            addAnimation("hover", [0,1,2,3], 10);
+            play("hover");
+            width = 8;
+            height = 8;
+            offset.x = 4;
+            offset.y = 8;
+        }
+    }
+}
+</code></pre>
+
+<p>Close Pod.as and open up PlayState.as.</p>
+
+<p><em>Flixel Aside:</em> A sprites hitbox and offset can be hard to grasp abstractly. The best way to get a feel for how it works is to play with a bunch of different values and see what effect they have. The easiest way to see that efffect is to turn on visual debugging. Open up Primer.as and beneath:</p>
+
+<pre><code>super(240,160,PlayState,2);
+</code></pre>
+
+<p>add:</p>
+
+<pre><code>FlxG.visualDebug = true;
+</code></pre>
+
+<p>Then run your game. The red outlines are hitboxes, the blue are individual tiles of your tilemap. To turn visual debug off, just remove or comment out the line we just added like so:</p>
+
+<pre><code>// FlxG.visualDebug = true;
+</code></pre>
+
+<h2>Hanging Around</h2>
+
+<p>Now we’re going to update our level loading logic to load the Ball and Pods from our TMX. In PlayState.as find:</p>
+
+<pre><code>private var ball:Ball;
+</code></pre>
+
+<p>and beneath it add:</p>
+
+<pre><code>private var podGroup:FlxGroup = new FlxGroup();
+</code></pre>
+
+<p>Then, inside the loadStateFromTmx() function, find:</p>
+
+<pre><code>ball = new Ball(16,16);
+add(ball);
+</code></pre>
+
+<p>and replace it with:</p>
+
+<pre><code>var group : TmxObjectGroup = tmx.getObjectGroup('entities');
+for each (var object:TmxObject in group.objects) {
+    spawnObject(object);
+}
+add(podGroup);
+</code></pre>
+
+<p>This code will turn the objects we added to our level into game objects. But first we need to define the spawnObject() function.</p>
+
+<p>Add the following below the loadStateFromTmx() function:</p>
+
+<pre><code>private function spawnObject(obj : TmxObject) : void {
+    switch(obj.type) {
+        case "Ball":
+            ball = new Ball(obj.x, obj.y);
+            add(ball);
+        break;
+
+        case "Pod":
+            podGroup.add(new Pod(obj.x, obj.y));
+        break;
+    }
+}
+</code></pre>
+
+<p>Let’s add the collection logic. Inside the update() function, beneath:</p>
+
+<pre><code>FlxG.collide(background, ball);
+</code></pre>
+
+<p>add:</p>
+
+<pre><code>FlxG.overlap(podGroup, ball, collectPod);
+</code></pre>
+
+<p>The <a href="http://flixel.org/docs/org/flixel/FlxG.html#overlap()">overlap()</a> function will check each pod in the podGroup to see if it overlaps with ball. When one does the collectPod() function is called.</p>
+
+<p>Then after the update() function, add:</p>
+
+<pre><code>private function collectPod(aPod:Pod, aBall:Ball):void {
+    aBall; // silence FDT warning about unused arg
+    aPod.kill();
+}
+</code></pre>
+
+<p>Finally, we add the reloading code. Inside the update() function, beneath:</p>
+
+<pre><code>if (!hasLoaded) return;
+</code></pre>
+
+<p>add:</p>
+
+<pre><code>if (FlxG.keys.justPressed("ENTER")) {
+    FlxG.switchState(new PlayState); // reload to test map changes
+}
+</code></pre>
+
+<p>With all the new additions, PlayState.as should now look like this:</p>
+
+<pre><code>package {
+    import org.flixel.*;
+    // TMX Loading
+    import net.pixelpracht.tmx.*;
+    import flash.events.Event;
+    import flash.net.URLLoader;
+    import flash.net.URLRequest;
+
+    public class PlayState extends FlxState {
+        private var hasLoaded:Boolean = false;
+        private var background:FlxTilemap = new FlxTilemap();
+        private var ball:Ball;
+        private var podGroup:FlxGroup = new FlxGroup();
+
+        override public function create():void {
+            // initiate variables, add sprites, tilemaps, etc
+
+            loadTmxFile();
+        }
+
+        // Level loading
+        private function loadTmxFile():void {
+            var loader:URLLoader = new URLLoader();
+            loader.addEventListener(Event.COMPLETE, onTmxLoaded);
+            loader.load(new URLRequest('level.tmx'));
+        }
+
+        private function onTmxLoaded(e:Event) : void {
+            var loader:URLLoader = e.target as URLLoader;
+            var xml:XML = new XML(loader.data);
+            var tmx:TmxMap = new TmxMap(xml);
+            loadStateFromTmx(tmx);
+            hasLoaded = true; // allow updates
+        }
+
+        private function loadStateFromTmx(tmx:TmxMap) : void {
+            var csvBg:String = tmx.getLayer('bg').toCsv(tmx.getTileSet('bg'));
+            background.loadMap(csvBg, ROM.ImgBg, 16, 16, FlxTilemap.OFF,0,0,2);
+            add(background);
+
+            var group : TmxObjectGroup = tmx.getObjectGroup('entities');
+            for each (var object:TmxObject in group.objects) {
+                spawnObject(object);
+            }
+            add(podGroup);
+
+            FlxG.camera.setBounds(0, 0, background.width, background.height, true);
+            FlxG.camera.follow(ball, FlxCamera.STYLE_TOPDOWN_TIGHT);
+        }
+
+        private function spawnObject(obj : TmxObject) : void {
+            switch(obj.type) {
+                case "Ball":
+                    ball = new Ball(obj.x, obj.y);
+                break;
+
+                case "Pod":
+                    podGroup.add(new Pod(obj.x, obj.y));
+                break;
+            }
+        }
+
+        override public function update():void {
+            // listen for user input, move sprites, etc
+
+            if (!hasLoaded) return;
+
+            if (FlxG.keys.justPressed("ENTER")) {
+                FlxG.switchState(new PlayState); // reload to test map changes
+            }
+
+            // handle user input
+            var ballVelocity:Number = 64;
+
+            ball.velocity.x = 0;
+            ball.velocity.y = 0;
+
+            if (FlxG.keys.RIGHT) {
+                ball.velocity.x = ballVelocity;
+            }
+            else if (FlxG.keys.LEFT) {
+                ball.velocity.x = -ballVelocity;
+            }
+
+            if (FlxG.keys.UP) {
+                ball.velocity.y = -ballVelocity;
+            }
+            else if (FlxG.keys.DOWN) {
+                ball.velocity.y = ballVelocity;
+            }
+
+            // update after user input
+            super.update();
+
+            // collision logic
+            FlxG.collide(background, ball);
+            FlxG.overlap(podGroup, ball, collectPod);
+        }
+
+        private function collectPod(aPod:Pod, aBall:Ball):void {
+            aBall; // silence FDT warning about unused arg
+            aPod.kill();
+        }
+    }
+}
+</code></pre>
+
+<p>Now run your game. Collect the pods! Edit your level in Tiled, reposition the ball and pods, redraw parts of the background map. Save, switch back to Flash Player, and hit Enter to test your changes. You’re now a level designer! </p>
+
+<p>Time to <a href="/primer/pitfalls/">add some danger</a>.</p>
+	</div><div class="copy">
+		Copyright © 2012–<span class="dateyear"></span> 
+		<a href="/">Retro Game Crunch</a>.
+	</div></div><script>
+$(function()
+{
+	$('.spoilers-toggle').on('touchstart click', function(event)
+	{
+		if(event.handled !== true)
+		{
+			$(this).parent().toggleClass('open');
+			event.handled = true;
+		}
+		return false;
+	});
+})
+</script>
+<script src="/archive.js"></script><script>cleanup();</script></body>
+</html>

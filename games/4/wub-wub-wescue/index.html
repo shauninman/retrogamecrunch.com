@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Beat Drop • Retro Game Crunch</title>
+<script>if((window.devicePixelRatio===undefined?1:window.devicePixelRatio)>1)document.cookie='HTTP_IS_RETINA=1;path=/';</script>
+<meta name="google-site-verification" content="0n15O71rkhohq8oudSJ4AhQ9ZHGrtYQGzZ-hj6_NTGI">
+<meta name="viewport" id="viewport" content="width=800">
+<link rel="stylesheet" href="/styles/rgc.q688883a0dcaa.css">
+<link rel="stylesheet" href="/scripts/highlight/styles/zenburn.css">
+<script src="/scripts/highlight/highlight.pack.js"></script>
+<script src="/scripts/jquery-1.8.3.min.js"></script>
+
+<script src="/scripts/mediaelement/mediaelement-and-player.min.js"></script>
+<link rel="stylesheet" href="/scripts/mediaelement/mediaelementplayer.css">
+<script>
+hljs.tabReplace = '    ';
+hljs.initHighlightingOnLoad();
+
+$(function()
+{
+	$('audio').mediaelementplayer(/* Options */);
+	
+	// disable :hover on touch devices
+	// based on https://gist.github.com/4404503 
+	// via https://twitter.com/javan/status/284873379062890496
+	// + https://twitter.com/pennig/status/285790598642946048
+	// re https://retrogamecrunch.com/tmp/hover
+	if ('createTouch' in document)
+	{
+		$('html').addClass('touch');
+		try
+		{
+			var ignore = /:hover\b/;
+			for (var i=0; i<document.styleSheets.length; i++)
+			{
+				var sheet = document.styleSheets[i];
+				for (var j=sheet.cssRules.length-1; j>=0; j--)
+				{
+					var rule = sheet.cssRules[j];
+					if (rule.type === CSSRule.STYLE_RULE && ignore.test(rule.selectorText))
+					{
+						sheet.deleteRule(j);
+					}
+				}
+			}
+		}
+		catch(e){}
+	}
+});
+
+var then = 1387576800000;
+var deadline = '2013-12-20 22:00:00 UTC';
+var last_mins = -1;
+window.setInterval(function()
+{
+	var now = (new Date).getTime();
+	var remaining = then - now;
+	if (remaining < 0) remaining = 0;
+
+	var sec = 1000;
+	var min = 60 * sec;
+	var hour = 60 * min;
+	var day = 24 * hour;
+
+	var days = Math.floor(remaining / day);
+	remaining -= days * day;
+	var hours = Math.floor(remaining / hour);
+	remaining -= hours * hour;
+	var mins = Math.floor(remaining / min);
+	
+	if (last_mins == mins) return; // prevent unnecessary redraws
+	last_mins = mins;
+
+	var html = '';
+
+	if (days) 	html += '<span class="remaining-days">'+days+' day'+(days>1?'s':'')+'</span> ';
+	if (hours) 	html += '<span class="remaining-days">'+hours+' hour'+(hours>1?'s':'')+'</span> ';
+	if (mins) 	html += '<span class="remaining-days">'+mins+' minute'+(mins>1?'s':'')+'</span> ';
+
+	// DELAY
+	// if (html=='') html = 'To be determined';
+	if (html=='') html = 'Just a few moments';
+
+	$('span.countdown').html(html);
+}, 1 * 1000);
+</script>
+
+
+<script>window.RufflePlayer={config:{polyfills:false,publicPath:"/scripts/ruffle/",autoplay:"on"}};</script><script src="/scripts/ruffle/ruffle.js" defer></script><script src="/scripts/flash.js" defer></script><link rel="stylesheet" href="/archive.css"><link rel="canonical" href="https://retrogamecrunch.com/games/4/wub-wub-wescue/"></head>
+<body>
+	
+	<div class="wide">
+		<div class="wrap wrap-game">
+		<div id="game-nav">
+							<a id="prev-game" href="/games/3/paradox-lost/"><img src="/images/btn-arrow-prev.png" height="102" alt="Previous Game"></a>
+										<a id="next-game" href="/games/5/brains-and-hearts/"><img src="/images/btn-arrow-next.png" height="102" alt="Next Game"></a>
+					</div><div id="game">
+			<div class="archive-flash" data-swf="/games/embeds/4/MusicGame.swf" data-background="#000000" data-flashvars="" style="display:inline-block;width:720px;height:480px;max-width:100%;" id="game-swf"></div>
+		</div><div id="game-options">
+			<img id="preview" src="/images/game-4.png" width="720" alt="">
+			<a href="/rewards/"><img src="/images/btn-download-complete.gif" height="105" alt="Download Complete Version"></a><a href="#game" id="btn-play-crunch"><img src="/images/btn-play-crunch.png" height="105" alt="Play the 72 Hour Version"></a>
+		</div><script>
+		$('#game').hide();
+		$('#btn-play-crunch').on('touchstart click', function(event)
+		{
+			if(event.handled !== true)
+			{
+				$('#game-options').hide();
+				$('#game').show();
+				event.handled = true;
+			}
+			return false;
+		});
+		</script>
+				<div class="masthead">
+			<div id="logo-unit"><a id="logo" href="/"><img src="/images/logo-white-sm.png" width="108" height="42" alt="Retro Game Crunch"></a></div>
+			
+			<div class="theme">
+				<span>Theme</span><br>
+				<strong>Music Influences the Level</strong>
+			</div>
+			
+			<div id="mini-login">
+	
+</div></div>
+	</div></div><div class="wrap wrap-bottom">
+		<div class="content">
+			
+	<div class="two-col">
+		<div class="main-col game-content">
+			<h1>Wub-Wub Wescue <em>née</em> Beat Drop <span>a  game made in 72 hours</span></h1>
+			<p>DJ Oontz O. Oontz finally landed his dream gig—right before all of his records were stolen! Help him rebuild his collection and prepare for the big show. </p>
+
+<p>Catch black records (hits) in his milk crate. Knock away red records (duds) with empty record sleeves. Duds are poison to any set, don’t let them land!</p>
+
+<p><strong>Arrows</strong> Move  Oontz/cursor<br>
+<strong>A</strong> Shoot<br>
+<strong>S</strong> Jump<br>
+<strong>Enter</strong> Confirm</p>
+		</div>
+		
+		<div class="sub-col downloads">
+					</div>
+	</div>
+	<h2>15 Comments</h2>
+<div class="comments">
+		<div class="comment" id="comment-277">
+		<div class="who">Dimitri</div>
+		<div class="what"><p>Awesome!</p>
+</div>
+		<div class="when"><a href="#comment-277" class="datetime" data-timezone="UTC" data-timestamp="1373338954">2013/07/09 03:02:34</a></div>
+	</div>
+		<div class="comment" id="comment-278">
+		<div class="who">Zack</div>
+		<div class="what"><p>Honestly, one of my favorites so far. Love how the records fall in areas in which the notes go with the song. Can’t wait to see how you guys expand this one.</p>
+</div>
+		<div class="when"><a href="#comment-278" class="datetime" data-timezone="UTC" data-timestamp="1373475917">2013/07/10 17:05:17</a></div>
+	</div>
+		<div class="comment" id="comment-279">
+		<div class="who">Zack</div>
+		<div class="what"><p>Sorry to dbl post, but it would be awesome to see extra points for jumping straight to the column (only hitting the note that you are supposed to) or maybe specific columns light up that you are your “stepping notes” to get to the next record…</p>
+</div>
+		<div class="when"><a href="#comment-279" class="datetime" data-timezone="UTC" data-timestamp="1373476076">2013/07/10 17:07:56</a></div>
+	</div>
+		<div class="comment" id="comment-280">
+		<div class="who">Shaun</div>
+		<div class="what"><p>That’s an awesome idea Zack!</p>
+</div>
+		<div class="when"><a href="#comment-280" class="datetime" data-timezone="UTC" data-timestamp="1373479757">2013/07/10 18:09:17</a></div>
+	</div>
+		<div class="comment" id="comment-281">
+		<div class="who">Scott</div>
+		<div class="what"><p>Every game you guys make is just Awesome and this is no different can’t wait to play the completed version good luck.</p>
+</div>
+		<div class="when"><a href="#comment-281" class="datetime" data-timezone="UTC" data-timestamp="1373825714">2013/07/14 18:15:14</a></div>
+	</div>
+		<div class="comment" id="comment-284">
+		<div class="who">Adam</div>
+		<div class="what"><p>I’ll admit, I’m rather disappointed by this. Lemme explain…</p>
+
+<p>First: It doesn’t feel like the music is influencing the level, rather than you’re adding little notes to the song as you move around, which isn’t very satisfying.</p>
+
+<p>Second: I know this was a 72 hour crunch, but the gameplay feels remarkably dull when the only gameplay addition is “records to shoot that hurt you”.</p>
+
+<p>Finally: Your composer is excellent, but the fact that he has been behind all of the music of all of the games thus far is REALLY starting to show by now, as these songs feel rather bland an uninspired, especially for a game that’s supposed to be based around the music. </p>
+
+<p>I admire what you’re doing, but you’ve made better things than this.</p>
+</div>
+		<div class="when"><a href="#comment-284" class="datetime" data-timezone="UTC" data-timestamp="1374280688">2013/07/20 00:38:08</a></div>
+	</div>
+		<div class="comment" id="comment-285">
+		<div class="who">Shaun</div>
+		<div class="what"><p>Thanks for sharing Adam. We’re working on it. We see the flaws too (it’s <em>all</em> we see). We’re a man down for this one. Any helpful, constructive criticism?</p>
+</div>
+		<div class="when"><a href="#comment-285" class="datetime" data-timezone="UTC" data-timestamp="1374332406">2013/07/20 15:00:06</a></div>
+	</div>
+		<div class="comment" id="comment-289">
+		<div class="who">A.J. Ross</div>
+		<div class="what"><p>Great prototyping guys, definitely shows promise.</p>
+</div>
+		<div class="when"><a href="#comment-289" class="datetime" data-timezone="UTC" data-timestamp="1375384263">2013/08/01 19:11:03</a></div>
+	</div>
+		<div class="comment" id="comment-293">
+		<div class="who">Luke</div>
+		<div class="what"><p>just an fyi, but there’s a minor bug; don’t know what triggered it, but i somehow got the character to fall through the platforms and offscreen.</p>
+
+<p>so, yeah. :/</p>
+</div>
+		<div class="when"><a href="#comment-293" class="datetime" data-timezone="UTC" data-timestamp="1376397948">2013/08/13 12:45:48</a></div>
+	</div>
+		<div class="comment" id="comment-295">
+		<div class="who">David Edward Clark</div>
+		<div class="what"><p>Just played it for the first time. Nice work! I love the constraints: NES color palette &amp; resolution. Can’t wait to play more.</p>
+</div>
+		<div class="when"><a href="#comment-295" class="datetime" data-timezone="UTC" data-timestamp="1377058829">2013/08/21 04:20:29</a></div>
+	</div>
+		<div class="comment" id="comment-298">
+		<div class="who">Chipskunk</div>
+		<div class="what"><p>Played through it in about 1-2 hours. The game is awesome, the graphics and the music are very good. The last boss is far to easy. I beat him with one try, without problems. Can´t wait to see the next title.</p>
+</div>
+		<div class="when"><a href="#comment-298" class="datetime" data-timezone="UTC" data-timestamp="1377116911">2013/08/21 20:28:31</a></div>
+	</div>
+		<div class="comment" id="comment-299">
+		<div class="who">Shaun</div>
+		<div class="what"><p>Thanks for playing Ursumino! I tend to design bosses as a summary or review of everything (most of the things?) you did to get there. More of a coda than a climax.</p>
+</div>
+		<div class="when"><a href="#comment-299" class="datetime" data-timezone="UTC" data-timestamp="1377118370">2013/08/21 20:52:50</a></div>
+	</div>
+		<div class="comment" id="comment-300">
+		<div class="who">Derrek</div>
+		<div class="what"><p>Wow. Great job. Wasn’t a fan of the 72 hour crunch Beat Drop but what you’ve transformed it into after the month long crunch… Excellent. This surpasses my expectations of the retro game crunch. It’s obvious much care and passion went into this from the homage to Donkey Kong to the familiar yet unique 8-bit graphics and sounds to the intelligent progressive level design. Well done!</p>
+</div>
+		<div class="when"><a href="#comment-300" class="datetime" data-timezone="UTC" data-timestamp="1377135557">2013/08/22 01:39:17</a></div>
+	</div>
+		<div class="comment" id="comment-301">
+		<div class="who">Shaun</div>
+		<div class="what"><p>Thanks Derek. The level design isn’t perfect but I spent <em>sooo</em> much time trying to balance teaching and challenging while establishing a sensible act structure and pacing. It’s great to hear it came across!</p>
+</div>
+		<div class="when"><a href="#comment-301" class="datetime" data-timezone="UTC" data-timestamp="1377192292">2013/08/22 17:24:52</a></div>
+	</div>
+		<div class="comment" id="comment-302">
+		<div class="who">Adam</div>
+		<div class="what"><p>My favorite so far, really nailed the retro vibe on this one. Scrapping the 72hr was a good call, really impressed guys.</p>
+
+<p>I think for the last crunch you guys should drop the ‘vote for a theme’ stuff and just do whatever you’re all excited about making.</p>
+</div>
+		<div class="when"><a href="#comment-302" class="datetime" data-timezone="UTC" data-timestamp="1377405927">2013/08/25 04:45:27</a></div>
+	</div>
+	</div>	</div><div class="copy">
+		Copyright © 2012–<span class="dateyear"></span> 
+		<a href="/">Retro Game Crunch</a>.
+	</div></div><script>
+$(function()
+{
+	$('.spoilers-toggle').on('touchstart click', function(event)
+	{
+		if(event.handled !== true)
+		{
+			$(this).parent().toggleClass('open');
+			event.handled = true;
+		}
+		return false;
+	});
+})
+</script>
+<script src="/archive.js"></script><script>cleanup();</script></body>
+</html>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Journal • Retro Game Crunch</title>
+<script>if((window.devicePixelRatio===undefined?1:window.devicePixelRatio)>1)document.cookie='HTTP_IS_RETINA=1;path=/';</script>
+<meta name="google-site-verification" content="0n15O71rkhohq8oudSJ4AhQ9ZHGrtYQGzZ-hj6_NTGI">
+<meta name="viewport" id="viewport" content="width=800">
+<link rel="stylesheet" href="/styles/rgc.q688883a0dcaa.css">
+<link rel="stylesheet" href="/scripts/highlight/styles/zenburn.css">
+<script src="/scripts/highlight/highlight.pack.js"></script>
+<script src="/scripts/jquery-1.8.3.min.js"></script>
+
+<script src="/scripts/mediaelement/mediaelement-and-player.min.js"></script>
+<link rel="stylesheet" href="/scripts/mediaelement/mediaelementplayer.css">
+<script>
+hljs.tabReplace = '    ';
+hljs.initHighlightingOnLoad();
+
+$(function()
+{
+	$('audio').mediaelementplayer(/* Options */);
+	
+	// disable :hover on touch devices
+	// based on https://gist.github.com/4404503 
+	// via https://twitter.com/javan/status/284873379062890496
+	// + https://twitter.com/pennig/status/285790598642946048
+	// re https://retrogamecrunch.com/tmp/hover
+	if ('createTouch' in document)
+	{
+		$('html').addClass('touch');
+		try
+		{
+			var ignore = /:hover\b/;
+			for (var i=0; i<document.styleSheets.length; i++)
+			{
+				var sheet = document.styleSheets[i];
+				for (var j=sheet.cssRules.length-1; j>=0; j--)
+				{
+					var rule = sheet.cssRules[j];
+					if (rule.type === CSSRule.STYLE_RULE && ignore.test(rule.selectorText))
+					{
+						sheet.deleteRule(j);
+					}
+				}
+			}
+		}
+		catch(e){}
+	}
+});
+
+var then = 1387576800000;
+var deadline = '2013-12-20 22:00:00 UTC';
+var last_mins = -1;
+window.setInterval(function()
+{
+	var now = (new Date).getTime();
+	var remaining = then - now;
+	if (remaining < 0) remaining = 0;
+
+	var sec = 1000;
+	var min = 60 * sec;
+	var hour = 60 * min;
+	var day = 24 * hour;
+
+	var days = Math.floor(remaining / day);
+	remaining -= days * day;
+	var hours = Math.floor(remaining / hour);
+	remaining -= hours * hour;
+	var mins = Math.floor(remaining / min);
+	
+	if (last_mins == mins) return; // prevent unnecessary redraws
+	last_mins = mins;
+
+	var html = '';
+
+	if (days) 	html += '<span class="remaining-days">'+days+' day'+(days>1?'s':'')+'</span> ';
+	if (hours) 	html += '<span class="remaining-days">'+hours+' hour'+(hours>1?'s':'')+'</span> ';
+	if (mins) 	html += '<span class="remaining-days">'+mins+' minute'+(mins>1?'s':'')+'</span> ';
+
+	// DELAY
+	// if (html=='') html = 'To be determined';
+	if (html=='') html = 'Just a few moments';
+
+	$('span.countdown').html(html);
+}, 1 * 1000);
+</script>
+
+
+<link rel="stylesheet" href="/archive.css"><link rel="canonical" href="https://retrogamecrunch.com/journal/"></head>
+<body>
+	<div class="wrap wrap-top">
+		<div id="logo-unit">
+			<a id="logo" href="/"><img src="/images/logo-black.png" width="204" height="98" alt="Retro Game Crunch"></a>
+			<a id="funded" href="http://www.kickstarter.com/projects/shauninman/retro-game-crunch-six-games-in-six-months"><img src="/images/funded-with.png" width="116" height="112" alt="Funded with Kickstarter"></a>
+		</div><div id="mini-login">
+	
+</div><div id="status">
+			<div class="currently">
+				<strong>Currently</strong>
+				<a href="/games/6/shuten/">Recovering from Shūten Complete</a>
+			</div></div><ul class="nav nav-main">
+			<li><a href="/">Home</a></li>
+			<li><a href="/games/">Games</a></li>			<li><a href="/rewards/">Rewards</a></li>
+			<li><a href="/journal/" class="current">Journal</a></li>
+			<li><a href="/primer/">Primer</a></li>
+			<li><a href="/about/">About</a></li>
+			<li><a href="/contact/">Contact</a></li>
+		</ul>
+	</div><div class="wrap wrap-bottom">
+		<div class="content">
+			<div class="posts">
+			<div class="post">
+			<h1><a href="/journal/65/gaiattack-original-sound-version-released/">GAIAttack! Original Sound Version released!</a></h1>
+			<div class="byline">Posted by <strong>Matt</strong> <span class="datetime" data-timezone="UTC" data-timestamp="1399567794">2014/05/08 16:49:54</span></div>
+			<p>The music from GAIAttack! is available today! If you were a Kickstarter backer at the DIGITAL-ONLY, SOUND TEST or higher levels you’ll find the download on the <a href="/rewards/">rewards page</a>. For everyone else the album is available on <a href="http://8bitmatt.bandcamp.com/album/gaiattack-original-sound-version">bandcamp</a>. You can listen for free.</p>
+
+<p><a href="http://8bitmatt.bandcamp.com/album/gaiattack-original-sound-version"><img src="/ks-updates/osv-gaia.png" alt="osv-gaia.png"></a></p>
+
+<p>I started re-writing this album in MML back in Sept 2013. Eight months later here we are, it’s done! I poured my heart and soul into every 32nd note. I hope you feel and hear that when you listen. Like the <a href="http://8bitmatt.bandcamp.com/album/end-of-line-original-sound-version">End of Line album</a>, the audio recordings are straight out of my Nintendo Entertainment System! </p>
+
+<p>This album means a lot to me, some of my favorite tracks from all of Retro Game Crunch are here (Fighting Type, Star Lemonade). When I was originally writing this music, SXSW 2013 happened. That gave Rusty, Shaun and I an excuse to see each other. We got to work in the same room and hang out. It was the only time that happened the entire year and for the duration of RGC. I wrote a good majority of Star Lemonade in Rusty’s bedroom. Good times. It’s hard saying goodbye. </p>
+		</div>
+			<div class="post">
+			<h1><a href="/journal/64/worldwide-release/">Worldwide Release</a></h1>
+			<div class="byline">Posted by <strong>Rusty</strong> <span class="datetime" data-timezone="UTC" data-timestamp="1393956965">2014/03/04 18:16:05</span></div>
+			<p>We’ve got some exciting news to share. The worldwide release of Retro Game Crunch is…Today! The full RGC collection is now available on the Humble Store. A lot of extra work has gone into this definitive release:</p>
+
+<ul>
+<li>A single download with all seven games.</li>
+<li>A launcher app to switch between the games.</li>
+<li>Controller support! A few popular gamepads, like the Xbox 360 and Playstation 4 controllers, now work with the entire collection.</li>
+<li>Smaller file sizes.</li>
+<li>Extra polish, bug fixes and love.</li>
+</ul>
+
+<h3>For Backers Too</h3>
+
+<p>All backers at $25 and up get this new version! Download it now on the RGC <a href="/rewards/">Backer Rewards</a> page. Just another way of us saying thank you! &lt;3</p>
+
+<h3>Release Trailer</h3>
+
+<p>We’ve made a sweet <a href="https://www.youtube.com/watch?v=2gO0-aYp72k">trailer</a> for today’s announcement! It does a good job showing the scope and scale of Retro Game Crunch. Hope y’all dig it.</p>
+
+<iframe src="//player.vimeo.com/video/86917571" width="480" height="270" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+<h3>Full Steam Ahead</h3>
+
+<p>Retro Game Crunch is now on Steam Greenlight! Greenlight is how new indie games get on the Steam store. We need lots of “yes” votes to progress through the Greenlight program, so <a href="http://steamcommunity.com/sharedfiles/filedetails/?id=227008079">click here</a>, and give us a thumbs up. Once RGC is released on Steam, we’ll hook you all up with Steam keys too.</p>
+
+<h3>Thank you</h3>
+
+<p>This journey wouldn’t have possible without you all. Your themes, feedback and pledges made these games a reality. We couldn’t have made it without you. Thank you a hundred times!</p>
+
+<p>We think you’ll love this new unified version. Download and enjoy.</p>
+		</div>
+			<div class="post">
+			<h1><a href="/journal/63/rgc-podcast-episode-6/">RGC Podcast, Episode 6</a></h1>
+			<div class="byline">Posted by <strong>Shaun</strong> <span class="datetime" data-timezone="UTC" data-timestamp="1389112372">2014/01/07 16:32:52</span></div>
+			<p><img src="/shared/images/podcast-6-400.png" alt="podcast-6-400.png"></p>
+
+<p>Our sixth and final podcast is a <a href="/games/6/shuten/">Shūten</a> postmortem! It’s also our longest yet. Be sure to stick around after we sign off for extra banter and maybe a cheat code or two. Oh, and there’s spoilers, so if you haven’t played through the <a href="/rewards/">complete version</a>, you might want to do that first!</p>
+
+<p>Listen in the browser: </p>
+
+<p><audio src="/shared/podcasts/06%20RGC%20Podcast%206_%20Shuten.mp3" type="audio/mp3" controls="controls"><a href="/shared/podcasts/06%20RGC%20Podcast%206_%20Shuten.mp3">06 RGC Podcast 6_ Shuten.mp3</a></audio></p>
+
+<p>Or <a href="/shared/podcasts/06%20RGC%20Podcast%206_%20Shuten.mp3">download it for later</a>.</p>
+		</div>
+			<div class="post">
+			<h1><a href="/journal/62/the-art-of-shuten-complete/">The Art of Shūten Complete</a></h1>
+			<div class="byline">Posted by <strong>Shaun</strong> <span class="datetime" data-timezone="UTC" data-timestamp="1389111812">2014/01/07 16:23:32</span></div>
+			<p>This post will contain spoilers! And lots of (hopefuly) pretty pictures.</p>
+
+<h2>Bosses</h2>
+
+<p>As I’ve mentioned <a href="/journal/58/meet-your-end/">previously</a>, the first boss I ever designed (Ripper for Super Clew Land) took days to draw. Each individual boss for Shūten only took hours. </p>
+
+<p>For Ripper, I used my Wacom tablet but, since I was without it in Denver, I had to use a different process for these bosses. For most bosses, I would sketch only the left or right side of the boss on paper, take a photo with my iPhone, and mail the image to myself. Then I’d open it in Photoshop, adjust the brightness/contrast then duplicate and flip it horizontally to create a full illustration before scaling to game size. </p>
+
+<p>Inevitably I’d forget some part of the boss or not be happy with some aspect of the original sketch. Instead of starting completely over, I’d draw just that part separately or erase bits of the original and try again, and repeat the process, adding the revision to the original in Photoshop. </p>
+
+<p><img src="/shared/images/game-6/art/squid.png" alt="squid.png">
+<em>Squid</em></p>
+
+<p>The squid was one of the few bosses I drew in its entirety (after trying and being unhappy with the reflection trick).</p>
+
+<p><img src="/shared/images/game-6/art/wolf.png" alt="wolf.png">
+<em>Wolf</em></p>
+
+<p>The wolf came pretty easily. The only part I wasn’t happy with was the ears. Rather than redrawing on paper I managed to correct them directly in pixels.</p>
+
+<p><img src="/shared/images/game-6/art/dragon.png" alt="dragon.png">
+<em>Dragon</em></p>
+
+<p>This one took a couple tries. The first attempt looked like a Chinese festival dragon, a little too comical. The final design heavily references the dragon from Spirited Away. The films of Studio Ghibli have had a strong influence on my designs throughout Retro Game Crunch.</p>
+
+<p><img src="/shared/images/game-6/art/crane.png" alt="crane.png">
+<em>Crane</em></p>
+
+<p>The original top down design perfectly illustrates my patchwork process (reflection, scaling, rotating, etc) but was too visually boring and not very threatening.</p>
+
+<p><img src="/shared/images/game-6/art/tortoise.png" alt="tortoise.png">
+<em>Tortoise</em></p>
+
+<p>The head was way too big in the original sketch. “We’ll fix it in post.” Also, the shell was all done with pixels after a number of failed attempts to sketch it on paper. It still isn’t perfect but I think the shading masks the imperfections pretty well.</p>
+
+<p><img src="/shared/images/game-6/art/oni.png" alt="oni.png">
+<em>Oni</em></p>
+
+<p>The original design for Oni had a ring of skulls which remained a nice-to-have until late in the process. Once implemented, we decided they weren’t necessary. The third eye and snarl were all pixel-only additions and made our sturdy sumo a little more menacing.</p>
+
+<h2>Enemies</h2>
+
+<p>I struggled with enemies for longer than I would have liked. I think I overwhelmed myself with the simultaneous goal of breadth <em>and</em> depth. For a while I chased down boring, animal-inspired enemies before honing in on more spiritual and abstract sprites.</p>
+
+<p><img src="/shared/images/game-6/art/cut-enemies.png" alt="cut-enemies.png">
+<em>Cut enemies (including smaller versions of some final enemies)</em></p>
+
+<p><img src="/shared/images/game-6/art/enemies.png" alt="enemies.png">
+<em>Final enemies and palette swaps</em></p>
+
+<p>I’m most proud of the crowman, drawn completely in pixels with nary a sketch to work from. As with most of the other enemies, I took a lot of inspiration from ancient Japanese scrolls.</p>
+
+<h2>Map</h2>
+
+<p>I also struggled with this map. A few sketches helped me figure out the basic relative position of things but it was many false pixel starts before I found the loose grid-based approach that became the final design. Then it was about a day of just building up the details and depth that make that final design sing.</p>
+
+<p><img src="/shared/images/game-6/art/map.png" alt="map.png">
+<em>Evolution of the map</em></p>
+
+<p>And there you have it, the Art of Shūten</p>
+		</div>
+			<div class="post">
+			<h1><a href="/journal/61/the-end-is-here/">The End is Here</a></h1>
+			<div class="byline">Posted by <strong>Shaun</strong> <span class="datetime" data-timezone="UTC" data-timestamp="1387588642">2013/12/21 01:17:22</span></div>
+			<p><a href="/rewards/"><img src="/ks-updates/shuten.png" alt="shuten.png"></a></p>
+
+<p>This is it. A little over twelve months since the Kickstarter was successfully funded, game six is done and it’s a doozy. Six weapons. Six bosses. Six environments. Twelve levels. Twelve tracks. An overworld map. And a shop with dozens of upgrades. Shūten is easily our most ambitious game yet. Oh, and two players!</p>
+
+<p>We’ll have plenty to say about our final game and the entire Retro Game Crunch experience once we get some rest but for now, go download the Complete version of Shūten from your <a href="/rewards/">Rewards</a> page and let us know what you think!</p>
+		</div>
+			<div class="post">
+			<h1><a href="/journal/60/the-end-is-coming/">The End is Coming!</a></h1>
+			<div class="byline">Posted by <strong>Shaun</strong> <span class="datetime" data-timezone="UTC" data-timestamp="1385479579">2013/11/26 15:26:19</span></div>
+			<p>Travel, moving, and the upcoming holidays have spread our efforts a little thin so we’re going to take another week or three to ensure Shūten is a game worthy of our final theme.</p>
+
+<p>In the meantime, here’s a shot from the trenches: A hardworking Owari trying to get a little shopping done ahead of Black Friday.</p>
+
+<p><img src="/shared/images/game-6/shop-3.png" alt="shop-3.png"></p>
+		</div>
+			<div class="post">
+			<h1><a href="/journal/59/rgc-podcast-episode-5/">RGC Podcast, Episode 5</a></h1>
+			<div class="byline">Posted by <strong>Shaun</strong> <span class="datetime" data-timezone="UTC" data-timestamp="1384962491">2013/11/20 15:48:11</span></div>
+			<p><img src="/shared/images/podcast-5-400.png" alt="podcast-5-400.png"></p>
+
+<p>Our fifth podcast is a <a href="/games/5/brains-and-hearts/">Brains &amp; Hearts</a> postmortem! How do you handle cheat codes in a two player game where cheating is actually cheating? What happens when CPU’s go chip to chip? How exactly <em>do</em> you compose music for a card game?</p>
+
+<p>Listen in the browser: </p>
+
+<p><audio src="/shared/podcasts/05%20RGC%20Podcast%205_%20Brains%20and%20Hearts.mp3" type="audio/mp3" controls="controls"><a href="/shared/podcasts/05%20RGC%20Podcast%205_%20Brains%20and%20Hearts.mp3">05 RGC Podcast 5_ Brains and Hearts.mp3</a></audio></p>
+
+<p>Or <a href="/shared/podcasts/05%20RGC%20Podcast%205_%20Brains%20and%20Hearts.mp3">download it for later</a>.</p>
+		</div>
+			<div class="post">
+			<h1><a href="/journal/58/meet-your-end/">Meet Your End</a></h1>
+			<div class="byline">Posted by <strong>Shaun</strong> <span class="datetime" data-timezone="UTC" data-timestamp="1382902953">2013/10/27 19:42:33</span></div>
+			<p><img src="/shared/images/game-6/boss-process.gif" alt="boss-process.gif"></p>
+
+<p>Boss in progress.</p>
+
+<p>Kind of crazy. Where Ripper from Super Clew Land took three days to draw, this guy probably only took as many hours. The difference 365 days make.</p>
+		</div>
+		</div>
+<p>
+	<a href="/journal/page/2/"><img src="/images/btn-older.png" height="30"></a>	
+		
+</p>
+	
+	</div><div class="copy">
+		Copyright © 2012–<span class="dateyear"></span> 
+		<a href="/">Retro Game Crunch</a>.
+	</div></div><script>
+$(function()
+{
+	$('.spoilers-toggle').on('touchstart click', function(event)
+	{
+		if(event.handled !== true)
+		{
+			$(this).parent().toggleClass('open');
+			event.handled = true;
+		}
+		return false;
+	});
+})
+</script>
+<script src="/archive.js"></script><script>cleanup();</script></body>
+</html>

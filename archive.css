@@ -1,0 +1,14 @@
+/* Source overrides copied into every static build after the original styles. */
+fieldset.archive-form{border:0;padding:0;margin:0;min-inline-size:0;position:relative}
+.content fieldset.archive-form{margin:16px 0}
+.archive-form input,.archive-form select,.archive-form textarea,.archive-form button{opacity:.5;cursor:not-allowed}
+.archive-disabled-link{cursor:default;text-decoration:none;opacity:.6}
+
+/* Homepage footer links must not be clipped by the original nav styling. */
+#footer-wrap ul.nav{overflow:visible}
+
+img {
+	image-rendering: -webkit-optimize-contrast;
+	image-rendering: -moz-crisp-edges;
+	-ms-interpolation-mode: nearest-neighbor;
+}

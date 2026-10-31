@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Game 2 Prototype &amp; Postmortem • Retro Game Crunch</title>
+<script>if((window.devicePixelRatio===undefined?1:window.devicePixelRatio)>1)document.cookie='HTTP_IS_RETINA=1;path=/';</script>
+<meta name="google-site-verification" content="0n15O71rkhohq8oudSJ4AhQ9ZHGrtYQGzZ-hj6_NTGI">
+<meta name="viewport" id="viewport" content="width=800">
+<link rel="stylesheet" href="/styles/rgc.q688883a0dcaa.css">
+<link rel="stylesheet" href="/scripts/highlight/styles/zenburn.css">
+<script src="/scripts/highlight/highlight.pack.js"></script>
+<script src="/scripts/jquery-1.8.3.min.js"></script>
+
+<script src="/scripts/mediaelement/mediaelement-and-player.min.js"></script>
+<link rel="stylesheet" href="/scripts/mediaelement/mediaelementplayer.css">
+<script>
+hljs.tabReplace = '    ';
+hljs.initHighlightingOnLoad();
+
+$(function()
+{
+	$('audio').mediaelementplayer(/* Options */);
+	
+	// disable :hover on touch devices
+	// based on https://gist.github.com/4404503 
+	// via https://twitter.com/javan/status/284873379062890496
+	// + https://twitter.com/pennig/status/285790598642946048
+	// re https://retrogamecrunch.com/tmp/hover
+	if ('createTouch' in document)
+	{
+		$('html').addClass('touch');
+		try
+		{
+			var ignore = /:hover\b/;
+			for (var i=0; i<document.styleSheets.length; i++)
+			{
+				var sheet = document.styleSheets[i];
+				for (var j=sheet.cssRules.length-1; j>=0; j--)
+				{
+					var rule = sheet.cssRules[j];
+					if (rule.type === CSSRule.STYLE_RULE && ignore.test(rule.selectorText))
+					{
+						sheet.deleteRule(j);
+					}
+				}
+			}
+		}
+		catch(e){}
+	}
+});
+
+var then = 1387576800000;
+var deadline = '2013-12-20 22:00:00 UTC';
+var last_mins = -1;
+window.setInterval(function()
+{
+	var now = (new Date).getTime();
+	var remaining = then - now;
+	if (remaining < 0) remaining = 0;
+
+	var sec = 1000;
+	var min = 60 * sec;
+	var hour = 60 * min;
+	var day = 24 * hour;
+
+	var days = Math.floor(remaining / day);
+	remaining -= days * day;
+	var hours = Math.floor(remaining / hour);
+	remaining -= hours * hour;
+	var mins = Math.floor(remaining / min);
+	
+	if (last_mins == mins) return; // prevent unnecessary redraws
+	last_mins = mins;
+
+	var html = '';
+
+	if (days) 	html += '<span class="remaining-days">'+days+' day'+(days>1?'s':'')+'</span> ';
+	if (hours) 	html += '<span class="remaining-days">'+hours+' hour'+(hours>1?'s':'')+'</span> ';
+	if (mins) 	html += '<span class="remaining-days">'+mins+' minute'+(mins>1?'s':'')+'</span> ';
+
+	// DELAY
+	// if (html=='') html = 'To be determined';
+	if (html=='') html = 'Just a few moments';
+
+	$('span.countdown').html(html);
+}, 1 * 1000);
+</script>
+
+
+<script>window.RufflePlayer={config:{polyfills:false,publicPath:"/scripts/ruffle/",autoplay:"on"}};</script><script src="/scripts/ruffle/ruffle.js" defer></script><script src="/scripts/flash.js" defer></script><link rel="stylesheet" href="/archive.css"><link rel="canonical" href="https://retrogamecrunch.com/journal/27/game-2-prototype-postmortem/"></head>
+<body>
+	<div class="wrap wrap-top">
+		<div id="logo-unit">
+			<a id="logo" href="/"><img src="/images/logo-black.png" width="204" height="98" alt="Retro Game Crunch"></a>
+			<a id="funded" href="http://www.kickstarter.com/projects/shauninman/retro-game-crunch-six-games-in-six-months"><img src="/images/funded-with.png" width="116" height="112" alt="Funded with Kickstarter"></a>
+		</div><div id="mini-login">
+	
+</div><div id="status">
+			<div class="currently">
+				<strong>Currently</strong>
+				<a href="/games/6/shuten/">Recovering from Shūten Complete</a>
+			</div></div><ul class="nav nav-main">
+			<li><a href="/">Home</a></li>
+			<li><a href="/games/">Games</a></li>			<li><a href="/rewards/">Rewards</a></li>
+			<li><a href="/journal/" class="current">Journal</a></li>
+			<li><a href="/primer/">Primer</a></li>
+			<li><a href="/about/">About</a></li>
+			<li><a href="/contact/">Contact</a></li>
+		</ul>
+	</div><div class="wide"><div class="wrap">
+					<ul class="nav nav-alt nav-journal">
+									<li><a href="/journal/26/rgc-podcast-episode-1/">RGC Podcast, Episode 1</a></li>
+													<li><a href="/journal/28/throw-away/">Throw away</a></li>
+							</ul>
+				</div></div><div class="wrap wrap-bottom">
+		<div class="content">
+		
+		
+	<div class="post">
+		<h1>Game 2 Prototype &amp; Postmortem</h1>
+		<div class="byline">
+			Posted by <strong>Shaun</strong> 
+							<span class="datetime" data-timezone="UTC" data-timestamp="1361196365">2013/02/18 14:06:05</span>					</div>
+		<h2>The Idea</h2>
+
+<p>You play as a planet. Inside you, a great evil has been sealed. Marauders are trying to free it, attacking across three quadrants simultaneously. The player controls the spirit of the planet, using magic to set up barriers, attack the marauders directly, and temporarily summon a guardian to collect items to refill its magic supply. The goal: Keep the marauders from reaching the core.</p>
+
+<p>(This arcade/god game hybrid won out over a reverse Lemmings auto-platformer and a level building game that saw players gaining experience to unlock new building blocks by having other players play their levels. Both cute, but ultimately just waiting games. We also shot down ideas that were too similar to <a href="http://www.newgrounds.com/portal/view/568517">Spike: A Love Story</a> and <a href="http://adamatomic.com/graverobbers/">Grave Robbers</a>.)</p>
+
+<h2>The Prototype</h2>
+
+<p>This incomplete prototype is where we stood at about 52 hours into our 72 hour crunch. It’s missing animations. It has programmer graphics (if you squint you might recognize the background graphics origin). The guardian is not time limited. Magic points aren’t implemented. Only one quadrant has a path to the core. Marauder siege behavior logic is completely random. There is no hud to indicate which quadrant(s) are at risk.</p>
+
+<p><div class="archive-flash" data-swf="/shared/downloads/LevelPrototype.swf" data-background="#000000" data-flashvars="" style="display:inline-block;width:480px;height:320px;max-width:100%;" id="game-shared-downloads-LevelPrototype-swf"></div></p>
+
+<p><em>Spirit of the Level controls:</em><br>
+<strong>Arrows</strong> Move<br>
+<strong>A</strong> Elemental attack<br>
+<strong>X</strong> Create Guardian<br>
+<strong>C</strong> Change quadrant</p>
+
+<p><em>Guardian controls:</em><br>
+<strong>Arrows</strong> Move left/right<br>
+<strong>Z</strong> Jump<br>
+<strong>X</strong> Attack<br>
+<strong>C</strong> Change quadrant</p>
+
+<h2>The Problems</h2>
+
+<p>So what was wrong? Basically everything. </p>
+
+<p>The design was the bad kind of complicated. In game design, good complexity emerges from the interaction of simple rules. Our original design was convoluted at the rule level.</p>
+
+<p>There is no win condition. You are under siege. You struggle until you fail. Game over. Not our idea of a good time.</p>
+
+<p>Switching between the guardian’s platforming controls to the spirit’s tile-based cursor is really unsatisfying. We tried more platform like controls for the spirit but it felt too debug-y.</p>
+
+<h2>The Stopgap</h2>
+
+<p>At hour 52 we decided to gut the ideas that weren’t working. The platforming felt right, so that stayed. Spirit cursor? Out. Quandrant switching? Out. Digging into the core? Out. The marauder recoil felt good, but what if you could juggle them? In. Since there was no win state the game was always going to be about score. Juggling became combos which allows you to score extra points. I built a high score server (which was actually less time consuming than the “enter your name” bit it required).</p>
+
+<p>We lost a lot of the thematic ties but, in the end, producing a game that is fun to play is paramount. </p>
+
+<h2>The Polish</h2>
+
+<p>So what’s next? Better combo detection. A simpler magic system. Better, more varied marauder behavior. Elemental barriers? Healing? Bonuses for dispatching all the marauders? Re-imagined levels? Feed the level (yourself) by juggling invaders into mouths lining the walls? Other crazy ideas we haven’t thought of yet?</p>
+
+<p>Our schedule for End of Line was relentless—it was more like a continuous 25 day crunch than our original  intentions. Game 2 will be a little looser. We start the polishing period tomorrow February 19th (we took a week to recover, not just from Game 2’s crunch but from End of Line’s non-stop sprint as well), and are tentatively scheduled to release the complete version around March 22th.</p>
+	</div>
+	
+		<h2>4 Comments</h2>
+<div class="comments">
+		<div class="comment" id="comment-159">
+		<div class="who">Sephirenn</div>
+		<div class="what"><p>Only two discouraging comments:</p>
+
+<p>1) The prototype seems too similar to Super Crate Box. Hopefully the upcoming changes and the combo system will make it into its own game instead of a new version of SCB.</p>
+
+<p>2) Even with the mentioned future polish, this barely at all fits the theme. I think that’s the biggest disappointment.</p>
+
+<p>I, as well as I’m sure everyone else, has great confidence in you guys, so I’m sure you’ll pull it out. Just wanted to restate some of the early issues now. Maybe you guys set the bar a little too high with End of Line (and the End of Line prototype that played more like a demo of a full game instead of an actual prototype).</p>
+</div>
+		<div class="when"><a href="#comment-159" class="datetime" data-timezone="UTC" data-timestamp="1361387927">2013/02/20 19:18:47</a></div>
+	</div>
+		<div class="comment" id="comment-160">
+		<div class="who">Shaun</div>
+		<div class="what"><p>Things Super Crate Box and Game 2 have in common:</p>
+
+<ol>
+<li>Single-screen</li>
+<li>Threats come from above</li>
+<li>Play for score</li>
+</ol>
+
+<p>This list also describes pretty much every 80’s arcade game ever. Super Crate Box is a fine example of the form but that doesn’t make every subsequent game in the genre a clone.</p>
+</div>
+		<div class="when"><a href="#comment-160" class="datetime" data-timezone="UTC" data-timestamp="1361456191">2013/02/21 14:16:31</a></div>
+	</div>
+		<div class="comment" id="comment-165">
+		<div class="who">andrea</div>
+		<div class="what"><p>heh, things can’t always turn up in the best of ways in just three days. That said, the guys managed to put the basis for a solid retro-platformer.
+EOL is the type of game you play passionately until completion and remember fondly over the years. This is a game you could actually play for years to master your score. Both game types have their places. Good luck guys!</p>
+</div>
+		<div class="when"><a href="#comment-165" class="datetime" data-timezone="UTC" data-timestamp="1362132507">2013/03/01 10:08:27</a></div>
+	</div>
+		<div class="comment" id="comment-169">
+		<div class="who">@maxschultz</div>
+		<div class="what"><p>Maybe you control how many enemies are released to have an effect on the level (lots of enemies on a bridge breaks the bridge etc) - therefore retaining ‘you are the level’.</p>
+</div>
+		<div class="when"><a href="#comment-169" class="datetime" data-timezone="UTC" data-timestamp="1362535569">2013/03/06 02:06:09</a></div>
+	</div>
+	</div>		</div><div class="copy">
+		Copyright © 2012–<span class="dateyear"></span> 
+		<a href="/">Retro Game Crunch</a>.
+	</div></div><script>
+$(function()
+{
+	$('.spoilers-toggle').on('touchstart click', function(event)
+	{
+		if(event.handled !== true)
+		{
+			$(this).parent().toggleClass('open');
+			event.handled = true;
+		}
+		return false;
+	});
+})
+</script>
+<script src="/archive.js"></script><script>cleanup();</script></body>
+</html>

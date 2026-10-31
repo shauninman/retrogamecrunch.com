@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Journal • Retro Game Crunch</title>
+<script>if((window.devicePixelRatio===undefined?1:window.devicePixelRatio)>1)document.cookie='HTTP_IS_RETINA=1;path=/';</script>
+<meta name="google-site-verification" content="0n15O71rkhohq8oudSJ4AhQ9ZHGrtYQGzZ-hj6_NTGI">
+<meta name="viewport" id="viewport" content="width=800">
+<link rel="stylesheet" href="/styles/rgc.q688883a0dcaa.css">
+<link rel="stylesheet" href="/scripts/highlight/styles/zenburn.css">
+<script src="/scripts/highlight/highlight.pack.js"></script>
+<script src="/scripts/jquery-1.8.3.min.js"></script>
+
+<script src="/scripts/mediaelement/mediaelement-and-player.min.js"></script>
+<link rel="stylesheet" href="/scripts/mediaelement/mediaelementplayer.css">
+<script>
+hljs.tabReplace = '    ';
+hljs.initHighlightingOnLoad();
+
+$(function()
+{
+	$('audio').mediaelementplayer(/* Options */);
+	
+	// disable :hover on touch devices
+	// based on https://gist.github.com/4404503 
+	// via https://twitter.com/javan/status/284873379062890496
+	// + https://twitter.com/pennig/status/285790598642946048
+	// re https://retrogamecrunch.com/tmp/hover
+	if ('createTouch' in document)
+	{
+		$('html').addClass('touch');
+		try
+		{
+			var ignore = /:hover\b/;
+			for (var i=0; i<document.styleSheets.length; i++)
+			{
+				var sheet = document.styleSheets[i];
+				for (var j=sheet.cssRules.length-1; j>=0; j--)
+				{
+					var rule = sheet.cssRules[j];
+					if (rule.type === CSSRule.STYLE_RULE && ignore.test(rule.selectorText))
+					{
+						sheet.deleteRule(j);
+					}
+				}
+			}
+		}
+		catch(e){}
+	}
+});
+
+var then = 1387576800000;
+var deadline = '2013-12-20 22:00:00 UTC';
+var last_mins = -1;
+window.setInterval(function()
+{
+	var now = (new Date).getTime();
+	var remaining = then - now;
+	if (remaining < 0) remaining = 0;
+
+	var sec = 1000;
+	var min = 60 * sec;
+	var hour = 60 * min;
+	var day = 24 * hour;
+
+	var days = Math.floor(remaining / day);
+	remaining -= days * day;
+	var hours = Math.floor(remaining / hour);
+	remaining -= hours * hour;
+	var mins = Math.floor(remaining / min);
+	
+	if (last_mins == mins) return; // prevent unnecessary redraws
+	last_mins = mins;
+
+	var html = '';
+
+	if (days) 	html += '<span class="remaining-days">'+days+' day'+(days>1?'s':'')+'</span> ';
+	if (hours) 	html += '<span class="remaining-days">'+hours+' hour'+(hours>1?'s':'')+'</span> ';
+	if (mins) 	html += '<span class="remaining-days">'+mins+' minute'+(mins>1?'s':'')+'</span> ';
+
+	// DELAY
+	// if (html=='') html = 'To be determined';
+	if (html=='') html = 'Just a few moments';
+
+	$('span.countdown').html(html);
+}, 1 * 1000);
+</script>
+
+
+<script>window.RufflePlayer={config:{polyfills:false,publicPath:"/scripts/ruffle/",autoplay:"on"}};</script><script src="/scripts/ruffle/ruffle.js" defer></script><script src="/scripts/flash.js" defer></script><link rel="stylesheet" href="/archive.css"><link rel="canonical" href="https://retrogamecrunch.com/journal/page/2/"></head>
+<body>
+	<div class="wrap wrap-top">
+		<div id="logo-unit">
+			<a id="logo" href="/"><img src="/images/logo-black.png" width="204" height="98" alt="Retro Game Crunch"></a>
+			<a id="funded" href="http://www.kickstarter.com/projects/shauninman/retro-game-crunch-six-games-in-six-months"><img src="/images/funded-with.png" width="116" height="112" alt="Funded with Kickstarter"></a>
+		</div><div id="mini-login">
+	
+</div><div id="status">
+			<div class="currently">
+				<strong>Currently</strong>
+				<a href="/games/6/shuten/">Recovering from Shūten Complete</a>
+			</div></div><ul class="nav nav-main">
+			<li><a href="/">Home</a></li>
+			<li><a href="/games/">Games</a></li>			<li><a href="/rewards/">Rewards</a></li>
+			<li><a href="/journal/" class="current">Journal</a></li>
+			<li><a href="/primer/">Primer</a></li>
+			<li><a href="/about/">About</a></li>
+			<li><a href="/contact/">Contact</a></li>
+		</ul>
+	</div><div class="wrap wrap-bottom">
+		<div class="content">
+			<div class="posts">
+			<div class="post">
+			<h1><a href="/journal/57/brains-and-hearts-and-cpus/">Brains and Hearts and CPUs</a></h1>
+			<div class="byline">Posted by <strong>Shaun</strong> <span class="datetime" data-timezone="UTC" data-timestamp="1382115582">2013/10/18 16:59:42</span></div>
+			<p>Game 5, our card game turned video game, is done! You can download Brains and Hearts from your <a href="/rewards/">Rewards</a> page <em>right</em> now!</p>
+
+<p style="margin-left:-12px;"><img src="/ks-updates/brains-hearts-title.png" width="480" height="320"></p>
+
+<p>We’ve tweaked the rules to speed up play, but don’t worry, Team Crunch makes a cameo appearance to explain the game as you go. You can still challenge a friend or go head-to-hard-drive against the new CPU. And for the first time, you can watch the credits without beating the game. Your name in lights!</p>
+
+<p>Brain Slab, a collection of the three slab serifs created for the game, is also up on the <a href="/rewards/">Rewards</a> page for backers of $50 and up.</p>
+		</div>
+			<div class="post">
+			<h1><a href="/journal/56/brain-freeze/">Brain Freeze</a></h1>
+			<div class="byline">Posted by <strong>Shaun</strong> <span class="datetime" data-timezone="UTC" data-timestamp="1381341002">2013/10/09 17:50:02</span></div>
+			<p>This has been a busy month! Shaun showed off all four finished Retro Game Crunch games plus Super Clew Land Complete at <a href="http://2013.xoxofest.com/arcade/">XOXO Arcade</a> in Portland. (<a href="https://twitter.com/shauninman/status/381274707690938368/photo/1">Four player frenzy with GAIAttack!</a>) Rusty and Matt showed off End of Line at <a href="http://fantasticfest.com/arcade">Fantastic Arcade</a> in Austin. (<a href="https://twitter.com/8bitmatt/status/381450670122889217/photo/1">End of Line on a theatre screen!</a>) And Rusty just got back from Indiecade in Los Angeles. Phew!</p>
+
+<p>So we’re going to tack on an extra week to wrap up the complete version of Brains &amp; Hearts. Until then—BELATED GIF BOMB!</p>
+
+<div style="white-space:nowrap;">
+<img src="/shared/images/game-5/albie-idle.gif">
+<img src="/shared/images/game-5/albie-joy.gif">
+<img src="/shared/images/game-5/albie-defeat.gif">
+</div>
+
+<div style="white-space:nowrap;">
+<img src="/shared/images/game-5/brainstein-idle.gif">
+<img src="/shared/images/game-5/brainstein-joy.gif">
+<img src="/shared/images/game-5/brainstein-defeat.gif">
+</div>
+		</div>
+			<div class="post">
+			<h1><a href="/journal/55/in-ze-cards-a-brains-hearts-postmortem/">In ze Cards, a Brains &amp; Hearts Postmortem</a></h1>
+			<div class="byline">Posted by <strong>Shaun</strong> <span class="datetime" data-timezone="UTC" data-timestamp="1378926481">2013/09/11 19:08:01</span></div>
+			<p>Before we even opened up theme submissions for game 5 we vowed to ourselves that our next game would not have a jump button. Level design is essentially commentary on level design. Four platformers later and I’m not sure I have anything interesting left to say about level design (for now). So where did that leave us?</p>
+
+<p>We talked about an RPG (too complex a system to develop and balance in just 30 days much less 3) and a four player, top-down shooter (shallow gameplay yet very artwork/content hungry) before hitting on the idea of a card game. Nintendo got its start in games printing Japanese playing cards. It doesn’t get much more retro than cards.</p>
+
+<h2>R &amp; D</h2>
+
+<p>Early in our research into elements of Einstein’s life that might make their way into his dreams, Matt discovered Einstein’s brain had been removed before his body was cremated. There is some controversy about whether this was done without the family’s consent and against Einstein’s own wishes. (His brain has had quite the <a href="http://en.wikipedia.org/wiki/Relics:_Einstein's_Brain">posthumous</a> <a href="https://www.youtube.com/playlist?list=PLthKojOtRS30Q7YaOY-lX-vr_6sVknK4u">adventure</a> itself.)</p>
+
+<p>Then Rusty hit on the idea that, with the brain separated from the body, you’re left with just a heartless intellect. One early idea involved a cross-dimensional wormhole, Einstein’s brain in a mech, an army with “intellect rays”, and brainless but compassionate Einstein leading the resistance with the battle cry “Ignorance is bliss!” There was also an Einstein quote about quantum mechanics that grab our attention, “God doesn’t play dice with the world.”</p>
+
+<h2>Ze Hand You’re Dealt</h2>
+
+<p>Saturday morning Rusty and I got together over Facetime and started hacking on card game ideas. Rusty had the basic idea for the game already down. Two players try to capture their opponents cards by creating runs of ascending sequential cards. Over the next two days we iterated and playtested countless variations of the game.</p>
+
+<p>The original version had each player playing with just a single suit, Ace to King, and drawing a single random card each turn. But with so many possible cards building runs was really infrequent. To increase the frequency of runs I proposed using both suits of the same color but only the Ace through 5. This greatly increased the likelihood of runs becoming available. We eventually settled on the cards Ace through 7 which was a good balance.</p>
+
+<p>With the random draws of the original version, there was very little user agency. I suggested giving the player the option to roll a die for the chance to modify one of the cards on the board (allowing the player to create a run where there was none before). We settled almost immediately on 2 rolls per game.</p>
+
+<p>Somewhere along the line we introduced the concept of the hold, a single card could be set aside to prevent the player from having to place a card that would create a run for their opponent. The hold card could be swapped in when beneficial in place of a newly drawn card. This idea survived for about a day and a half until our next major revision.</p>
+
+<p>The individual random draws of the original game design left little room for long-term strategy. The hold helped but the game was still unsatisfying once you learned the rules. Our first attempt at correcting this was to dole out the fourteen cards over three phases. With five cards in a hand per phase and six cards on the board at any given time (plus another card in each players hold) calculating your best move on any given turn was time consuming and overwhelming. Too much strategy.</p>
+
+<p>We played too many variations to remember them all but we eventually settled on the player starting with two cards and drawing a new card (or rolling) at the beginning of each turn. A continuously refreshed, hand of three with no hold was much more manageable.</p>
+
+<p>At this point we had agency and strategy but it was still too easy for one player to turn an early lead into a crushing defeat because with each run a player wipes out their opponents cards leaving them with no cards with which to build their own run. One of Rusty’s roommates, an avid Magic The Gathering player, suggested the final piece of the puzzle: locks. Locks allow a beleaguered player to rebuild their board without their cards being immediately consumed by their opponent.</p>
+
+<h2>Trials</h2>
+
+<p>Card game design is hard. And time consuming. And probably not meant to be done by people in three separate states.</p>
+
+<p>There is no artifice in card games. It’s just pure gameplay. No artwork. No music. Just rules and actions. Balancing chance and agency is extremely hard to do without burdening players with complex rules and conditions. Your players are also your processors. The iterative process was grueling but fun. It’s amazing how one tiny rule change can open up or constrict a card game design.</p>
+
+<p>Every revision to the rules meant we had to play two or three games to observe the actual effect. If a normal game takes 15-20 minutes to play, it can take 45 to an hour to play with analysis. That means one rule change can result in up to 3 hours of testing. Oh, and you can have bugs in a physical card game too. After one change to the rules the second player ended up with an extra turn at the end of the game. It turned out that the first player was playing with one less card because it got misplaced after the previous game.</p>
+
+<p>Early versions of the game had no hidden information. Both players had access to the same information: the six cards on the board, the contents of the holds, the card that was just drawn. Playtesting via Facetime was manageable. Once we started testing the hidden hold and introduced hands, things got a bit more complicated. iPhones were dangled off counter edges and inserted into light fixtures for a bird’s eye view of the action. Missing was the face-to-face human interaction. Seeing the excitement or defeat of your opponent when they got the card they needed or missed a last ditch die roll.</p>
+
+<p>Because the process was so involved and the game mechanics were constantly evolving, artwork production couldn’t really start until the final day. Rusty documented the rules (which required exhaustive detail), I started on graphics for the tutorial, and Matt composed a perfectly pensive background track. A few hours before launch it became clear that there was no time remaining to color the dialogue then copy-fit and design the complete ruleset for inclusion in the tutorial. So the tutorial became a primer and we instead published the complete rules as a PDF.</p>
+
+<p>In the end, we were exhausted but satisfied with what we created. But a game is just rules without players to play it so grab a friend, play a few rounds of <a href="/games/5/brains-and-hearts/">Brains &amp; Hearts</a> and let us know how it goes!</p>
+		</div>
+			<div class="post">
+			<h1><a href="/journal/54/rgc-podcast-episode-4/">RGC Podcast, Episode 4</a></h1>
+			<div class="byline">Posted by <strong>Shaun</strong> <span class="datetime" data-timezone="UTC" data-timestamp="1378334310">2013/09/04 22:38:30</span></div>
+			<p><img src="/shared/images/podcast-4-400.png" alt="podcast-4-400.png"></p>
+
+<p>Our fourth podcast is a <a href="/games/4/wub-wub-wescue/">Wub-Wub Wescue</a> postmortem. There’s spoilers, so if you haven’t played through the <a href="/rewards/">complete version</a>, you might want to do that first!</p>
+
+<p>Listen in the browser: </p>
+
+<p><audio src="/shared/podcasts/04%20RGC%20Podcast%204_%20Wub-Wub%20Wescue.mp3" type="audio/mp3" controls="controls"><a href="/shared/podcasts/04%20RGC%20Podcast%204_%20Wub-Wub%20Wescue.mp3">04 RGC Podcast 4_ Wub-Wub Wescue.mp3</a></audio></p>
+
+<p>Or <a href="/shared/podcasts/04%20RGC%20Podcast%204_%20Wub-Wub%20Wescue.mp3">download it for later</a>.</p>
+		</div>
+			<div class="post">
+			<h1><a href="/journal/53/refill/">Refill</a></h1>
+			<div class="byline">Posted by <strong>Shaun</strong> <span class="datetime" data-timezone="UTC" data-timestamp="1378145729">2013/09/02 18:15:29</span></div>
+			<p>We’ve made it through four games. Only two more to go. We’re putting the team back together. Rusty will be rejoining us for Game 5 so we <a href="/games/5/brains-and-hearts/">need your themes</a>! Submissions will close Wednesday afternoon with voting starting Wednesday night. We crunch again on Friday!</p>
+
+<p>In other awesome news, <a href="http://fantasticfest.com/news/entry/fantastic-arcade-showcase-games-and-gamemaking-frenzy-announced">End of Line was selected</a> for the <a href="http://fantasticfest.com/arcade">Fantastic Arcade</a>, sharing the spotlight with the likes of indie darlings Kentucky Route Zero and Gone Home. Swoon! If you’re in Austin on September 19-22, swing by and check it out.</p>
+
+<p><img src="/ks-updates/eol-osv.png" alt="eol-osv.png"></p>
+
+<p>On a related—wait for it—note, Matt released the <a href="http://8bitmatt.bandcamp.com/album/end-of-line-original-sound-version">End of Line soundtrack</a>! If you missed out on the SOUND TEST reward tier make sure you don’t miss Matt’s amazing soundtrack recorded from <a href="/journal/43/super-nintendo/">actual NES hardware</a>.</p>
+
+<p>Finally, my mom’s surgery went smoothly. I’ll still be in Denver for another 2-3 months while she completes her treatment but everything has gone about as well as it possibly could. Thanks for the continued support and understanding, you guys are the best!</p>
+		</div>
+			<div class="post">
+			<h1><a href="/journal/52/wub-wub-wesuwection/">Wub-Wub Wesuwection</a></h1>
+			<div class="byline">Posted by <strong>Shaun</strong> <span class="datetime" data-timezone="UTC" data-timestamp="1377618082">2013/08/27 15:41:22</span></div>
+			<p>Let’s talk about <a href="/rewards/">Wub-Wub Wescue</a> and the creative process. Here’s <a href="https://twitter.com/boltcity/status/369484217349992448">a tweet</a> by <a href="https://twitter.com/boltcity">Kazu Kibuishi</a> that pretty much sums up this post if you’re short on time:</p>
+
+<blockquote>
+  <p>Creative process:<br>
+  1) This is going to be awesome<br>
+  2) This is hard<br>
+  3) This is terrible<br>
+  4) I’m terrible<br>
+  5) Hey, not bad<br>
+  6) That was awesome</p>
+</blockquote>
+
+<p>Nailed it.</p>
+
+<h2>Beaten Down</h2>
+
+<p><div class="archive-flash" data-swf="/shared/downloads/BeatDropPlatform.swf" data-background="#000000" data-flashvars="" style="display:inline-block;width:480px;height:320px;max-width:100%;" id="game-shared-downloads-BeatDropPlatform-swf"></div></p>
+
+<p><em>Controls: ARROWS to move, A to shoot, S to jump</em></p>
+
+<p>This update to the 3 day crunch version of Beat Drop probably reflects about two weeks of additional design and development (shared with the next embed). I mention a few of the additions in <a href="/journal/47/a-boy-and-his-pug/">A Boy and His Pug</a>. </p>
+
+<p>This is the first appearance of Wub-Wub as a difficult to control power-up. In addition to the sun and twister mentioned in that post this version also introduced a UFO (we were going for 80’s non-sensical eclectic) and an anvil. If you let the sun and twister hit the ground you’ll see the full screen effects I coyly mentioned.</p>
+
+<p>The intractable problem with this approach to the theme is that difficulty is ultimately tied to tempo. And this problem won’t be fixed until we ditch record catching completely.</p>
+
+<h2>Lost the Rhythm</h2>
+
+<p><div class="archive-flash" data-swf="/shared/downloads/BeatDropRhythm.swf" data-background="#000000" data-flashvars="" style="display:inline-block;width:480px;height:320px;max-width:100%;" id="game-shared-downloads-BeatDropRhythm-swf"></div></p>
+
+<p><em>Controls: ARROWS</em></p>
+
+<p>This is as far as I got with the rhythm game section we planned on building. This “level” only uses one arrow direction but it supports all four directions and WASD. </p>
+
+<p>Turns out it’s really tricky to sync visuals with audio in ActionScript. If you watch closely you might notice the records get ahead or fall behind then snap back or forward on the beat. I assign all records the same velocity to keep pace with the music but due to cumulative drift from Number’s (lack of) precision and Flash’s inconsistent frame rate I need to manually correct their position.</p>
+
+<p>One thing I’m surprised I got working as well as I did was player beat precision detection. Values range from Miss to Bad to Good to Great to Perfect.</p>
+
+<h2>A Skipping Playhead</h2>
+
+<p><div class="archive-flash" data-swf="/shared/downloads/RecordGame.swf" data-background="#000000" data-flashvars="" style="display:inline-block;width:480px;height:320px;max-width:100%;" id="game-shared-downloads-RecordGame-swf"></div></p>
+
+<p><em>Controls: ARROWS, SPACE to jump, Z/X to speak</em></p>
+
+<p>Having <a href="/journal/48/recalculating/">noted</a> a number of flaws in our original direction, Matt and I huddled and hashed out a new one. Matt <a href="/journal/51/droppin-beats/">talks a bit</a> about how he approached music for this version. This build reflects about a week’s worth of design and development.</p>
+
+<p>We tried to make the music more visibly influence the level by associating each piece of the music with a distinct level formation, transitioning smoothly from one to the next. This <em>almost</em> works.</p>
+
+<p>We were also still trying to make the record collection mechanic interesting. Unfortunately, our solution was still to distract from that mechanic. Not a good sign when the only way to make your core mechanic work is by distracting the player from it.</p>
+
+<p>After about a week we decided this whole direction still wasn’t working. But it wasn’t a complete waste. Oontz went from a record shop combing DJ to a Professor of Archaeology seeking the source of all music, the Playhead. Wub-Wub learned some new moves. And the Natives were restless. These new additions (plus snakes) all made it into, arguably, defined, the game’s final form.</p>
+
+<h2>The Final Act</h2>
+
+<p><img src="/shared/images/game-4/acts.png" alt="acts.png"></p>
+
+<p>After a few days flailing about directionless Matt and I got on video chat even though neither of us had any ideas on how to salvage this and just talked it out for an afternoon. By the end of the hours long conversation we had our fourth and final plan of action.</p>
+
+<p>What follows is my un-edited TODONE.txt from that meeting on July 28th till the launch on August 19th (reverse chronological so you might want to scroll all the way down and work your way back up):</p>
+
+<div class="spoilers"><img src="/images/btn-spoilers.png" height="30" alt="Spoilers" class="spoilers-toggle"><div class="spoilers-content">
+
+<pre><code>TODONE
+-----------------------------------------------------------
+2013-08-19
+added File &gt; Quit (plus the ctl+q shortcut) to PC app
+
+SFX bring down twinkle sound effect 80%?
+
+SFX increase native land volume
+
+implemented new game/continue
+
+tweaked snake level
+
+-----------------------------------------------------------
+2013-08-18
+MUSIC: CreditsFull
+
+SFX wall collision thud
+
+SFX: new start sound
+
+SFX: boss hit should be final hit, not after spin comes to rest
+
+BUG: disable balloon during recoil
+
+figure out app packaging (PC)
+
+try mosaic transition to nowhere for cheat confirmation
+
+increase wall collision shake
+
+adjust timing of arrow/bat level to match beat
+
+add hanging wall to a snake/arrow level
+
+set up app packaging (Mac)
+
+icon
+
+FIXED: death by falling off screen doesn't 
+let the death jingle play fully
+
+FIXED: you can pause game with off screen death
+
+tweaked boss music volume
+
+added PRAM and hasSeenCredits skipping
+
+add flashing hand to title
+
+create infinite jump cheat platforms
+
+implement cheat codes
+
+-----------------------------------------------------------
+2013-08-17
+kuranchi hidden in plain sight
+
+figure out optimum music order
+tweak levels for selected music
+
+Re-order levels (cut 8 levels)
+
+designed and implemented act structure
+
+prevent native from spawning behind wub during ending
+
+FIXED: monkey/player collision bugs (22.tmx/ladders)
+
+added basics of infinite jump cheat
+
+reposition different colored bgs and change every 4 levels
+
+write FLJS to generate bin embeds automagically
+
+
+-----------------------------------------------------------
+2013-08-16
+implemented logo, ending, and credits
+
+tightened up boss
+
+animate boss recoil and damage
+
+FIXED: bat carrying should set player.peakY
+
+-----------------------------------------------------------
+2013-08-15
+started boss level/behavior design
+
+FIXED: monkey catching bugs (precision issue)
+
+tweaked boulder spawn point
+
+designed 3 levels (28-30.tmx) plus boss.tmx
+
+revisited 4 boulder levels (reduced spawn rate)
+
+-----------------------------------------------------------
+2013-08-14
+added forced facing walls (use only to match arrow head facing)
+
+designed 1 level (24.tmx)
+
+ported 3 mg levels (25-27.tmx)
+
+-----------------------------------------------------------
+2013-08-13
+designed 2 levels (22-23.tmx)
+
+Spikes can now be rendered from full spike or just bottom row
+
+-----------------------------------------------------------
+2013-08-12
+FIXED: spikes were eating up one too many columns during entity parse
+
+designed 2 levels (20-21.tmx) (3 if you count scrapped 21a)
+
+-----------------------------------------------------------
+2013-08-10
+FIXED: bat's second swoop in 19.tmx
+FIXED: landing/flapping in wrong facing in 19.tmx
+
+designed 2 levels (18-19.tmx)
+
+tweaked monkey and bat hitboxes/velocities
+
+-----------------------------------------------------------
+2013-08-09
+added level name to hud for debug
+
+created treetop background
+
+designed 1 level (17.tmx) :\
+
+-----------------------------------------------------------
+2013-08-08
+BUG: wub continues to bounce if he walks off a platform
+
+designed 5 levels (12-16.tmx)
+
+cut the 4 boulder levels :\
+
+-----------------------------------------------------------
+2013-08-07
+stoneheads should stop arrows (but not their own)
+
+designed 6 levels (6-11.tmx)
+
+post progress update on RGC.com
+
+-----------------------------------------------------------
+2013-08-06
+fixed a bunch of bugs
+
+designed 4 levels (2-5.tmx)
+
+"paws" screen
+
+add parenths to bambooyeah 8
+
+credits
+
+sync past month's Kickstarter survey stragglers
+
+-----------------------------------------------------------
+2013-08-05
+created Bambooyeah 8 and Bambooyeah 8 Bold typefaces
+
+designed 1 level (1.tmx)
+
+misc bug fixes
+
+implemented balloon power-up including revised hud
+
+title screen
+
+-----------------------------------------------------------
+2013-08-04
+make ladder behavior more Mega Man-like
+
+background loading
+
+animate and implement bark and barking
+
+load platform, arrow, and boulder timings from tmx
+
+load song from tmx
+
+level loading
+
+hook up sound effects
+
+update Create Audio SWC.fljs to support Music and Sfx
+
+embed music
+
+embed sound effects
+
+
+-----------------------------------------------------------
+2013-08-03
+hook up yellow phonograph
+
+implement bat
+
+finish animating new bat
+
+-----------------------------------------------------------
+2013-08-02
+design and animated the new bat!
+
+implement ceiling spikes
+
+implemented monkey and snake
+
+-----------------------------------------------------------
+2013-08-01
+failed to design and animate an alternate vulture
+
+failed to design and animate the parrot
+
+-----------------------------------------------------------
+2013-07-31
+animated wub-wub being thrown
+
+redraw and animate monkey, jumping and throwing
+
+redraw and animate snake, circling and sleeping
+
+simple hud design and implementation of song learning
+with queuing and limited song durations with progress bar
+
+implemented phonographs
+
+animated/implemented wub-wub listening and singing
+
+animated/implemented drummers, caged oontz, and dragging away
+
+-----------------------------------------------------------
+2013-07-30
+implemented boulders
+
+implemented arrows
+
+implemented rhythm platforms
+
+implemented seamlessly looping audio and tempo tracking
+
+-----------------------------------------------------------
+2013-07-29
+implemented wub-wub, ground, spikes, walls and ladders
+
+started third FDT project for this game
+
+drew a shit-ton of new art assets
+
+-----------------------------------------------------------
+2013-07-28
+came up with a new direction with Matt, code name Doggy Kong
+
+panicked about the lack of fun and focus in the gameplay
+
+redrew wub-wub's run cycle
+
+palette swapped red cobra
+
+
+-----------------------------------------------------------
+2013-07-27
+unsuccessfully tried to re-imagine the mechanics to make
+them more fun
+
+unsuccessfully attempted to build a fun level with the 
+current mechanics
+</code></pre>
+
+</div></div>
+
+<p>You might notice that level production was really slow going. Then we cut as many levels as we included. Making focused levels with a coherent progression was something I struggled at. I think the last minute establishing of an act structure and subsequent self-editing made the game a lot stronger in the end.</p>
+
+<p>You might also notice that the boulder levels were designed pretty early in the level production. Boulders are hard. So hard we had intended to cut them entirely at one point. We tried a variety of different, less random behaviors. None were any easier. I eventually stumbled on the idea of barking to deflect incoming boulders. It’s not super obvious but combined with hugging the tile column directly below the boulder cave to control the drop behavior, boulders are much more manageable. They’re still difficult but, by the point we introduce them, you’re already well acquainted with monkeys, which have the same jump arc.</p>
+
+<p>In the end I think we were successful in applying the theme to multiple gameplay mechanics but were never able to get completely away from the underlying problem of difficulty being dependent on and determined by tempo.</p>
+
+<p>Anyways, that was the creative process that transformed Beat Drop into Wub-Wub Wescue. Thanks for reading—and playing!</p>
+		</div>
+			<div class="post">
+			<h1><a href="/journal/51/droppin-beats/">Droppin’ Beats</a></h1>
+			<div class="byline">Posted by <strong>Matt</strong> <span class="datetime" data-timezone="UTC" data-timestamp="1377477167">2013/08/26 00:32:47</span></div>
+			<p>Making Wub-Wub Wescue was a journey. You’ll soon hear all the details in the upcoming podcast and Shaun’s postmortem. We had four total versions of the game, which came with their own sets of music.</p>
+
+<h2>Beat Drop - Three Day Jam</h2>
+
+<p>For the initial three day jam I wrote twelve short songs, each with a different musical style. Only five songs were used for levels in the release; while two other songs were used for the title and ending screens. During the three day jam I got my hands into the programming too! I worked on making the floor tiles play notes that fit with the music. I used the SiON as3 library to make sound with small snippets of mml I wrote. </p>
+
+<p>The idea behind this iteration of the game was that you’d be collecting records to unlock new parts of the song that’s currently playing. It starts with just bass and drums, then you unlock the rhythm (or background voices) of the song. Finally, you unlock the melody or lead voice. Each song essentially had three versions.</p>
+
+<p>Here’s the twelve songs from the three day jam (all parts unlocked):</p>
+
+<h3>Song 1</h3>
+
+<p><audio src="/shared/music/game-4/beat/song-1.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/beat/song-1.mp3">song 1</a></audio></p>
+
+<h3>Song 2</h3>
+
+<p>This song eventually turned into the end credits theme for Wub-Wub Wescue! I loved it from the very start. I knew it was special. I wasn’t the only one either. My ex-girlfriend (girlfriend at the time of creation) loved it so much she wanted this as a ringtone on her phone. When a girl wants a song as her ringtone there’s no higher compliment.</p>
+
+<p><audio src="/shared/music/game-4/beat/song-2.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/beat/song-2.mp3">song 2</a></audio></p>
+
+<h3>Song 3</h3>
+
+<p><audio src="/shared/music/game-4/beat/song-3.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/beat/song-3.mp3">song 3</a></audio></p>
+
+<h3>Song 4</h3>
+
+<p><audio src="/shared/music/game-4/beat/song-4.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/beat/song-4.mp3">song 4</a></audio></p>
+
+<h3>Song 5</h3>
+
+<p><audio src="/shared/music/game-4/beat/song-5.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/beat/song-5.mp3">song 5</a></audio></p>
+
+<h3>Song 6</h3>
+
+<p>This was used for the ending screen.</p>
+
+<p><audio src="/shared/music/game-4/beat/song-6.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/beat/song-6.mp3">song 6</a></audio></p>
+
+<h3>Song 7</h3>
+
+<p><audio src="/shared/music/game-4/beat/song-7.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/beat/song-7.mp3">song 7</a></audio></p>
+
+<h3>Song 8</h3>
+
+<p>This is the title music!</p>
+
+<p><audio src="/shared/music/game-4/beat/song-8.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/beat/song-8.mp3">song 8</a></audio></p>
+
+<h3>Song 9</h3>
+
+<p><audio src="/shared/music/game-4/beat/song-9.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/beat/song-9.mp3">song 9</a></audio></p>
+
+<h3>Song 10</h3>
+
+<p>I actually wrote the first iteration of this musical idea during  GAIAttack development.</p>
+
+<p><audio src="/shared/music/game-4/beat/song-10.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/beat/song-10.mp3">song 10</a></audio></p>
+
+<h3>Song 11</h3>
+
+<p><audio src="/shared/music/game-4/beat/song-11.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/beat/song-11.mp3">song 11</a></audio></p>
+
+<h3>Song 12</h3>
+
+<p>This song also started back in the GAIAttack days. Neither this nor #10 made it into any version of the game so maybe one day I’ll get to use them. :)</p>
+
+<p><audio src="/shared/music/game-4/beat/song-12.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/beat/song-12.mp3">song 12</a></audio></p>
+
+<h2>Beat Drop - Post Jam</h2>
+
+<p>After the jam we were still exploring the Beat Drop game idea and were planning to use all twelve songs. So I guess technically there was no new music for this version of the game. I believe I might have re-visited some of the songs to try and polish ideas or extend their length but nothing major.</p>
+
+<h2>Record Game (working title)</h2>
+
+<p>We felt like we weren’t getting anywhere and the game still wasn’t fun. At this point we were exploring the idea of having platforms morph into different shapes based on the music. We thought it might be interesting to make everything randomly generated so levels and music were never the same. To accomplish this I composed songs in really short segments. Each “stem” of the music could be played in any order, any number of times. The idea comes from a project, that Shaun told me about, called <a href="http://musicforshuffle.com">“Music for Shuffle”</a>.</p>
+
+<p>I wanted to explore new music styles I hadn’t worked with before and I was listening to a lot of middle eastern style music; Song1 is HEAVILY influenced by this. I composed two songs before we moved on to a better game idea.</p>
+
+<p>Here’s all the stems:</p>
+
+<h3>Song 1 Stem 1</h3>
+
+<p><audio src="/shared/music/game-4/record/Song1Stem1.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/record/Song1Stem1.mp3">song 1 stem 1</a></audio></p>
+
+<h3>Song 1 Stem 2</h3>
+
+<p><audio src="/shared/music/game-4/record/Song1Stem2.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/record/Song1Stem2.mp3">song 1 stem 2</a></audio></p>
+
+<h3>Song 1 Stem 3</h3>
+
+<p><audio src="/shared/music/game-4/record/Song1Stem3.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/record/Song1Stem3.mp3">song 1 stem 3</a></audio></p>
+
+<h3>Song 1 Stem 4</h3>
+
+<p><audio src="/shared/music/game-4/record/Song1Stem4.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/record/Song1Stem4.mp3">song 1 stem 4</a></audio></p>
+
+<h3>Song 1 Stem 5</h3>
+
+<p><audio src="/shared/music/game-4/record/Song1Stem5.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/record/Song1Stem5.mp3">song 1 stem 5</a></audio></p>
+
+<h3>Song 1 Stem 6</h3>
+
+<p><audio src="/shared/music/game-4/record/Song1Stem6.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/record/Song1Stem6.mp3">song 1 stem 6</a></audio></p>
+
+<h3>Song 1 Stem 7</h3>
+
+<p><audio src="/shared/music/game-4/record/Song1Stem7.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/record/Song1Stem7.mp3">song 1 stem 7</a></audio></p>
+
+<h3>Song 1 Stem 8</h3>
+
+<p><audio src="/shared/music/game-4/record/Song1Stem8.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/record/Song1Stem8.mp3">song 1 stem 8</a></audio></p>
+
+<h3>Song 1 Stem 9</h3>
+
+<p><audio src="/shared/music/game-4/record/Song1Stem9.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/record/Song1Stem9.mp3">song 1 stem 9</a></audio></p>
+
+<h3>Song 1 Stem 10</h3>
+
+<p><audio src="/shared/music/game-4/record/Song1Stem10.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/record/Song1Stem10.mp3">song 1 stem 10</a></audio></p>
+
+<h3>Song 1 Stem 11</h3>
+
+<p><audio src="/shared/music/game-4/record/Song1Stem11.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/record/Song1Stem11.mp3">song 1 stem 11</a></audio></p>
+
+<h3>Song 1 Stem 12</h3>
+
+<p><audio src="/shared/music/game-4/record/Song1Stem12.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/record/Song1Stem12.mp3">song 1 stem 12</a></audio></p>
+
+<h3>Song 1 Stem 13</h3>
+
+<p><audio src="/shared/music/game-4/record/Song1Stem13.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/record/Song1Stem13.mp3">song 1 stem 13</a></audio></p>
+
+<h3>Song 2 Stem 1</h3>
+
+<p><audio src="/shared/music/game-4/record/Song2Stem1.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/record/Song2Stem1.mp3">song 2 stem 1</a></audio></p>
+
+<h3>Song 2 Stem 2</h3>
+
+<p><audio src="/shared/music/game-4/record/Song2Stem2.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/record/Song2Stem2.mp3">song 2 stem 2</a></audio></p>
+
+<h3>Song 2 Stem 3</h3>
+
+<p><audio src="/shared/music/game-4/record/Song2Stem3.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/record/Song2Stem3.mp3">song 2 stem 3</a></audio></p>
+
+<h3>Song 2 Stem 4</h3>
+
+<p><audio src="/shared/music/game-4/record/Song2Stem4.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/record/Song2Stem4.mp3">song 2 stem 4</a></audio></p>
+
+<h3>Song 2 Stem 5</h3>
+
+<p><audio src="/shared/music/game-4/record/Song2Stem5.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/record/Song2Stem5.mp3">song 2 stem 5</a></audio></p>
+
+<h3>Song 2 Stem 6</h3>
+
+<p><audio src="/shared/music/game-4/record/Song2Stem6.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/record/Song2Stem6.mp3">song 2 stem 6</a></audio></p>
+
+<h3>Song 2 Stem 7</h3>
+
+<p><audio src="/shared/music/game-4/record/Song2Stem7.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/record/Song2Stem7.mp3">song 2 stem 7</a></audio></p>
+
+<h3>Song 2 Stem 8</h3>
+
+<p><audio src="/shared/music/game-4/record/Song2Stem8.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/record/Song2Stem8.mp3">song 2 stem 8</a></audio></p>
+
+<h2>Wub-Wub Wescue (Doggy Kong - working title)</h2>
+
+<p>I took a really different approach to music with Wub-Wub. All the level music consists of drum beats only. I used the noise channel and DPCM samples. It gives the game a very jungle-like vibe. With no melody or other distractions the player can really focus on the beat and how obstacles in the level react to the music. I wrote ten beats total, only six made it into the final game. Each beat has a slower version (when the slow-mo charm is used) but for brevity I’m only going to include the full speed versions here.</p>
+
+<p>The beats (+ title and boss themes):</p>
+
+<h3>beat 1</h3>
+
+<p><audio src="/shared/music/game-4/wub/beat-1.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/wub/beat-1.mp3">beat 1</a></audio></p>
+
+<h3>beat 2</h3>
+
+<p><audio src="/shared/music/game-4/wub/beat-2.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/wub/beat-2.mp3">beat 2</a></audio></p>
+
+<h3>beat 3</h3>
+
+<p><audio src="/shared/music/game-4/wub/beat-3.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/wub/beat-3.mp3">beat 3</a></audio></p>
+
+<h3>beat 4</h3>
+
+<p><audio src="/shared/music/game-4/wub/beat-4.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/wub/beat-4.mp3">beat 4</a></audio></p>
+
+<h3>beat 5</h3>
+
+<p><audio src="/shared/music/game-4/wub/beat-5.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/wub/beat-5.mp3">beat 5</a></audio></p>
+
+<h3>beat 6</h3>
+
+<p><audio src="/shared/music/game-4/wub/beat-6.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/wub/beat-6.mp3">beat 6</a></audio></p>
+
+<h3>beat 7</h3>
+
+<p><audio src="/shared/music/game-4/wub/beat-7.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/wub/beat-7.mp3">beat 7</a></audio></p>
+
+<h3>beat 8</h3>
+
+<p><audio src="/shared/music/game-4/wub/beat-8.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/wub/beat-8.mp3">beat 8</a></audio></p>
+
+<h3>beat 9</h3>
+
+<p><audio src="/shared/music/game-4/wub/beat-9.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/wub/beat-9.mp3">beat 9</a></audio></p>
+
+<h3>beat 10</h3>
+
+<p><audio src="/shared/music/game-4/wub/beat-10.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/wub/beat-10.mp3">beat 10</a></audio></p>
+
+<h3>Title theme</h3>
+
+<p><audio src="/shared/music/game-4/wub/title.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/wub/title.mp3">title theme</a></audio></p>
+
+<h3>Boss theme</h3>
+
+<p>The end boss theme is the only jungle beat to have a bassline (or melody).</p>
+
+<p><audio src="/shared/music/game-4/wub/boss.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/wub/boss.mp3">boss theme</a></audio></p>
+
+<p>Sound design was really fun. I enjoyed making the atmospheric jungle sounds like bugs and birds. Those sounds play randomly throughout the entire game. I also really enjoyed making the “charm” songs; the phonograph versions and the extra cute Wub-Wub bark versions. Wub-wub’s bark is probably my favorite sound effect. I used the Konami VRC6 sawtooth to create the bark.</p>
+
+<p><audio src="/shared/music/game-4/wub/wub-bark.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/wub/wub-bark.mp3">Wub-Wub bark</a></audio></p>
+
+<p>Speaking of Konami expansion audio chips, I used the VRC7 for the first time ever. The end credits theme uses it for all the lead voices. My favorite is the middle of the song, it has an 80’s synth sound. As noted earlier, this song started out as the second piece of music I wrote for the entire project! I love it.</p>
+
+<p><audio src="/shared/music/game-4/wub/credits-full.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-4/wub/credits-full.mp3">credits theme</a></audio></p>
+
+<h2>Bonus: Album Releases</h2>
+
+<p>If you didn’t select a high enough backer level on Kickstarter to get the soundtracks… good news! All of the Retro Game Crunch albums are going to be available for anyone to purchase. The first release “End of Line” just went live! <a href="http://8bitmatt.bandcamp.com/album/end-of-line-original-sound-version">Check it out!</a></p>
+		</div>
+			<div class="post">
+			<h1><a href="/journal/50/wub-wub-wescue-unleashed-pug-intended/">Wub-Wub Wescue Unleashed (Pug Intended) </a></h1>
+			<div class="byline">Posted by <strong>Shaun</strong> <span class="datetime" data-timezone="UTC" data-timestamp="1377034458">2013/08/20 21:34:18</span></div>
+			<p>Game 4, done! You can download Wub-Wub Wescue from your <a href="/rewards/">Rewards</a> page <em>right</em> now.</p>
+
+<p><a href="/rewards/"><img src="/ks-updates/wescue-title.png" alt="wescue-title.png"></a></p>
+
+<p>Assume the role of pugtagonist Wub-Wub as he tries to free dog’s best friend and professor-in-peril Oontz O. Oontz from the natives. Wescue pays homage to Donkey Kong (the codename during development was even “Doggy Kong”) and other single-screen 80s arcade games (with a touch of Mega Man for ladder mechanics).</p>
+
+<p>This game features a bunch of firsts:</p>
+
+<ol>
+<li>First first, Shaun and Matt completed this game without Rusty (who is being treated for Myofascial pain). Get better Rusty!</li>
+<li>The complete version of Game 4, <a href="/rewards/">Wub-Wub Wescue</a>, is a <em>completely</em> different game from the crunch version, <a href="/games/4/wub-wub-wescue/">Beat Drop</a>. </li>
+<li>We also tried out a new resolution, an NES native 256x224. </li>
+<li>Matt broke out the Konami VRC7 chip for a little FM synthesis for the ending credits theme. </li>
+<li>Both the Mac and PC versions are self-contained Air applications, which results in better performance and eliminates the risk of your browser deleting your save. </li>
+<li>Final first, Shaun tried a new, outline-less pixel art style. </li>
+</ol>
+
+<p><img src="/public/wub-wub-run.gif" alt="wub-wub-run.gif"></p>
+
+<p>We hope you enjoy it!</p>
+		</div>
+		</div>
+<p>
+	<a href="/journal/page/3/"><img src="/images/btn-older.png" height="30"></a>	
+	<a href="/journal/"><img src="/images/btn-newer.png" height="30"></a>	
+</p>
+	
+	</div><div class="copy">
+		Copyright © 2012–<span class="dateyear"></span> 
+		<a href="/">Retro Game Crunch</a>.
+	</div></div><script>
+$(function()
+{
+	$('.spoilers-toggle').on('touchstart click', function(event)
+	{
+		if(event.handled !== true)
+		{
+			$(this).parent().toggleClass('open');
+			event.handled = true;
+		}
+		return false;
+	});
+})
+</script>
+<script src="/archive.js"></script><script>cleanup();</script></body>
+</html>

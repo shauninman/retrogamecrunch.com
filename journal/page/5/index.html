@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Journal • Retro Game Crunch</title>
+<script>if((window.devicePixelRatio===undefined?1:window.devicePixelRatio)>1)document.cookie='HTTP_IS_RETINA=1;path=/';</script>
+<meta name="google-site-verification" content="0n15O71rkhohq8oudSJ4AhQ9ZHGrtYQGzZ-hj6_NTGI">
+<meta name="viewport" id="viewport" content="width=800">
+<link rel="stylesheet" href="/styles/rgc.q688883a0dcaa.css">
+<link rel="stylesheet" href="/scripts/highlight/styles/zenburn.css">
+<script src="/scripts/highlight/highlight.pack.js"></script>
+<script src="/scripts/jquery-1.8.3.min.js"></script>
+
+<script src="/scripts/mediaelement/mediaelement-and-player.min.js"></script>
+<link rel="stylesheet" href="/scripts/mediaelement/mediaelementplayer.css">
+<script>
+hljs.tabReplace = '    ';
+hljs.initHighlightingOnLoad();
+
+$(function()
+{
+	$('audio').mediaelementplayer(/* Options */);
+	
+	// disable :hover on touch devices
+	// based on https://gist.github.com/4404503 
+	// via https://twitter.com/javan/status/284873379062890496
+	// + https://twitter.com/pennig/status/285790598642946048
+	// re https://retrogamecrunch.com/tmp/hover
+	if ('createTouch' in document)
+	{
+		$('html').addClass('touch');
+		try
+		{
+			var ignore = /:hover\b/;
+			for (var i=0; i<document.styleSheets.length; i++)
+			{
+				var sheet = document.styleSheets[i];
+				for (var j=sheet.cssRules.length-1; j>=0; j--)
+				{
+					var rule = sheet.cssRules[j];
+					if (rule.type === CSSRule.STYLE_RULE && ignore.test(rule.selectorText))
+					{
+						sheet.deleteRule(j);
+					}
+				}
+			}
+		}
+		catch(e){}
+	}
+});
+
+var then = 1387576800000;
+var deadline = '2013-12-20 22:00:00 UTC';
+var last_mins = -1;
+window.setInterval(function()
+{
+	var now = (new Date).getTime();
+	var remaining = then - now;
+	if (remaining < 0) remaining = 0;
+
+	var sec = 1000;
+	var min = 60 * sec;
+	var hour = 60 * min;
+	var day = 24 * hour;
+
+	var days = Math.floor(remaining / day);
+	remaining -= days * day;
+	var hours = Math.floor(remaining / hour);
+	remaining -= hours * hour;
+	var mins = Math.floor(remaining / min);
+	
+	if (last_mins == mins) return; // prevent unnecessary redraws
+	last_mins = mins;
+
+	var html = '';
+
+	if (days) 	html += '<span class="remaining-days">'+days+' day'+(days>1?'s':'')+'</span> ';
+	if (hours) 	html += '<span class="remaining-days">'+hours+' hour'+(hours>1?'s':'')+'</span> ';
+	if (mins) 	html += '<span class="remaining-days">'+mins+' minute'+(mins>1?'s':'')+'</span> ';
+
+	// DELAY
+	// if (html=='') html = 'To be determined';
+	if (html=='') html = 'Just a few moments';
+
+	$('span.countdown').html(html);
+}, 1 * 1000);
+</script>
+
+
+<script>window.RufflePlayer={config:{polyfills:false,publicPath:"/scripts/ruffle/",autoplay:"on"}};</script><script src="/scripts/ruffle/ruffle.js" defer></script><script src="/scripts/flash.js" defer></script><link rel="stylesheet" href="/archive.css"><link rel="canonical" href="https://retrogamecrunch.com/journal/page/5/"></head>
+<body>
+	<div class="wrap wrap-top">
+		<div id="logo-unit">
+			<a id="logo" href="/"><img src="/images/logo-black.png" width="204" height="98" alt="Retro Game Crunch"></a>
+			<a id="funded" href="http://www.kickstarter.com/projects/shauninman/retro-game-crunch-six-games-in-six-months"><img src="/images/funded-with.png" width="116" height="112" alt="Funded with Kickstarter"></a>
+		</div><div id="mini-login">
+	
+</div><div id="status">
+			<div class="currently">
+				<strong>Currently</strong>
+				<a href="/games/6/shuten/">Recovering from Shūten Complete</a>
+			</div></div><ul class="nav nav-main">
+			<li><a href="/">Home</a></li>
+			<li><a href="/games/">Games</a></li>			<li><a href="/rewards/">Rewards</a></li>
+			<li><a href="/journal/" class="current">Journal</a></li>
+			<li><a href="/primer/">Primer</a></li>
+			<li><a href="/about/">About</a></li>
+			<li><a href="/contact/">Contact</a></li>
+		</ul>
+	</div><div class="wrap wrap-bottom">
+		<div class="content">
+			<div class="posts">
+			<div class="post">
+			<h1><a href="/journal/33/protagonista/">Protagonista</a></h1>
+			<div class="byline">Posted by <strong>Shaun</strong> <span class="datetime" data-timezone="UTC" data-timestamp="1365254536">2013/04/06 13:22:16</span></div>
+			<p><img src="/shared/images/game-3/abby-idle.gif" alt="abby-idle.gif">
+<img src="/shared/images/game-3/abby-run.gif" alt="abby-run.gif">
+<img src="/shared/images/game-3/abby-jump.gif" alt="abby-jump.gif">
+<img src="/shared/images/game-3/abby-shoot.gif" alt="abby-shoot.gif">
+<img src="/shared/images/game-3/abby-duck.gif" alt="abby-duck.gif">
+<img src="/shared/images/game-3/abby-recoil.gif" alt="abby-recoil.gif"></p>
+
+<p>Meet pilot Abby Shorehart and her time travel gun—a gun that shoots time travel!</p>
+		</div>
+			<div class="post">
+			<h1><a href="/journal/32/gaiattack-30-day-postmortem/">GAIAttack 30-day Postmortem</a></h1>
+			<div class="byline">Posted by <strong>Rusty</strong> <span class="datetime" data-timezone="UTC" data-timestamp="1365193695">2013/04/05 20:28:15</span></div>
+			<p>I spent the first days of our 30-day polish expanding the gameplay. We liked juggling enemies in the jam version, but the enemy reactions could be better! How high should enemies fly? How far? Lots of little tweaking. I added a “Hit ID” system to player actions, so enemies wouldn’t get struck from the same attack twice.</p>
+
+<p>New attacks were introduced. A ground pound to smash enemies below. A strong punch to smash enemies against walls. The upward attack also became a sort of secondary jump, allowing players to move higher and farther.</p>
+
+<p>Once the player interactions felt pretty solid, I started prototyping new enemies. The original enemies were pretty basic, so I started by adding new behaviors. What if enemies chased the player? What if they jumped with the player or when near the player?</p>
+
+<p>Lots of fun interactions came from the prototyping. It was pretty fast and fun. We had eight enemies types in before SXSW began.</p>
+
+<h2>Multiplayer SXSW</h2>
+
+<p>From the beginning, GAIAttack seemed a good candidate for multiplayer. Knowing that Shaun and Matt would soon arrive in Austin for SXSW, I spent a few hours adding basic support for multiple players. </p>
+
+<p>They arrived. We coded, tested, tweaked, and had a truck load of fun. Working together in person helped us quickly refine the multiplayer interactions. We also discovered a weird input lag in our Mac version, but by packaging the game as an AIR app, the game lag disappeared. Sweet!</p>
+
+<h2>Finding the game</h2>
+
+<p>Two weeks left. We had the juggling and enemy interactions in a good place, but it was only fun in the short term. It was still just a single screen game.</p>
+
+<p>So we brainstormed new directions. An RPG leveling system? Hmm. A side-scrolling adventure? Maybe… A vertical climb. YES!</p>
+
+<p>If the player was climbing, parachuting enemies would be natural obstacles. Also, it’d be great to see the airship the sky pirates were parachuting from.</p>
+
+<p>I worked on adding this behavior while Shaun created the ship.</p>
+
+<h2>And Then I Saw the Airship</h2>
+
+<p>It was love at first sight.</p>
+
+<p><img src="/shared/images/game-2/ship-full4.png" alt="The Airship"></p>
+
+<p>I could see it, how each level would end: WHOOSH. The ship flies in. Players jump aboard. WHIRR. The ship takes of at hight speed. Players battle the Captain in a brawl to the death. BAM. The ship does down with the captain. KAABOOM.</p>
+
+<p>The airship was the final turning point in GAIAttack for me. It changed up the gameplay and allowed us to introduce boss battles at the end of each level. This became my favorite part of the game.</p>
+
+<h2>Wrapping Up</h2>
+
+<p>I spent the last few days as I normally do: on a dozen tasks all at once. This included…</p>
+
+<ul>
+<li>Adding menus</li>
+<li>Squashing bugs</li>
+<li>Tweaking sound effects with Matt</li>
+<li>Adding the ending</li>
+<li>Music implementation and timing</li>
+<li>Playtesting with my roommates and brothers</li>
+<li>Smoothing the transition between the menu, ending, credits, and game.</li>
+</ul>
+
+<p>Of course, Matt and Shaun did a truck-load of work too. (Beyond character and level design, Shaun designed and wrote the whole high score front and back end!) But I’ll let them talk about it in our upcoming podcast. :)</p>
+		</div>
+			<div class="post">
+			<h1><a href="/journal/31/gaiattack/">GAIAttack!</a></h1>
+			<div class="byline">Posted by <strong>Shaun</strong> <span class="datetime" data-timezone="UTC" data-timestamp="1364138762">2013/03/24 15:26:02</span></div>
+			<p>Game 2 is out the door! You can download GAIAttack from your <a href="/rewards/">Rewards</a> page <em>right now</em>.</p>
+
+<p><a href="/rewards/"><img src="/ks-updates/gaiattack-title.png" alt="gaiattack-title.png"></a></p>
+
+<p>We spent an extra day polishing the UI but we think it was worth it. So grab <a href="/journal/30/game-two-four-players/">four controllers</a>, four friends, and get pummeling. Or play solo for hi-score and shortest clear time, and then check the <a href="http://gaiattack.com/">official leaderboards</a> to see how you rank against other Retro Game Crunchers.</p>
+
+<p>Rusty and I are both at <a href="http://gdconf.com">GDC</a> this week, so if you’re around, track us down and say hi!</p>
+		</div>
+			<div class="post">
+			<h1><a href="/journal/30/game-two-four-players/">Game Two, Four Players</a></h1>
+			<div class="byline">Posted by <strong>Shaun</strong> <span class="datetime" data-timezone="UTC" data-timestamp="1364004526">2013/03/23 02:08:46</span></div>
+			<p><img src="/shared/images/game-2/GAIAttack!.png" alt="GAIAttack!.png"></p>
+
+<p>We hope you have controllers—and friends! Our second game, GAIAttack, supports up to four players and unless you like playing finger Twister, it can get a little cramped on the keyboard. </p>
+
+<p>I prefer a classic Super Nintendo/Famicom controller with a Super SmartJoy USB adaptor. (Rusty swears by this <a href="http://www.amazon.com/gp/product/B002IXZ5DE/">double SNES adaptor</a>.) You can also pair your Bluetooth PS3 controllers with your Mac or your Xbox 360 and PS3 controllers with your PC. Then you can use <a href="http://abstractable.net/enjoy/">Enjoy</a> or <a href="http://www.electracode.com/4/joy2key/JoyToKey%20English%20Version.htm">JoyToKey</a> to map buttons to keyboard.</p>
+
+<p>So until tomorrow:</p>
+
+<p><img src="/shared/images/game-2/ship.png" alt="ship.png"></p>
+		</div>
+			<div class="post">
+			<h1><a href="/journal/29/untitled-armed-gif-bomb/">Untitled: Armed Gif Bomb</a></h1>
+			<div class="byline">Posted by <strong>Shaun</strong> <span class="datetime" data-timezone="UTC" data-timestamp="1362147937">2013/03/01 14:25:37</span></div>
+			<p>Instruments of destruction (and glider):</p>
+
+<p><img src="/shared/images/game-2/pumpjack-3.gif" alt="pumpjack-3.gif">
+<img src="/shared/images/game-2/drill-para-drill.gif" alt="drill-para-drill.gif">
+<img src="/shared/images/game-2/marauder-glide-2.gif" alt="marauder-glide-2.gif"></p>
+
+<p>You get an arm! And you get an arm!</p>
+
+<p><img src="/shared/images/game-2/guardian-upper.gif" alt="guardian-upper.gif">
+<img src="/shared/images/game-2/guardian-whip-new.gif" alt="guardian-whip-new.gif">
+<img src="/shared/images/game-2/guardian-strong-new.gif" alt="guardian-strong-new.gif">
+<img src="/shared/images/game-2/marauder-walk-3.gif" alt="marauder-walk-3.gif">
+<img src="/shared/images/game-2/stabber-walk-3.gif" alt="stabber-walk-3.gif">
+<img src="/shared/images/game-2/hopper-walk-3.gif" alt="hopper-walk-3.gif">
+<img src="/shared/images/game-2/brute-walk-3.gif" alt="brute-walk-3.gif"></p>
+		</div>
+			<div class="post">
+			<h1><a href="/journal/28/throw-away/">Throw away</a></h1>
+			<div class="byline">Posted by <strong>Matt</strong> <span class="datetime" data-timezone="UTC" data-timestamp="1361895525">2013/02/26 16:18:45</span></div>
+			<p>During the crunch weekend for Game 2 I wrote the most music I’ve ever written in 72 hours, and I had to throw almost all of it away.</p>
+
+<p>Friday night and Saturday morning I worked on, then threw away, five different songs before finally deciding to choose between two simple ideas. It was mid-day Saturday when I showed Rusty and Shaun the two ideas. </p>
+
+<h3>idea 1</h3>
+
+<p><audio src="/shared/music/game-2/idea-1.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-2/idea-1.mp3">idea 1</a></audio></p>
+
+<h3>idea 2</h3>
+
+<p><audio src="/shared/music/game-2/idea-2.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-2/idea-2.mp3">idea 2</a></audio></p>
+
+<p>Idea one fit the mood we were going for so I ran with it. I <em>really</em> ran with it. Most NES style songs are between 0:30 and 1:30 before repeating. I wrote an epic adventure of a song. A whopping 4:30 before repeating. This is twice as long as any song from EOL. That was probably its downfall, it was an adventure. Musically it’s interesting and goes a lot of places (And I’m still really proud of it). It just didn’t have the high energy and mood we needed for this game. It’s named “chi” because of the elemental spirit idea that the gameplay revolves around. The different sections of the song were composed to represent parts of the game world (We actually talked about making the voices in the music change dynamically between each stage). Now you can listen to it for the first time ever:</p>
+
+<h3>chi</h3>
+
+<p><audio src="/shared/music/game-2/chi.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-2/chi.mp3">chi</a></audio></p>
+
+<p>For most of the crunch I had a tough time finding the right musical feel. I came up with idea three late sunday. </p>
+
+<h3>idea 3</h3>
+
+<p><audio src="/shared/music/game-2/idea-3.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-2/idea-3.mp3">idea 3</a></audio></p>
+
+<p>But again it just wasn’t hitting the sweet spot. After all these setbacks things still got worse, one of my nightmares came true. I hit a writing block (in the middle of a crunch). I tried really hard for the next 5-6 hours and ended up with a blank garageband file. I hated everything I was creating. In retrospect some of the ideas were probably good, I was being a little hard on myself. I felt defeated so I needed to get away from it. I created a couple of sfx then I went to bed. </p>
+
+<p>While I slept, Rusty and Shaun purged the game of its impurities to try and find the fun. With that I think they threw out the bad vibes. I woke up Monday morning determined and within an hour I had a bass line I loved and the rest of the song came together quick. I ran it by the guys and they loved it. I finished polishing the song and had a few hours to spare. Next I made a simple version of the main song for the title screen. Then I created the remaining sfx and helped with some of the code for enemy waves.</p>
+
+<h3>elemental</h3>
+
+<p><audio src="/shared/music/game-2/elemental.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/game-2/elemental.mp3">elemental</a></audio></p>
+
+<p>Between all the ideas I threw away, the song “chi”, and the song “elemental”, etc. I’m guessing I wrote nearly 20 minutes of music in that 72 hours. In the end I only came out with about 3 minutes that was actually used in the initial version of the game.</p>
+		</div>
+			<div class="post">
+			<h1><a href="/journal/27/game-2-prototype-postmortem/">Game 2 Prototype &amp; Postmortem</a></h1>
+			<div class="byline">Posted by <strong>Shaun</strong> <span class="datetime" data-timezone="UTC" data-timestamp="1361196365">2013/02/18 14:06:05</span></div>
+			<h2>The Idea</h2>
+
+<p>You play as a planet. Inside you, a great evil has been sealed. Marauders are trying to free it, attacking across three quadrants simultaneously. The player controls the spirit of the planet, using magic to set up barriers, attack the marauders directly, and temporarily summon a guardian to collect items to refill its magic supply. The goal: Keep the marauders from reaching the core.</p>
+
+<p>(This arcade/god game hybrid won out over a reverse Lemmings auto-platformer and a level building game that saw players gaining experience to unlock new building blocks by having other players play their levels. Both cute, but ultimately just waiting games. We also shot down ideas that were too similar to <a href="http://www.newgrounds.com/portal/view/568517">Spike: A Love Story</a> and <a href="http://adamatomic.com/graverobbers/">Grave Robbers</a>.)</p>
+
+<h2>The Prototype</h2>
+
+<p>This incomplete prototype is where we stood at about 52 hours into our 72 hour crunch. It’s missing animations. It has programmer graphics (if you squint you might recognize the background graphics origin). The guardian is not time limited. Magic points aren’t implemented. Only one quadrant has a path to the core. Marauder siege behavior logic is completely random. There is no hud to indicate which quadrant(s) are at risk.</p>
+
+<p><div class="archive-flash" data-swf="/shared/downloads/LevelPrototype.swf" data-background="#000000" data-flashvars="" style="display:inline-block;width:480px;height:320px;max-width:100%;" id="game-shared-downloads-LevelPrototype-swf"></div></p>
+
+<p><em>Spirit of the Level controls:</em><br>
+<strong>Arrows</strong> Move<br>
+<strong>A</strong> Elemental attack<br>
+<strong>X</strong> Create Guardian<br>
+<strong>C</strong> Change quadrant</p>
+
+<p><em>Guardian controls:</em><br>
+<strong>Arrows</strong> Move left/right<br>
+<strong>Z</strong> Jump<br>
+<strong>X</strong> Attack<br>
+<strong>C</strong> Change quadrant</p>
+
+<h2>The Problems</h2>
+
+<p>So what was wrong? Basically everything. </p>
+
+<p>The design was the bad kind of complicated. In game design, good complexity emerges from the interaction of simple rules. Our original design was convoluted at the rule level.</p>
+
+<p>There is no win condition. You are under siege. You struggle until you fail. Game over. Not our idea of a good time.</p>
+
+<p>Switching between the guardian’s platforming controls to the spirit’s tile-based cursor is really unsatisfying. We tried more platform like controls for the spirit but it felt too debug-y.</p>
+
+<h2>The Stopgap</h2>
+
+<p>At hour 52 we decided to gut the ideas that weren’t working. The platforming felt right, so that stayed. Spirit cursor? Out. Quandrant switching? Out. Digging into the core? Out. The marauder recoil felt good, but what if you could juggle them? In. Since there was no win state the game was always going to be about score. Juggling became combos which allows you to score extra points. I built a high score server (which was actually less time consuming than the “enter your name” bit it required).</p>
+
+<p>We lost a lot of the thematic ties but, in the end, producing a game that is fun to play is paramount. </p>
+
+<h2>The Polish</h2>
+
+<p>So what’s next? Better combo detection. A simpler magic system. Better, more varied marauder behavior. Elemental barriers? Healing? Bonuses for dispatching all the marauders? Re-imagined levels? Feed the level (yourself) by juggling invaders into mouths lining the walls? Other crazy ideas we haven’t thought of yet?</p>
+
+<p>Our schedule for End of Line was relentless—it was more like a continuous 25 day crunch than our original  intentions. Game 2 will be a little looser. We start the polishing period tomorrow February 19th (we took a week to recover, not just from Game 2’s crunch but from End of Line’s non-stop sprint as well), and are tentatively scheduled to release the complete version around March 22th.</p>
+		</div>
+			<div class="post">
+			<h1><a href="/journal/26/rgc-podcast-episode-1/">RGC Podcast, Episode 1</a></h1>
+			<div class="byline">Posted by <strong>Shaun</strong> <span class="datetime" data-timezone="UTC" data-timestamp="1360871247">2013/02/14 19:47:27</span></div>
+			<p><img src="/shared/images/podcast-1-400.png" alt="podcast-1-400.png"></p>
+
+<p>Our first podcast is an <a href="/games/1/end-of-line/">End of Line</a> postmortem. There’s spoilers, so if you haven’t played through the <a href="/rewards/">complete version</a>, you might want to do that first!</p>
+
+<p>Listen in the browser: </p>
+
+<p><audio src="/shared/podcasts/01%20RGC%20Podcast%201_%20End%20of%20Line.mp3" type="audio/mp3" controls="controls"><a href="/shared/podcasts/01%20RGC%20Podcast%201_%20End%20of%20Line.mp3">01 RGC Podcast 1_ End of Line.mp3</a></audio></p>
+
+<p>Or <a href="/shared/podcasts/01%20RGC%20Podcast%201_%20End%20of%20Line.mp3">download it for later</a>.</p>
+
+<p>(If you only signed up for 3 months of Retro Game Crunch, you don’t have access to the podcast. You can upgrade your account <a href="/account/">here</a>.)</p>
+		</div>
+		</div>
+<p>
+	<a href="/journal/page/6/"><img src="/images/btn-older.png" height="30"></a>	
+	<a href="/journal/page/4/"><img src="/images/btn-newer.png" height="30"></a>	
+</p>
+	
+	</div><div class="copy">
+		Copyright © 2012–<span class="dateyear"></span> 
+		<a href="/">Retro Game Crunch</a>.
+	</div></div><script>
+$(function()
+{
+	$('.spoilers-toggle').on('touchstart click', function(event)
+	{
+		if(event.handled !== true)
+		{
+			$(this).parent().toggleClass('open');
+			event.handled = true;
+		}
+		return false;
+	});
+})
+</script>
+<script src="/archive.js"></script><script>cleanup();</script></body>
+</html>

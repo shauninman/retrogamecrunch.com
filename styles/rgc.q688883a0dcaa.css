@@ -1,0 +1,1293 @@
+/* RESET */
+body,div,dl,dt,dd,ul,ol,
+li,h1,h2,h3,h4,h5,h6,
+pre,form,fieldset,p,
+blockquote,th,td          {margin:0;padding:0;}
+body                      {line-height:1;color:#000;background:#fff;}
+h1,h2,h3,h4,h5,h6,p       {font-size:100%;font-weight:normal;}
+ul                        {list-style:none;}
+caption,cite,code,th      {font-style:normal;font-weight:normal;}
+fieldset,img              {border:0;}
+:focus                    {outline:none;}
+caption,th                {text-align:left;}
+table                     {border-collapse:collapse;border-spacing:0;}
+hr                        {border:0;border-top:1px solid #000;margin:0;height:1px;}
+
+*
+{
+	-moz-box-sizing: border-box; 
+	-webkit-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+img
+{
+	/* MERRY CRISPNESS */
+	image-rendering: -webkit-optimize-contrast;
+	image-rendering: -moz-crisp-edges;
+	image-rendering: -o-crisp-edges;
+	image-rendering: optimizeSpeed;
+	-ms-interpolation-mode: nearest-neighbor;
+}
+
+@media screen and (max-device-width: 480px)
+{
+	/* PREVENT RATIO BREAKING TEXT RESIZING ON MOBILE DEVICES */
+	body { -webkit-text-size-adjust: none; }
+}
+
+/* TEXT */
+
+body
+{
+	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	line-height: 24px;
+}
+
+a
+{
+	color: #7c7c7c; /* dark gray */
+}
+
+a:link,
+a:visited
+{
+	color: #3cbcfc; /* blue */
+	text-decoration: none;
+}
+
+a:hover
+{
+	color: #0078f8; /* dark blue */
+}
+
+.content h1
+{
+	margin-bottom: 16px;
+	font-size: 24px;
+	line-height: 28px;
+	font-weight: bold;
+	width: 720px;
+}
+
+.game-content h1 {
+	width: 540px;
+}
+
+.game-content h1 em {
+	font-weight: normal;
+}
+
+.content h2
+{
+	margin: 16px 0;
+	font-size: 24px;
+	line-height: 28px;
+}
+
+.content p,
+.content form,
+.content pre,
+.content iframe
+{
+	margin: 16px 0;
+}
+
+.content ol,
+.content ul
+{
+	margin: 16px 0;
+}
+
+.content ol
+{
+	padding-left: 24px;
+}
+
+.content ul li
+{
+	padding-left: 14px;
+	position: relative;
+}
+.content ul li:before
+{
+	/* BULLET */
+	content:'';
+	display: block;
+	background-color: black;
+	position: absolute;
+	top: 10px;
+	left: 4px;
+	width: 4px;
+	height: 4px;
+}
+
+pre,code,.toc
+{
+	font-size: 14px;
+	line-height: 20px;
+}
+
+pre code
+{
+	overflow: scroll;
+}
+
+hr
+{
+	width: 720px;
+	border-color: black;
+	border-top-width: 2px;
+	height: 0;
+	margin: 8px 0;
+}
+hr.double
+{
+	border-top-width: 4px;
+	margin-bottom: 16px;
+}
+
+/* FORMS */
+
+input, textarea, button
+{
+	font-size: inherit;
+	line-height: inherit;
+	margin: 0;
+	vertical-align: top;
+}
+input[type=text],
+input[type=email],
+input[type=password],
+textarea
+{
+	-webkit-border-radius:0;
+	padding: 2px 4px;
+	border: 2px solid black;
+	width: 176px;
+	height: 30px;
+	background: url(/images/bg-input.png) 0 0 no-repeat;
+	background-size: 600px 800px;
+	font-family: inherit; /* Firefox is soooo derpy */
+}
+
+input[type=text]:focus,
+input[type=email]:focus,
+input[type=password]:focus,
+textarea:focus
+{
+	border-color: #55a4f2;
+}
+
+textarea
+{
+	width: 100%;
+	height: auto;
+	min-height: 240px;
+}
+button
+{
+	cursor: pointer;
+}
+button.img
+{
+	border: none;
+	outline: none;
+	padding: 0;
+	background-color: transparent;
+	font-size: inherit;
+}
+
+button::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
+br+button,
+br+button+button,
+br+button+a.btn,
+br+input,
+br+textarea
+{
+	margin-top: 8px;
+}
+
+label br+button,
+label br+button+button,
+label br+button+a.btn,
+label br+input,
+label br+textarea
+{
+	margin-top: 0;
+}
+
+input+button,
+span+button,
+label+button,
+button+button,
+button+a.btn
+{
+	margin-left: 4px;
+}
+
+a.btn
+{
+	display: inline-block;
+}
+
+/* ERRORS */
+
+.errors
+{
+	color: #881400;
+}
+ul.errors li:before
+{
+	background-color: #881400;
+}
+
+/* LAYOUT */
+
+.wrap
+{
+	width: 800px;
+	padding: 0 40px;
+	margin: 0 auto;
+}
+
+.wide
+{
+	color: #fff;
+	background-color: #000;
+}
+
+/* NAV */
+
+ul.nav
+{
+	padding: 0;
+	text-align: justify;
+	overflow: hidden;
+	cursor: default;
+	/* height required to mask :after overflow */
+}
+
+ul.nav li
+{
+	position: relative;
+	display: inline-block;
+}
+
+ul.nav:after
+{
+	display: inline-block;
+	content: '';
+	width: 100%;
+}
+
+/* NAV-MAIN */
+
+.nav-main
+{
+	border-top: 2px solid #000;
+	border-bottom: 4px solid #000;
+	height: 46px;
+}
+
+.wrap-top + .wide
+{
+	margin-top: -4px;
+}
+
+.nav-main a
+{
+	display: block;
+	font-weight: bold;
+	color: #000;
+	line-height: 32px;
+	padding: 4px 2px 0;
+	border-bottom: 4px solid transparent;
+}
+
+.nav-main a:hover
+{
+	color: #3cbcfc; /* blue */
+	border-bottom-color: #d8d8d8; /* light light gray */
+}
+
+.nav-main a.current
+{
+	border-bottom-color: #3cbcfc; /* blue */
+}
+
+.nav-main a.rss
+{
+	padding: 0;
+	border: 0;
+	position: absolute;
+	top: 7px;
+	right: -24px;
+}
+
+/* NAV-ALT */
+
+.nav-alt
+{
+	font-size: 14px;
+	height: 32px;
+	line-height: 32px;
+	color: #7c7c7c; /* dark gray */
+}
+
+.nav-alt a
+{
+	display: block;
+	padding: 0 2px;
+	cursor: default;
+	font-weight: bold;
+}
+
+.nav-alt a:link,
+.nav-alt a:visited 
+{
+	cursor: pointer;
+	color: #fff;
+}
+
+.nav-alt a[href]:hover
+{
+	color: #a4e4fc; /* light blue */
+}
+
+.nav-alt a.current
+{
+	color: #3cbcfc; /* blue */
+}
+
+/* NAV-JOURNAL */
+
+.nav-journal li
+{
+	position: relative;
+	padding-right: 10px;
+}
+
+.nav-journal li:first-child {
+	padding-left: 10px;
+}
+
+.nav-journal li:before,
+.nav-journal li a:before
+{
+	content: '';
+	display: block;
+	width: 6px;
+	height: 12px;
+	background: #7c7c7c url(/images/icon-prev-next.png) 0 0 no-repeat; /* dark gray */
+	background-size: 12px 12px;
+	position: absolute;
+	top: 10px;
+	
+	right: 0;
+	background-position: -6px 0;
+}
+
+.nav-journal li a:before
+{
+	background-color: #fff;
+}
+
+.nav-journal li a:hover:before
+{
+	background-color: #a4e4fc; /* light blue */
+}
+
+.nav-journal li:first-child:before,
+.nav-journal li:first-child a:before
+{
+	right: auto;
+	left: 0;
+	background-position: 0 0;
+}
+
+/* NAV-GAMES */
+
+.nav-games
+{
+	line-height: 12px;
+	height: 40px;
+}
+
+.nav-games a
+{
+	padding: 8px 2px;
+}
+
+.nav-games a.eta
+{
+	color: #7c7c7c; /* dark gray */
+}
+
+.nav-games a span
+{
+	display: block;
+	font-weight: normal;
+	font-size: 10px;
+}
+
+/* HEAD */
+
+.wrap-top
+{
+	position: relative;
+	margin-top: 48px;
+}
+
+#logo-unit
+{
+	position: relative;
+	line-height: 0; /* eliminates whitespace below inline-block link */
+}
+
+#logo-unit img
+{
+	display: block; /* causes parent link to be 100% width of its parent */
+}
+
+#logo
+{
+	display: inline-block; /* eliminates 100% width issue */
+}
+
+#funded
+{
+	position: absolute;
+	top: -26px;
+	left: 162px;
+	display: none;
+}
+
+/* STATUS */
+
+#status
+{
+	font-size: 14px;
+	line-height: 32px;
+	min-height: 16px;
+}
+#status:after
+{
+	content: '';
+	display: block;
+	height: 0;
+	clear: both;
+}
+#status * {
+	display: none;
+}
+
+.currently
+{
+	float: left;
+}
+.remaining
+{
+	text-align: right;
+	white-space: nowrap;
+}
+
+/* MINI-LOGIN */
+
+#mini-login
+{
+	position: absolute;
+	top: 0;
+	right: 40px; /* same as .wrap padding */
+	font-size: 14px;
+	line-height: 20px;
+}
+
+#mini-login .logout input, #mini-login .logout button
+{
+	vertical-align: middle;
+}
+
+#mini-login button
+{
+	margin-left: 4px;
+}
+
+.password
+{
+	margin-left: 4px;
+	position: relative;
+	display: inline-block;
+}
+
+.password input
+{
+	width: 88px;
+}
+
+.forgot
+{
+	position: absolute;
+	top: 34px;
+	left: 2px;
+	line-height: 14px;
+}
+
+.wrap-bottom
+{
+	padding-top: 24px;
+}
+
+/* SUBMIT THEME */
+#submit-theme 
+{
+	margin-bottom: 32px;
+}
+
+#submit-theme .theme
+{
+	position: relative;
+	display: inline-block;
+}
+
+#submit-theme .theme input
+{
+	width: 300px;
+}
+
+#char-remaining
+{
+	position: absolute;
+	top: 34px;
+	left: 2px;
+	line-height: 14px;
+	color: #7c7c7c; /* dark gray */
+}
+
+/* PRIMER */
+
+.content
+{
+	position: relative;
+	width: 410px;
+}
+
+.content pre
+{
+	width: 720px; /* use the full width for code */
+}
+
+/* VOTE */
+
+ul.themes
+{
+	padding: 0;
+	width: 720px;
+}
+
+ul.themes:after
+{
+	display: block;
+	content: '';
+	clear: both;
+}
+
+ul.themes li
+{
+	width: 240px; /* 3 col */
+	
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	
+	float: left;
+	padding-left: 0;
+}
+
+ul.themes li:before
+{
+	display: none;
+}
+
+ul.themes li a
+{
+	display: block;
+	padding: 8px 16px 8px 0;
+	line-height: 20px;
+	color: inherit;
+	
+	text-overflow: ellipsis;
+	width: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+ul.themes li a:before
+{
+	display: inline-block;
+	content: '';
+	vertical-align: top;
+	width: 22px;
+	height: 20px;
+	margin-right: 2px;
+	background: url(/images/icon-heart.png) 0 0 no-repeat;
+	background-size: 22px 80px;
+}
+
+ul.themes li a:hover:before
+{
+	background-position: 0 -20px;
+}
+
+ul.themes li a.heart:before
+{
+	background-position: 0 -40px;
+}
+
+ul.themes li a.heart:hover:before
+{
+	background-position: 0 -60px;
+}
+
+/* GAME */
+.wrap-game
+{
+	padding: 16px 40px;
+}
+
+.masthead
+{
+	position: relative;
+}
+
+.masthead #mini-login
+{
+	right: 0;
+}
+
+.masthead .theme,
+.masthead .complete
+{
+	position: absolute;
+	top: -4px;
+	left: 140px;
+	line-height: 18px;
+}
+
+.masthead .complete
+{
+	left: 328px;
+}
+
+.masthead .theme span,
+.masthead .complete span
+{
+	font-size: 14px;
+	color: #7c7c7c; /* dark gray */
+}
+
+#game,
+#game-options
+{
+	width: 720px;
+	height: 480px;
+	margin-bottom: 16px;
+}
+
+#game-options {
+	position: relative;
+	text-align: center;
+	vertical-align: center;
+	line-height: 480px;
+}
+
+#preview {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+}
+
+#game-options a {
+	margin: 48px 0 0;
+	display: inline-block;
+	position: relative;
+	z-index: 100;
+}
+
+#game-nav
+{
+	width: 720px;
+	position: absolute;
+}
+
+#prev-game,
+#next-game
+{
+	position: absolute;
+	top: 188px;
+	opacity: 0.25;
+}
+
+#prev-game:hover,
+#next-game:hover
+{
+	opacity: 1.0;
+}
+
+#prev-game {
+	left: -38px;
+}
+
+#next-game {
+	right: -38px;
+}
+
+h1 span,
+h2 span
+{
+	font-size: 16px;
+	font-weight: normal;
+	color: #bcbcbc; /* light gray */
+	white-space: nowrap;
+}
+
+/* TWO COLUMN */
+.two-col
+{
+	width: 720px;
+}
+
+.two-col:after
+{
+	content: '';
+	height: 0;
+	clear: both;
+	display: block;
+}
+
+.main-col
+{
+	width: 410px; /* same as .content */
+	float: left;
+}
+
+.sub-col
+{
+	float: left;
+	padding-top: 5px;
+	margin-left: 48px;
+}
+
+.two-col.inverted .main-col
+{
+	width: 180px;
+}
+
+.two-col.inverted .sub-col
+{
+	width: 410px;
+	margin-left: 130px;
+}
+
+/*.sub-col */
+h3
+{
+	font-weight: bold;
+}
+
+.downloads
+{
+	width: 150px;
+	margin-left: 160px;
+}
+
+.downloads ul
+{
+	margin-top: 8px;
+}
+
+.downloads ul li
+{
+	padding-left: 0;
+}
+
+.downloads ul li:before
+{
+	display: none;
+}
+
+.downloads ul a
+{
+	display: block;
+	position: relative;
+	padding-left: 26px;
+}
+.downloads ul a:before
+{
+	content: '';
+	display: block;
+	width: 22px;
+	height: 20px;
+	background: url(/images/icon-downloads.png) 0 0 no-repeat;
+	background-size: 22px 120px;	
+	
+	position: absolute;
+	top: 2px;
+	left: 0;
+}
+
+.downloads ul a.font:before
+{
+	background-position: 0 -20px;
+}
+
+.downloads ul a.ost:before
+{
+	background-position: 0 -40px;
+}
+
+.downloads ul a.game:before
+{
+	background-position: 0 -60px;
+}
+
+.downloads ul a.cast:before
+{
+	background-position: 0 -80px;
+}
+
+.downloads ul a.post:before
+{
+	background-position: 0 -100px;
+}
+
+.about-us
+{
+	padding-top: 30px;
+	width: 262px;
+	font-size: 14px;
+	line-height: 20px;
+}
+
+.about-us img
+{
+	float: left;
+	margin: -5px 8px 0 0;
+}
+
+.about-us, .your-themes
+{
+	padding-top: 48px;
+	font-size: 14px;
+	line-height: 20px;
+}
+
+.your-themes p
+{
+	margin: 0;
+}
+
+.your-themes ul
+{
+	margin-top: 0;
+}
+
+/* SWF OBJECT */
+#flash-content 
+{
+	display:none;
+	width: 720px;
+}
+
+.touch .not-touch
+{
+	display: none;
+}
+
+/* POSTS */
+
+.posts .post h1
+{
+	border-top: 2px solid #000;
+	padding-top: 12px;
+}
+
+.posts .post:first-child h1
+{
+	border-top: none;
+	padding-top: 0;
+}
+
+
+.byline
+{
+	font-size: 14px;
+	margin-top: -16px;
+	color: #7c7c7c; /* dark gray */
+}
+
+/* COMMENTS */
+.comments
+{
+	width: 720px;
+	border-top: 4px solid #000;
+}
+
+.comments .comment
+{
+	position: relative;
+	border-top: 2px solid #000;
+	padding-top: 16px;
+}
+
+.comments form.comment
+{
+	border-top-width: 4px;
+}
+
+.comments .comment:first-child
+{
+	border-top: none;
+}
+
+.who
+{
+	position: absolute;
+	top: 16px;
+	left: 0;
+	font-weight: bold;
+	line-height: 20px;
+	background: url(/images/icon-comment.png) 0 5px no-repeat;
+	background-size: 16px 14px;
+	padding: 1px 0 0 20px;
+	width: 132px;
+	height: 40px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.what,
+.where
+{
+	position: relative;
+	margin-left: 140px;
+	width: 410px; /* same as .content */
+	min-height: 48px; /* two lines at 24pxm */
+	margin-bottom: 16px; /* redundant, seems like comment content margin-bottom is applied to bottom of what except in Firefox */
+}
+
+.where
+{
+	min-height: 0;
+	font-style: italic;
+}
+
+.what p:first-child
+{
+	margin-top: 0;
+}
+
+.when
+{
+	position: absolute;
+	top: 16px;
+	right: 0;
+	font-size: 14px;
+	color: #7c7c7c; /* dark gray */
+	text-align: right;
+}
+
+.markdown
+{
+	position: absolute;
+	bottom: 8px;
+	right: 2px;
+	font-size: 14px;
+}
+
+.comment pre
+{
+	width: inherit;
+}
+
+/* ADMIN */
+#update-config
+{
+	width: 720px;
+}
+
+.admin
+{
+	margin-bottom: 1em;
+}
+
+.admin td, 
+.admin th
+{
+	padding: 0px 4px;
+}
+
+.admin tr:nth-child(even) td, 
+.admin tr:nth-child(even) th
+{
+	background-color: #eee;
+}
+
+.admin th
+{
+	font-weight: bold;
+}
+
+.right
+{
+	text-align: right;
+}
+
+td input[type=radio]
+{
+	display: block; /* does what vertical-align: middle; can't */
+}
+
+li input[type=checkbox]
+{
+	vertical-align: middle;
+}
+
+form
+{
+	position: relative;
+}
+
+.note
+{
+	display: inline-block;
+	margin-top: 8px;
+	font-size: 14px;
+	line-height: 30px;
+	color: #7c7c7c; /* dark gray */
+}
+
+.curated
+{
+	background-color: #f8b800;
+}
+
+.disqualified
+{
+	opacity: 0.5;
+}
+
+/* REWARDS */
+.rewards
+{
+	width: 720px;
+}
+
+.rewards ul:after
+{
+	list-style: none;
+	content: '';
+	display: block;
+	height: 0;
+	clear: both;
+}
+
+.rewards ul li
+{
+	padding-left: 0;
+	float: left;
+	width: 240px;
+	margin-bottom: 16px;
+	line-height: 20px;
+}
+
+.rewards ul li.disclaimers
+{
+	width: 410px; /* same as .content */
+}
+
+.rewards ul li.disclaimers:nth-child(3n+2)
+{
+	margin-left: 16px;
+}
+
+.rewards ul li.disclaimers p:first-child
+{
+	margin-top: 0;
+}
+
+.rewards ul li img
+{
+	display: block;
+	margin-bottom: 4px;
+}
+
+.rewards ul li:before
+{
+	display: none;
+}
+
+/* HOME */
+.home
+{
+	width: 720px;
+	margin-bottom: 40px;
+}
+
+.home ul 
+{
+	margin-bottom: 0;
+}
+
+.home .disclaimer
+{
+	font-size: 14px;
+	margin: 0;
+}
+
+.home ul li
+{
+	padding-left: 0;
+	float: left;
+}
+
+.home ul li:before
+{
+	display: none;
+}
+
+.home ul:after
+{
+	content: '';
+	display: block;
+	height: 0;
+	clear: both;
+}
+
+.home ul li a
+{
+	display: block;
+	position: relative;
+}
+
+.home a .overlay
+{
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	padding: 16px;
+	background-color: rgba(0,0,0,0.5);
+	text-shadow: 0 0 4px rgba(0,0,0,0.5);
+	z-index: 100;
+}
+
+#banner-3-day
+{
+	position: absolute;
+	top: 0;
+	right: 0;
+	z-index: 50;
+}
+
+.home a:hover .overlay
+{
+	display: none;
+}
+
+.overlay .title
+{
+	display: block;
+	font-size: 24px;
+}
+.overlay .latest
+{
+	color: #fff;
+	font-style: italic;
+	
+	position: absolute;
+	top: 20px;
+	left: 20px;
+}
+.overlay .game
+{
+	position: absolute;
+	left: 20px;
+	bottom: 20px;
+}
+
+.overlay .game .name
+{
+	font-size: 48px;
+	line-height: 56px;
+	display: block;
+}
+
+.overlay .game .theme
+{
+	display: block;
+	color: #fff;
+	line-height: 16px;
+	padding-bottom: 4px;
+}
+
+.overlay .game .theme strong
+{
+	display: block;
+}
+
+.overlay .subtitle
+{
+	color: #fff;
+	line-height: 18px;
+	display: inline-block;
+	padding-top: 5px;
+}
+
+.home ul li img
+{
+	display: block;
+}
+
+.staging
+{
+	background-color: red;
+	text-align: center;
+	font-style: italic;
+}
+
+/* FOOT */
+
+.copy
+{
+	border-top: 2px solid #000;
+	padding: 4px 0 24px;
+	font-size: 14px;
+}
+
+.spoilers-toggle {
+	cursor: pointer;
+	display: block;
+	margin: 16px 0;
+}
+
+.spoilers-content {
+	display: none;
+}
+
+.spoilers.open .spoilers-content {
+	display: block;
+}
+
+blockquote {
+	border-left: 2px solid #d8d8d8; /* light light gray */
+	padding-left: 8px;
+	font-style: italic;
+}

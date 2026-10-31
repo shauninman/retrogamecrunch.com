@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Retro Game Crunch</title>
+<script>if((window.devicePixelRatio===undefined?1:window.devicePixelRatio)>1)document.cookie='HTTP_IS_RETINA=1;path=/';</script>
+<meta name="google-site-verification" content="0n15O71rkhohq8oudSJ4AhQ9ZHGrtYQGzZ-hj6_NTGI">
+<meta name="viewport" id="viewport" content="width=800">
+<link rel="stylesheet" href="/styles/rgc.q688883a0dcaa.css">
+<link rel="stylesheet" href="/scripts/highlight/styles/zenburn.css">
+<script src="/scripts/highlight/highlight.pack.js"></script>
+<script src="/scripts/jquery-1.8.3.min.js"></script>
+
+<script src="/scripts/mediaelement/mediaelement-and-player.min.js"></script>
+<link rel="stylesheet" href="/scripts/mediaelement/mediaelementplayer.css">
+<script>
+hljs.tabReplace = '    ';
+hljs.initHighlightingOnLoad();
+
+$(function()
+{
+	$('audio').mediaelementplayer(/* Options */);
+	
+	// disable :hover on touch devices
+	// based on https://gist.github.com/4404503 
+	// via https://twitter.com/javan/status/284873379062890496
+	// + https://twitter.com/pennig/status/285790598642946048
+	// re https://retrogamecrunch.com/tmp/hover
+	if ('createTouch' in document)
+	{
+		$('html').addClass('touch');
+		try
+		{
+			var ignore = /:hover\b/;
+			for (var i=0; i<document.styleSheets.length; i++)
+			{
+				var sheet = document.styleSheets[i];
+				for (var j=sheet.cssRules.length-1; j>=0; j--)
+				{
+					var rule = sheet.cssRules[j];
+					if (rule.type === CSSRule.STYLE_RULE && ignore.test(rule.selectorText))
+					{
+						sheet.deleteRule(j);
+					}
+				}
+			}
+		}
+		catch(e){}
+	}
+});
+
+var then = 1387576800000;
+var deadline = '2013-12-20 22:00:00 UTC';
+var last_mins = -1;
+window.setInterval(function()
+{
+	var now = (new Date).getTime();
+	var remaining = then - now;
+	if (remaining < 0) remaining = 0;
+
+	var sec = 1000;
+	var min = 60 * sec;
+	var hour = 60 * min;
+	var day = 24 * hour;
+
+	var days = Math.floor(remaining / day);
+	remaining -= days * day;
+	var hours = Math.floor(remaining / hour);
+	remaining -= hours * hour;
+	var mins = Math.floor(remaining / min);
+	
+	if (last_mins == mins) return; // prevent unnecessary redraws
+	last_mins = mins;
+
+	var html = '';
+
+	if (days) 	html += '<span class="remaining-days">'+days+' day'+(days>1?'s':'')+'</span> ';
+	if (hours) 	html += '<span class="remaining-days">'+hours+' hour'+(hours>1?'s':'')+'</span> ';
+	if (mins) 	html += '<span class="remaining-days">'+mins+' minute'+(mins>1?'s':'')+'</span> ';
+
+	// DELAY
+	// if (html=='') html = 'To be determined';
+	if (html=='') html = 'Just a few moments';
+
+	$('span.countdown').html(html);
+}, 1 * 1000);
+</script>
+
+
+<link rel="stylesheet" href="/archive.css"><link rel="canonical" href="https://retrogamecrunch.com/tmp/scoreboard/"></head>
+<body>
+	<div class="wrap wrap-top">
+		<div id="logo-unit">
+			<a id="logo" href="/"><img src="/images/logo-black.png" width="204" height="98" alt="Retro Game Crunch"></a>
+			<a id="funded" href="http://www.kickstarter.com/projects/shauninman/retro-game-crunch-six-games-in-six-months"><img src="/images/funded-with.png" width="116" height="112" alt="Funded with Kickstarter"></a>
+		</div><div id="mini-login">
+	
+</div><div id="status">
+			<div class="currently">
+				<strong>Currently</strong>
+				<a href="/games/6/shuten/">Recovering from Shūten Complete</a>
+			</div></div><ul class="nav nav-main">
+			<li><a href="/">Home</a></li>
+			<li><a href="/games/" class="current">Games</a></li>			<li><a href="/rewards/">Rewards</a></li>
+			<li><a href="/journal/">Journal</a></li>
+			<li><a href="/primer/">Primer</a></li>
+			<li><a href="/about/">About</a></li>
+			<li><a href="/contact/">Contact</a></li>
+		</ul>
+	</div><div class="wide"><div class="wrap">
+					<ul class="nav nav-alt nav-games"><li><a href="/games/0/super-clew-land/">Clew Land<span class="status">Complete</span></a></li> <li><a href="/games/1/end-of-line/">End of Line<span class="status">Complete</span></a></li> <li><a href="/games/2/gaiattack/">GAIAttack!<span class="status">Complete</span></a></li> <li><a href="/games/3/paradox-lost/">Paradox Lost<span class="status">Complete</span></a></li> <li><a href="/games/4/wub-wub-wescue/">Wescue<span class="status">Complete</span></a></li> <li><a href="/games/5/brains-and-hearts/">Brains &amp; Hearts<span class="status">Complete</span></a></li> <li><a href="/games/6/shuten/">Shūten<span class="status">Complete</span></a></li>  </ul>
+				</div></div><div class="wrap wrap-bottom">
+		<div class="content">
+		
+<h1><a href="/games/2/gaiattack/">Game 2</a> High Scores</h1>
+<table class="admin">
+		<tr>
+		<td>WRECKINGCREW</td>
+		<td class="right">450,800</td>
+	</tr>
+		<tr>
+		<td>MATT</td>
+		<td class="right">301,025</td>
+	</tr>
+		<tr>
+		<td>DIMERHUNTON</td>
+		<td class="right">274,525</td>
+	</tr>
+		<tr>
+		<td>CABALLOLOCO</td>
+		<td class="right">215,325</td>
+	</tr>
+		<tr>
+		<td>DJODY</td>
+		<td class="right">160,575</td>
+	</tr>
+		<tr>
+		<td>DAFFA</td>
+		<td class="right">153,200</td>
+	</tr>
+		<tr>
+		<td>1</td>
+		<td class="right">127,975</td>
+	</tr>
+		<tr>
+		<td>LINKTNS</td>
+		<td class="right">119,800</td>
+	</tr>
+		<tr>
+		<td>SHAUN</td>
+		<td class="right">87,825</td>
+	</tr>
+		<tr>
+		<td>ROY</td>
+		<td class="right">87,825</td>
+	</tr>
+		<tr>
+		<td>TIM</td>
+		<td class="right">78,400</td>
+	</tr>
+		<tr>
+		<td>JESSE</td>
+		<td class="right">77,125</td>
+	</tr>
+		<tr>
+		<td>FIREMAN</td>
+		<td class="right">67,400</td>
+	</tr>
+		<tr>
+		<td>RUSTY</td>
+		<td class="right">66,225</td>
+	</tr>
+		<tr>
+		<td>NEY</td>
+		<td class="right">63,000</td>
+	</tr>
+		<tr>
+		<td>RYDERMACKAY</td>
+		<td class="right">59,475</td>
+	</tr>
+		<tr>
+		<td>ZXCZXCZXCZXC</td>
+		<td class="right">53,200</td>
+	</tr>
+		<tr>
+		<td>ZZXCZXC</td>
+		<td class="right">52,475</td>
+	</tr>
+		<tr>
+		<td>FEET</td>
+		<td class="right">51,850</td>
+	</tr>
+		<tr>
+		<td>AUCME</td>
+		<td class="right">48,825</td>
+	</tr>
+		<tr>
+		<td>ANAME</td>
+		<td class="right">48,275</td>
+	</tr>
+		<tr>
+		<td>RYDER</td>
+		<td class="right">46,225</td>
+	</tr>
+		<tr>
+		<td>FRED</td>
+		<td class="right">44,750</td>
+	</tr>
+		<tr>
+		<td>SDSSS</td>
+		<td class="right">43,000</td>
+	</tr>
+		<tr>
+		<td>HERBERT</td>
+		<td class="right">41,200</td>
+	</tr>
+		<tr>
+		<td>JAMES</td>
+		<td class="right">40,700</td>
+	</tr>
+		<tr>
+		<td>ZU</td>
+		<td class="right">40,275</td>
+	</tr>
+		<tr>
+		<td>SEAN</td>
+		<td class="right">39,775</td>
+	</tr>
+		<tr>
+		<td>SIMPLYLAMORT</td>
+		<td class="right">37,625</td>
+	</tr>
+		<tr>
+		<td>GEO</td>
+		<td class="right">37,400</td>
+	</tr>
+		<tr>
+		<td>BLEP</td>
+		<td class="right">37,225</td>
+	</tr>
+		<tr>
+		<td>A</td>
+		<td class="right">36,625</td>
+	</tr>
+		<tr>
+		<td>SSWDASDSADAD</td>
+		<td class="right">34,975</td>
+	</tr>
+		<tr>
+		<td>MIKEYHYPHY</td>
+		<td class="right">34,775</td>
+	</tr>
+		<tr>
+		<td>MARK</td>
+		<td class="right">34,450</td>
+	</tr>
+		<tr>
+		<td>CLINTONIA</td>
+		<td class="right">33,375</td>
+	</tr>
+		<tr>
+		<td>AMSEL</td>
+		<td class="right">33,300</td>
+	</tr>
+		<tr>
+		<td>CHAOS</td>
+		<td class="right">33,225</td>
+	</tr>
+		<tr>
+		<td>JOHANNES</td>
+		<td class="right">31,500</td>
+	</tr>
+		<tr>
+		<td>LIFELY</td>
+		<td class="right">30,925</td>
+	</tr>
+		<tr>
+		<td>ASS</td>
+		<td class="right">30,425</td>
+	</tr>
+		<tr>
+		<td>CWAL</td>
+		<td class="right">29,525</td>
+	</tr>
+		<tr>
+		<td>ZELDA</td>
+		<td class="right">29,275</td>
+	</tr>
+		<tr>
+		<td>TEST</td>
+		<td class="right">28,550</td>
+	</tr>
+		<tr>
+		<td>WHATEVER</td>
+		<td class="right">28,300</td>
+	</tr>
+		<tr>
+		<td>CONAN</td>
+		<td class="right">27,850</td>
+	</tr>
+		<tr>
+		<td>ASDASD</td>
+		<td class="right">27,850</td>
+	</tr>
+		<tr>
+		<td>LEVER</td>
+		<td class="right">27,575</td>
+	</tr>
+		<tr>
+		<td>GARRO</td>
+		<td class="right">27,450</td>
+	</tr>
+		<tr>
+		<td>RICHARD</td>
+		<td class="right">26,700</td>
+	</tr>
+		<tr>
+		<td>SIM</td>
+		<td class="right">26,525</td>
+	</tr>
+		<tr>
+		<td>DIEDIEDIE</td>
+		<td class="right">26,475</td>
+	</tr>
+		<tr>
+		<td>MUJ</td>
+		<td class="right">26,000</td>
+	</tr>
+		<tr>
+		<td>ZP</td>
+		<td class="right">26,000</td>
+	</tr>
+		<tr>
+		<td>ZXXCZXC</td>
+		<td class="right">25,975</td>
+	</tr>
+		<tr>
+		<td>NAJA</td>
+		<td class="right">25,650</td>
+	</tr>
+		<tr>
+		<td>GEORGELASZLO</td>
+		<td class="right">25,475</td>
+	</tr>
+		<tr>
+		<td>PISS</td>
+		<td class="right">25,300</td>
+	</tr>
+		<tr>
+		<td>ADC</td>
+		<td class="right">24,750</td>
+	</tr>
+		<tr>
+		<td>J</td>
+		<td class="right">24,675</td>
+	</tr>
+		<tr>
+		<td>ACKIEEE</td>
+		<td class="right">24,625</td>
+	</tr>
+		<tr>
+		<td>BJORN</td>
+		<td class="right">23,925</td>
+	</tr>
+		<tr>
+		<td>BOB</td>
+		<td class="right">23,675</td>
+	</tr>
+		<tr>
+		<td>DRASKIN</td>
+		<td class="right">23,175</td>
+	</tr>
+		<tr>
+		<td>MERIK</td>
+		<td class="right">23,100</td>
+	</tr>
+		<tr>
+		<td>VIKK</td>
+		<td class="right">22,975</td>
+	</tr>
+		<tr>
+		<td>ANGUS</td>
+		<td class="right">22,825</td>
+	</tr>
+		<tr>
+		<td>SOAPY</td>
+		<td class="right">22,825</td>
+	</tr>
+		<tr>
+		<td>NAEM</td>
+		<td class="right">22,300</td>
+	</tr>
+		<tr>
+		<td>TYPMAN</td>
+		<td class="right">22,225</td>
+	</tr>
+		<tr>
+		<td>NBMNB</td>
+		<td class="right">21,875</td>
+	</tr>
+		<tr>
+		<td>GARGOTH</td>
+		<td class="right">20,500</td>
+	</tr>
+		<tr>
+		<td>CHARLES</td>
+		<td class="right">20,500</td>
+	</tr>
+		<tr>
+		<td>T</td>
+		<td class="right">20,450</td>
+	</tr>
+		<tr>
+		<td>SAERO</td>
+		<td class="right">20,175</td>
+	</tr>
+		<tr>
+		<td>OSMOSIS</td>
+		<td class="right">20,150</td>
+	</tr>
+		<tr>
+		<td>SASQUATCH</td>
+		<td class="right">19,575</td>
+	</tr>
+		<tr>
+		<td>FNORD</td>
+		<td class="right">19,425</td>
+	</tr>
+		<tr>
+		<td>UNTITLED</td>
+		<td class="right">19,325</td>
+	</tr>
+		<tr>
+		<td>ELDEN</td>
+		<td class="right">19,125</td>
+	</tr>
+		<tr>
+		<td>BINTANG</td>
+		<td class="right">18,750</td>
+	</tr>
+		<tr>
+		<td>VOLTFAN</td>
+		<td class="right">18,700</td>
+	</tr>
+		<tr>
+		<td>BRAD</td>
+		<td class="right">18,550</td>
+	</tr>
+		<tr>
+		<td>FIRE</td>
+		<td class="right">18,425</td>
+	</tr>
+		<tr>
+		<td>ADSXZCVFAGGO</td>
+		<td class="right">18,325</td>
+	</tr>
+		<tr>
+		<td>JX</td>
+		<td class="right">18,300</td>
+	</tr>
+		<tr>
+		<td>LOSHPENI</td>
+		<td class="right">17,775</td>
+	</tr>
+		<tr>
+		<td>THING</td>
+		<td class="right">17,700</td>
+	</tr>
+		<tr>
+		<td>XSSWFWFWF</td>
+		<td class="right">17,575</td>
+	</tr>
+		<tr>
+		<td>XBOBX</td>
+		<td class="right">17,425</td>
+	</tr>
+		<tr>
+		<td>ZACH</td>
+		<td class="right">17,125</td>
+	</tr>
+		<tr>
+		<td>JAKE</td>
+		<td class="right">17,000</td>
+	</tr>
+		<tr>
+		<td>THEDUDENESSY</td>
+		<td class="right">16,800</td>
+	</tr>
+		<tr>
+		<td>ASD</td>
+		<td class="right">16,350</td>
+	</tr>
+		<tr>
+		<td>DEINEMUDDA</td>
+		<td class="right">15,875</td>
+	</tr>
+		<tr>
+		<td>JOENOPDA</td>
+		<td class="right">15,825</td>
+	</tr>
+		<tr>
+		<td>FENWICK</td>
+		<td class="right">15,600</td>
+	</tr>
+		<tr>
+		<td>EFREN</td>
+		<td class="right">15,575</td>
+	</tr>
+		<tr>
+		<td>TOM</td>
+		<td class="right">14,975</td>
+	</tr>
+		<tr>
+		<td>TRILOCK</td>
+		<td class="right">14,375</td>
+	</tr>
+	</table>
+
+	</div><div class="copy">
+		Copyright © 2012–<span class="dateyear"></span> 
+		<a href="/">Retro Game Crunch</a>.
+	</div></div><script>
+$(function()
+{
+	$('.spoilers-toggle').on('touchstart click', function(event)
+	{
+		if(event.handled !== true)
+		{
+			$(this).parent().toggleClass('open');
+			event.handled = true;
+		}
+		return false;
+	});
+})
+</script>
+<script src="/archive.js"></script><script>cleanup();</script></body>
+</html>

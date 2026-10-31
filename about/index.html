@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>About • Retro Game Crunch</title>
+<script>if((window.devicePixelRatio===undefined?1:window.devicePixelRatio)>1)document.cookie='HTTP_IS_RETINA=1;path=/';</script>
+<meta name="google-site-verification" content="0n15O71rkhohq8oudSJ4AhQ9ZHGrtYQGzZ-hj6_NTGI">
+<meta name="viewport" id="viewport" content="width=800">
+<link rel="stylesheet" href="/styles/rgc.q688883a0dcaa.css">
+<link rel="stylesheet" href="/scripts/highlight/styles/zenburn.css">
+<script src="/scripts/highlight/highlight.pack.js"></script>
+<script src="/scripts/jquery-1.8.3.min.js"></script>
+
+<script src="/scripts/mediaelement/mediaelement-and-player.min.js"></script>
+<link rel="stylesheet" href="/scripts/mediaelement/mediaelementplayer.css">
+<script>
+hljs.tabReplace = '    ';
+hljs.initHighlightingOnLoad();
+
+$(function()
+{
+	$('audio').mediaelementplayer(/* Options */);
+	
+	// disable :hover on touch devices
+	// based on https://gist.github.com/4404503 
+	// via https://twitter.com/javan/status/284873379062890496
+	// + https://twitter.com/pennig/status/285790598642946048
+	// re https://retrogamecrunch.com/tmp/hover
+	if ('createTouch' in document)
+	{
+		$('html').addClass('touch');
+		try
+		{
+			var ignore = /:hover\b/;
+			for (var i=0; i<document.styleSheets.length; i++)
+			{
+				var sheet = document.styleSheets[i];
+				for (var j=sheet.cssRules.length-1; j>=0; j--)
+				{
+					var rule = sheet.cssRules[j];
+					if (rule.type === CSSRule.STYLE_RULE && ignore.test(rule.selectorText))
+					{
+						sheet.deleteRule(j);
+					}
+				}
+			}
+		}
+		catch(e){}
+	}
+});
+
+var then = 1387576800000;
+var deadline = '2013-12-20 22:00:00 UTC';
+var last_mins = -1;
+window.setInterval(function()
+{
+	var now = (new Date).getTime();
+	var remaining = then - now;
+	if (remaining < 0) remaining = 0;
+
+	var sec = 1000;
+	var min = 60 * sec;
+	var hour = 60 * min;
+	var day = 24 * hour;
+
+	var days = Math.floor(remaining / day);
+	remaining -= days * day;
+	var hours = Math.floor(remaining / hour);
+	remaining -= hours * hour;
+	var mins = Math.floor(remaining / min);
+	
+	if (last_mins == mins) return; // prevent unnecessary redraws
+	last_mins = mins;
+
+	var html = '';
+
+	if (days) 	html += '<span class="remaining-days">'+days+' day'+(days>1?'s':'')+'</span> ';
+	if (hours) 	html += '<span class="remaining-days">'+hours+' hour'+(hours>1?'s':'')+'</span> ';
+	if (mins) 	html += '<span class="remaining-days">'+mins+' minute'+(mins>1?'s':'')+'</span> ';
+
+	// DELAY
+	// if (html=='') html = 'To be determined';
+	if (html=='') html = 'Just a few moments';
+
+	$('span.countdown').html(html);
+}, 1 * 1000);
+</script>
+
+
+<link rel="stylesheet" href="/archive.css"><link rel="canonical" href="https://retrogamecrunch.com/about/"></head>
+<body>
+	<div class="wrap wrap-top">
+		<div id="logo-unit">
+			<a id="logo" href="/"><img src="/images/logo-black.png" width="204" height="98" alt="Retro Game Crunch"></a>
+			<a id="funded" href="http://www.kickstarter.com/projects/shauninman/retro-game-crunch-six-games-in-six-months"><img src="/images/funded-with.png" width="116" height="112" alt="Funded with Kickstarter"></a>
+		</div><div id="mini-login">
+	
+</div><div id="status">
+			<div class="currently">
+				<strong>Currently</strong>
+				<a href="/games/6/shuten/">Recovering from Shūten Complete</a>
+			</div></div><ul class="nav nav-main">
+			<li><a href="/">Home</a></li>
+			<li><a href="/games/">Games</a></li>			<li><a href="/rewards/">Rewards</a></li>
+			<li><a href="/journal/">Journal</a></li>
+			<li><a href="/primer/">Primer</a></li>
+			<li><a href="/about/" class="current">About</a></li>
+			<li><a href="/contact/">Contact</a></li>
+		</ul>
+	</div><div class="wrap wrap-bottom">
+		<div class="content">
+			<div class="two-col">
+		<div class="main-col"><h1>About Retro Game Crunch</h1>
+
+<p>At the end of August 2012 <a href="http://rustymoyher.com">Rusty Moyher</a>, <a href="https://shauninman.com">Shaun Inman</a>, and <a href="http://8bitmatt.com">Matt Grimm</a> banded together, buckled down, and created <a href="/games/0/super-clew-land/">Super Clew Land</a> in 72 hours for the 24th <a href="http://www.ludumdare.com">Ludum Dare</a> game jam. It was our first time working together.</p>
+
+<p>By the end of the three day weekend we didn’t want to stop—working together or working on Super Clew Land. “Wouldn’t it be cool,” we thought, “if we could do this more often?” So we hatched a plan and <a href="http://www.kickstarter.com/projects/shauninman/retro-game-crunch-six-games-in-six-months">Kickstarted</a> it.</p>
+
+<p style="text-align:center;"><img src="/images/pyramid.png" width="138" height="166" alt=""></p>
+
+<h2>Six Games in Six Months</h2>
+
+<p>We’re making six games in six months. Backers submit and vote on game themes. We crunch for three days, making a playable game from scratch based on the winning theme. Then everyone gets to play it. </p>
+
+<p>After a brief recovery period, we resume work on the game. For thirty days, we polish, expand, and improve the new born game. Then backers get to <a href="/rewards/">download</a> the complete version of the finished game. </p>
+
+<p>Step and repeat, six times.</p>
+
+<p>Along the way we’re <a href="/journal/">documenting the process</a> and sharing our trials and triumphs. We even wrote a series of articles to <a href="/primer/">get you started jamming</a>. Backer or not, check back each month to <a href="/games/6/shuten/">play a new game</a>!</p>
+</div>
+		<div class="sub-col about-us"><p><img src="/images/portrait-shaun.png" width="48" height="80" alt=""> <strong>Shaun Inman</strong> Creator of <a href="http://thelastrocket.com/">The Last Rocket</a>, one of <em>Edge Magazine</em>’s Must Play iOS Games. Independent designer, developer, and composer. Favors the even numbered Final Fantasies.</p>
+
+<p><img src="/images/portrait-rusty.png" width="48" height="80" alt=""> <strong>Rusty Moyher</strong> Creator of <a href="http://rustymoyher.com/bloop/">Bloop</a>, <em>Indiecade 2012 Finalist.</em> Filmmaker. Game Designer. Storyteller. Regularly plays Starcraft with his three brothers on Christmas Day.</p>
+
+<p><img src="/images/portrait-matt.png" width="48" height="80" alt=""> <strong>Matt Grimm</strong> Composer and sound designer for <a href="http://8bitmatt.bandcamp.com/album/flips-escape-original-sound-version">Flip’s Escape</a>. MML maestro and master of the NES’s four meager sound channels. <em>Twin Galaxies</em> record holder for Burger Time (NES).</p>
+</div>
+	</div>
+	</div><div class="copy">
+		Copyright © 2012–<span class="dateyear"></span> 
+		<a href="/">Retro Game Crunch</a>.
+	</div></div><script>
+$(function()
+{
+	$('.spoilers-toggle').on('touchstart click', function(event)
+	{
+		if(event.handled !== true)
+		{
+			$(this).parent().toggleClass('open');
+			event.handled = true;
+		}
+		return false;
+	});
+})
+</script>
+<script src="/archive.js"></script><script>cleanup();</script></body>
+</html>

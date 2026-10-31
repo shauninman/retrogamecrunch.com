@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Recalculating • Retro Game Crunch</title>
+<script>if((window.devicePixelRatio===undefined?1:window.devicePixelRatio)>1)document.cookie='HTTP_IS_RETINA=1;path=/';</script>
+<meta name="google-site-verification" content="0n15O71rkhohq8oudSJ4AhQ9ZHGrtYQGzZ-hj6_NTGI">
+<meta name="viewport" id="viewport" content="width=800">
+<link rel="stylesheet" href="/styles/rgc.q688883a0dcaa.css">
+<link rel="stylesheet" href="/scripts/highlight/styles/zenburn.css">
+<script src="/scripts/highlight/highlight.pack.js"></script>
+<script src="/scripts/jquery-1.8.3.min.js"></script>
+
+<script src="/scripts/mediaelement/mediaelement-and-player.min.js"></script>
+<link rel="stylesheet" href="/scripts/mediaelement/mediaelementplayer.css">
+<script>
+hljs.tabReplace = '    ';
+hljs.initHighlightingOnLoad();
+
+$(function()
+{
+	$('audio').mediaelementplayer(/* Options */);
+	
+	// disable :hover on touch devices
+	// based on https://gist.github.com/4404503 
+	// via https://twitter.com/javan/status/284873379062890496
+	// + https://twitter.com/pennig/status/285790598642946048
+	// re https://retrogamecrunch.com/tmp/hover
+	if ('createTouch' in document)
+	{
+		$('html').addClass('touch');
+		try
+		{
+			var ignore = /:hover\b/;
+			for (var i=0; i<document.styleSheets.length; i++)
+			{
+				var sheet = document.styleSheets[i];
+				for (var j=sheet.cssRules.length-1; j>=0; j--)
+				{
+					var rule = sheet.cssRules[j];
+					if (rule.type === CSSRule.STYLE_RULE && ignore.test(rule.selectorText))
+					{
+						sheet.deleteRule(j);
+					}
+				}
+			}
+		}
+		catch(e){}
+	}
+});
+
+var then = 1387576800000;
+var deadline = '2013-12-20 22:00:00 UTC';
+var last_mins = -1;
+window.setInterval(function()
+{
+	var now = (new Date).getTime();
+	var remaining = then - now;
+	if (remaining < 0) remaining = 0;
+
+	var sec = 1000;
+	var min = 60 * sec;
+	var hour = 60 * min;
+	var day = 24 * hour;
+
+	var days = Math.floor(remaining / day);
+	remaining -= days * day;
+	var hours = Math.floor(remaining / hour);
+	remaining -= hours * hour;
+	var mins = Math.floor(remaining / min);
+	
+	if (last_mins == mins) return; // prevent unnecessary redraws
+	last_mins = mins;
+
+	var html = '';
+
+	if (days) 	html += '<span class="remaining-days">'+days+' day'+(days>1?'s':'')+'</span> ';
+	if (hours) 	html += '<span class="remaining-days">'+hours+' hour'+(hours>1?'s':'')+'</span> ';
+	if (mins) 	html += '<span class="remaining-days">'+mins+' minute'+(mins>1?'s':'')+'</span> ';
+
+	// DELAY
+	// if (html=='') html = 'To be determined';
+	if (html=='') html = 'Just a few moments';
+
+	$('span.countdown').html(html);
+}, 1 * 1000);
+</script>
+
+
+<link rel="stylesheet" href="/archive.css"><link rel="canonical" href="https://retrogamecrunch.com/journal/48/recalculating/"></head>
+<body>
+	<div class="wrap wrap-top">
+		<div id="logo-unit">
+			<a id="logo" href="/"><img src="/images/logo-black.png" width="204" height="98" alt="Retro Game Crunch"></a>
+			<a id="funded" href="http://www.kickstarter.com/projects/shauninman/retro-game-crunch-six-games-in-six-months"><img src="/images/funded-with.png" width="116" height="112" alt="Funded with Kickstarter"></a>
+		</div><div id="mini-login">
+	
+</div><div id="status">
+			<div class="currently">
+				<strong>Currently</strong>
+				<a href="/games/6/shuten/">Recovering from Shūten Complete</a>
+			</div></div><ul class="nav nav-main">
+			<li><a href="/">Home</a></li>
+			<li><a href="/games/">Games</a></li>			<li><a href="/rewards/">Rewards</a></li>
+			<li><a href="/journal/" class="current">Journal</a></li>
+			<li><a href="/primer/">Primer</a></li>
+			<li><a href="/about/">About</a></li>
+			<li><a href="/contact/">Contact</a></li>
+		</ul>
+	</div><div class="wide"><div class="wrap">
+					<ul class="nav nav-alt nav-journal">
+									<li><a href="/journal/47/a-boy-and-his-pug/">A Boy and His Pug</a></li>
+													<li><a href="/journal/49/his-masters-voice/">His Master’s Voice</a></li>
+							</ul>
+				</div></div><div class="wrap wrap-bottom">
+		<div class="content">
+		
+		
+	<div class="post">
+		<h1>Recalculating</h1>
+		<div class="byline">
+			Posted by <strong>Shaun</strong> 
+							<span class="datetime" data-timezone="UTC" data-timestamp="1374478186">2013/07/22 07:29:46</span>					</div>
+		<p>These “<code>&lt;noun&gt;</code> <code>&lt;verb&gt;</code> the level” themes <a href="https://twitter.com/shauninman/status/359005095649742850">are brutal</a>. We’re doing a little course correcting this week. The platforming segment of Beat Drop still isn’t feeling any better so we’re cutting the unimplemented rhythm segment. With limited time and resources it doesn’t make sense to split our focus on two types of gameplay until we really nail down the first.</p>
+
+<p>A number of things were working against the original design. Foremost was the layered music approach. Your first encounter with any piece of music in the game is just the bass and drum tracks. Not a great first impression. Additionally the music’s impact on the level was hard to spot. The tempo of the music determined the rate at which the platforms underfoot undulated. Just syncing visuals to music in Flash is challenge because of the lack of interval precision at even 120bpm. Finally, the introduction of a shooting mechanic undermines the primary goal of collecting records.</p>
+
+<p>Of the new drop types added last week (the melting sun, blowing tornado, destructive anvil, and intercepting UFO), the only keeper was Wub-Wub. Controlling both Oontz and his canine companion at the same time introduced some interesting layers to the collection mechanic. The ability to tell your dog (or your dog’s human) to “Stay!” while you continue to move around should make it even more interesting.</p>
+
+<p>We’re also changing the way we integrate music. The level will react to changes in the music. Platforms will change size and position corresponding with different sections of music. Music is being written modularly so we can ultimately randomize the internal sequence of each track which will in turn randomize the level designs.</p>
+
+<p>As a result of the new direction, the narrative has shifted as well. Our protagonist is now a Professor of Archaeology who moonlights as a DJ and, on weekends, raids ruins in search of the records of the ancients. His excursions are haunted by snakes, natives, and the source of all music, The Playhead.</p>
+
+<p><img src="/shared/images/game-4/playhead.png" alt="playhead.png"></p>
+
+<p>Why’d it have to be snakes?</p>
+	</div>
+	
+		<h2>3 Comments</h2>
+<div class="comments">
+		<div class="comment" id="comment-286">
+		<div class="who">Dimitri</div>
+		<div class="what"><p>Looking forward to the new direction. Keep up the great work as always!</p>
+</div>
+		<div class="when"><a href="#comment-286" class="datetime" data-timezone="UTC" data-timestamp="1374479482">2013/07/22 07:51:22</a></div>
+	</div>
+		<div class="comment" id="comment-287">
+		<div class="who">Jack</div>
+		<div class="what"><p>Glad to see you taking this action! From the screenshot alone it looks like you’ve found a new bout of inspiration and passion :-)</p>
+</div>
+		<div class="when"><a href="#comment-287" class="datetime" data-timezone="UTC" data-timestamp="1374479616">2013/07/22 07:53:36</a></div>
+	</div>
+		<div class="comment" id="comment-288">
+		<div class="who">DimerHunton</div>
+		<div class="what"><p>Very exciting!</p>
+</div>
+		<div class="when"><a href="#comment-288" class="datetime" data-timezone="UTC" data-timestamp="1374501659">2013/07/22 14:00:59</a></div>
+	</div>
+	</div>		</div><div class="copy">
+		Copyright © 2012–<span class="dateyear"></span> 
+		<a href="/">Retro Game Crunch</a>.
+	</div></div><script>
+$(function()
+{
+	$('.spoilers-toggle').on('touchstart click', function(event)
+	{
+		if(event.handled !== true)
+		{
+			$(this).parent().toggleClass('open');
+			event.handled = true;
+		}
+		return false;
+	});
+})
+</script>
+<script src="/archive.js"></script><script>cleanup();</script></body>
+</html>

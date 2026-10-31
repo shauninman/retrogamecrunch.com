@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Journal • Retro Game Crunch</title>
+<script>if((window.devicePixelRatio===undefined?1:window.devicePixelRatio)>1)document.cookie='HTTP_IS_RETINA=1;path=/';</script>
+<meta name="google-site-verification" content="0n15O71rkhohq8oudSJ4AhQ9ZHGrtYQGzZ-hj6_NTGI">
+<meta name="viewport" id="viewport" content="width=800">
+<link rel="stylesheet" href="/styles/rgc.q688883a0dcaa.css">
+<link rel="stylesheet" href="/scripts/highlight/styles/zenburn.css">
+<script src="/scripts/highlight/highlight.pack.js"></script>
+<script src="/scripts/jquery-1.8.3.min.js"></script>
+
+<script src="/scripts/mediaelement/mediaelement-and-player.min.js"></script>
+<link rel="stylesheet" href="/scripts/mediaelement/mediaelementplayer.css">
+<script>
+hljs.tabReplace = '    ';
+hljs.initHighlightingOnLoad();
+
+$(function()
+{
+	$('audio').mediaelementplayer(/* Options */);
+	
+	// disable :hover on touch devices
+	// based on https://gist.github.com/4404503 
+	// via https://twitter.com/javan/status/284873379062890496
+	// + https://twitter.com/pennig/status/285790598642946048
+	// re https://retrogamecrunch.com/tmp/hover
+	if ('createTouch' in document)
+	{
+		$('html').addClass('touch');
+		try
+		{
+			var ignore = /:hover\b/;
+			for (var i=0; i<document.styleSheets.length; i++)
+			{
+				var sheet = document.styleSheets[i];
+				for (var j=sheet.cssRules.length-1; j>=0; j--)
+				{
+					var rule = sheet.cssRules[j];
+					if (rule.type === CSSRule.STYLE_RULE && ignore.test(rule.selectorText))
+					{
+						sheet.deleteRule(j);
+					}
+				}
+			}
+		}
+		catch(e){}
+	}
+});
+
+var then = 1387576800000;
+var deadline = '2013-12-20 22:00:00 UTC';
+var last_mins = -1;
+window.setInterval(function()
+{
+	var now = (new Date).getTime();
+	var remaining = then - now;
+	if (remaining < 0) remaining = 0;
+
+	var sec = 1000;
+	var min = 60 * sec;
+	var hour = 60 * min;
+	var day = 24 * hour;
+
+	var days = Math.floor(remaining / day);
+	remaining -= days * day;
+	var hours = Math.floor(remaining / hour);
+	remaining -= hours * hour;
+	var mins = Math.floor(remaining / min);
+	
+	if (last_mins == mins) return; // prevent unnecessary redraws
+	last_mins = mins;
+
+	var html = '';
+
+	if (days) 	html += '<span class="remaining-days">'+days+' day'+(days>1?'s':'')+'</span> ';
+	if (hours) 	html += '<span class="remaining-days">'+hours+' hour'+(hours>1?'s':'')+'</span> ';
+	if (mins) 	html += '<span class="remaining-days">'+mins+' minute'+(mins>1?'s':'')+'</span> ';
+
+	// DELAY
+	// if (html=='') html = 'To be determined';
+	if (html=='') html = 'Just a few moments';
+
+	$('span.countdown').html(html);
+}, 1 * 1000);
+</script>
+
+
+<link rel="stylesheet" href="/archive.css"><link rel="canonical" href="https://retrogamecrunch.com/journal/page/6/"></head>
+<body>
+	<div class="wrap wrap-top">
+		<div id="logo-unit">
+			<a id="logo" href="/"><img src="/images/logo-black.png" width="204" height="98" alt="Retro Game Crunch"></a>
+			<a id="funded" href="http://www.kickstarter.com/projects/shauninman/retro-game-crunch-six-games-in-six-months"><img src="/images/funded-with.png" width="116" height="112" alt="Funded with Kickstarter"></a>
+		</div><div id="mini-login">
+	
+</div><div id="status">
+			<div class="currently">
+				<strong>Currently</strong>
+				<a href="/games/6/shuten/">Recovering from Shūten Complete</a>
+			</div></div><ul class="nav nav-main">
+			<li><a href="/">Home</a></li>
+			<li><a href="/games/">Games</a></li>			<li><a href="/rewards/">Rewards</a></li>
+			<li><a href="/journal/" class="current">Journal</a></li>
+			<li><a href="/primer/">Primer</a></li>
+			<li><a href="/about/">About</a></li>
+			<li><a href="/contact/">Contact</a></li>
+		</ul>
+	</div><div class="wrap wrap-bottom">
+		<div class="content">
+			<div class="posts">
+			<div class="post">
+			<h1><a href="/journal/25/dead-end/">Dead End</a></h1>
+			<div class="byline">Posted by <strong>Shaun</strong> <span class="datetime" data-timezone="UTC" data-timestamp="1360267744">2013/02/07 20:09:04</span></div>
+			<p><img src="/shared/images/game-1/1-11.png" alt="1-11.png"></p>
+
+<p>Stuck on this level? It’s not your fault. Over the course of development, the levels that introduce the concepts this level was built on were moved to later worlds. A few tips:</p>
+
+<div class="spoilers"><img src="/images/btn-spoilers.png" height="30" alt="Spoilers" class="spoilers-toggle"><div class="spoilers-content">
+
+<ol>
+<li>A broken hopper’s rubble presses a button.</li>
+<li>Flyers will land on the worn patches closest to their last repair job.</li>
+</ol>
+
+</div></div>
+
+<p>Still stuck? Here’s the complete solution:</p>
+
+<div class="spoilers"><img src="/images/btn-spoilers.png" height="30" alt="Spoilers" class="spoilers-toggle"><div class="spoilers-content">
+
+<ol>
+<li>Step on the left buton to trap the hopper behind the right gate on the right button.</li>
+<li>Push the crate onto the left button.</li>
+<li>Break the hopper up against the left gate to get the flyer to land on the lower worn patch.</li>
+<li>Break the flyer.</li>
+<li>Break the hopper on the right button.</li>
+<li>Push the crate into the left starting area, then push it back onto the left button.</li>
+<li>Both gates to the spikes should be down, now break yourself.</li>
+</ol>
+
+</div></div>
+		</div>
+			<div class="post">
+			<h1><a href="/journal/24/end-of-end-of-line/">End of End of Line</a></h1>
+			<div class="byline">Posted by <strong>Shaun</strong> <span class="datetime" data-timezone="UTC" data-timestamp="1360102739">2013/02/05 22:18:59</span></div>
+			<p><em>That</em> was a quick month. We just released the complete version of Game 1, <a href="/games/1/end-of-line/">End of Line</a>:</p>
+
+<p><a href="/rewards/"><img src="/ks-updates/end-of-line-title.png" alt="end-of-line-title.png"></a></p>
+
+<p>We thought Super Clew Land set the bar high for what we could achieve in one month. Then Game 1 happened. End of Line has more than 60 levels spanning 5 worlds, over 20 minutes of music, 2 endings plus a secret (ssshhh) epilogue!</p>
+
+<p>Download the complete version of End of Line from the Retro Game Crunch <a href="/rewards/">Rewards</a> page. Let us know what you think right here (or <a href="https://twitter.com/RetroGameCrunch">on Twitter</a>). </p>
+
+<p>Oh, and theme submissions are now open for <a href="/games/2/gaiattack/">Game 2</a>!</p>
+		</div>
+			<div class="post">
+			<h1><a href="/journal/23/z-sorting/">Z-Sorting</a></h1>
+			<div class="byline">Posted by <strong>Shaun</strong> <span class="datetime" data-timezone="UTC" data-timestamp="1359556655">2013/01/30 14:37:35</span></div>
+			<p>JPMartineau <a href="https://twitter.com/JPMartineau/status/296024016723001344">asks</a>, “how do you handle a player partially hidden by raised terrain? What you call half-tile obscuring.” (Also frequently called z-sorting.)</p>
+
+<h2>Layered</h2>
+
+<p>Z-sorting is actually pretty easy in Flixel. In End of Line, we have three layers. We have objects in the mid-ground that can partially obscure other objects in the mid-ground. We also have objects on the ground, beneath other objects, and in the air, above all other objects.</p>
+
+<p>The three layers are easy, we just use three FlxGroup’s (actually our own subclassed DisplayGroup, see below), that we add to our PlayState in order:</p>
+
+<pre><code>add(lowDisplayGroup);
+add(midDisplayGroup);
+add(highDisplayGroup);
+</code></pre>
+
+<p>Then we add our objects to the appropriate layer. Repair pads and the bottom of elemental stations are added to the <code>lowDisplayGroup</code>. EOL, walls, and the other bots are added to the <code>midDisplayGroup</code>. The tops of elemental stations are added to the <code>highDisplayGroup</code>. </p>
+
+<p>When a flyer needs to repair something, we move it to the <code>highDisplayGroup</code> during flight and then back to the <code>midDisplayGroup</code> when it lands.</p>
+
+<h2>Sorted</h2>
+
+<p>Sorting within the groups is a little trickier (but not much). FlxGroup provides <code>sort()</code> and <code>sortHandler()</code> functions. We create a subclass of FlxGroup called DisplayGroup and override the <code>sortHandler()</code> to sort on the bottom left coordinate of each sprite (the default is top left):</p>
+
+<pre><code>override protected function sortHandler(Obj1:FlxBasic,Obj2:FlxBasic):int
+{
+    var base1:Number = Obj1['y']+Obj1['height'];
+    var base2:Number = Obj2['y']+Obj2['height'];
+    var x1:Number = Obj1['x'];
+    var x2:Number = Obj2['x'];
+
+    if(base1 &lt; base2) {
+        return _sortOrder; // above == behind
+    }
+    else if(base1 &gt; base2) {
+        return -_sortOrder; // below == in front
+    }
+    else {
+        if(x1 &gt; x2) {
+            return _sortOrder; // right == behind
+        }
+        else if(x1 &lt; x2) {
+            return -_sortOrder; // left == in front
+        }
+        else {
+            return 0;
+        }
+    }
+}
+</code></pre>
+
+<p>Then at the end of our PlayState’s <code>update()</code> function we just call:</p>
+
+<pre><code>lowDisplayGroup.sort();
+midDisplayGroup.sort();
+highDisplayGroup.sort();
+</code></pre>
+
+<p>Once sorted, Flixel’s drawing code does the rest!</p>
+		</div>
+			<div class="post">
+			<h1><a href="/journal/22/fulfilling/">Fulfilling</a></h1>
+			<div class="byline">Posted by <strong>Shaun</strong> <span class="datetime" data-timezone="UTC" data-timestamp="1359121506">2013/01/25 13:45:06</span></div>
+			<p>Just a quick post to say: Shirts are printed and packed. Posters are being rolled. Shipping soon!</p>
+
+<p><img src="/ks-updates/fulfilling-1.jpg" alt="fulfilling-1.jpg">
+<img src="/ks-updates/fulfilling-2.jpg" alt="fulfilling-2.jpg"></p>
+
+<p>(Photos courtesy of Pat at Buy Olympia)</p>
+		</div>
+			<div class="post">
+			<h1><a href="/journal/21/remapped/">Remapped</a></h1>
+			<div class="byline">Posted by <strong>Rusty</strong> <span class="datetime" data-timezone="UTC" data-timestamp="1359046143">2013/01/24 16:49:03</span></div>
+			<p>All the levels in <em>End of Life</em> are being built with <a href="http://www.mapeditor.org">Tiled</a>. In the 72-hour jam version, we had three layers: Background, Foreground, and Entities.</p>
+
+<p><img src="/shared/images/game-1/three-layers.png" alt="Three Layers"></p>
+
+<p>Most of the objects were made on the “Entities” object layer. As the levels grew in complexity, more and more objects were added to this layer. Creating and editing lots of objects in Tiled is cumbersome and messy. It’s hard to tell the objects apart.</p>
+
+<p><img src="/shared/images/game-1/map-before.png" alt="Map Before"></p>
+
+<p>With dozens of levels to create for the full version, making this process faster was my first priority. Instead of using object layers, objects are now painted on using special tilemap layers. Here’s what the current “EntityGround” tileset looks like:</p>
+
+<p><img src="/shared/images/game-1/entityground.png" alt="EntityGround"></p>
+
+<p>Each of these tiles is assigned a number. When the EntityGround is loaded in the game, objects are created by examining the number of each painted tile. Levels now look better inside of Tiled and are much simpler to create. </p>
+
+<p><img src="/shared/images/game-1/map-after.png" alt="Map After"></p>
+		</div>
+			<div class="post">
+			<h1><a href="/journal/20/worldly/">Worldly</a></h1>
+			<div class="byline">Posted by <strong>Shaun</strong> <span class="datetime" data-timezone="UTC" data-timestamp="1358966901">2013/01/23 18:48:21</span></div>
+			<p>Fleshing out some alternate foreground/background treatments so we don’t have to rely on half-tile obscuring, tall concrete blocks to shape the levels. </p>
+
+<p>Man, something sure tore the earth asunder:</p>
+
+<p><img src="/shared/images/game-1/world-1.png" alt="world-1.png">
+<img src="/shared/images/game-1/world-2.png" alt="world-2.png">
+<img src="/shared/images/game-1/world-3.png" alt="world-3.png">
+<img src="/shared/images/game-1/world-4.png" alt="world-4.png"></p>
+		</div>
+			<div class="post">
+			<h1><a href="/journal/19/get-equipped-with-classic-maps/">Get Equipped with Classic Maps</a></h1>
+			<div class="byline">Posted by <strong>Shaun</strong> <span class="datetime" data-timezone="UTC" data-timestamp="1358778933">2013/01/21 14:35:33</span></div>
+			<p>Just a quick post to share an Automator workflow to quickly download maps from classic games for inspiration. With only two weeks remaining I don’t really have time to replay a bunch of Mega Man games for visual research. <a href="http://vgmaps.com">The Video Game Atlas</a> to the rescue! <a href="/shared/downloads/Map.workflow.zip">Download the workflow</a>, change the game name in the Filter URLs step, and hold B to run. Sizzling Circuits!</p>
+		</div>
+			<div class="post">
+			<h1><a href="/journal/18/looped-noise/">Looped Noise</a></h1>
+			<div class="byline">Posted by <strong>Matt</strong> <span class="datetime" data-timezone="UTC" data-timestamp="1358635681">2013/01/19 22:48:01</span></div>
+			<p>A look back at the 3 day jam for EOL and the music that came out of it.</p>
+
+<h2>Friday</h2>
+
+<p>I started writing music immediately after the idea for the game was agreed upon. I got about 80% of a song done that night. I soon realized it was not a strong enough song to be the world 1 theme. I wanted something more mechanical sounding and it needed to be catchy.</p>
+
+<h2>Saturday</h2>
+
+<p>I created a playlist of NES tunes in NoiseES. I listened to it over and over while I laid in bed and thought about what I was going to write. I looked for anything with robots in the NES library. Of course a lot of Mega Man was in that playlist; it really shows its influence in the world 2 theme.</p>
+
+<p>I spent the next seven hours making the world 1 theme “Programmed to Work”. Somehow I found a second wind and late into the night (4am) I created the world 2 theme “I Won’t Byte”. These are the two main songs that made it into the jam version of the game!</p>
+
+<h3>Programmed to Work</h3>
+
+<p><audio src="/shared/music/Programmed%20to%20Work.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/Programmed%20to%20Work.mp3">Programmed to Work</a></audio></p>
+
+<h3>I Won’t Byte</h3>
+
+<p><audio src="/shared/music/I%20Won't%20Byte.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/I%20Won't%20Byte.mp3">I Won’t Byte</a></audio></p>
+
+<h2>Sunday</h2>
+
+<p>Early Sunday morning I revisited and finished my song from the first night, “Trust Your Circuits”. </p>
+
+<h3>Trust Your Circuits</h3>
+
+<p><audio src="/shared/music/Trust%20Your%20Circuits.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/Trust%20Your%20Circuits.mp3">Trust Your Circuits</a></audio></p>
+
+<p>Next I started writing the title theme, but it kind of went in a different direction. Lucky for me it fit perfectly with the narrative idea, “passing of time”, that we had talked about. So I skipped ahead on my list of todos and finished this small song and named it “Epoch”. </p>
+
+<h3>Epoch</h3>
+
+<p><audio src="/shared/music/Epoch.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/Epoch.mp3">Epoch</a></audio></p>
+
+<p>Staying with that idea, I also needed a shorter “passing of time” song, so next I wrote “System Time”. </p>
+
+<h3>System Time</h3>
+
+<p><audio src="/shared/music/System%20Time.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/System%20Time.mp3">System Time</a></audio></p>
+
+<p>With those tracks finished I needed to get back to my original task and write the title theme. I got stuck for awhile and threw away a few ideas. None of them felt right. I wanted a simple, short melody that was memorable and sounded like an epic journey was about to begin. After an hour or so “Does Not Compute” was born. This is the only other song that made it into the jam version.</p>
+
+<h3>Does Not Compute</h3>
+
+<p><audio src="/shared/music/Does%20Not%20Compute.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/Does%20Not%20Compute.mp3">Does Not Compute</a></audio></p>
+
+<p>Finally I moved on to the ending theme “Bits and Pieces”. It’s the first chiptune I’ve written in 3/4 time. </p>
+
+<h3>Bits and Pieces</h3>
+
+<p><audio src="/shared/music/Bits%20and%20Pieces.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/Bits%20and%20Pieces.mp3">Bits and Pieces</a></audio></p>
+
+<p>I was finished with music around 8:20pm that night (so all the music was written within about 48 hours). I made the decision to stop writing and focus on SFX the rest of the time. It was a good decision, as you can see half of the music I wrote didn’t make it into the jam version of the game! I started on the SFX and stayed up until 1am.</p>
+
+<h2>Monday</h2>
+
+<p>I tweaked a few of the SFX from the night before and created two or three new ones. With my remaining time I designed two levels! Only one made it into the jam. I finished my second level literally four minutes before our deadline, so there’s no way it could have been added.</p>
+
+<h2>Recently</h2>
+
+<p>After living with these songs for a few weeks I think my favorite is currently “Does Not Compute”. I love that melody, I whistle it constantly. My second favorite is “Bits and Pieces”. I can’t help myself, I LOVE ending themes.</p>
+
+<p>Since the jam I’ve been working on my level design chops. Rusty and Shaun always have great feedback. I’ve written one new song and have plans to write a few more. The new song, “Data Corruption”, is a glitch/dubstep style track. I think it’s very appropriate for this game, and this is my first time ever attempting to write something like dubstep. Because the music is all about EOL and the repairbots, and it’s written on the 2A03 sound chip, I like to call the genre botstep. So here it is (and only using the five standard NES sound channels too!).</p>
+
+<h3>Data Corruption</h3>
+
+<p><audio src="/shared/music/Data%20Corruption.mp3" type="audio/mp3" controls="controls"><a href="/shared/music/Data%20Corruption.mp3">Data Corruption</a></audio></p>
+
+<p>Maybe soon, we can explore the finer details of some of EOL’s music. I’m really happy with what I created and in such a short amount of time. It’s rare to love most everything you start working on without throwing it away or hating it a few hours later. Not that quantity has anything to do with quality, but for comparison: EOL currently has over 14 minutes of music and Super Clew Land Complete has 9. I really hit a stride. I must have had this robot music bottled up inside of me all these years.</p>
+		</div>
+		</div>
+<p>
+	<a href="/journal/page/7/"><img src="/images/btn-older.png" height="30"></a>	
+	<a href="/journal/page/5/"><img src="/images/btn-newer.png" height="30"></a>	
+</p>
+	
+	</div><div class="copy">
+		Copyright © 2012–<span class="dateyear"></span> 
+		<a href="/">Retro Game Crunch</a>.
+	</div></div><script>
+$(function()
+{
+	$('.spoilers-toggle').on('touchstart click', function(event)
+	{
+		if(event.handled !== true)
+		{
+			$(this).parent().toggleClass('open');
+			event.handled = true;
+		}
+		return false;
+	});
+})
+</script>
+<script src="/archive.js"></script><script>cleanup();</script></body>
+</html>

@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>GAIAttack! • Retro Game Crunch</title>
+<script>if((window.devicePixelRatio===undefined?1:window.devicePixelRatio)>1)document.cookie='HTTP_IS_RETINA=1;path=/';</script>
+<meta name="google-site-verification" content="0n15O71rkhohq8oudSJ4AhQ9ZHGrtYQGzZ-hj6_NTGI">
+<meta name="viewport" id="viewport" content="width=800">
+<link rel="stylesheet" href="/styles/rgc.q688883a0dcaa.css">
+<link rel="stylesheet" href="/scripts/highlight/styles/zenburn.css">
+<script src="/scripts/highlight/highlight.pack.js"></script>
+<script src="/scripts/jquery-1.8.3.min.js"></script>
+
+<script src="/scripts/mediaelement/mediaelement-and-player.min.js"></script>
+<link rel="stylesheet" href="/scripts/mediaelement/mediaelementplayer.css">
+<script>
+hljs.tabReplace = '    ';
+hljs.initHighlightingOnLoad();
+
+$(function()
+{
+	$('audio').mediaelementplayer(/* Options */);
+	
+	// disable :hover on touch devices
+	// based on https://gist.github.com/4404503 
+	// via https://twitter.com/javan/status/284873379062890496
+	// + https://twitter.com/pennig/status/285790598642946048
+	// re https://retrogamecrunch.com/tmp/hover
+	if ('createTouch' in document)
+	{
+		$('html').addClass('touch');
+		try
+		{
+			var ignore = /:hover\b/;
+			for (var i=0; i<document.styleSheets.length; i++)
+			{
+				var sheet = document.styleSheets[i];
+				for (var j=sheet.cssRules.length-1; j>=0; j--)
+				{
+					var rule = sheet.cssRules[j];
+					if (rule.type === CSSRule.STYLE_RULE && ignore.test(rule.selectorText))
+					{
+						sheet.deleteRule(j);
+					}
+				}
+			}
+		}
+		catch(e){}
+	}
+});
+
+var then = 1387576800000;
+var deadline = '2013-12-20 22:00:00 UTC';
+var last_mins = -1;
+window.setInterval(function()
+{
+	var now = (new Date).getTime();
+	var remaining = then - now;
+	if (remaining < 0) remaining = 0;
+
+	var sec = 1000;
+	var min = 60 * sec;
+	var hour = 60 * min;
+	var day = 24 * hour;
+
+	var days = Math.floor(remaining / day);
+	remaining -= days * day;
+	var hours = Math.floor(remaining / hour);
+	remaining -= hours * hour;
+	var mins = Math.floor(remaining / min);
+	
+	if (last_mins == mins) return; // prevent unnecessary redraws
+	last_mins = mins;
+
+	var html = '';
+
+	if (days) 	html += '<span class="remaining-days">'+days+' day'+(days>1?'s':'')+'</span> ';
+	if (hours) 	html += '<span class="remaining-days">'+hours+' hour'+(hours>1?'s':'')+'</span> ';
+	if (mins) 	html += '<span class="remaining-days">'+mins+' minute'+(mins>1?'s':'')+'</span> ';
+
+	// DELAY
+	// if (html=='') html = 'To be determined';
+	if (html=='') html = 'Just a few moments';
+
+	$('span.countdown').html(html);
+}, 1 * 1000);
+</script>
+
+
+<script>window.RufflePlayer={config:{polyfills:false,publicPath:"/scripts/ruffle/",autoplay:"on"}};</script><script src="/scripts/ruffle/ruffle.js" defer></script><script src="/scripts/flash.js" defer></script><link rel="stylesheet" href="/archive.css"><link rel="canonical" href="https://retrogamecrunch.com/games/2/gaiattack/"></head>
+<body>
+	
+	<div class="wide">
+		<div class="wrap wrap-game">
+		<div id="game-nav">
+							<a id="prev-game" href="/games/1/end-of-line/"><img src="/images/btn-arrow-prev.png" height="102" alt="Previous Game"></a>
+										<a id="next-game" href="/games/3/paradox-lost/"><img src="/images/btn-arrow-next.png" height="102" alt="Next Game"></a>
+					</div><div id="game">
+			<div class="archive-flash" data-swf="/games/embeds/2/LevelGame.swf" data-background="#000000" data-flashvars="" style="display:inline-block;width:720px;height:480px;max-width:100%;" id="game-swf"></div>
+		</div><div id="game-options">
+			<img id="preview" src="/images/game-2.png" width="720" alt="">
+			<a href="/rewards/"><img src="/images/btn-download-complete.gif" height="105" alt="Download Complete Version"></a><a href="#game" id="btn-play-crunch"><img src="/images/btn-play-crunch.png" height="105" alt="Play the 72 Hour Version"></a>
+		</div><script>
+		$('#game').hide();
+		$('#btn-play-crunch').on('touchstart click', function(event)
+		{
+			if(event.handled !== true)
+			{
+				$('#game-options').hide();
+				$('#game').show();
+				event.handled = true;
+			}
+			return false;
+		});
+		</script>
+				<div class="masthead">
+			<div id="logo-unit"><a id="logo" href="/"><img src="/images/logo-white-sm.png" width="108" height="42" alt="Retro Game Crunch"></a></div>
+			
+			<div class="theme">
+				<span>Theme</span><br>
+				<strong>You are the Level</strong>
+			</div>
+			
+			<div id="mini-login">
+	
+</div></div>
+	</div></div><div class="wrap wrap-bottom">
+		<div class="content">
+			
+	<div class="two-col">
+		<div class="main-col game-content">
+			<h1>GAIAttack! <span>a  game made in 72 hours</span></h1>
+			<p>Time to level: this theme chewed us up and spat us out. </p>
+
+<p>Forty-eight hours into our arcade/god game prototype we decided it just wasn’t working. So with the last 24 hours we hacked away at the problem areas and were left with this promising but still under-cooked arcade/melee/platformer.</p>
+
+<p>We’ll be posting the <a href="/journal/27/game-2-prototype-postmortem/">broken 48 hour prototype</a> in a Journal update later this week and watching your <a href="/tmp/scoreboard/">high scores</a>. Juggle, knock enemies into each other, and string together combos to climb the charts!</p>
+
+<p><strong>Arrows</strong> Move<br>
+<strong>Z</strong> Jump<br>
+<strong>X</strong> Horizontal Attack<br>
+<strong>Up+X</strong> Vertical Attack<br>
+<strong>C</strong> Level Special  </p>
+		</div>
+		
+		<div class="sub-col downloads">
+					</div>
+	</div>
+	<h2>26 Comments</h2>
+<div class="comments">
+		<div class="comment" id="comment-137">
+		<div class="who">Conan</div>
+		<div class="what"><p>I did wonder if the complete radio-silence during this crunch meant that things were going either <em>really</em> well or <em>really</em>… not so well. :)</p>
+
+<p>It was certainly a challenging theme. But you’re a talented bunch of chaps: I’m still excited to see what you can make of it during the finessing stage!</p>
+</div>
+		<div class="when"><a href="#comment-137" class="datetime" data-timezone="UTC" data-timestamp="1360629407">2013/02/12 00:36:47</a></div>
+	</div>
+		<div class="comment" id="comment-138">
+		<div class="who">Derrek</div>
+		<div class="what"><p>I’ll be honest, can’t say I liked this. A little too similar and inferior to “Super Crate Box” and the theme is very loosely integrated. </p>
+
+<p>Perhaps build off of that first screen more…? That had my imagination running wild! </p>
+
+<p>Curious to hear/see the rejected arcade/god prototype.</p>
+
+<p>You guys are very talented and I know you will deliver a better product in the coming month.</p>
+</div>
+		<div class="when"><a href="#comment-138" class="datetime" data-timezone="UTC" data-timestamp="1360637828">2013/02/12 02:57:08</a></div>
+	</div>
+		<div class="comment" id="comment-139">
+		<div class="who">Michael</div>
+		<div class="what"><p>I was hoping for a game where you’d have to spend points on spawning enemies, or moving blocks, while a preprogrammed hero jumped and clubbed his way through you (the level).  Basically, your score would fall every time you spawned an enemy or moved some blocks, so the less you do, that is, the more effective your changes in stopping the hero, the better your score.</p>
+</div>
+		<div class="when"><a href="#comment-139" class="datetime" data-timezone="UTC" data-timestamp="1360660990">2013/02/12 09:23:10</a></div>
+	</div>
+		<div class="comment" id="comment-141">
+		<div class="who">Shrapnel</div>
+		<div class="what"><p>It obviously needs more work, but I really like it: it clearly shows some promise and the graphics and sound are, as usual, top notch.</p>
+</div>
+		<div class="when"><a href="#comment-141" class="datetime" data-timezone="UTC" data-timestamp="1360669704">2013/02/12 11:48:24</a></div>
+	</div>
+		<div class="comment" id="comment-142">
+		<div class="who">Simon</div>
+		<div class="what"><p>Well this could turn into a quiet interesting spectacle melee game. But it obviously needs a lot of work</p>
+</div>
+		<div class="when"><a href="#comment-142" class="datetime" data-timezone="UTC" data-timestamp="1360671198">2013/02/12 12:13:18</a></div>
+	</div>
+		<div class="comment" id="comment-144">
+		<div class="who">A.J. Ross</div>
+		<div class="what"><p>Excited to see where this goes. Great graphics and music — can’t wait to see the scrapped prototype.</p>
+</div>
+		<div class="when"><a href="#comment-144" class="datetime" data-timezone="UTC" data-timestamp="1360722347">2013/02/13 02:25:47</a></div>
+	</div>
+		<div class="comment" id="comment-145">
+		<div class="who">DimerHunton</div>
+		<div class="what"><p>Good effort, though I’m not really seeing how the theme is expressed in the game.</p>
+</div>
+		<div class="when"><a href="#comment-145" class="datetime" data-timezone="UTC" data-timestamp="1360722645">2013/02/13 02:30:45</a></div>
+	</div>
+		<div class="comment" id="comment-146">
+		<div class="who">Garro Sakuragi</div>
+		<div class="what"><p>I’m actually kind of excited about this. First of all, the journal about those 48 hours should be pretty interesting, just knowing what happened that let you to scrap your first idea when you were so deep into the crunch. Also, the resulting game seems to be pretty raw, but I’ll agree it does have potential, although I’m a bit concerned about how the theme fits into this particular game. Maybe you could make it a sort of Osmosis Jones-type thing? You know, a white cell fighting off virus, bacteria, etc. in different organs of the human body. Keep the same mechanics shown so far, but make the graphs closer to that theme (how awesome it would be if you could make rhinovirus enemies and stuff like that :P)</p>
+</div>
+		<div class="when"><a href="#comment-146" class="datetime" data-timezone="UTC" data-timestamp="1360736427">2013/02/13 06:20:27</a></div>
+	</div>
+		<div class="comment" id="comment-148">
+		<div class="who">Jesse</div>
+		<div class="what"><p>I really like where this game is going, especially with the different levels and the way that the player character integrates with the theme. I also like how the player must earn points in order to use the special moves. Don’t get discouraged, keep at it! Super Clew Land and End of Line alone were worth the price of admission, the next five games are just icing on the cake.</p>
+</div>
+		<div class="when"><a href="#comment-148" class="datetime" data-timezone="UTC" data-timestamp="1360760119">2013/02/13 12:55:19</a></div>
+	</div>
+		<div class="comment" id="comment-149">
+		<div class="who">Conan</div>
+		<div class="what"><p>I agree with Jesse. I’d be happy if all we got as Super Clew Land and the other 6 games were complete failures. So long as I got to read (and hear!) the journal entries along the way. :D</p>
+</div>
+		<div class="when"><a href="#comment-149" class="datetime" data-timezone="UTC" data-timestamp="1360771937">2013/02/13 16:12:17</a></div>
+	</div>
+		<div class="comment" id="comment-150">
+		<div class="who">BrianHorror</div>
+		<div class="what"><p>Although I’m not blown away by this initial crunch, I have full confidence in you three. I can’t thank you enough for committing to this project! Looking forward to checking out the failed crunch.</p>
+</div>
+		<div class="when"><a href="#comment-150" class="datetime" data-timezone="UTC" data-timestamp="1360798586">2013/02/13 23:36:26</a></div>
+	</div>
+		<div class="comment" id="comment-151">
+		<div class="who">Evan</div>
+		<div class="what"><p>Cool stuff so far! 
+I like the idea of a play through that swaps control between moving the character and moving the level.
+Don’t worry about it being simple—you’ve got another whole shell of a game that wasn’t quite compile-ready, no worries.</p>
+</div>
+		<div class="when"><a href="#comment-151" class="datetime" data-timezone="UTC" data-timestamp="1360814221">2013/02/14 03:57:01</a></div>
+	</div>
+		<div class="comment" id="comment-153">
+		<div class="who">ChessboardMan</div>
+		<div class="what"><p>Hmmm, as someone who submitted this theme, the result so far is a little disappointing, mostly due to the relation to the theme not being as readily apparent. It feels like if the player IS the level, then they should be able to actually control the layout of the level, or maybe a duel control mechanism like in Crew Land with the secondary control having some effect on the level, rather than simply have a special based on the level. Also it is too easy to die, especially with the ability to simply fall off the stage. Maybe a Bubble Bobble would work better, especially since you are implementing waves of opponents, as I’m basically finding right now the only way to stay alive is to find a good spot, and stick to it, attacking enemies who come my way, and leaving the rest to die. If the enemies who fall off the bottom then looped back to the top, it would force players to be more active, and also punish them less for being active.<em>end ramble</em></p>
+</div>
+		<div class="when"><a href="#comment-153" class="datetime" data-timezone="UTC" data-timestamp="1360890138">2013/02/15 01:02:18</a></div>
+	</div>
+		<div class="comment" id="comment-154">
+		<div class="who">awesomerobot</div>
+		<div class="what"><p>Am I missing something, or is the only theme relevance a few frame animation when your character comes to life? Seems like a Super Crate Box clone, even down to the layout. Can’t make a winner every time I guess…</p>
+
+<p>I was expecting something more akin to a game where you’re moving a level around a character you have no control over, but I suppose that’s been done before too…</p>
+</div>
+		<div class="when"><a href="#comment-154" class="datetime" data-timezone="UTC" data-timestamp="1360964426">2013/02/15 21:40:26</a></div>
+	</div>
+		<div class="comment" id="comment-161">
+		<div class="who">Rusty</div>
+		<div class="what"><p>Thanks for all the feedback! While our primary focus for the 30 day version is to make the game fun, we’re still trying to bring the theme more into gameplay.</p>
+
+<p>@Conan LOL, the “radio-silence” was more from burnout. We didn’t get a break after getting End of Life out the door.</p>
+
+<p>@ChessboardMan Yeah, I would have liked a way to act as the level more, but the gameplay ideas we came up with and tested weren’t fun for very long. For this game you’ll basically be “the spirit of the level”, but we’re still working to find good mechanics that tie the gameplay closer to the theme. :)</p>
+</div>
+		<div class="when"><a href="#comment-161" class="datetime" data-timezone="UTC" data-timestamp="1361485963">2013/02/21 22:32:43</a></div>
+	</div>
+		<div class="comment" id="comment-162">
+		<div class="who">Arvor</div>
+		<div class="what"><p>I although think the theme is not really incorporated and that it is too easy to die.
+If you die too easily you cannot make good use of the juggling mechanics.
+My suggestion would be to make the guardian spirit more of a spirit.
+The spirit is still controlled like it is now but it cannot be damaged by the marauders directly.
+You on the other hand can hit the marauders but instead of a normal striking animation it looks like the level itself does the damage by e.g. shooting vines out of the ground or spikes of ice or sharp rocks depending on the environment.
+The marauders try to damage notes that are positioned in different places of the level.
+If a note and therefore the level is damaged, so are you.
+You can defend the notes which regenerate over time.
+If multiple notes are destroyed you lose.
+Making clever use of special attacks and those wall-mouth things and other perils built into the level design can help dispose of huge numbers of enemies at once, giving you the time to get to a node in need.
+I suppose this differs too much from what you have by now and therefore will not be helpful.
+I’m still eager to see what you have come up with to make this game fit the theme more.
+And while I don’t really like platformers much, still believe you will deliver a good game none the less.</p>
+
+<p>Maybe the next crunch will be more to my liking and hopefully runs smother on your end as well.</p>
+</div>
+		<div class="when"><a href="#comment-162" class="datetime" data-timezone="UTC" data-timestamp="1361826494">2013/02/25 21:08:14</a></div>
+	</div>
+		<div class="comment" id="comment-164">
+		<div class="who">AdamH</div>
+		<div class="what"><p>I actually preferred the concept of the original “failed” prototype. I dunno…at the moment this seems lackluster given the promise of the selected theme. Though, with a little polish and some additional, more unique game play elements, this could be good.</p>
+</div>
+		<div class="when"><a href="#comment-164" class="datetime" data-timezone="UTC" data-timestamp="1362057692">2013/02/28 13:21:32</a></div>
+	</div>
+		<div class="comment" id="comment-171">
+		<div class="who">Bob</div>
+		<div class="what"><p>This feels a little lackluster to me right now.  I don’t see how it fits the theme yet either.  Keep hacking.</p>
+</div>
+		<div class="when"><a href="#comment-171" class="datetime" data-timezone="UTC" data-timestamp="1362890744">2013/03/10 04:45:44</a></div>
+	</div>
+		<div class="comment" id="comment-173">
+		<div class="who">Matthew Stevens</div>
+		<div class="what"><p>I wonder what ever happened to finishing this game and starting the next one… I hope everyone is OK.</p>
+</div>
+		<div class="when"><a href="#comment-173" class="datetime" data-timezone="UTC" data-timestamp="1363352470">2013/03/15 13:01:10</a></div>
+	</div>
+		<div class="comment" id="comment-174">
+		<div class="who">Shaun</div>
+		<div class="what"><p>Matthew, we’re still hard at work polishing this game. Only seven days left!</p>
+</div>
+		<div class="when"><a href="#comment-174" class="datetime" data-timezone="UTC" data-timestamp="1363354424">2013/03/15 13:33:44</a></div>
+	</div>
+		<div class="comment" id="comment-176">
+		<div class="who">9Volt</div>
+		<div class="what"><p>When the game is gonna be out?</p>
+</div>
+		<div class="when"><a href="#comment-176" class="datetime" data-timezone="UTC" data-timestamp="1363999303">2013/03/23 00:41:43</a></div>
+	</div>
+		<div class="comment" id="comment-177">
+		<div class="who">Shaun</div>
+		<div class="what"><p><a href="/journal/30/game-two-four-players/">Tomorrow!</a></p>
+</div>
+		<div class="when"><a href="#comment-177" class="datetime" data-timezone="UTC" data-timestamp="1364006769">2013/03/23 02:46:09</a></div>
+	</div>
+		<div class="comment" id="comment-184">
+		<div class="who">Goose</div>
+		<div class="what"><p>Fun game! Quite polished and deep! Wish I had 4 people to play with but even as single player it is pretty fun. Was really surprised to find you were able to add bosses! To be 100% honest I started to get a little bored part way through the 2nd stage, but I think it would be a lot more fun with more people fighting for top score.</p>
+
+<p>Some minor suggestions:</p>
+
+<ul>
+<li>Show how many points are being awarded for kills and destruction right above the sprite on screen (like damage points in an RPG). It’s hard to know what I should be focusing on without knowing what is worth the most points.</li>
+<li>When the ground is actively rising keep the “Go Up” arrow on screen as a reminder that you shouldn’t stop right now. This became a bigger issue after the first stage.</li>
+<li>Explain what the fireplace things are for. I thought they were checkpoints, but then found that I checkpointed even without them.</li>
+<li>The difference between the big enemies and the small enemies isn’t very obvious (especially when there are only 1 type on screen). Would be nice if the big guys had something to call out them out.</li>
+</ul>
+
+<p>Can’t wait to see what’s next!</p>
+</div>
+		<div class="when"><a href="#comment-184" class="datetime" data-timezone="UTC" data-timestamp="1364148309">2013/03/24 18:05:09</a></div>
+	</div>
+		<div class="comment" id="comment-185">
+		<div class="who">BrianHorror</div>
+		<div class="what"><p>This is awesome guys. Excellent recovery from a slower start! I eat my earlier comment last month.</p>
+</div>
+		<div class="when"><a href="#comment-185" class="datetime" data-timezone="UTC" data-timestamp="1364152698">2013/03/24 19:18:18</a></div>
+	</div>
+		<div class="comment" id="comment-191">
+		<div class="who">Mike</div>
+		<div class="what"><p>Finally played this. Really enjoyed it. Awesome little platformer. Very well done. Cant wait to see what comes next.</p>
+</div>
+		<div class="when"><a href="#comment-191" class="datetime" data-timezone="UTC" data-timestamp="1364861822">2013/04/02 00:17:02</a></div>
+	</div>
+		<div class="comment" id="comment-197">
+		<div class="who">Kevin</div>
+		<div class="what"><p>Had this hooked up to a tv and the buttons mapped to a PS3 controller. Played with two friends as well and we all had a blast! Were laughing constantly and competing to beat each others scores. You guys did a great job on this one!</p>
+</div>
+		<div class="when"><a href="#comment-197" class="datetime" data-timezone="UTC" data-timestamp="1365295640">2013/04/07 00:47:20</a></div>
+	</div>
+	</div>	</div><div class="copy">
+		Copyright © 2012–<span class="dateyear"></span> 
+		<a href="/">Retro Game Crunch</a>.
+	</div></div><script>
+$(function()
+{
+	$('.spoilers-toggle').on('touchstart click', function(event)
+	{
+		if(event.handled !== true)
+		{
+			$(this).parent().toggleClass('open');
+			event.handled = true;
+		}
+		return false;
+	});
+})
+</script>
+<script src="/archive.js"></script><script>cleanup();</script></body>
+</html>

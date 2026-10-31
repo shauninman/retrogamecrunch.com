@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Dead End • Retro Game Crunch</title>
+<script>if((window.devicePixelRatio===undefined?1:window.devicePixelRatio)>1)document.cookie='HTTP_IS_RETINA=1;path=/';</script>
+<meta name="google-site-verification" content="0n15O71rkhohq8oudSJ4AhQ9ZHGrtYQGzZ-hj6_NTGI">
+<meta name="viewport" id="viewport" content="width=800">
+<link rel="stylesheet" href="/styles/rgc.q688883a0dcaa.css">
+<link rel="stylesheet" href="/scripts/highlight/styles/zenburn.css">
+<script src="/scripts/highlight/highlight.pack.js"></script>
+<script src="/scripts/jquery-1.8.3.min.js"></script>
+
+<script src="/scripts/mediaelement/mediaelement-and-player.min.js"></script>
+<link rel="stylesheet" href="/scripts/mediaelement/mediaelementplayer.css">
+<script>
+hljs.tabReplace = '    ';
+hljs.initHighlightingOnLoad();
+
+$(function()
+{
+	$('audio').mediaelementplayer(/* Options */);
+	
+	// disable :hover on touch devices
+	// based on https://gist.github.com/4404503 
+	// via https://twitter.com/javan/status/284873379062890496
+	// + https://twitter.com/pennig/status/285790598642946048
+	// re https://retrogamecrunch.com/tmp/hover
+	if ('createTouch' in document)
+	{
+		$('html').addClass('touch');
+		try
+		{
+			var ignore = /:hover\b/;
+			for (var i=0; i<document.styleSheets.length; i++)
+			{
+				var sheet = document.styleSheets[i];
+				for (var j=sheet.cssRules.length-1; j>=0; j--)
+				{
+					var rule = sheet.cssRules[j];
+					if (rule.type === CSSRule.STYLE_RULE && ignore.test(rule.selectorText))
+					{
+						sheet.deleteRule(j);
+					}
+				}
+			}
+		}
+		catch(e){}
+	}
+});
+
+var then = 1387576800000;
+var deadline = '2013-12-20 22:00:00 UTC';
+var last_mins = -1;
+window.setInterval(function()
+{
+	var now = (new Date).getTime();
+	var remaining = then - now;
+	if (remaining < 0) remaining = 0;
+
+	var sec = 1000;
+	var min = 60 * sec;
+	var hour = 60 * min;
+	var day = 24 * hour;
+
+	var days = Math.floor(remaining / day);
+	remaining -= days * day;
+	var hours = Math.floor(remaining / hour);
+	remaining -= hours * hour;
+	var mins = Math.floor(remaining / min);
+	
+	if (last_mins == mins) return; // prevent unnecessary redraws
+	last_mins = mins;
+
+	var html = '';
+
+	if (days) 	html += '<span class="remaining-days">'+days+' day'+(days>1?'s':'')+'</span> ';
+	if (hours) 	html += '<span class="remaining-days">'+hours+' hour'+(hours>1?'s':'')+'</span> ';
+	if (mins) 	html += '<span class="remaining-days">'+mins+' minute'+(mins>1?'s':'')+'</span> ';
+
+	// DELAY
+	// if (html=='') html = 'To be determined';
+	if (html=='') html = 'Just a few moments';
+
+	$('span.countdown').html(html);
+}, 1 * 1000);
+</script>
+
+
+<link rel="stylesheet" href="/archive.css"><link rel="canonical" href="https://retrogamecrunch.com/journal/25/dead-end/"></head>
+<body>
+	<div class="wrap wrap-top">
+		<div id="logo-unit">
+			<a id="logo" href="/"><img src="/images/logo-black.png" width="204" height="98" alt="Retro Game Crunch"></a>
+			<a id="funded" href="http://www.kickstarter.com/projects/shauninman/retro-game-crunch-six-games-in-six-months"><img src="/images/funded-with.png" width="116" height="112" alt="Funded with Kickstarter"></a>
+		</div><div id="mini-login">
+	
+</div><div id="status">
+			<div class="currently">
+				<strong>Currently</strong>
+				<a href="/games/6/shuten/">Recovering from Shūten Complete</a>
+			</div></div><ul class="nav nav-main">
+			<li><a href="/">Home</a></li>
+			<li><a href="/games/">Games</a></li>			<li><a href="/rewards/">Rewards</a></li>
+			<li><a href="/journal/" class="current">Journal</a></li>
+			<li><a href="/primer/">Primer</a></li>
+			<li><a href="/about/">About</a></li>
+			<li><a href="/contact/">Contact</a></li>
+		</ul>
+	</div><div class="wide"><div class="wrap">
+					<ul class="nav nav-alt nav-journal">
+									<li><a href="/journal/24/end-of-end-of-line/">End of End of Line</a></li>
+													<li><a href="/journal/26/rgc-podcast-episode-1/">RGC Podcast, Episode 1</a></li>
+							</ul>
+				</div></div><div class="wrap wrap-bottom">
+		<div class="content">
+		
+		
+	<div class="post">
+		<h1>Dead End</h1>
+		<div class="byline">
+			Posted by <strong>Shaun</strong> 
+							<span class="datetime" data-timezone="UTC" data-timestamp="1360267744">2013/02/07 20:09:04</span>					</div>
+		<p><img src="/shared/images/game-1/1-11.png" alt="1-11.png"></p>
+
+<p>Stuck on this level? It’s not your fault. Over the course of development, the levels that introduce the concepts this level was built on were moved to later worlds. A few tips:</p>
+
+<div class="spoilers"><img src="/images/btn-spoilers.png" height="30" alt="Spoilers" class="spoilers-toggle"><div class="spoilers-content">
+
+<ol>
+<li>A broken hopper’s rubble presses a button.</li>
+<li>Flyers will land on the worn patches closest to their last repair job.</li>
+</ol>
+
+</div></div>
+
+<p>Still stuck? Here’s the complete solution:</p>
+
+<div class="spoilers"><img src="/images/btn-spoilers.png" height="30" alt="Spoilers" class="spoilers-toggle"><div class="spoilers-content">
+
+<ol>
+<li>Step on the left buton to trap the hopper behind the right gate on the right button.</li>
+<li>Push the crate onto the left button.</li>
+<li>Break the hopper up against the left gate to get the flyer to land on the lower worn patch.</li>
+<li>Break the flyer.</li>
+<li>Break the hopper on the right button.</li>
+<li>Push the crate into the left starting area, then push it back onto the left button.</li>
+<li>Both gates to the spikes should be down, now break yourself.</li>
+</ol>
+
+</div></div>
+	</div>
+	
+		<h2>4 Comments</h2>
+<div class="comments">
+		<div class="comment" id="comment-129">
+		<div class="who">Jack</div>
+		<div class="what"><p>This took me awhile and I nearly got the crate on to the right button through a collision glitch. Once I realised a broken hopper’s rubble presses a button it all fell into place.</p>
+
+<p>PS This game is amazing, thank you!</p>
+</div>
+		<div class="when"><a href="#comment-129" class="datetime" data-timezone="UTC" data-timestamp="1360269037">2013/02/07 20:30:37</a></div>
+	</div>
+		<div class="comment" id="comment-130">
+		<div class="who">DimerHunton</div>
+		<div class="what"><p>Ah! D’oh!</p>
+</div>
+		<div class="when"><a href="#comment-130" class="datetime" data-timezone="UTC" data-timestamp="1360279117">2013/02/07 23:18:37</a></div>
+	</div>
+		<div class="comment" id="comment-136">
+		<div class="who">jrmcdowell13</div>
+		<div class="what"><p>Ha, I did finally figure it out, but glad to find out I wasn’t the only one who was having trouble.</p>
+</div>
+		<div class="when"><a href="#comment-136" class="datetime" data-timezone="UTC" data-timestamp="1360536759">2013/02/10 22:52:39</a></div>
+	</div>
+		<div class="comment" id="comment-147">
+		<div class="who">Simon</div>
+		<div class="what"><p>Well, i didn’t have much trouble, because I played the 72 hour version, but it was probably still the level that took me the longest in the first world</p>
+</div>
+		<div class="when"><a href="#comment-147" class="datetime" data-timezone="UTC" data-timestamp="1360752076">2013/02/13 10:41:16</a></div>
+	</div>
+	</div>		</div><div class="copy">
+		Copyright © 2012–<span class="dateyear"></span> 
+		<a href="/">Retro Game Crunch</a>.
+	</div></div><script>
+$(function()
+{
+	$('.spoilers-toggle').on('touchstart click', function(event)
+	{
+		if(event.handled !== true)
+		{
+			$(this).parent().toggleClass('open');
+			event.handled = true;
+		}
+		return false;
+	});
+})
+</script>
+<script src="/archive.js"></script><script>cleanup();</script></body>
+</html>

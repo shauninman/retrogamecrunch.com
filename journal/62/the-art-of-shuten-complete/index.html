@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>The Art of Shūten Complete • Retro Game Crunch</title>
+<script>if((window.devicePixelRatio===undefined?1:window.devicePixelRatio)>1)document.cookie='HTTP_IS_RETINA=1;path=/';</script>
+<meta name="google-site-verification" content="0n15O71rkhohq8oudSJ4AhQ9ZHGrtYQGzZ-hj6_NTGI">
+<meta name="viewport" id="viewport" content="width=800">
+<link rel="stylesheet" href="/styles/rgc.q688883a0dcaa.css">
+<link rel="stylesheet" href="/scripts/highlight/styles/zenburn.css">
+<script src="/scripts/highlight/highlight.pack.js"></script>
+<script src="/scripts/jquery-1.8.3.min.js"></script>
+
+<script src="/scripts/mediaelement/mediaelement-and-player.min.js"></script>
+<link rel="stylesheet" href="/scripts/mediaelement/mediaelementplayer.css">
+<script>
+hljs.tabReplace = '    ';
+hljs.initHighlightingOnLoad();
+
+$(function()
+{
+	$('audio').mediaelementplayer(/* Options */);
+	
+	// disable :hover on touch devices
+	// based on https://gist.github.com/4404503 
+	// via https://twitter.com/javan/status/284873379062890496
+	// + https://twitter.com/pennig/status/285790598642946048
+	// re https://retrogamecrunch.com/tmp/hover
+	if ('createTouch' in document)
+	{
+		$('html').addClass('touch');
+		try
+		{
+			var ignore = /:hover\b/;
+			for (var i=0; i<document.styleSheets.length; i++)
+			{
+				var sheet = document.styleSheets[i];
+				for (var j=sheet.cssRules.length-1; j>=0; j--)
+				{
+					var rule = sheet.cssRules[j];
+					if (rule.type === CSSRule.STYLE_RULE && ignore.test(rule.selectorText))
+					{
+						sheet.deleteRule(j);
+					}
+				}
+			}
+		}
+		catch(e){}
+	}
+});
+
+var then = 1387576800000;
+var deadline = '2013-12-20 22:00:00 UTC';
+var last_mins = -1;
+window.setInterval(function()
+{
+	var now = (new Date).getTime();
+	var remaining = then - now;
+	if (remaining < 0) remaining = 0;
+
+	var sec = 1000;
+	var min = 60 * sec;
+	var hour = 60 * min;
+	var day = 24 * hour;
+
+	var days = Math.floor(remaining / day);
+	remaining -= days * day;
+	var hours = Math.floor(remaining / hour);
+	remaining -= hours * hour;
+	var mins = Math.floor(remaining / min);
+	
+	if (last_mins == mins) return; // prevent unnecessary redraws
+	last_mins = mins;
+
+	var html = '';
+
+	if (days) 	html += '<span class="remaining-days">'+days+' day'+(days>1?'s':'')+'</span> ';
+	if (hours) 	html += '<span class="remaining-days">'+hours+' hour'+(hours>1?'s':'')+'</span> ';
+	if (mins) 	html += '<span class="remaining-days">'+mins+' minute'+(mins>1?'s':'')+'</span> ';
+
+	// DELAY
+	// if (html=='') html = 'To be determined';
+	if (html=='') html = 'Just a few moments';
+
+	$('span.countdown').html(html);
+}, 1 * 1000);
+</script>
+
+
+<link rel="stylesheet" href="/archive.css"><link rel="canonical" href="https://retrogamecrunch.com/journal/62/the-art-of-shuten-complete/"></head>
+<body>
+	<div class="wrap wrap-top">
+		<div id="logo-unit">
+			<a id="logo" href="/"><img src="/images/logo-black.png" width="204" height="98" alt="Retro Game Crunch"></a>
+			<a id="funded" href="http://www.kickstarter.com/projects/shauninman/retro-game-crunch-six-games-in-six-months"><img src="/images/funded-with.png" width="116" height="112" alt="Funded with Kickstarter"></a>
+		</div><div id="mini-login">
+	
+</div><div id="status">
+			<div class="currently">
+				<strong>Currently</strong>
+				<a href="/games/6/shuten/">Recovering from Shūten Complete</a>
+			</div></div><ul class="nav nav-main">
+			<li><a href="/">Home</a></li>
+			<li><a href="/games/">Games</a></li>			<li><a href="/rewards/">Rewards</a></li>
+			<li><a href="/journal/" class="current">Journal</a></li>
+			<li><a href="/primer/">Primer</a></li>
+			<li><a href="/about/">About</a></li>
+			<li><a href="/contact/">Contact</a></li>
+		</ul>
+	</div><div class="wide"><div class="wrap">
+					<ul class="nav nav-alt nav-journal">
+									<li><a href="/journal/61/the-end-is-here/">The End is Here</a></li>
+													<li><a href="/journal/63/rgc-podcast-episode-6/">RGC Podcast, Episode 6</a></li>
+							</ul>
+				</div></div><div class="wrap wrap-bottom">
+		<div class="content">
+		
+		
+	<div class="post">
+		<h1>The Art of Shūten Complete</h1>
+		<div class="byline">
+			Posted by <strong>Shaun</strong> 
+							<span class="datetime" data-timezone="UTC" data-timestamp="1389111812">2014/01/07 16:23:32</span>					</div>
+		<p>This post will contain spoilers! And lots of (hopefuly) pretty pictures.</p>
+
+<h2>Bosses</h2>
+
+<p>As I’ve mentioned <a href="/journal/58/meet-your-end/">previously</a>, the first boss I ever designed (Ripper for Super Clew Land) took days to draw. Each individual boss for Shūten only took hours. </p>
+
+<p>For Ripper, I used my Wacom tablet but, since I was without it in Denver, I had to use a different process for these bosses. For most bosses, I would sketch only the left or right side of the boss on paper, take a photo with my iPhone, and mail the image to myself. Then I’d open it in Photoshop, adjust the brightness/contrast then duplicate and flip it horizontally to create a full illustration before scaling to game size. </p>
+
+<p>Inevitably I’d forget some part of the boss or not be happy with some aspect of the original sketch. Instead of starting completely over, I’d draw just that part separately or erase bits of the original and try again, and repeat the process, adding the revision to the original in Photoshop. </p>
+
+<p><img src="/shared/images/game-6/art/squid.png" alt="squid.png">
+<em>Squid</em></p>
+
+<p>The squid was one of the few bosses I drew in its entirety (after trying and being unhappy with the reflection trick).</p>
+
+<p><img src="/shared/images/game-6/art/wolf.png" alt="wolf.png">
+<em>Wolf</em></p>
+
+<p>The wolf came pretty easily. The only part I wasn’t happy with was the ears. Rather than redrawing on paper I managed to correct them directly in pixels.</p>
+
+<p><img src="/shared/images/game-6/art/dragon.png" alt="dragon.png">
+<em>Dragon</em></p>
+
+<p>This one took a couple tries. The first attempt looked like a Chinese festival dragon, a little too comical. The final design heavily references the dragon from Spirited Away. The films of Studio Ghibli have had a strong influence on my designs throughout Retro Game Crunch.</p>
+
+<p><img src="/shared/images/game-6/art/crane.png" alt="crane.png">
+<em>Crane</em></p>
+
+<p>The original top down design perfectly illustrates my patchwork process (reflection, scaling, rotating, etc) but was too visually boring and not very threatening.</p>
+
+<p><img src="/shared/images/game-6/art/tortoise.png" alt="tortoise.png">
+<em>Tortoise</em></p>
+
+<p>The head was way too big in the original sketch. “We’ll fix it in post.” Also, the shell was all done with pixels after a number of failed attempts to sketch it on paper. It still isn’t perfect but I think the shading masks the imperfections pretty well.</p>
+
+<p><img src="/shared/images/game-6/art/oni.png" alt="oni.png">
+<em>Oni</em></p>
+
+<p>The original design for Oni had a ring of skulls which remained a nice-to-have until late in the process. Once implemented, we decided they weren’t necessary. The third eye and snarl were all pixel-only additions and made our sturdy sumo a little more menacing.</p>
+
+<h2>Enemies</h2>
+
+<p>I struggled with enemies for longer than I would have liked. I think I overwhelmed myself with the simultaneous goal of breadth <em>and</em> depth. For a while I chased down boring, animal-inspired enemies before honing in on more spiritual and abstract sprites.</p>
+
+<p><img src="/shared/images/game-6/art/cut-enemies.png" alt="cut-enemies.png">
+<em>Cut enemies (including smaller versions of some final enemies)</em></p>
+
+<p><img src="/shared/images/game-6/art/enemies.png" alt="enemies.png">
+<em>Final enemies and palette swaps</em></p>
+
+<p>I’m most proud of the crowman, drawn completely in pixels with nary a sketch to work from. As with most of the other enemies, I took a lot of inspiration from ancient Japanese scrolls.</p>
+
+<h2>Map</h2>
+
+<p>I also struggled with this map. A few sketches helped me figure out the basic relative position of things but it was many false pixel starts before I found the loose grid-based approach that became the final design. Then it was about a day of just building up the details and depth that make that final design sing.</p>
+
+<p><img src="/shared/images/game-6/art/map.png" alt="map.png">
+<em>Evolution of the map</em></p>
+
+<p>And there you have it, the Art of Shūten</p>
+	</div>
+	
+		<h2>1 Comment</h2>
+<div class="comments">
+		<div class="comment" id="comment-350">
+		<div class="who">Shrapnel</div>
+		<div class="what"><p>Congratulations! I sure hope you’ll repeat this awesome experiment and let us have more games. =)</p>
+</div>
+		<div class="when"><a href="#comment-350" class="datetime" data-timezone="UTC" data-timestamp="1389116375">2014/01/07 17:39:35</a></div>
+	</div>
+	</div>		</div><div class="copy">
+		Copyright © 2012–<span class="dateyear"></span> 
+		<a href="/">Retro Game Crunch</a>.
+	</div></div><script>
+$(function()
+{
+	$('.spoilers-toggle').on('touchstart click', function(event)
+	{
+		if(event.handled !== true)
+		{
+			$(this).parent().toggleClass('open');
+			event.handled = true;
+		}
+		return false;
+	});
+})
+</script>
+<script src="/archive.js"></script><script>cleanup();</script></body>
+</html>

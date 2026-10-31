@@ -1,1 +1,449 @@
-<!-- and we're back -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Retro Game Crunch</title>
+<script>if((window.devicePixelRatio===undefined?1:window.devicePixelRatio)>1)document.cookie='HTTP_IS_RETINA=1;path=/';</script>
+<meta name="viewport" id="viewport" content="width=1008">
+<meta name="google-site-verification" content="0n15O71rkhohq8oudSJ4AhQ9ZHGrtYQGzZ-hj6_NTGI">
+<style>
+/* RESET */
+body,div,dl,dt,dd,ul,ol,
+li,h1,h2,h3,h4,h5,h6,
+pre,form,fieldset,p,
+blockquote,th,td          {margin:0;padding:0;}
+body                      {line-height:1;color:#000;background:#fff;}
+h1,h2,h3,h4,h5,h6,p       {font-size:100%;font-weight:normal;}
+ul                        {list-style:none;}
+caption,cite,code,th      {font-style:normal;font-weight:normal;}
+fieldset,img              {border:0;}
+:focus                    {outline:none;}
+caption,th                {text-align:left;}
+table                     {border-collapse:collapse;border-spacing:0;}
+hr                        {border:0;border-top:1px solid #000;margin:0;height:1px;}
+
+*
+{
+	-moz-box-sizing: border-box; 
+	-webkit-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+img
+{
+	/* MERRY CRISPNESS */
+	image-rendering: -webkit-optimize-contrast;
+	image-rendering: -moz-crisp-edges;
+	image-rendering: -o-crisp-edges;
+	image-rendering: optimizeSpeed;
+	-ms-interpolation-mode: nearest-neighbor;
+}
+
+body {
+	background-color: #000;
+	margin: 0;
+	padding: 24px;
+	color: #fff;
+	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	line-height: 32px;
+}
+iframe {
+	display: block;
+	margin: 0;
+}
+
+#wrap {
+	width: 960px;
+	margin: 0 auto;
+}
+
+#youtube-iframe {
+	margin: 0 0 16px;
+}
+
+#content-wrap {
+	border-top: 4px solid #fff;
+	border-bottom: 2px solid #fff;
+	margin: 32px 0 16px;
+	padding: 16px 0;
+}
+#content {
+	width: 550px;
+/*	overflow: hidden;*/
+}
+
+h1 {
+	font-size: 24px;
+	line-height: 28px;
+	font-weight: bold;
+	margin-bottom: 0;
+}
+h2 {
+	color: #7c7c7c;
+}
+h3
+{
+	font-weight: bold;
+	margin: 16px 0;
+}
+p {
+	margin: 16px 0 24px;
+}
+ul.games:after,
+#footer:after,
+.two-col:after
+{
+	content: '';
+	display: block;
+	height: 0;
+	clear: both;
+}
+
+/*ul.games {
+	width: 984px;
+}*/
+ul.games li {
+	float: left;
+	width: 216px;
+	font-size: 14px;
+	line-height: 20px;
+	margin: 0 24px 24px 0;
+	color: #bcbcbc;
+}
+ul.games li strong {
+	color: #fff;
+}
+
+
+#footer {
+	clear: both;
+	padding-bottom: 32px;
+}
+#footer img
+{
+	float: left;
+}
+
+#footer-wrap {
+	margin-left: 128px;
+}
+
+ul.nav
+{
+	padding: 0;
+	text-align: justify;
+	overflow: hidden;
+	font-weight: bold;
+	line-height: 10px;
+	height: 18px;
+	margin: 0;
+	position: relative;
+	top: -4px;
+	/* height required to mask :after overflow */
+}
+
+ul.nav li
+{
+	position: relative;
+	display: inline-block;
+}
+
+ul.nav:after
+{
+	display: inline-block;
+	content: '';
+	width: 100%;
+}
+
+a
+{
+	color: #3cbcfc; /* blue */
+	text-decoration: none;
+}
+
+.copyright {
+	border-top: 1px solid #7c7c7c;
+	color: #7c7c7c;
+	font-size: 12px;
+	margin: 6px 0 0;
+}
+
+.sub-col {
+	float: left;
+}
+
+.warning {
+	margin: 4px 0 0 8px;
+	font-size: 12px;
+	color: #7c7c7c;
+}
+
+.two-col
+{
+	border-bottom: 4px solid #fff;
+	padding-bottom: 24px;
+	margin-bottom: 32px;
+}
+
+#youtube-wrap {
+	position: relative;
+	cursor: pointer;
+	height: 540px;
+	overflow: hidden;
+}
+
+#youtube-iframe {
+	position: relative;
+	z-index: 100;
+}
+
+#youtube-poster {
+	position: absolute;
+	z-index: 1;
+	top: 0;
+}
+
+#youtube-logo {
+	position: absolute;
+	top: 32px;
+	right: 16px;
+}
+
+#youtube-play {
+	position: absolute;
+	top: 210px;
+	left: 400px;
+	width: 160px;
+	height: 120px;
+	background-image: url(/images/youtube-play-glow.png);
+	background-size: 160px 240px;
+}
+
+#youtube-wrap:hover #youtube-play {
+	background-position: 0 -120px;
+}
+
+#buy-now {
+	float: right;
+	background-color: #004058; /*#00b800;*/
+	border-radius: 12px;
+	padding: 0 0 12px 12px;
+}
+
+#buy-now strong {
+	display: block;
+	margin-bottom: 4px;
+}
+
+#buy-now img {
+	display: block;
+	border-radius: 8px;
+	float: left;
+	margin-right: 12px;
+}
+
+#buy-now img:hover {
+	box-shadow: 0 0 8px 4px #3cbcfc;
+	z-index: 100;
+}
+
+#ZoomClose {
+	display: none !important;
+}
+
+#wallpaper {
+	text-align: right;
+	font-size: 12px;
+	position: relative;
+	height: 4px;
+}
+
+/*#wallpaper a:after {
+	content: '⬇';
+	position: relative;
+	top: 2px;
+}
+*/
+</style>
+<script src="/scripts/jquery-1.8.3.min.js"></script>
+<script>
+// Load YouTube API
+var tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+var isPlaying = false;
+var player;
+function onYouTubeIframeAPIReady() {
+	// Firefox can't seem to hookup to an existing iframe so...
+	player = new YT.Player('youtube-iframe', { 
+		width: 960,
+		height: 540,
+		videoId: 'YGoSLASUJR0',
+		playerVars: {
+			'rel':0,
+			'autohide':1,
+			'showinfo':0
+		},
+		events: { 
+			'onStateChange': onPlayerStateChange 
+		}
+	});
+};
+
+function onPlayerStateChange(event) {
+	// console.log('state:'+event.data);
+	if (!isPlaying && (event.data==YT.PlayerState.PLAYING||event.data==YT.PlayerState.BUFFERING)) {
+		play();
+	}
+	if (isPlaying && event.data==YT.PlayerState.ENDED) {
+		stop();
+	}
+}
+
+function pleaseExitFullScreen() {
+	if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.mozFullScreenElement && !document.msFullscreenElement) return;
+	if (document.exitFullscreen) 			document.exitFullscreen();
+	else if (document.msExitFullscreen)		document.msExitFullscreen();
+	else if (document.mozCancelFullScreen)	document.mozCancelFullScreen();
+	else if (document.webkitExitFullscreen)	document.webkitExitFullscreen();
+}
+
+function play() {
+	// console.log('play');
+	isPlaying = true;
+	$('#youtube-iframe').css({'opacity':1});
+	$('#youtube-poster').hide();
+}
+
+function stop() {
+	// console.log('stop');
+	isPlaying = false;
+	pleaseExitFullScreen();
+	$('#youtube-iframe').css({'opacity':0});
+	$('#youtube-poster').show();
+}
+
+$(function(){
+	stop();
+	$('#youtube-wrap').on('click', play);
+});
+
+// disable :hover on touch devices
+// based on https://gist.github.com/4404503 
+// via https://twitter.com/javan/status/284873379062890496
+// + https://twitter.com/pennig/status/285790598642946048
+// re https://retrogamecrunch.com/tmp/hover
+if ('createTouch' in document)
+{
+	$('html').addClass('touch');
+	try
+	{
+		var ignore = /:hover\b/;
+		for (var i=0; i<document.styleSheets.length; i++)
+		{
+			var sheet = document.styleSheets[i];
+			for (var j=sheet.cssRules.length-1; j>=0; j--)
+			{
+				var rule = sheet.cssRules[j];
+				if (rule.type === CSSRule.STYLE_RULE && ignore.test(rule.selectorText))
+				{
+					sheet.deleteRule(j);
+				}
+			}
+		}
+	}
+	catch(e){}
+}
+
+</script>
+<link rel="stylesheet" href="/archive.css"><link rel="canonical" href="https://retrogamecrunch.com/"></head>
+<body>
+
+<div id="wrap">
+	<div id="youtube-wrap">
+		<div id="youtube-iframe"></div>
+		<noscript>
+			<iframe id="youtube-iframe" width="960" height="540" scrolling="no" frameborder="0" src="//www.youtube.com/embed/YGoSLASUJR0?enablejsapi=1&amp;rel=0&amp;autohide=1&amp;showinfo=0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+		</noscript>
+		<div id="youtube-poster">
+			<div id="youtube-play"></div>
+			<img id="youtube-logo" src="/images/logo-white-antialiased.png" width="204" height="98">
+			<img src="/images/couch-960x540.jpg" width="960" height="540">
+		</div>
+	</div>
+	
+	<div id="wallpaper">
+		Download the <a href="/public/retro-game-couch-2880x2880.jpg" rel="nozoom">Retro Game Couch wallpaper</a>.
+	</div>
+	
+	<div id="content-wrap">
+		<div id="buy-now">
+			<strong>Get it now!</strong>
+			<a href="http://store.steampowered.com/app/290040"><img src="/images/btn-mist.png" width="112" height="112" alt="Steam"></a>
+			<a href="https://www.humblebundle.com/store/p/retrogamecrunch_storefront"><img src="/images/btn-humble.png" width="112" height="112" alt="Humble Store"></a>
+		</div>
+		<div id="content">
+			<h1>Presenting the Retro Game Crunch Collection</h1>
+			<h2>Seven Challenging 8-bit Games</h2>
+			
+			<p>Retro Game Crunch is a series of 7 games, full of the charm and challenge of the 8-bit generation. Each world feels like an authentic NES classic. This genre-spanning collection includes...</p>
+		</div>
+		<ul class="games">
+			<li>
+				<a href="/images/game-0@2x.png"><img src="/shared/images/super-clew-land-mac.png" width="240" height="160"></a>
+				<strong>Super Clew Land</strong> — The game that started it all! Eat, evolve, and explore in this happy-go-lucky exploration-based platformer.</li> 
+
+			<li>
+				<a href="/images/game-1@2x.png"><img src="/shared/images/end-of-line-mac.png" width="240" height="160"></a>
+				<strong>End of Line</strong> — A game about learning how to die. Figure out how to thwart autonomous repair bots in this puzzle adventure.</li> 
+
+			<li>
+				<a href="/images/game-2@2x.png"><img src="/shared/images/gaiattack-mac.png" width="240" height="160"></a>
+				<strong>GAIAttack!</strong> — Gaia summons four champions to rise up and destroy the pillaging Sky Pirates. A beat ‘em up platformer for up to four players.</li> 
+
+			<li>
+				<a href="/images/game-3@2x.png"><img src="/shared/images/paradox-lost-mac.png" width="240" height="160"></a>
+				<strong>Paradox Lost</strong> — Abby survives her plane going down and comes across a gun that shoots time travel! A metroidvania spanning three eras.</li> 
+
+			<li>
+				<a href="/images/game-4@2x.png"><img src="/shared/images/wub-wub-wescue-mac.png" width="240" height="160"></a>
+				<strong>Wub-Wub Wescue</strong> — A pug must brave the jungle and navigate its treacherous rhythms, all to rescue his master. An early 80’s arcade platformer.</li> 
+
+			<li>
+				<a href="/images/game-5@2x.png"><img src="/shared/images/brains-and-hearts-mac.png" width="240" height="160"></a>
+				<strong>Brains &amp; Hearts</strong> — A two player card game that takes place inside Albert Einstein’s dream. Play against the CPU or a friend.</li> 
+
+			<li>
+				<a href="/images/game-6@2x.png"><img src="/shared/images/shuten-mac.png" width="240" height="160"></a>
+				<strong>Shūten</strong> — A samurai shoot ‘em up for one or two players. Owari’s village is trampled as ancient gods awaken. He takes up sword to end them.</li>
+		</ul>
+		<p>Play with an Xbox 360, DualShock 4, or any XInput-compatible controller!</p>
+	</div>
+	<div id="footer">
+		<a href="/"><img src="/images/logo-white-sm.png" width="108" height="42" alt="Retro Game Crunch"></a>
+		
+		<div id="footer-wrap">
+			<ul class="nav">
+				<li><a href="/">Home</a></li>
+				<li><a href="/games/">Games</a></li>
+				<li><a href="/rewards/">Backer Rewards</a></li>
+				<li><a href="/journal/">Journal</a></li>
+				<li><a href="/primer/">Primer</a></li>
+				<li><a href="/about/">About</a></li>
+				<li><a href="/contact/">Contact</a></li>
+			</ul>
+			<p class="copyright">Copyright © 2012–<span class="dateyear"></span> Retro Game Crunch</p>
+		</div>
+	</div>
+</div>
+
+<script src="/js-global/FancyZoom.js" type="text/javascript"></script>
+<script src="/js-global/FancyZoomHTML.js" type="text/javascript"></script>
+<script>setupZoom();</script>
+
+<script src="/archive.js"></script><script>cleanup();</script></body>
+</html>

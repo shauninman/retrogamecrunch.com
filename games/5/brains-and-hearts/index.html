@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Brains &amp; Hearts • Retro Game Crunch</title>
+<script>if((window.devicePixelRatio===undefined?1:window.devicePixelRatio)>1)document.cookie='HTTP_IS_RETINA=1;path=/';</script>
+<meta name="google-site-verification" content="0n15O71rkhohq8oudSJ4AhQ9ZHGrtYQGzZ-hj6_NTGI">
+<meta name="viewport" id="viewport" content="width=800">
+<link rel="stylesheet" href="/styles/rgc.q688883a0dcaa.css">
+<link rel="stylesheet" href="/scripts/highlight/styles/zenburn.css">
+<script src="/scripts/highlight/highlight.pack.js"></script>
+<script src="/scripts/jquery-1.8.3.min.js"></script>
+
+<script src="/scripts/mediaelement/mediaelement-and-player.min.js"></script>
+<link rel="stylesheet" href="/scripts/mediaelement/mediaelementplayer.css">
+<script>
+hljs.tabReplace = '    ';
+hljs.initHighlightingOnLoad();
+
+$(function()
+{
+	$('audio').mediaelementplayer(/* Options */);
+	
+	// disable :hover on touch devices
+	// based on https://gist.github.com/4404503 
+	// via https://twitter.com/javan/status/284873379062890496
+	// + https://twitter.com/pennig/status/285790598642946048
+	// re https://retrogamecrunch.com/tmp/hover
+	if ('createTouch' in document)
+	{
+		$('html').addClass('touch');
+		try
+		{
+			var ignore = /:hover\b/;
+			for (var i=0; i<document.styleSheets.length; i++)
+			{
+				var sheet = document.styleSheets[i];
+				for (var j=sheet.cssRules.length-1; j>=0; j--)
+				{
+					var rule = sheet.cssRules[j];
+					if (rule.type === CSSRule.STYLE_RULE && ignore.test(rule.selectorText))
+					{
+						sheet.deleteRule(j);
+					}
+				}
+			}
+		}
+		catch(e){}
+	}
+});
+
+var then = 1387576800000;
+var deadline = '2013-12-20 22:00:00 UTC';
+var last_mins = -1;
+window.setInterval(function()
+{
+	var now = (new Date).getTime();
+	var remaining = then - now;
+	if (remaining < 0) remaining = 0;
+
+	var sec = 1000;
+	var min = 60 * sec;
+	var hour = 60 * min;
+	var day = 24 * hour;
+
+	var days = Math.floor(remaining / day);
+	remaining -= days * day;
+	var hours = Math.floor(remaining / hour);
+	remaining -= hours * hour;
+	var mins = Math.floor(remaining / min);
+	
+	if (last_mins == mins) return; // prevent unnecessary redraws
+	last_mins = mins;
+
+	var html = '';
+
+	if (days) 	html += '<span class="remaining-days">'+days+' day'+(days>1?'s':'')+'</span> ';
+	if (hours) 	html += '<span class="remaining-days">'+hours+' hour'+(hours>1?'s':'')+'</span> ';
+	if (mins) 	html += '<span class="remaining-days">'+mins+' minute'+(mins>1?'s':'')+'</span> ';
+
+	// DELAY
+	// if (html=='') html = 'To be determined';
+	if (html=='') html = 'Just a few moments';
+
+	$('span.countdown').html(html);
+}, 1 * 1000);
+</script>
+
+
+<script>window.RufflePlayer={config:{polyfills:false,publicPath:"/scripts/ruffle/",autoplay:"on"}};</script><script src="/scripts/ruffle/ruffle.js" defer></script><script src="/scripts/flash.js" defer></script><link rel="stylesheet" href="/archive.css"><link rel="canonical" href="https://retrogamecrunch.com/games/5/brains-and-hearts/"></head>
+<body>
+	
+	<div class="wide">
+		<div class="wrap wrap-game">
+		<div id="game-nav">
+							<a id="prev-game" href="/games/4/wub-wub-wescue/"><img src="/images/btn-arrow-prev.png" height="102" alt="Previous Game"></a>
+										<a id="next-game" href="/games/6/shuten/"><img src="/images/btn-arrow-next.png" height="102" alt="Next Game"></a>
+					</div><div id="game">
+			<div class="archive-flash" data-swf="/games/embeds/5/BrainsAndHearts.swf" data-background="#000000" data-flashvars="" style="display:inline-block;width:720px;height:480px;max-width:100%;" id="game-swf"></div>
+		</div><div id="game-options">
+			<img id="preview" src="/images/game-5.png" width="720" alt="">
+			<a href="/rewards/"><img src="/images/btn-download-complete.gif" height="105" alt="Download Complete Version"></a><a href="#game" id="btn-play-crunch"><img src="/images/btn-play-crunch.png" height="105" alt="Play the 72 Hour Version"></a>
+		</div><script>
+		$('#game').hide();
+		$('#btn-play-crunch').on('touchstart click', function(event)
+		{
+			if(event.handled !== true)
+			{
+				$('#game-options').hide();
+				$('#game').show();
+				event.handled = true;
+			}
+			return false;
+		});
+		</script>
+				<div class="masthead">
+			<div id="logo-unit"><a id="logo" href="/"><img src="/images/logo-card-white-sm.png" width="108" height="42" alt="Retro Game Crunch"></a></div>
+			
+			<div class="theme">
+				<span>Theme</span><br>
+				<strong>Einstein's Dreams</strong>
+			</div>
+			
+			<div id="mini-login">
+	
+</div></div>
+	</div></div><div class="wrap wrap-bottom">
+		<div class="content">
+			
+	<div class="two-col">
+		<div class="main-col game-content">
+			<h1>Brains &amp; Hearts <span>a card game made in 72 hours</span></h1>
+			<p>Welcome to Retro Card Crunch. Brains &amp; Hearts is a two player card game. Backers can play the complete version on their Mac or PC against the CPU or a friend. Anyone can download the <a href="/public/rules.pdf">original game rules</a> and play on their kitchen table.</p>
+
+<p><strong>Left/Right</strong> Page through the primer</p>
+		</div>
+		
+		<div class="sub-col downloads">
+					</div>
+	</div>
+	<h2>10 Comments</h2>
+<div class="comments">
+		<div class="comment" id="comment-309">
+		<div class="who">Conan</div>
+		<div class="what"><p>God Die. Love it. :D</p>
+
+<p>I’ve not played the game yet, but I’ve read through the Rules and it sounds like a lot of fun. It’s impressive to read such a comprehensive gameplay-strategy after only 3 days of crunching on the 2-word theme.</p>
+
+<p>It’ll be interesting to see how you implement all this in code - whether or not you keep the traditional card-deck, invent an entirely new kind of deck, or maybe even convert the whole affair to a puzzler.</p>
+</div>
+		<div class="when"><a href="#comment-309" class="datetime" data-timezone="UTC" data-timestamp="1378821332">2013/09/10 13:55:32</a></div>
+	</div>
+		<div class="comment" id="comment-310">
+		<div class="who">Dave Eilers</div>
+		<div class="what"><p>Looks fun. Now I just need to find a friend to play with.</p>
+</div>
+		<div class="when"><a href="#comment-310" class="datetime" data-timezone="UTC" data-timestamp="1378845391">2013/09/10 20:36:31</a></div>
+	</div>
+		<div class="comment" id="comment-311">
+		<div class="who">Jake Marsh</div>
+		<div class="what"><p>Absolutely brilliant.</p>
+</div>
+		<div class="when"><a href="#comment-311" class="datetime" data-timezone="UTC" data-timestamp="1378922448">2013/09/11 18:00:48</a></div>
+	</div>
+		<div class="comment" id="comment-312">
+		<div class="who">Kevin</div>
+		<div class="what"><p>Played the other night and liked it a lot! My only suggestion would be to maybe limit how many times you can lock a card in the game. If not you pretty much just lock a card every time you put it in a blank space. Still had a lot of fun! There was a lot more strategy in it than I thought there would be.</p>
+</div>
+		<div class="when"><a href="#comment-312" class="datetime" data-timezone="UTC" data-timestamp="1378928024">2013/09/11 19:33:44</a></div>
+	</div>
+		<div class="comment" id="comment-313">
+		<div class="who">Shaun</div>
+		<div class="what"><p>Thanks guys! Glad to hear you had fun Kevin. </p>
+
+<p>Locking is designed to give a player who’s falling behind a fighting chance when restarting from a blank slate after their opponent wipes them out. Without locks it’s very easy for the first person to score to completely dominate the other, capturing each card they place as they place it. With no cards, the beleaguered player cannot capture their opponent’s cards. </p>
+
+<p>Setting an arbitrary limit on the number of locks would reduce locks to a temporary fix and once used up, break the remainder of the game. I wrote (a lot!) about how we arrived at the final rule set in my <a href="/journal/55/in-ze-cards-a-brains-hearts-postmortem/">postmortem</a> if you’re interested.</p>
+</div>
+		<div class="when"><a href="#comment-313" class="datetime" data-timezone="UTC" data-timestamp="1378929844">2013/09/11 20:04:04</a></div>
+	</div>
+		<div class="comment" id="comment-314">
+		<div class="who">@streetalchemist</div>
+		<div class="what"><p>Seriously guys, great job! Played with my wife last night and we had a blast! She kicked my ass handily both times, but still, it was great fun. The strategy is pretty crazy.</p>
+</div>
+		<div class="when"><a href="#comment-314" class="datetime" data-timezone="UTC" data-timestamp="1378993190">2013/09/12 13:39:50</a></div>
+	</div>
+		<div class="comment" id="comment-315">
+		<div class="who">Shaun</div>
+		<div class="what"><p>Thanks Alex!</p>
+</div>
+		<div class="when"><a href="#comment-315" class="datetime" data-timezone="UTC" data-timestamp="1379109899">2013/09/13 22:04:59</a></div>
+	</div>
+		<div class="comment" id="comment-316">
+		<div class="who">Goose</div>
+		<div class="what"><p>Played with a co-worker over lunch, and had a lot of fun. We played 2 games. I won the first 8-0 and the second came 3-2.</p>
+
+<p>He felt that you should be able to start runs with the opponents card, since without it, it was too limiting. I felt that if you allowed that it wouldn’t allow much strategy in what card to play (since you would almost always be setting yourself up for SOME run). It probably was influenced by the fact that he lost and I won.</p>
+
+<p>I think we both felt that you should be able to play a God Coin <em>and</em> play a card in the same turn. The God coins already involve some chance so it would be tough to exploit them, but would allow for some more strategy if it could be combine with cards.</p>
+
+<p>In terms of locking the cards that Kevin talked about; I didn’t find it an issue that I was always locking cards. I was often wrestling with the decision of whether to lock  a card or use it right away, and risk having it used against me.</p>
+</div>
+		<div class="when"><a href="#comment-316" class="datetime" data-timezone="UTC" data-timestamp="1379453149">2013/09/17 21:25:49</a></div>
+	</div>
+		<div class="comment" id="comment-321">
+		<div class="who">Alex</div>
+		<div class="what"><p>when does the voting starts</p>
+</div>
+		<div class="when"><a href="#comment-321" class="datetime" data-timezone="UTC" data-timestamp="1382202754">2013/10/19 17:12:34</a></div>
+	</div>
+		<div class="comment" id="comment-322">
+		<div class="who">Rusty</div>
+		<div class="what"><p>@Alex Theme submission for Game 6 started yesterday. Voting begins on Wednesday!</p>
+</div>
+		<div class="when"><a href="#comment-322" class="datetime" data-timezone="UTC" data-timestamp="1382450913">2013/10/22 14:08:33</a></div>
+	</div>
+	</div>	</div><div class="copy">
+		Copyright © 2012–<span class="dateyear"></span> 
+		<a href="/">Retro Game Crunch</a>.
+	</div></div><script>
+$(function()
+{
+	$('.spoilers-toggle').on('touchstart click', function(event)
+	{
+		if(event.handled !== true)
+		{
+			$(this).parent().toggleClass('open');
+			event.handled = true;
+		}
+		return false;
+	});
+})
+</script>
+<script src="/archive.js"></script><script>cleanup();</script></body>
+</html>

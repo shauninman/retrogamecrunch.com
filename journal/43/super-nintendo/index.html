@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>“Super” Nintendo • Retro Game Crunch</title>
+<script>if((window.devicePixelRatio===undefined?1:window.devicePixelRatio)>1)document.cookie='HTTP_IS_RETINA=1;path=/';</script>
+<meta name="google-site-verification" content="0n15O71rkhohq8oudSJ4AhQ9ZHGrtYQGzZ-hj6_NTGI">
+<meta name="viewport" id="viewport" content="width=800">
+<link rel="stylesheet" href="/styles/rgc.q688883a0dcaa.css">
+<link rel="stylesheet" href="/scripts/highlight/styles/zenburn.css">
+<script src="/scripts/highlight/highlight.pack.js"></script>
+<script src="/scripts/jquery-1.8.3.min.js"></script>
+
+<script src="/scripts/mediaelement/mediaelement-and-player.min.js"></script>
+<link rel="stylesheet" href="/scripts/mediaelement/mediaelementplayer.css">
+<script>
+hljs.tabReplace = '    ';
+hljs.initHighlightingOnLoad();
+
+$(function()
+{
+	$('audio').mediaelementplayer(/* Options */);
+	
+	// disable :hover on touch devices
+	// based on https://gist.github.com/4404503 
+	// via https://twitter.com/javan/status/284873379062890496
+	// + https://twitter.com/pennig/status/285790598642946048
+	// re https://retrogamecrunch.com/tmp/hover
+	if ('createTouch' in document)
+	{
+		$('html').addClass('touch');
+		try
+		{
+			var ignore = /:hover\b/;
+			for (var i=0; i<document.styleSheets.length; i++)
+			{
+				var sheet = document.styleSheets[i];
+				for (var j=sheet.cssRules.length-1; j>=0; j--)
+				{
+					var rule = sheet.cssRules[j];
+					if (rule.type === CSSRule.STYLE_RULE && ignore.test(rule.selectorText))
+					{
+						sheet.deleteRule(j);
+					}
+				}
+			}
+		}
+		catch(e){}
+	}
+});
+
+var then = 1387576800000;
+var deadline = '2013-12-20 22:00:00 UTC';
+var last_mins = -1;
+window.setInterval(function()
+{
+	var now = (new Date).getTime();
+	var remaining = then - now;
+	if (remaining < 0) remaining = 0;
+
+	var sec = 1000;
+	var min = 60 * sec;
+	var hour = 60 * min;
+	var day = 24 * hour;
+
+	var days = Math.floor(remaining / day);
+	remaining -= days * day;
+	var hours = Math.floor(remaining / hour);
+	remaining -= hours * hour;
+	var mins = Math.floor(remaining / min);
+	
+	if (last_mins == mins) return; // prevent unnecessary redraws
+	last_mins = mins;
+
+	var html = '';
+
+	if (days) 	html += '<span class="remaining-days">'+days+' day'+(days>1?'s':'')+'</span> ';
+	if (hours) 	html += '<span class="remaining-days">'+hours+' hour'+(hours>1?'s':'')+'</span> ';
+	if (mins) 	html += '<span class="remaining-days">'+mins+' minute'+(mins>1?'s':'')+'</span> ';
+
+	// DELAY
+	// if (html=='') html = 'To be determined';
+	if (html=='') html = 'Just a few moments';
+
+	$('span.countdown').html(html);
+}, 1 * 1000);
+</script>
+
+
+<link rel="stylesheet" href="/archive.css"><link rel="canonical" href="https://retrogamecrunch.com/journal/43/super-nintendo/"></head>
+<body>
+	<div class="wrap wrap-top">
+		<div id="logo-unit">
+			<a id="logo" href="/"><img src="/images/logo-black.png" width="204" height="98" alt="Retro Game Crunch"></a>
+			<a id="funded" href="http://www.kickstarter.com/projects/shauninman/retro-game-crunch-six-games-in-six-months"><img src="/images/funded-with.png" width="116" height="112" alt="Funded with Kickstarter"></a>
+		</div><div id="mini-login">
+	
+</div><div id="status">
+			<div class="currently">
+				<strong>Currently</strong>
+				<a href="/games/6/shuten/">Recovering from Shūten Complete</a>
+			</div></div><ul class="nav nav-main">
+			<li><a href="/">Home</a></li>
+			<li><a href="/games/">Games</a></li>			<li><a href="/rewards/">Rewards</a></li>
+			<li><a href="/journal/" class="current">Journal</a></li>
+			<li><a href="/primer/">Primer</a></li>
+			<li><a href="/about/">About</a></li>
+			<li><a href="/contact/">Contact</a></li>
+		</ul>
+	</div><div class="wide"><div class="wrap">
+					<ul class="nav nav-alt nav-journal">
+									<li><a href="/journal/42/restart/">Restart</a></li>
+													<li><a href="/journal/44/block-rockin-gifs/">Block Rockin’ Gifs</a></li>
+							</ul>
+				</div></div><div class="wrap wrap-bottom">
+		<div class="content">
+		
+		
+	<div class="post">
+		<h1>“Super” Nintendo</h1>
+		<div class="byline">
+			Posted by <strong>Shaun</strong> 
+							<span class="datetime" data-timezone="UTC" data-timestamp="1372897485">2013/07/04 00:24:45</span>					</div>
+		<p>Theme submissions for Game 4 are closed, go <a href="/games/4/wub-wub-wescue/">heart your favorites</a>!</p>
+
+<p>This past week, Matt has been putting the finishing touches on the <a href="/games/1/end-of-line/">End of Line</a> soundtrack—and on his own Nintendo Entertainment System:</p>
+
+<p><img src="/ks-updates/nes-modded.png" alt="nes-modded.png"></p>
+
+<p>This soundtrack (and every Retro Game Crunch album to follow) will be recorded directly from actual hardware. </p>
+
+<p>For backers of $55 and up, End of Line is available as MP3 or AIFF (both downloads include the NSFE too) from your <a href="/rewards/">Rewards</a> page right now!</p>
+	</div>
+	
+		<h2>4 Comments</h2>
+<div class="comments">
+		<div class="comment" id="comment-270">
+		<div class="who">Jason</div>
+		<div class="what"><p>Is there any way for those of us who didn’t quite back up to $55 to ‘upgrade’?</p>
+</div>
+		<div class="when"><a href="#comment-270" class="datetime" data-timezone="UTC" data-timestamp="1372910783">2013/07/04 04:06:23</a></div>
+	</div>
+		<div class="comment" id="comment-271">
+		<div class="who">Conan</div>
+		<div class="what"><p>Thanks for all your hard-work guys. It’s wonderful that we can get NSFe’s of the soundtracks! And here’s to Rusty having a full recovery, however long it takes.</p>
+
+<p>@Jason I think you can click the “Your Account” link at the top of the site to upgrade.</p>
+</div>
+		<div class="when"><a href="#comment-271" class="datetime" data-timezone="UTC" data-timestamp="1372952568">2013/07/04 15:42:48</a></div>
+	</div>
+		<div class="comment" id="comment-272">
+		<div class="who">Shaun</div>
+		<div class="what"><p>Account upgrades are currently only available to the most popular $25 reward level (from the $1 Wallpaper and $15 Three Month levels). We want to make more of the upper reward levels available but I just haven’t had time to sit down, make sense of the UI/logic, and build it :\</p>
+</div>
+		<div class="when"><a href="#comment-272" class="datetime" data-timezone="UTC" data-timestamp="1372954760">2013/07/04 16:19:20</a></div>
+	</div>
+		<div class="comment" id="comment-274">
+		<div class="who">Jason</div>
+		<div class="what"><p>@Shaun If/when it seems financially viable for you guys add support for more account upgrades, I’m certainly happy to do so :).</p>
+</div>
+		<div class="when"><a href="#comment-274" class="datetime" data-timezone="UTC" data-timestamp="1372960920">2013/07/04 18:02:00</a></div>
+	</div>
+	</div>		</div><div class="copy">
+		Copyright © 2012–<span class="dateyear"></span> 
+		<a href="/">Retro Game Crunch</a>.
+	</div></div><script>
+$(function()
+{
+	$('.spoilers-toggle').on('touchstart click', function(event)
+	{
+		if(event.handled !== true)
+		{
+			$(this).parent().toggleClass('open');
+			event.handled = true;
+		}
+		return false;
+	});
+})
+</script>
+<script src="/archive.js"></script><script>cleanup();</script></body>
+</html>

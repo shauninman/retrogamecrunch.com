@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Primer • Retro Game Crunch</title>
+<script>if((window.devicePixelRatio===undefined?1:window.devicePixelRatio)>1)document.cookie='HTTP_IS_RETINA=1;path=/';</script>
+<meta name="google-site-verification" content="0n15O71rkhohq8oudSJ4AhQ9ZHGrtYQGzZ-hj6_NTGI">
+<meta name="viewport" id="viewport" content="width=800">
+<link rel="stylesheet" href="/styles/rgc.q688883a0dcaa.css">
+<link rel="stylesheet" href="/scripts/highlight/styles/zenburn.css">
+<script src="/scripts/highlight/highlight.pack.js"></script>
+<script src="/scripts/jquery-1.8.3.min.js"></script>
+
+<script src="/scripts/mediaelement/mediaelement-and-player.min.js"></script>
+<link rel="stylesheet" href="/scripts/mediaelement/mediaelementplayer.css">
+<script>
+hljs.tabReplace = '    ';
+hljs.initHighlightingOnLoad();
+
+$(function()
+{
+	$('audio').mediaelementplayer(/* Options */);
+	
+	// disable :hover on touch devices
+	// based on https://gist.github.com/4404503 
+	// via https://twitter.com/javan/status/284873379062890496
+	// + https://twitter.com/pennig/status/285790598642946048
+	// re https://retrogamecrunch.com/tmp/hover
+	if ('createTouch' in document)
+	{
+		$('html').addClass('touch');
+		try
+		{
+			var ignore = /:hover\b/;
+			for (var i=0; i<document.styleSheets.length; i++)
+			{
+				var sheet = document.styleSheets[i];
+				for (var j=sheet.cssRules.length-1; j>=0; j--)
+				{
+					var rule = sheet.cssRules[j];
+					if (rule.type === CSSRule.STYLE_RULE && ignore.test(rule.selectorText))
+					{
+						sheet.deleteRule(j);
+					}
+				}
+			}
+		}
+		catch(e){}
+	}
+});
+
+var then = 1387576800000;
+var deadline = '2013-12-20 22:00:00 UTC';
+var last_mins = -1;
+window.setInterval(function()
+{
+	var now = (new Date).getTime();
+	var remaining = then - now;
+	if (remaining < 0) remaining = 0;
+
+	var sec = 1000;
+	var min = 60 * sec;
+	var hour = 60 * min;
+	var day = 24 * hour;
+
+	var days = Math.floor(remaining / day);
+	remaining -= days * day;
+	var hours = Math.floor(remaining / hour);
+	remaining -= hours * hour;
+	var mins = Math.floor(remaining / min);
+	
+	if (last_mins == mins) return; // prevent unnecessary redraws
+	last_mins = mins;
+
+	var html = '';
+
+	if (days) 	html += '<span class="remaining-days">'+days+' day'+(days>1?'s':'')+'</span> ';
+	if (hours) 	html += '<span class="remaining-days">'+hours+' hour'+(hours>1?'s':'')+'</span> ';
+	if (mins) 	html += '<span class="remaining-days">'+mins+' minute'+(mins>1?'s':'')+'</span> ';
+
+	// DELAY
+	// if (html=='') html = 'To be determined';
+	if (html=='') html = 'Just a few moments';
+
+	$('span.countdown').html(html);
+}, 1 * 1000);
+</script>
+
+
+<link rel="stylesheet" href="/archive.css"><link rel="canonical" href="https://retrogamecrunch.com/primer/tools/"></head>
+<body>
+	<div class="wrap wrap-top">
+		<div id="logo-unit">
+			<a id="logo" href="/"><img src="/images/logo-black.png" width="204" height="98" alt="Retro Game Crunch"></a>
+			<a id="funded" href="http://www.kickstarter.com/projects/shauninman/retro-game-crunch-six-games-in-six-months"><img src="/images/funded-with.png" width="116" height="112" alt="Funded with Kickstarter"></a>
+		</div><div id="mini-login">
+	
+</div><div id="status">
+			<div class="currently">
+				<strong>Currently</strong>
+				<a href="/games/6/shuten/">Recovering from Shūten Complete</a>
+			</div></div><ul class="nav nav-main">
+			<li><a href="/">Home</a></li>
+			<li><a href="/games/">Games</a></li>			<li><a href="/rewards/">Rewards</a></li>
+			<li><a href="/journal/">Journal</a></li>
+			<li><a href="/primer/" class="current">Primer</a></li>
+			<li><a href="/about/">About</a></li>
+			<li><a href="/contact/">Contact</a></li>
+		</ul>
+	</div><div class="wide"><div class="wrap">
+					<ul class="nav nav-alt nav-primer">
+				<li><a href="/primer/tools/" class="current">Tools</a></li>
+				<li><a href="/primer/getting-started/">Getting Started</a></li>
+				<li><a href="/primer/level-up/">Level Up</a></li>
+				<li><a href="/primer/players-gonna-play/">Players Gonna Play</a></li>
+				<li><a href="/primer/catch-em-all/">Catch ‘em All</a></li>
+				<li><a href="/primer/pitfalls/">Pitfalls!</a></li>
+				<li><a href="/primer/sound-off/">Sound Off</a></li>
+			</ul>
+				</div></div><div class="wrap wrap-bottom">
+		<div class="content">
+		<h1>Primer</h1>
+
+<p>We’re really excited about sharing our game development process with backers of Retro Game Crunch. Shaun did something similar with <a href="https://shauninman.com/liftoff/">Lift Off, The Last Rocket Development Diary</a>. A few readers mentioned that Lift Off was missing a primer on game development: what tools we use and how we use them. Since the Retro Game Crunch development journal will mostly focus on problems and solutions specific to these games, we decided to tackle the primer before we even start crunching on the games.</p>
+
+<p>First up, tools, then tomorrow we’ll start building a simple game to illustrate how they all work together!</p>
+
+<h2>Tools</h2>
+
+<p><a href="http://fdt.powerflasher.com/buy-download/">FDT Free</a> - A free IDE for ActionScript development. Flash may be (perpetually) on the way out, but for rapid game prototyping we’ve yet to find anything more malleable and unfussy than ActionScript. FDT is “quirky” but generally stays out of the way and works how you’d expect.</p>
+
+<p><a href="http://flixel.org/">Flixel</a> - A fully featured, open source ActionScript game development library. Easy to learn, use, and extend—just like it says on the tin—and it’s <a href="http://flixel.org/docs/">well documented</a> to boot!</p>
+
+<p><a href="http://www.mapeditor.org/">Tiled</a> - Most games have levels of some kind. Tiled is a general purpose tile-based level/map editor. It’s clunky but with some clever tricks you can really streamline your level design process.</p>
+
+<p><a href="http://www.ymck.net/magical8bitplug/">Magical 8-bit Plug</a> - We’re huge fans of the 2A03, the sound chip in the original Nintendo Entertainment System. This plugin emulates the square and triangle wave channels as well as the noise channel. Great for sketching musical ideas.</p>
+
+<p><strong>MML &amp; NSF</strong> - Once a track is fully developed we’ll transpose it to MML (<a href="http://www.nullsleep.com/treasure/mck_guide/">Music Macro Language</a>) and convert to NSF (Nintendo Sound Format) using Shaun’s <a href="https://www.shauninman.com/archive/2012/03/21/polished_mml_bundle">TextMate MML Bundle</a>. We export a WAV file using <a href="http://bannister.org/software/ao.htm">Audio Overload</a> and tweak levels and convert to MP3 using <a href="http://audacity.sourceforge.net/">Audacity</a>.</p>
+
+<p><a href="/public/enjoy.zip">Enjoy</a> - Native gamepad support isn’t available to Flash games so we use Enjoy to easily map USB gamepad input to key presses. On Windows there’s <a href="http://www.electracode.com/4/joy2key/JoyToKey%20English%20Version.htm">JoyToKey</a>.</p>
+
+<p>What are you waiting for? <a href="/primer/getting-started/">Get started!</a></p>
+	</div><div class="copy">
+		Copyright © 2012–<span class="dateyear"></span> 
+		<a href="/">Retro Game Crunch</a>.
+	</div></div><script>
+$(function()
+{
+	$('.spoilers-toggle').on('touchstart click', function(event)
+	{
+		if(event.handled !== true)
+		{
+			$(this).parent().toggleClass('open');
+			event.handled = true;
+		}
+		return false;
+	});
+})
+</script>
+<script src="/archive.js"></script><script>cleanup();</script></body>
+</html>

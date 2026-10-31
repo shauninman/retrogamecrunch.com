@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>In ze Cards, a Brains &amp; Hearts Postmortem • Retro Game Crunch</title>
+<script>if((window.devicePixelRatio===undefined?1:window.devicePixelRatio)>1)document.cookie='HTTP_IS_RETINA=1;path=/';</script>
+<meta name="google-site-verification" content="0n15O71rkhohq8oudSJ4AhQ9ZHGrtYQGzZ-hj6_NTGI">
+<meta name="viewport" id="viewport" content="width=800">
+<link rel="stylesheet" href="/styles/rgc.q688883a0dcaa.css">
+<link rel="stylesheet" href="/scripts/highlight/styles/zenburn.css">
+<script src="/scripts/highlight/highlight.pack.js"></script>
+<script src="/scripts/jquery-1.8.3.min.js"></script>
+
+<script src="/scripts/mediaelement/mediaelement-and-player.min.js"></script>
+<link rel="stylesheet" href="/scripts/mediaelement/mediaelementplayer.css">
+<script>
+hljs.tabReplace = '    ';
+hljs.initHighlightingOnLoad();
+
+$(function()
+{
+	$('audio').mediaelementplayer(/* Options */);
+	
+	// disable :hover on touch devices
+	// based on https://gist.github.com/4404503 
+	// via https://twitter.com/javan/status/284873379062890496
+	// + https://twitter.com/pennig/status/285790598642946048
+	// re https://retrogamecrunch.com/tmp/hover
+	if ('createTouch' in document)
+	{
+		$('html').addClass('touch');
+		try
+		{
+			var ignore = /:hover\b/;
+			for (var i=0; i<document.styleSheets.length; i++)
+			{
+				var sheet = document.styleSheets[i];
+				for (var j=sheet.cssRules.length-1; j>=0; j--)
+				{
+					var rule = sheet.cssRules[j];
+					if (rule.type === CSSRule.STYLE_RULE && ignore.test(rule.selectorText))
+					{
+						sheet.deleteRule(j);
+					}
+				}
+			}
+		}
+		catch(e){}
+	}
+});
+
+var then = 1387576800000;
+var deadline = '2013-12-20 22:00:00 UTC';
+var last_mins = -1;
+window.setInterval(function()
+{
+	var now = (new Date).getTime();
+	var remaining = then - now;
+	if (remaining < 0) remaining = 0;
+
+	var sec = 1000;
+	var min = 60 * sec;
+	var hour = 60 * min;
+	var day = 24 * hour;
+
+	var days = Math.floor(remaining / day);
+	remaining -= days * day;
+	var hours = Math.floor(remaining / hour);
+	remaining -= hours * hour;
+	var mins = Math.floor(remaining / min);
+	
+	if (last_mins == mins) return; // prevent unnecessary redraws
+	last_mins = mins;
+
+	var html = '';
+
+	if (days) 	html += '<span class="remaining-days">'+days+' day'+(days>1?'s':'')+'</span> ';
+	if (hours) 	html += '<span class="remaining-days">'+hours+' hour'+(hours>1?'s':'')+'</span> ';
+	if (mins) 	html += '<span class="remaining-days">'+mins+' minute'+(mins>1?'s':'')+'</span> ';
+
+	// DELAY
+	// if (html=='') html = 'To be determined';
+	if (html=='') html = 'Just a few moments';
+
+	$('span.countdown').html(html);
+}, 1 * 1000);
+</script>
+
+
+<link rel="stylesheet" href="/archive.css"><link rel="canonical" href="https://retrogamecrunch.com/journal/55/in-ze-cards-a-brains-hearts-postmortem/"></head>
+<body>
+	<div class="wrap wrap-top">
+		<div id="logo-unit">
+			<a id="logo" href="/"><img src="/images/logo-black.png" width="204" height="98" alt="Retro Game Crunch"></a>
+			<a id="funded" href="http://www.kickstarter.com/projects/shauninman/retro-game-crunch-six-games-in-six-months"><img src="/images/funded-with.png" width="116" height="112" alt="Funded with Kickstarter"></a>
+		</div><div id="mini-login">
+	
+</div><div id="status">
+			<div class="currently">
+				<strong>Currently</strong>
+				<a href="/games/6/shuten/">Recovering from Shūten Complete</a>
+			</div></div><ul class="nav nav-main">
+			<li><a href="/">Home</a></li>
+			<li><a href="/games/">Games</a></li>			<li><a href="/rewards/">Rewards</a></li>
+			<li><a href="/journal/" class="current">Journal</a></li>
+			<li><a href="/primer/">Primer</a></li>
+			<li><a href="/about/">About</a></li>
+			<li><a href="/contact/">Contact</a></li>
+		</ul>
+	</div><div class="wide"><div class="wrap">
+					<ul class="nav nav-alt nav-journal">
+									<li><a href="/journal/54/rgc-podcast-episode-4/">RGC Podcast, Episode 4</a></li>
+													<li><a href="/journal/56/brain-freeze/">Brain Freeze</a></li>
+							</ul>
+				</div></div><div class="wrap wrap-bottom">
+		<div class="content">
+		
+		
+	<div class="post">
+		<h1>In ze Cards, a Brains &amp; Hearts Postmortem</h1>
+		<div class="byline">
+			Posted by <strong>Shaun</strong> 
+							<span class="datetime" data-timezone="UTC" data-timestamp="1378926481">2013/09/11 19:08:01</span>					</div>
+		<p>Before we even opened up theme submissions for game 5 we vowed to ourselves that our next game would not have a jump button. Level design is essentially commentary on level design. Four platformers later and I’m not sure I have anything interesting left to say about level design (for now). So where did that leave us?</p>
+
+<p>We talked about an RPG (too complex a system to develop and balance in just 30 days much less 3) and a four player, top-down shooter (shallow gameplay yet very artwork/content hungry) before hitting on the idea of a card game. Nintendo got its start in games printing Japanese playing cards. It doesn’t get much more retro than cards.</p>
+
+<h2>R &amp; D</h2>
+
+<p>Early in our research into elements of Einstein’s life that might make their way into his dreams, Matt discovered Einstein’s brain had been removed before his body was cremated. There is some controversy about whether this was done without the family’s consent and against Einstein’s own wishes. (His brain has had quite the <a href="http://en.wikipedia.org/wiki/Relics:_Einstein's_Brain">posthumous</a> <a href="https://www.youtube.com/playlist?list=PLthKojOtRS30Q7YaOY-lX-vr_6sVknK4u">adventure</a> itself.)</p>
+
+<p>Then Rusty hit on the idea that, with the brain separated from the body, you’re left with just a heartless intellect. One early idea involved a cross-dimensional wormhole, Einstein’s brain in a mech, an army with “intellect rays”, and brainless but compassionate Einstein leading the resistance with the battle cry “Ignorance is bliss!” There was also an Einstein quote about quantum mechanics that grab our attention, “God doesn’t play dice with the world.”</p>
+
+<h2>Ze Hand You’re Dealt</h2>
+
+<p>Saturday morning Rusty and I got together over Facetime and started hacking on card game ideas. Rusty had the basic idea for the game already down. Two players try to capture their opponents cards by creating runs of ascending sequential cards. Over the next two days we iterated and playtested countless variations of the game.</p>
+
+<p>The original version had each player playing with just a single suit, Ace to King, and drawing a single random card each turn. But with so many possible cards building runs was really infrequent. To increase the frequency of runs I proposed using both suits of the same color but only the Ace through 5. This greatly increased the likelihood of runs becoming available. We eventually settled on the cards Ace through 7 which was a good balance.</p>
+
+<p>With the random draws of the original version, there was very little user agency. I suggested giving the player the option to roll a die for the chance to modify one of the cards on the board (allowing the player to create a run where there was none before). We settled almost immediately on 2 rolls per game.</p>
+
+<p>Somewhere along the line we introduced the concept of the hold, a single card could be set aside to prevent the player from having to place a card that would create a run for their opponent. The hold card could be swapped in when beneficial in place of a newly drawn card. This idea survived for about a day and a half until our next major revision.</p>
+
+<p>The individual random draws of the original game design left little room for long-term strategy. The hold helped but the game was still unsatisfying once you learned the rules. Our first attempt at correcting this was to dole out the fourteen cards over three phases. With five cards in a hand per phase and six cards on the board at any given time (plus another card in each players hold) calculating your best move on any given turn was time consuming and overwhelming. Too much strategy.</p>
+
+<p>We played too many variations to remember them all but we eventually settled on the player starting with two cards and drawing a new card (or rolling) at the beginning of each turn. A continuously refreshed, hand of three with no hold was much more manageable.</p>
+
+<p>At this point we had agency and strategy but it was still too easy for one player to turn an early lead into a crushing defeat because with each run a player wipes out their opponents cards leaving them with no cards with which to build their own run. One of Rusty’s roommates, an avid Magic The Gathering player, suggested the final piece of the puzzle: locks. Locks allow a beleaguered player to rebuild their board without their cards being immediately consumed by their opponent.</p>
+
+<h2>Trials</h2>
+
+<p>Card game design is hard. And time consuming. And probably not meant to be done by people in three separate states.</p>
+
+<p>There is no artifice in card games. It’s just pure gameplay. No artwork. No music. Just rules and actions. Balancing chance and agency is extremely hard to do without burdening players with complex rules and conditions. Your players are also your processors. The iterative process was grueling but fun. It’s amazing how one tiny rule change can open up or constrict a card game design.</p>
+
+<p>Every revision to the rules meant we had to play two or three games to observe the actual effect. If a normal game takes 15-20 minutes to play, it can take 45 to an hour to play with analysis. That means one rule change can result in up to 3 hours of testing. Oh, and you can have bugs in a physical card game too. After one change to the rules the second player ended up with an extra turn at the end of the game. It turned out that the first player was playing with one less card because it got misplaced after the previous game.</p>
+
+<p>Early versions of the game had no hidden information. Both players had access to the same information: the six cards on the board, the contents of the holds, the card that was just drawn. Playtesting via Facetime was manageable. Once we started testing the hidden hold and introduced hands, things got a bit more complicated. iPhones were dangled off counter edges and inserted into light fixtures for a bird’s eye view of the action. Missing was the face-to-face human interaction. Seeing the excitement or defeat of your opponent when they got the card they needed or missed a last ditch die roll.</p>
+
+<p>Because the process was so involved and the game mechanics were constantly evolving, artwork production couldn’t really start until the final day. Rusty documented the rules (which required exhaustive detail), I started on graphics for the tutorial, and Matt composed a perfectly pensive background track. A few hours before launch it became clear that there was no time remaining to color the dialogue then copy-fit and design the complete ruleset for inclusion in the tutorial. So the tutorial became a primer and we instead published the complete rules as a PDF.</p>
+
+<p>In the end, we were exhausted but satisfied with what we created. But a game is just rules without players to play it so grab a friend, play a few rounds of <a href="/games/5/brains-and-hearts/">Brains &amp; Hearts</a> and let us know how it goes!</p>
+	</div>
+	
+		<h2>1 Comment</h2>
+<div class="comments">
+		<div class="comment" id="comment-320">
+		<div class="who">Josh W.</div>
+		<div class="what"><p>Thanks for sharing your process of how you iterated to develop the rules of the game. This is the most interesting and challenging part of game design that isn’t often documented in detail.</p>
+</div>
+		<div class="when"><a href="#comment-320" class="datetime" data-timezone="UTC" data-timestamp="1382130160">2013/10/18 21:02:40</a></div>
+	</div>
+	</div>		</div><div class="copy">
+		Copyright © 2012–<span class="dateyear"></span> 
+		<a href="/">Retro Game Crunch</a>.
+	</div></div><script>
+$(function()
+{
+	$('.spoilers-toggle').on('touchstart click', function(event)
+	{
+		if(event.handled !== true)
+		{
+			$(this).parent().toggleClass('open');
+			event.handled = true;
+		}
+		return false;
+	});
+})
+</script>
+<script src="/archive.js"></script><script>cleanup();</script></body>
+</html>

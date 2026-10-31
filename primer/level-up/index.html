@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Level Up • Retro Game Crunch</title>
+<script>if((window.devicePixelRatio===undefined?1:window.devicePixelRatio)>1)document.cookie='HTTP_IS_RETINA=1;path=/';</script>
+<meta name="google-site-verification" content="0n15O71rkhohq8oudSJ4AhQ9ZHGrtYQGzZ-hj6_NTGI">
+<meta name="viewport" id="viewport" content="width=800">
+<link rel="stylesheet" href="/styles/rgc.q688883a0dcaa.css">
+<link rel="stylesheet" href="/scripts/highlight/styles/zenburn.css">
+<script src="/scripts/highlight/highlight.pack.js"></script>
+<script src="/scripts/jquery-1.8.3.min.js"></script>
+
+<script src="/scripts/mediaelement/mediaelement-and-player.min.js"></script>
+<link rel="stylesheet" href="/scripts/mediaelement/mediaelementplayer.css">
+<script>
+hljs.tabReplace = '    ';
+hljs.initHighlightingOnLoad();
+
+$(function()
+{
+	$('audio').mediaelementplayer(/* Options */);
+	
+	// disable :hover on touch devices
+	// based on https://gist.github.com/4404503 
+	// via https://twitter.com/javan/status/284873379062890496
+	// + https://twitter.com/pennig/status/285790598642946048
+	// re https://retrogamecrunch.com/tmp/hover
+	if ('createTouch' in document)
+	{
+		$('html').addClass('touch');
+		try
+		{
+			var ignore = /:hover\b/;
+			for (var i=0; i<document.styleSheets.length; i++)
+			{
+				var sheet = document.styleSheets[i];
+				for (var j=sheet.cssRules.length-1; j>=0; j--)
+				{
+					var rule = sheet.cssRules[j];
+					if (rule.type === CSSRule.STYLE_RULE && ignore.test(rule.selectorText))
+					{
+						sheet.deleteRule(j);
+					}
+				}
+			}
+		}
+		catch(e){}
+	}
+});
+
+var then = 1387576800000;
+var deadline = '2013-12-20 22:00:00 UTC';
+var last_mins = -1;
+window.setInterval(function()
+{
+	var now = (new Date).getTime();
+	var remaining = then - now;
+	if (remaining < 0) remaining = 0;
+
+	var sec = 1000;
+	var min = 60 * sec;
+	var hour = 60 * min;
+	var day = 24 * hour;
+
+	var days = Math.floor(remaining / day);
+	remaining -= days * day;
+	var hours = Math.floor(remaining / hour);
+	remaining -= hours * hour;
+	var mins = Math.floor(remaining / min);
+	
+	if (last_mins == mins) return; // prevent unnecessary redraws
+	last_mins = mins;
+
+	var html = '';
+
+	if (days) 	html += '<span class="remaining-days">'+days+' day'+(days>1?'s':'')+'</span> ';
+	if (hours) 	html += '<span class="remaining-days">'+hours+' hour'+(hours>1?'s':'')+'</span> ';
+	if (mins) 	html += '<span class="remaining-days">'+mins+' minute'+(mins>1?'s':'')+'</span> ';
+
+	// DELAY
+	// if (html=='') html = 'To be determined';
+	if (html=='') html = 'Just a few moments';
+
+	$('span.countdown').html(html);
+}, 1 * 1000);
+</script>
+
+
+<link rel="stylesheet" href="/archive.css"><link rel="canonical" href="https://retrogamecrunch.com/primer/level-up/"></head>
+<body>
+	<div class="wrap wrap-top">
+		<div id="logo-unit">
+			<a id="logo" href="/"><img src="/images/logo-black.png" width="204" height="98" alt="Retro Game Crunch"></a>
+			<a id="funded" href="http://www.kickstarter.com/projects/shauninman/retro-game-crunch-six-games-in-six-months"><img src="/images/funded-with.png" width="116" height="112" alt="Funded with Kickstarter"></a>
+		</div><div id="mini-login">
+	
+</div><div id="status">
+			<div class="currently">
+				<strong>Currently</strong>
+				<a href="/games/6/shuten/">Recovering from Shūten Complete</a>
+			</div></div><ul class="nav nav-main">
+			<li><a href="/">Home</a></li>
+			<li><a href="/games/">Games</a></li>			<li><a href="/rewards/">Rewards</a></li>
+			<li><a href="/journal/">Journal</a></li>
+			<li><a href="/primer/" class="current">Primer</a></li>
+			<li><a href="/about/">About</a></li>
+			<li><a href="/contact/">Contact</a></li>
+		</ul>
+	</div><div class="wide"><div class="wrap">
+					<ul class="nav nav-alt nav-primer">
+				<li><a href="/primer/tools/">Tools</a></li>
+				<li><a href="/primer/getting-started/">Getting Started</a></li>
+				<li><a href="/primer/level-up/" class="current">Level Up</a></li>
+				<li><a href="/primer/players-gonna-play/">Players Gonna Play</a></li>
+				<li><a href="/primer/catch-em-all/">Catch ‘em All</a></li>
+				<li><a href="/primer/pitfalls/">Pitfalls!</a></li>
+				<li><a href="/primer/sound-off/">Sound Off</a></li>
+			</ul>
+				</div></div><div class="wrap wrap-bottom">
+		<div class="content">
+		<h1>Level Up</h1>
+
+<p>Moving right along! Yesterday we downloaded and installed a bunch of frequently-used game development <a href="/primer/tools/">tools</a>. Then we created a <a href="/primer/getting-started/">new project</a>, hooked up Flixel, and prepared our PlayState for action. Now we’re ready to add things to our game! We’ll start by loading a level from an external file. But first we need to create that level with Tiled.</p>
+
+<h2>Tiled</h2>
+
+<p>Open Tiled and open its Preferences (Tiled &gt; Preferences…). Make sure “Store tile layer data as” is set to CSV (Flash can unzip and de-Base64 this data but it’s much slower in our testing). Now create a new TMX file (File &gt; New…). Make sure the Orientation is set to Orthogonal, Tile size should be 16px by 16px. Remember that our game’s dimensions are 240x160 pixels. We want our level to be a little bit bigger than that so we can see how Flixel’s camera works. Set the Map size to 20 tiles by 15 tiles and hit the OK button. You need to manually save the new file (File &gt; Save) as level.tmx in your project’s bin folder.</p>
+
+<p><img src="/primer/images/tiled-new.png" alt="tiled-new.png"></p>
+
+<p><em>Tiled Gotcha:</em> If you don’t see anything in the new window that appears make sure the grid is turned on (View &gt; Show Grid) and that you’re zoomed all the way out (View &gt; Normal Size).</p>
+
+<p>Download this <a href="/primer/downloads/bg.png">tileset</a> Shaun prepared and add it to your project’s bin folder. Then create an assets folder inside your src folder and copy (not move!) bg.png into the new assets folder too.</p>
+
+<p><img src="/primer/downloads/bg.png" alt="bg.png"></p>
+
+<p>Back in Tiled create a new tileset (Map &gt; New Tileset…). Browse and select the bg.png you just downloaded. Set Tile width and Tile height both to 16px and click the OK button. In the Layers palette on the right, double-click Tile Layer 1 and rename it to bg.</p>
+
+<p><img src="/primer/images/tiled-tile-tools.png" alt="tiled-tile-tools.png"></p>
+
+<p>Now draw your level by first selecting a tile in the Tilesets palette. Then use the paint bucket to flood large areas and the stamp for detail work. The eraser works just like you expect, but the selection tool is a little weird. You can’t move a selection, but you can copy or cut it. If you then paste, your previous selection becomes a large, complex stamp that can be used to easily duplicate detailed areas of your map. When you’re done, you should have something that looks like this:</p>
+
+<p><img src="/primer/images/tiled-level.png" alt="tiled-level.png"></p>
+
+<h2>Loading the Level</h2>
+
+<p>Now that we’ve created a simple level we need to load it into our game. To do that we’ll use this handy <a href="http://pixelpracht.wordpress.com/2010/03/31/flash-tmx-parser/">TMX parser library</a>. I’ve extracted the library and commented out some debug trace statements for this project. Download <a href="/primer/downloads/net.pixelpracht.tmx.zip">net.pixelpracht.tmx</a>, unzip and copy the entire net folder into your project’s src folder (just like we did with Flixel’s org folder <a href="/primer/getting-started/">last time</a>). Open FDT and then open PlayState.as.</p>
+
+<p>Beneath:</p>
+
+<pre><code>import org.flixel.*;
+</code></pre>
+
+<p>add:</p>
+
+<pre><code>// TMX Loading
+import net.pixelpracht.tmx.*;
+import flash.events.Event;
+import flash.net.URLLoader;
+import flash.net.URLRequest;
+</code></pre>
+
+<p>Then add the following private vars to your PlayState class definition:</p>
+
+<pre><code>private var hasLoaded:Boolean = false;
+private var background:FlxTilemap = new FlxTilemap();
+</code></pre>
+
+<p>We need to prevent our PlayState from trying to update itself before the level has loaded so add the following inside the update() function:</p>
+
+<pre><code>if (!hasLoaded) return;
+</code></pre>
+
+<p>Next, we add the methods that handle loading and parsing the level file to our PlayState class defintion:</p>
+
+<pre><code>// Level loading
+private function loadTmxFile():void {
+    var loader:URLLoader = new URLLoader();
+    loader.addEventListener(Event.COMPLETE, onTmxLoaded);
+    loader.load(new URLRequest('level.tmx'));
+}
+
+private function onTmxLoaded(e:Event) : void {
+    var loader:URLLoader = e.target as URLLoader;
+    var xml:XML = new XML(loader.data);
+    var tmx:TmxMap = new TmxMap(xml);
+    loadStateFromTmx(tmx);
+    hasLoaded = true; // allow updates
+}
+
+private function loadStateFromTmx(tmx:TmxMap) : void {
+    var csvBg:String = tmx.getLayer('bg').toCsv(tmx.getTileSet('bg'));
+    background.loadMap(csvBg, ROM.ImgBg, 16, 16, FlxTilemap.OFF,0,0,2);
+    add(background);
+}
+</code></pre>
+
+<p>The loadTmxFile() function requests our external level.tmx file. Once loaded, the onTmxLoaded() function parses the file into an object representing our level data. The loadStateFromTmx() function uses that data to <a href="http://flixel.org/docs/org/flixel/FlxTilemap.html#loadMap()">load</a> our background FlxTilemap. Then we add the background to our PlayState so it will update and draw in our game!</p>
+
+<p>Now add the following inside the create() function:</p>
+
+<pre><code>loadTmxFile();
+</code></pre>
+
+<p>After these additions your PlayState.as should look like this:</p>
+
+<pre><code>package {
+    import org.flixel.*;
+    // TMX Loading
+    import net.pixelpracht.tmx.*;
+    import flash.events.Event;
+    import flash.net.URLLoader;
+    import flash.net.URLRequest;
+
+    public class PlayState extends FlxState {
+        private var hasLoaded:Boolean = false;
+        private var background:FlxTilemap = new FlxTilemap();
+
+        override public function create():void {
+            // initiate variables, add sprites, tilemaps, etc
+
+            loadTmxFile();
+        }
+
+        // Level loading
+        private function loadTmxFile():void {
+            var loader:URLLoader = new URLLoader();
+            loader.addEventListener(Event.COMPLETE, onTmxLoaded);
+            loader.load(new URLRequest('level.tmx'));
+        }
+
+        private function onTmxLoaded(e:Event) : void {
+            var loader:URLLoader = e.target as URLLoader;
+            var xml:XML = new XML(loader.data);
+            var tmx:TmxMap = new TmxMap(xml);
+            loadStateFromTmx(tmx);
+            hasLoaded = true; // allow updates
+        }
+
+        private function loadStateFromTmx(tmx:TmxMap) : void {
+            var csvBg:String = tmx.getLayer('bg').toCsv(tmx.getTileSet('bg'));
+            background.loadMap(csvBg, ROM.ImgBg, 16, 16, FlxTilemap.OFF,0,0,2);
+            add(background);
+        }
+
+        override public function update():void {
+            // listen for user input, move sprites, etc
+
+            if (!hasLoaded) return;
+        }
+    }
+}
+</code></pre>
+
+<p>If you run the game now you’ll receive an error regarding ROM.ImgBg. Let’s do something about that.</p>
+
+<h2>ROM</h2>
+
+<p>Time to take a quick detour into asset management. Rather than have image and audio embeds scattered across the different classes in a project, we like to create a singleton to hold all these files. That way, if more than one class needs to use an image or sound effect, they can pull from the same place. Create a new ActionScript class (File &gt; New &gt; ActionScript Class), name it ROM, and click the Finish button. Inside the ROM class definition, add the following:</p>
+
+<pre><code>[Embed(source="assets/bg.png")] static public var ImgBg : Class;
+</code></pre>
+
+<p>The full ROM.as should look like this:</p>
+
+<pre><code>package {
+    public class ROM {
+        [Embed(source="assets/bg.png")] static public var ImgBg : Class;
+    }
+}
+</code></pre>
+
+<p>Now run the game. You should see the top left corner of our level! In the next Primer we’ll <a href="/primer/players-gonna-play/">add a player and handle user input</a>.</p>
+	</div><div class="copy">
+		Copyright © 2012–<span class="dateyear"></span> 
+		<a href="/">Retro Game Crunch</a>.
+	</div></div><script>
+$(function()
+{
+	$('.spoilers-toggle').on('touchstart click', function(event)
+	{
+		if(event.handled !== true)
+		{
+			$(this).parent().toggleClass('open');
+			event.handled = true;
+		}
+		return false;
+	});
+})
+</script>
+<script src="/archive.js"></script><script>cleanup();</script></body>
+</html>

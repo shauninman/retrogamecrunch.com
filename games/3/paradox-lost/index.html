@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Paradox Lost • Retro Game Crunch</title>
+<script>if((window.devicePixelRatio===undefined?1:window.devicePixelRatio)>1)document.cookie='HTTP_IS_RETINA=1;path=/';</script>
+<meta name="google-site-verification" content="0n15O71rkhohq8oudSJ4AhQ9ZHGrtYQGzZ-hj6_NTGI">
+<meta name="viewport" id="viewport" content="width=800">
+<link rel="stylesheet" href="/styles/rgc.q688883a0dcaa.css">
+<link rel="stylesheet" href="/scripts/highlight/styles/zenburn.css">
+<script src="/scripts/highlight/highlight.pack.js"></script>
+<script src="/scripts/jquery-1.8.3.min.js"></script>
+
+<script src="/scripts/mediaelement/mediaelement-and-player.min.js"></script>
+<link rel="stylesheet" href="/scripts/mediaelement/mediaelementplayer.css">
+<script>
+hljs.tabReplace = '    ';
+hljs.initHighlightingOnLoad();
+
+$(function()
+{
+	$('audio').mediaelementplayer(/* Options */);
+	
+	// disable :hover on touch devices
+	// based on https://gist.github.com/4404503 
+	// via https://twitter.com/javan/status/284873379062890496
+	// + https://twitter.com/pennig/status/285790598642946048
+	// re https://retrogamecrunch.com/tmp/hover
+	if ('createTouch' in document)
+	{
+		$('html').addClass('touch');
+		try
+		{
+			var ignore = /:hover\b/;
+			for (var i=0; i<document.styleSheets.length; i++)
+			{
+				var sheet = document.styleSheets[i];
+				for (var j=sheet.cssRules.length-1; j>=0; j--)
+				{
+					var rule = sheet.cssRules[j];
+					if (rule.type === CSSRule.STYLE_RULE && ignore.test(rule.selectorText))
+					{
+						sheet.deleteRule(j);
+					}
+				}
+			}
+		}
+		catch(e){}
+	}
+});
+
+var then = 1387576800000;
+var deadline = '2013-12-20 22:00:00 UTC';
+var last_mins = -1;
+window.setInterval(function()
+{
+	var now = (new Date).getTime();
+	var remaining = then - now;
+	if (remaining < 0) remaining = 0;
+
+	var sec = 1000;
+	var min = 60 * sec;
+	var hour = 60 * min;
+	var day = 24 * hour;
+
+	var days = Math.floor(remaining / day);
+	remaining -= days * day;
+	var hours = Math.floor(remaining / hour);
+	remaining -= hours * hour;
+	var mins = Math.floor(remaining / min);
+	
+	if (last_mins == mins) return; // prevent unnecessary redraws
+	last_mins = mins;
+
+	var html = '';
+
+	if (days) 	html += '<span class="remaining-days">'+days+' day'+(days>1?'s':'')+'</span> ';
+	if (hours) 	html += '<span class="remaining-days">'+hours+' hour'+(hours>1?'s':'')+'</span> ';
+	if (mins) 	html += '<span class="remaining-days">'+mins+' minute'+(mins>1?'s':'')+'</span> ';
+
+	// DELAY
+	// if (html=='') html = 'To be determined';
+	if (html=='') html = 'Just a few moments';
+
+	$('span.countdown').html(html);
+}, 1 * 1000);
+</script>
+
+
+<script>window.RufflePlayer={config:{polyfills:false,publicPath:"/scripts/ruffle/",autoplay:"on"}};</script><script src="/scripts/ruffle/ruffle.js" defer></script><script src="/scripts/flash.js" defer></script><link rel="stylesheet" href="/archive.css"><link rel="canonical" href="https://retrogamecrunch.com/games/3/paradox-lost/"></head>
+<body>
+	
+	<div class="wide">
+		<div class="wrap wrap-game">
+		<div id="game-nav">
+							<a id="prev-game" href="/games/2/gaiattack/"><img src="/images/btn-arrow-prev.png" height="102" alt="Previous Game"></a>
+										<a id="next-game" href="/games/4/wub-wub-wescue/"><img src="/images/btn-arrow-next.png" height="102" alt="Next Game"></a>
+					</div><div id="game">
+			<div class="archive-flash" data-swf="/games/embeds/3/Game3.swf" data-background="#000000" data-flashvars="" style="display:inline-block;width:720px;height:480px;max-width:100%;" id="game-swf"></div>
+		</div><div id="game-options">
+			<img id="preview" src="/images/game-3.png" width="720" alt="">
+			<a href="/rewards/"><img src="/images/btn-download-complete.gif" height="105" alt="Download Complete Version"></a><a href="#game" id="btn-play-crunch"><img src="/images/btn-play-crunch.png" height="105" alt="Play the 72 Hour Version"></a>
+		</div><script>
+		$('#game').hide();
+		$('#btn-play-crunch').on('touchstart click', function(event)
+		{
+			if(event.handled !== true)
+			{
+				$('#game-options').hide();
+				$('#game').show();
+				event.handled = true;
+			}
+			return false;
+		});
+		</script>
+				<div class="masthead">
+			<div id="logo-unit"><a id="logo" href="/"><img src="/images/logo-white-sm.png" width="108" height="42" alt="Retro Game Crunch"></a></div>
+			
+			<div class="theme">
+				<span>Theme</span><br>
+				<strong>Can't Stop Time Traveling</strong>
+			</div>
+			
+			<div id="mini-login">
+	
+</div></div>
+	</div></div><div class="wrap wrap-bottom">
+		<div class="content">
+			
+	<div class="two-col">
+		<div class="main-col game-content">
+			<h1>Paradox Lost <span>a  game made in 72 hours</span></h1>
+			<p>A plane goes down, but a pilot surrives. Though Abby Shorehart has lost her way, she stumbles upon a most curious thing—a gun that shoots time travel! Explore the island across three time periods to piece together the paradox.</p>
+
+<p>˙ɹoɹɹıɯ pǝɹ ǝɥʇ ʞǝǝs</p>
+
+<p><strong>Arrows</strong> Move<br>
+<strong>Z</strong> Jump<br>
+<strong>X</strong> Shoot</p>
+		</div>
+		
+		<div class="sub-col downloads">
+					</div>
+	</div>
+	<h2>33 Comments</h2>
+<div class="comments">
+		<div class="comment" id="comment-199">
+		<div class="who">Conan</div>
+		<div class="what"><p>Odd. Damned odd.</p>
+
+<p>But I like it.</p>
+</div>
+		<div class="when"><a href="#comment-199" class="datetime" data-timezone="UTC" data-timestamp="1365468736">2013/04/09 00:52:16</a></div>
+	</div>
+		<div class="comment" id="comment-200">
+		<div class="who">Ian</div>
+		<div class="what"><p>I like where this is going. Mega Man meets Metroid meets Portal meets Antichamber but it feels like there’s still a lot of depth available with time travel as the puzzle solving mechanic.</p>
+</div>
+		<div class="when"><a href="#comment-200" class="datetime" data-timezone="UTC" data-timestamp="1365469324">2013/04/09 01:02:04</a></div>
+	</div>
+		<div class="comment" id="comment-201">
+		<div class="who">DimerHunton</div>
+		<div class="what"><p>That was fun! Great job! Looking forward to seeing more changes in the past/future!</p>
+</div>
+		<div class="when"><a href="#comment-201" class="datetime" data-timezone="UTC" data-timestamp="1365470038">2013/04/09 01:13:58</a></div>
+	</div>
+		<div class="comment" id="comment-202">
+		<div class="who">Jesse</div>
+		<div class="what"><p>A Metroidvania! It’s possible that I’ll like this even more than GAIAttack — and that’s saying a lot!</p>
+</div>
+		<div class="when"><a href="#comment-202" class="datetime" data-timezone="UTC" data-timestamp="1365473002">2013/04/09 02:03:22</a></div>
+	</div>
+		<div class="comment" id="comment-203">
+		<div class="who">Evan</div>
+		<div class="what"><p><strong>Neat!</strong></p>
+</div>
+		<div class="when"><a href="#comment-203" class="datetime" data-timezone="UTC" data-timestamp="1365479905">2013/04/09 03:58:25</a></div>
+	</div>
+		<div class="comment" id="comment-204">
+		<div class="who">Jason Medeiros</div>
+		<div class="what"><p>Great mechanic and execution. Fun and satisfying.</p>
+
+<p>Keeping 3 parallel layouts clear in my head was a challenge. I worry that the complexity of the puzzles will be limited by a player’s ability to keep 3 topologies and their interactions straight.</p>
+
+<p>Maybe it’s just a matter of making sure there is a “no-penalty mirror” (a mirror in the same location in all times) when things get hairy so the player can rapidly switch between times to see how they interact. However, the delay caused by the charging makes switching times slower, increasing the difficulty of seeing interesting interactions between the times. Maybe times leave a temporary “residue” after switching, allowing time interactions to be understood visually by the player.</p>
+
+<p>Looking forward to the result of the polish. Great work all around.</p>
+</div>
+		<div class="when"><a href="#comment-204" class="datetime" data-timezone="UTC" data-timestamp="1365482439">2013/04/09 04:40:39</a></div>
+	</div>
+		<div class="comment" id="comment-205">
+		<div class="who">Marty Alchin</div>
+		<div class="what"><p>As a die-hard Metroid fan, I was very happy to see this one. In particular, the introduction of the slide upgrade gave me a nice, wide grin. :D That really took me back. I’m definitely looking forward to the finished product!</p>
+</div>
+		<div class="when"><a href="#comment-205" class="datetime" data-timezone="UTC" data-timestamp="1365482852">2013/04/09 04:47:32</a></div>
+	</div>
+		<div class="comment" id="comment-206">
+		<div class="who">Truls</div>
+		<div class="what"><p>Interesting, but I felt that I solved a few of puzzles accidentally before really understanding what was going on and what I needed to do.</p>
+
+<p>I also found needing to charge-jump-shoot-jump to hit the first mirror a bit awkward, but I guess it’s part of training the user.</p>
+
+<p>I’m still a bit confused about what it means to hit enemies with a charged beam, as they didn’t seem to end up in a different time.</p>
+
+<p>I love the style of it all though, reminds me a bit of the mood when playing flashback for the first time.</p>
+
+<p>Looking forward to the full version!</p>
+</div>
+		<div class="when"><a href="#comment-206" class="datetime" data-timezone="UTC" data-timestamp="1365487179">2013/04/09 05:59:39</a></div>
+	</div>
+		<div class="comment" id="comment-207">
+		<div class="who">Jason</div>
+		<div class="what"><p>Absolutely love this.</p>
+</div>
+		<div class="when"><a href="#comment-207" class="datetime" data-timezone="UTC" data-timestamp="1365491911">2013/04/09 07:18:31</a></div>
+	</div>
+		<div class="comment" id="comment-208">
+		<div class="who">Kenny</div>
+		<div class="what"><p>Very cool stuff, can’t wait to see the finished version!</p>
+</div>
+		<div class="when"><a href="#comment-208" class="datetime" data-timezone="UTC" data-timestamp="1365506569">2013/04/09 11:22:49</a></div>
+	</div>
+		<div class="comment" id="comment-209">
+		<div class="who">Jonic</div>
+		<div class="what"><p>Brilliant use of the time travel gun, although the full version could use more environmental puzzles rather than “mirror is inaccessible in this time period”. It’s a great starting point, and I think the finished version has the potential to be something awesome!</p>
+
+<p>Great work guys! Keep it up! :)</p>
+</div>
+		<div class="when"><a href="#comment-209" class="datetime" data-timezone="UTC" data-timestamp="1365510945">2013/04/09 12:35:45</a></div>
+	</div>
+		<div class="comment" id="comment-210">
+		<div class="who">Shaun</div>
+		<div class="what"><p>Really glad you guys liked it! Great feedback and ideas all around.</p>
+
+<p>Truls, hitting enemies with a charged shot <em>does</em> send them to a different time but it currently doesn’t persist across room changes and there’s no mirrors in rooms with enemies at the moment. An uncharged beam only sends them a few seconds into the future so you eventually catch up to them.</p>
+</div>
+		<div class="when"><a href="#comment-210" class="datetime" data-timezone="UTC" data-timestamp="1365520715">2013/04/09 15:18:35</a></div>
+	</div>
+		<div class="comment" id="comment-211">
+		<div class="who">Shelby</div>
+		<div class="what"><p>way fun :)
+ya’ll continue to impress with your offerings!</p>
+</div>
+		<div class="when"><a href="#comment-211" class="datetime" data-timezone="UTC" data-timestamp="1365565684">2013/04/10 03:48:04</a></div>
+	</div>
+		<div class="comment" id="comment-212">
+		<div class="who">Simon</div>
+		<div class="what"><p>VERY retro! Now that’s what this is all about, isn’t it?
+It needs to be harder, in a different way than just trying out every path so that you will get the right one eventually</p>
+</div>
+		<div class="when"><a href="#comment-212" class="datetime" data-timezone="UTC" data-timestamp="1365600843">2013/04/10 13:34:03</a></div>
+	</div>
+		<div class="comment" id="comment-214">
+		<div class="who">Nick</div>
+		<div class="what"><p>Fun start! The first thing that came to mind was Metroid, especially the way the rooms were navigated. And the slide certainly rang of classic Mega Man. All around I really like how this is starting. It will be interesting to see if the mechanic goes beyond the mirrors, but as other mentioned there is already the complexity of keeping 3 separate maps in mind.</p>
+
+<p>I guess what I didn’t really feel was that you were “time traveling”. Other than the “skin of the map and the year in the lower corner nothing felt different about them. Maybe this could be expanded upon by having things that are unique to each time period? Transporting something from the future to the past would certainly lead to some interesting effects!</p>
+</div>
+		<div class="when"><a href="#comment-214" class="datetime" data-timezone="UTC" data-timestamp="1365646818">2013/04/11 02:20:18</a></div>
+	</div>
+		<div class="comment" id="comment-215">
+		<div class="who">Zack</div>
+		<div class="what"><p>Really cool. Nice work. When the polish is done this is going to be a real gem. Keep up the good work guys.</p>
+</div>
+		<div class="when"><a href="#comment-215" class="datetime" data-timezone="UTC" data-timestamp="1365691405">2013/04/11 14:43:25</a></div>
+	</div>
+		<div class="comment" id="comment-216">
+		<div class="who">Jake Marsh</div>
+		<div class="what"><p>Absolutely blown away by Paradox Lost.</p>
+
+<p>It’s everything I wanted it to be and more.</p>
+
+<p>You guys out did yourselves, I can’t wait for the full version.</p>
+
+<p>Oooh and I know it’d be a pain to implement in Flixel but I’d love to see something like the Mimeo-style pixelation effect when time traveling, might help ease the transition between environments and make it a little easier for the plater to process what’s going on.</p>
+</div>
+		<div class="when"><a href="#comment-216" class="datetime" data-timezone="UTC" data-timestamp="1365822667">2013/04/13 03:11:07</a></div>
+	</div>
+		<div class="comment" id="comment-217">
+		<div class="who">James Monkman</div>
+		<div class="what"><p>Well I completed the game, but I ended up stuck in a wall on the last screen by accident and yet was able to jump upwards to the red mirror and shoot it…  I assume that is not how I should be doing it?</p>
+
+<p>Also, it would be nice if the charge shot transported enemies to another time as well :)</p>
+</div>
+		<div class="when"><a href="#comment-217" class="datetime" data-timezone="UTC" data-timestamp="1365896179">2013/04/13 23:36:19</a></div>
+	</div>
+		<div class="comment" id="comment-218">
+		<div class="who">BrianHorror</div>
+		<div class="what"><p>This is excellent guys, really. I love the direction this game is going.</p>
+
+<p>Had to restart once when I warped myself inside a wall.. haha <a href="http://imgur.com/vEuUNjn"></a></p>
+
+<p>I’m also very eager to see the variations in enemies/obstacles with the time changes. Lots of cool possibilities here!</p>
+</div>
+		<div class="when"><a href="#comment-218" class="datetime" data-timezone="UTC" data-timestamp="1365899476">2013/04/14 00:31:16</a></div>
+	</div>
+		<div class="comment" id="comment-219">
+		<div class="who">Metronome49</div>
+		<div class="what"><p>Very nice. I enjoyed it. Can’t wait to see how it expands.</p>
+</div>
+		<div class="when"><a href="#comment-219" class="datetime" data-timezone="UTC" data-timestamp="1366015165">2013/04/15 08:39:25</a></div>
+	</div>
+		<div class="comment" id="comment-228">
+		<div class="who">9Volt</div>
+		<div class="what"><p>I really would like if that game could be more arcade…</p>
+</div>
+		<div class="when"><a href="#comment-228" class="datetime" data-timezone="UTC" data-timestamp="1366072608">2013/04/16 00:36:48</a></div>
+	</div>
+		<div class="comment" id="comment-229">
+		<div class="who">BM5k</div>
+		<div class="what"><p>Very nice. I’m having a lot of fun with this one.</p>
+</div>
+		<div class="when"><a href="#comment-229" class="datetime" data-timezone="UTC" data-timestamp="1366084339">2013/04/16 03:52:19</a></div>
+	</div>
+		<div class="comment" id="comment-231">
+		<div class="who">dt</div>
+		<div class="what"><p>got myself stuck… <a href="http://dl.dropbox.com/u/613129/Screenshots/Screenshot_2013-04-23_16.01.31.png">http://dl.dropbox.com/u/613129/Screenshots/Screenshot_2013-04-23_16.01.31.png</a></p>
+</div>
+		<div class="when"><a href="#comment-231" class="datetime" data-timezone="UTC" data-timestamp="1366750920">2013/04/23 21:02:00</a></div>
+	</div>
+		<div class="comment" id="comment-240">
+		<div class="who">Raleigh</div>
+		<div class="what"><p>23 more hours :D :D :D :D</p>
+</div>
+		<div class="when"><a href="#comment-240" class="datetime" data-timezone="UTC" data-timestamp="1369184075">2013/05/22 00:54:35</a></div>
+	</div>
+		<div class="comment" id="comment-241">
+		<div class="who">Raleigh</div>
+		<div class="what"><p>ya :D</p>
+</div>
+		<div class="when"><a href="#comment-241" class="datetime" data-timezone="UTC" data-timestamp="1369184086">2013/05/22 00:54:46</a></div>
+	</div>
+		<div class="comment" id="comment-243">
+		<div class="who">Rusty</div>
+		<div class="what"><p>The polished version is released!</p>
+
+<p><a href="/rewards/">https://retrogamecrunch.com/rewards/</a></p>
+</div>
+		<div class="when"><a href="#comment-243" class="datetime" data-timezone="UTC" data-timestamp="1369331035">2013/05/23 17:43:55</a></div>
+	</div>
+		<div class="comment" id="comment-245">
+		<div class="who">Evan</div>
+		<div class="what"><p>Just got a chance to play through for about an hour. Great stuff guys! This is my favorite so far.</p>
+</div>
+		<div class="when"><a href="#comment-245" class="datetime" data-timezone="UTC" data-timestamp="1369340568">2013/05/23 20:22:48</a></div>
+	</div>
+		<div class="comment" id="comment-247">
+		<div class="who">Rusty</div>
+		<div class="what"><p>Sweet! Thanks Evan. :D</p>
+</div>
+		<div class="when"><a href="#comment-247" class="datetime" data-timezone="UTC" data-timestamp="1369341301">2013/05/23 20:35:01</a></div>
+	</div>
+		<div class="comment" id="comment-249">
+		<div class="who">MitchellW</div>
+		<div class="what"><p>Liked the game, was a good use of 2 hours. </p>
+
+<p>A little early training in “where you are affects where you come out” might have been useful. I thought I was stuck at one point and it took me 10 minutes to figure it out. </p>
+
+<p>Also, perhaps I just lucked out into the right way to get to the exit, but I only ended up with 3 survivors on my way, and two of them I went out of my way to get.</p>
+</div>
+		<div class="when"><a href="#comment-249" class="datetime" data-timezone="UTC" data-timestamp="1369415157">2013/05/24 17:05:57</a></div>
+	</div>
+		<div class="comment" id="comment-255">
+		<div class="who">Jeremy The Jinx</div>
+		<div class="what"><p>Just sat through the full game, 41% items gatheres I think 7 people rescued. I really liked that one being a huge fan of metroidvanias. Keep it up guys I look forward to the next 3</p>
+</div>
+		<div class="when"><a href="#comment-255" class="datetime" data-timezone="UTC" data-timestamp="1369554906">2013/05/26 07:55:06</a></div>
+	</div>
+		<div class="comment" id="comment-282">
+		<div class="who">man</div>
+		<div class="what"><p>This game is badass.  You guys are really smart to have designed these levels.  I’m 20 / 28 citizens saved, and am at 75% items.</p>
+
+<p>Keep up the great work.</p>
+</div>
+		<div class="when"><a href="#comment-282" class="datetime" data-timezone="UTC" data-timestamp="1373950804">2013/07/16 05:00:04</a></div>
+	</div>
+		<div class="comment" id="comment-308">
+		<div class="who">Chipskunk</div>
+		<div class="what"><p>This game is awesome, the gameplay, the graphic and the music is well done. The game could be a bit more difficult. It´s too easy to get through the game without dying.</p>
+
+<p>Found the secret area and all citizens. 1 of them took me forever.</p>
+
+<p>Can´t wait for the next game.</p>
+</div>
+		<div class="when"><a href="#comment-308" class="datetime" data-timezone="UTC" data-timestamp="1378743699">2013/09/09 16:21:39</a></div>
+	</div>
+		<div class="comment" id="comment-349">
+		<div class="who">Jeremy</div>
+		<div class="what"><p>Just picked this game up for the first time after finishing Shuten. Awesome. Finished it the first time with 53%, but now I’m at all the items and 27 of 28 citizens. This last one is taking me FOREVER. Grr.</p>
+
+<p>I know I’m a bit late to the game (<em>snicker</em>) but this is another great one. Nice job guys!</p>
+</div>
+		<div class="when"><a href="#comment-349" class="datetime" data-timezone="UTC" data-timestamp="1388163609">2013/12/27 17:00:09</a></div>
+	</div>
+	</div>	</div><div class="copy">
+		Copyright © 2012–<span class="dateyear"></span> 
+		<a href="/">Retro Game Crunch</a>.
+	</div></div><script>
+$(function()
+{
+	$('.spoilers-toggle').on('touchstart click', function(event)
+	{
+		if(event.handled !== true)
+		{
+			$(this).parent().toggleClass('open');
+			event.handled = true;
+		}
+		return false;
+	});
+})
+</script>
+<script src="/archive.js"></script><script>cleanup();</script></body>
+</html>

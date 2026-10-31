@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>A Boy and His Pug • Retro Game Crunch</title>
+<script>if((window.devicePixelRatio===undefined?1:window.devicePixelRatio)>1)document.cookie='HTTP_IS_RETINA=1;path=/';</script>
+<meta name="google-site-verification" content="0n15O71rkhohq8oudSJ4AhQ9ZHGrtYQGzZ-hj6_NTGI">
+<meta name="viewport" id="viewport" content="width=800">
+<link rel="stylesheet" href="/styles/rgc.q688883a0dcaa.css">
+<link rel="stylesheet" href="/scripts/highlight/styles/zenburn.css">
+<script src="/scripts/highlight/highlight.pack.js"></script>
+<script src="/scripts/jquery-1.8.3.min.js"></script>
+
+<script src="/scripts/mediaelement/mediaelement-and-player.min.js"></script>
+<link rel="stylesheet" href="/scripts/mediaelement/mediaelementplayer.css">
+<script>
+hljs.tabReplace = '    ';
+hljs.initHighlightingOnLoad();
+
+$(function()
+{
+	$('audio').mediaelementplayer(/* Options */);
+	
+	// disable :hover on touch devices
+	// based on https://gist.github.com/4404503 
+	// via https://twitter.com/javan/status/284873379062890496
+	// + https://twitter.com/pennig/status/285790598642946048
+	// re https://retrogamecrunch.com/tmp/hover
+	if ('createTouch' in document)
+	{
+		$('html').addClass('touch');
+		try
+		{
+			var ignore = /:hover\b/;
+			for (var i=0; i<document.styleSheets.length; i++)
+			{
+				var sheet = document.styleSheets[i];
+				for (var j=sheet.cssRules.length-1; j>=0; j--)
+				{
+					var rule = sheet.cssRules[j];
+					if (rule.type === CSSRule.STYLE_RULE && ignore.test(rule.selectorText))
+					{
+						sheet.deleteRule(j);
+					}
+				}
+			}
+		}
+		catch(e){}
+	}
+});
+
+var then = 1387576800000;
+var deadline = '2013-12-20 22:00:00 UTC';
+var last_mins = -1;
+window.setInterval(function()
+{
+	var now = (new Date).getTime();
+	var remaining = then - now;
+	if (remaining < 0) remaining = 0;
+
+	var sec = 1000;
+	var min = 60 * sec;
+	var hour = 60 * min;
+	var day = 24 * hour;
+
+	var days = Math.floor(remaining / day);
+	remaining -= days * day;
+	var hours = Math.floor(remaining / hour);
+	remaining -= hours * hour;
+	var mins = Math.floor(remaining / min);
+	
+	if (last_mins == mins) return; // prevent unnecessary redraws
+	last_mins = mins;
+
+	var html = '';
+
+	if (days) 	html += '<span class="remaining-days">'+days+' day'+(days>1?'s':'')+'</span> ';
+	if (hours) 	html += '<span class="remaining-days">'+hours+' hour'+(hours>1?'s':'')+'</span> ';
+	if (mins) 	html += '<span class="remaining-days">'+mins+' minute'+(mins>1?'s':'')+'</span> ';
+
+	// DELAY
+	// if (html=='') html = 'To be determined';
+	if (html=='') html = 'Just a few moments';
+
+	$('span.countdown').html(html);
+}, 1 * 1000);
+</script>
+
+
+<link rel="stylesheet" href="/archive.css"><link rel="canonical" href="https://retrogamecrunch.com/journal/47/a-boy-and-his-pug/"></head>
+<body>
+	<div class="wrap wrap-top">
+		<div id="logo-unit">
+			<a id="logo" href="/"><img src="/images/logo-black.png" width="204" height="98" alt="Retro Game Crunch"></a>
+			<a id="funded" href="http://www.kickstarter.com/projects/shauninman/retro-game-crunch-six-games-in-six-months"><img src="/images/funded-with.png" width="116" height="112" alt="Funded with Kickstarter"></a>
+		</div><div id="mini-login">
+	
+</div><div id="status">
+			<div class="currently">
+				<strong>Currently</strong>
+				<a href="/games/6/shuten/">Recovering from Shūten Complete</a>
+			</div></div><ul class="nav nav-main">
+			<li><a href="/">Home</a></li>
+			<li><a href="/games/">Games</a></li>			<li><a href="/rewards/">Rewards</a></li>
+			<li><a href="/journal/" class="current">Journal</a></li>
+			<li><a href="/primer/">Primer</a></li>
+			<li><a href="/about/">About</a></li>
+			<li><a href="/contact/">Contact</a></li>
+		</ul>
+	</div><div class="wide"><div class="wrap">
+					<ul class="nav nav-alt nav-journal">
+									<li><a href="/journal/46/rgc-podcast-episode-3/">RGC Podcast, Episode 3</a></li>
+													<li><a href="/journal/48/recalculating/">Recalculating</a></li>
+							</ul>
+				</div></div><div class="wrap wrap-bottom">
+		<div class="content">
+		
+		
+	<div class="post">
+		<h1>A Boy and His Pug</h1>
+		<div class="byline">
+			Posted by <strong>Shaun</strong> 
+							<span class="datetime" data-timezone="UTC" data-timestamp="1374012295">2013/07/16 22:04:55</span>					</div>
+		<p><img src="/shared/images/game-4/pair.png" alt="pair.png"></p>
+
+<p>Time for more art! Oontz (who is starting to look like a white collar DJ) is joined by his pet pug, Wub-Wub. (Inspired by <a href="https://vine.co/v/hala130B3ir">this Vine</a> from <a href="http://adamatomic.com">Adam Saltsman</a>) Wub-Wub will probably be a power-up who, once collected, you’ll control at the same time as Oontz. He can do anything Oontz can except toss record sleeves.</p>
+
+<p><img src="/shared/images/game-4/wub-wub-idle.gif" alt="wub-wub-idle.gif">
+<img src="/shared/images/game-4/wub-wub-run.gif" alt="wub-wub-run.gif">
+<img src="/shared/images/game-4/wub-wub-jump-full.gif" alt="wub-wub-jump-full.gif">
+<img src="/shared/images/game-4/wub-wub-jump-side.gif" alt="wub-wub-jump-side.gif"></p>
+
+<p>Also adding some more bad drops. The Sun will melt any on-screen records if allowed to set. The Twister will blow any on-screen records left or right if allowed to touch down.</p>
+
+<p><img src="/shared/images/game-4/wub-sun.gif" alt="wub-sun.gif">
+<img src="/shared/images/game-4/wub-record-melt.gif" alt="wub-record-melt.gif">
+<img src="/shared/images/game-4/wub-tornado.gif" alt="wub-tornado.gif">
+<img src="/shared/images/game-4/wub-record-spin.gif" alt="wub-record-spin.gif"></p>
+
+<p>Both have full screen animated effects that I’m going to hold off on revealing until the complete version is done.</p>
+
+<p><strong>Edit</strong> Forgot to mention, I’m trying a new art style with this game: no outlines. It seems silly to waste pixels and colors on outlines when there are so few to work with.</p>
+	</div>
+	
+		<h2>1 Comment</h2>
+<div class="comments">
+		<div class="comment" id="comment-283">
+		<div class="who">Shrapnel</div>
+		<div class="what"><p>Showing even more promise than before. Great! =)</p>
+</div>
+		<div class="when"><a href="#comment-283" class="datetime" data-timezone="UTC" data-timestamp="1374158776">2013/07/18 14:46:16</a></div>
+	</div>
+	</div>		</div><div class="copy">
+		Copyright © 2012–<span class="dateyear"></span> 
+		<a href="/">Retro Game Crunch</a>.
+	</div></div><script>
+$(function()
+{
+	$('.spoilers-toggle').on('touchstart click', function(event)
+	{
+		if(event.handled !== true)
+		{
+			$(this).parent().toggleClass('open');
+			event.handled = true;
+		}
+		return false;
+	});
+})
+</script>
+<script src="/archive.js"></script><script>cleanup();</script></body>
+</html>

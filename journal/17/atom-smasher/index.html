@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Atom Smasher • Retro Game Crunch</title>
+<script>if((window.devicePixelRatio===undefined?1:window.devicePixelRatio)>1)document.cookie='HTTP_IS_RETINA=1;path=/';</script>
+<meta name="google-site-verification" content="0n15O71rkhohq8oudSJ4AhQ9ZHGrtYQGzZ-hj6_NTGI">
+<meta name="viewport" id="viewport" content="width=800">
+<link rel="stylesheet" href="/styles/rgc.q688883a0dcaa.css">
+<link rel="stylesheet" href="/scripts/highlight/styles/zenburn.css">
+<script src="/scripts/highlight/highlight.pack.js"></script>
+<script src="/scripts/jquery-1.8.3.min.js"></script>
+
+<script src="/scripts/mediaelement/mediaelement-and-player.min.js"></script>
+<link rel="stylesheet" href="/scripts/mediaelement/mediaelementplayer.css">
+<script>
+hljs.tabReplace = '    ';
+hljs.initHighlightingOnLoad();
+
+$(function()
+{
+	$('audio').mediaelementplayer(/* Options */);
+	
+	// disable :hover on touch devices
+	// based on https://gist.github.com/4404503 
+	// via https://twitter.com/javan/status/284873379062890496
+	// + https://twitter.com/pennig/status/285790598642946048
+	// re https://retrogamecrunch.com/tmp/hover
+	if ('createTouch' in document)
+	{
+		$('html').addClass('touch');
+		try
+		{
+			var ignore = /:hover\b/;
+			for (var i=0; i<document.styleSheets.length; i++)
+			{
+				var sheet = document.styleSheets[i];
+				for (var j=sheet.cssRules.length-1; j>=0; j--)
+				{
+					var rule = sheet.cssRules[j];
+					if (rule.type === CSSRule.STYLE_RULE && ignore.test(rule.selectorText))
+					{
+						sheet.deleteRule(j);
+					}
+				}
+			}
+		}
+		catch(e){}
+	}
+});
+
+var then = 1387576800000;
+var deadline = '2013-12-20 22:00:00 UTC';
+var last_mins = -1;
+window.setInterval(function()
+{
+	var now = (new Date).getTime();
+	var remaining = then - now;
+	if (remaining < 0) remaining = 0;
+
+	var sec = 1000;
+	var min = 60 * sec;
+	var hour = 60 * min;
+	var day = 24 * hour;
+
+	var days = Math.floor(remaining / day);
+	remaining -= days * day;
+	var hours = Math.floor(remaining / hour);
+	remaining -= hours * hour;
+	var mins = Math.floor(remaining / min);
+	
+	if (last_mins == mins) return; // prevent unnecessary redraws
+	last_mins = mins;
+
+	var html = '';
+
+	if (days) 	html += '<span class="remaining-days">'+days+' day'+(days>1?'s':'')+'</span> ';
+	if (hours) 	html += '<span class="remaining-days">'+hours+' hour'+(hours>1?'s':'')+'</span> ';
+	if (mins) 	html += '<span class="remaining-days">'+mins+' minute'+(mins>1?'s':'')+'</span> ';
+
+	// DELAY
+	// if (html=='') html = 'To be determined';
+	if (html=='') html = 'Just a few moments';
+
+	$('span.countdown').html(html);
+}, 1 * 1000);
+</script>
+
+
+<link rel="stylesheet" href="/archive.css"><link rel="canonical" href="https://retrogamecrunch.com/journal/17/atom-smasher/"></head>
+<body>
+	<div class="wrap wrap-top">
+		<div id="logo-unit">
+			<a id="logo" href="/"><img src="/images/logo-black.png" width="204" height="98" alt="Retro Game Crunch"></a>
+			<a id="funded" href="http://www.kickstarter.com/projects/shauninman/retro-game-crunch-six-games-in-six-months"><img src="/images/funded-with.png" width="116" height="112" alt="Funded with Kickstarter"></a>
+		</div><div id="mini-login">
+	
+</div><div id="status">
+			<div class="currently">
+				<strong>Currently</strong>
+				<a href="/games/6/shuten/">Recovering from Shūten Complete</a>
+			</div></div><ul class="nav nav-main">
+			<li><a href="/">Home</a></li>
+			<li><a href="/games/">Games</a></li>			<li><a href="/rewards/">Rewards</a></li>
+			<li><a href="/journal/" class="current">Journal</a></li>
+			<li><a href="/primer/">Primer</a></li>
+			<li><a href="/about/">About</a></li>
+			<li><a href="/contact/">Contact</a></li>
+		</ul>
+	</div><div class="wide"><div class="wrap">
+					<ul class="nav nav-alt nav-journal">
+									<li><a href="/journal/16/cutting-corners/">Cutting Corners</a></li>
+													<li><a href="/journal/18/looped-noise/">Looped Noise</a></li>
+							</ul>
+				</div></div><div class="wrap wrap-bottom">
+		<div class="content">
+		
+		
+	<div class="post">
+		<h1>Atom Smasher</h1>
+		<div class="byline">
+			Posted by <strong>Shaun</strong> 
+							<span class="datetime" data-timezone="UTC" data-timestamp="1358573164">2013/01/19 05:26:04</span>					</div>
+		<p>Trying to collect my thoughts on level design, and more specifically, puzzle design for End of Line. I’ve started documenting all the atoms available, just like I did for The Last Rocket. (I’m borrowing my  loose definition of an atom, an action/outcome pair, from <a href="http://www.raphkoster.com/2012/01/24/an-atomic-theory-of-fun-game-design/">Raph Koster</a>.)</p>
+
+<p>This is what I see as the current atoms available for EOL puzzles (doesn’t include new elements added late this week):</p>
+
+<pre><code>MICRO
+
+Active
+
+    - kill yourself to get to another area of the map
+    - kill yourself to return to origin
+    - kill yourself to attract a flyer
+    - kill yourself to attract a hopper
+    - kill a flyer to prevent repair (of hoppers, terminals, and EOL)
+    - kill a flyer to clear a path
+    - kill a hopper to prevent repair (of terminals and EOL)
+    - kill a hopper to attract a flyer
+    - kill a hopper to press a switch
+    - kill a hopper to clear a path
+    - kill a terminal to attract a flyer
+    - kill a terminal to attract a hopper
+
+    - attract a flyer to press a switch
+    - attract a hopper to press a switch
+    - attract an ice hopper to create a path
+
+    - push a crate to clear a path
+    - push a crate to press a switch
+    - push a crate to release a switch
+    - push a crate onto a conveyor to...
+
+    - press a switch to lower a gate
+    - press a switch to raise a gate
+    - release a switch to lower a gate
+    - release a switch to raise a gate
+
+    - collect fire to cross fire
+    - collect fire to kill fire flyer
+    - collect fire to kill fire hopper
+    - collect fire to kill iron crate
+
+    - collect ice to cross water
+    - collect ice to kill ice flyer
+    - collect ice to kill ice hopper
+
+Passive
+
+    - convey yourself
+    - convey a crate
+
+    - pass through an open gate
+    - pass through a destroyed iron crate
+    - pass over ice hopper ice path
+
+Compound
+
+    - use gates to control hopper flow
+    - push crate across ice (hopper or Ice EOL created)
+    - push a crate into the path of a hopper to press a switch
+
+MACRO
+
+    - kill all iron crates
+    - kill all flyers
+    - kill all hoppers
+    - (optional) kill all terminals (for special ending?)
+    - kill yourself on
+        - spikes
+        - fire (except Fire EOL)
+        - melting ice (except Ice EOL)
+
+ENVIRO
+
+    - place conveyors to prevent crate movement
+    - place conveyors to prevent hopper movement
+    - kill a hopper on spikes
+    - a hoppers path towards a switch creates a timer
+    - obscure switches with crates
+    - obscure switches with iron crates
+    - obscure switches with flyers
+    - flyers as first responders (hoppers don't repair if a flyer is available)
+</code></pre>
+
+<p>And those are just the ones we’ve discovered so far. Level design, and especially puzzle design, is a time consuming process. First you need to define your mechanics and invent some props. Then you explore and learn how they interact. It’s that foundation and insight that allows you to discover interesting combinations that result in challenging puzzles.</p>
+	</div>
+	
+		<h2>2 Comments</h2>
+<div class="comments">
+		<div class="comment" id="comment-93">
+		<div class="who">Marty Alchin</div>
+		<div class="what"><p>I love that you included a hopper creating a timer as it moves toward a switch. That’s the kind of clever reuse that I love to see in level design!</p>
+</div>
+		<div class="when"><a href="#comment-93" class="datetime" data-timezone="UTC" data-timestamp="1358578665">2013/01/19 06:57:45</a></div>
+	</div>
+		<div class="comment" id="comment-94">
+		<div class="who">Shaun</div>
+		<div class="what"><p>That’s a Matt Grimm original!</p>
+</div>
+		<div class="when"><a href="#comment-94" class="datetime" data-timezone="UTC" data-timestamp="1358604472">2013/01/19 14:07:52</a></div>
+	</div>
+	</div>		</div><div class="copy">
+		Copyright © 2012–<span class="dateyear"></span> 
+		<a href="/">Retro Game Crunch</a>.
+	</div></div><script>
+$(function()
+{
+	$('.spoilers-toggle').on('touchstart click', function(event)
+	{
+		if(event.handled !== true)
+		{
+			$(this).parent().toggleClass('open');
+			event.handled = true;
+		}
+		return false;
+	});
+})
+</script>
+<script src="/archive.js"></script><script>cleanup();</script></body>
+</html>

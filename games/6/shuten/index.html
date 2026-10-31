@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Shūten • Retro Game Crunch</title>
+<script>if((window.devicePixelRatio===undefined?1:window.devicePixelRatio)>1)document.cookie='HTTP_IS_RETINA=1;path=/';</script>
+<meta name="google-site-verification" content="0n15O71rkhohq8oudSJ4AhQ9ZHGrtYQGzZ-hj6_NTGI">
+<meta name="viewport" id="viewport" content="width=800">
+<link rel="stylesheet" href="/styles/rgc.q688883a0dcaa.css">
+<link rel="stylesheet" href="/scripts/highlight/styles/zenburn.css">
+<script src="/scripts/highlight/highlight.pack.js"></script>
+<script src="/scripts/jquery-1.8.3.min.js"></script>
+
+<script src="/scripts/mediaelement/mediaelement-and-player.min.js"></script>
+<link rel="stylesheet" href="/scripts/mediaelement/mediaelementplayer.css">
+<script>
+hljs.tabReplace = '    ';
+hljs.initHighlightingOnLoad();
+
+$(function()
+{
+	$('audio').mediaelementplayer(/* Options */);
+	
+	// disable :hover on touch devices
+	// based on https://gist.github.com/4404503 
+	// via https://twitter.com/javan/status/284873379062890496
+	// + https://twitter.com/pennig/status/285790598642946048
+	// re https://retrogamecrunch.com/tmp/hover
+	if ('createTouch' in document)
+	{
+		$('html').addClass('touch');
+		try
+		{
+			var ignore = /:hover\b/;
+			for (var i=0; i<document.styleSheets.length; i++)
+			{
+				var sheet = document.styleSheets[i];
+				for (var j=sheet.cssRules.length-1; j>=0; j--)
+				{
+					var rule = sheet.cssRules[j];
+					if (rule.type === CSSRule.STYLE_RULE && ignore.test(rule.selectorText))
+					{
+						sheet.deleteRule(j);
+					}
+				}
+			}
+		}
+		catch(e){}
+	}
+});
+
+var then = 1387576800000;
+var deadline = '2013-12-20 22:00:00 UTC';
+var last_mins = -1;
+window.setInterval(function()
+{
+	var now = (new Date).getTime();
+	var remaining = then - now;
+	if (remaining < 0) remaining = 0;
+
+	var sec = 1000;
+	var min = 60 * sec;
+	var hour = 60 * min;
+	var day = 24 * hour;
+
+	var days = Math.floor(remaining / day);
+	remaining -= days * day;
+	var hours = Math.floor(remaining / hour);
+	remaining -= hours * hour;
+	var mins = Math.floor(remaining / min);
+	
+	if (last_mins == mins) return; // prevent unnecessary redraws
+	last_mins = mins;
+
+	var html = '';
+
+	if (days) 	html += '<span class="remaining-days">'+days+' day'+(days>1?'s':'')+'</span> ';
+	if (hours) 	html += '<span class="remaining-days">'+hours+' hour'+(hours>1?'s':'')+'</span> ';
+	if (mins) 	html += '<span class="remaining-days">'+mins+' minute'+(mins>1?'s':'')+'</span> ';
+
+	// DELAY
+	// if (html=='') html = 'To be determined';
+	if (html=='') html = 'Just a few moments';
+
+	$('span.countdown').html(html);
+}, 1 * 1000);
+</script>
+
+
+<script>window.RufflePlayer={config:{polyfills:false,publicPath:"/scripts/ruffle/",autoplay:"on"}};</script><script src="/scripts/ruffle/ruffle.js" defer></script><script src="/scripts/flash.js" defer></script><link rel="stylesheet" href="/archive.css"><link rel="canonical" href="https://retrogamecrunch.com/games/6/shuten/"></head>
+<body>
+	
+	<div class="wide">
+		<div class="wrap wrap-game">
+		<div id="game-nav">
+							<a id="prev-game" href="/games/5/brains-and-hearts/"><img src="/images/btn-arrow-prev.png" height="102" alt="Previous Game"></a>
+								</div><div id="game">
+			<div class="archive-flash" data-swf="/games/embeds/6/SamuraiGame.swf" data-background="#000000" data-flashvars="" style="display:inline-block;width:720px;height:480px;max-width:100%;" id="game-swf"></div>
+		</div><div id="game-options">
+			<img id="preview" src="/images/game-6.png" width="720" alt="">
+			<a href="/rewards/"><img src="/images/btn-download-complete.gif" height="105" alt="Download Complete Version"></a><a href="#game" id="btn-play-crunch"><img src="/images/btn-play-crunch.png" height="105" alt="Play the 72 Hour Version"></a>
+		</div><script>
+		$('#game').hide();
+		$('#btn-play-crunch').on('touchstart click', function(event)
+		{
+			if(event.handled !== true)
+			{
+				$('#game-options').hide();
+				$('#game').show();
+				event.handled = true;
+			}
+			return false;
+		});
+		</script>
+				<div class="masthead">
+			<div id="logo-unit"><a id="logo" href="/"><img src="/images/logo-white-sm.png" width="108" height="42" alt="Retro Game Crunch"></a></div>
+			
+			<div class="theme">
+				<span>Theme</span><br>
+				<strong>The End</strong>
+			</div>
+			
+			<div id="mini-login">
+	
+</div></div>
+	</div></div><div class="wrap wrap-bottom">
+		<div class="content">
+			
+	<div class="two-col">
+		<div class="main-col game-content">
+			<h1>Shūten <span>a  game made in 72 hours</span></h1>
+			<p>The ancient gods are stirring. Owari’s village is trampled under foot in their renewed conflict. He takes up sword to claim their power as his own and use it against them. To end them.</p>
+
+<p><strong>Arrows</strong> Move  Owari<br>
+<strong>Z</strong>  Deflect / Hold to Absorb / Release to End<br>
+<strong>X</strong> Fire absorbed weapon</p>
+		</div>
+		
+		<div class="sub-col downloads">
+					</div>
+	</div>
+	<h2>18 Comments</h2>
+<div class="comments">
+		<div class="comment" id="comment-325">
+		<div class="who">Raleigh</div>
+		<div class="what"><p>This is the best one so far. </p>
+
+<p>So.
+Freaking.
+Good!</p>
+
+<p>I CANNOT wait to play the full version. </p>
+
+<p>More weapons plz!</p>
+
+<p>Magikarp!!</p>
+</div>
+		<div class="when"><a href="#comment-325" class="datetime" data-timezone="UTC" data-timestamp="1383017136">2013/10/29 03:25:36</a></div>
+	</div>
+		<div class="comment" id="comment-326">
+		<div class="who">Jesse</div>
+		<div class="what"><p>THIS. IS. AWESOME.</p>
+</div>
+		<div class="when"><a href="#comment-326" class="datetime" data-timezone="UTC" data-timestamp="1383017404">2013/10/29 03:30:04</a></div>
+	</div>
+		<div class="comment" id="comment-327">
+		<div class="who">Shaun</div>
+		<div class="what"><p>Oh. My. Word. It is magikarp! And he even has the lamest weapon!</p>
+
+<p>Thanks Raleigh!</p>
+</div>
+		<div class="when"><a href="#comment-327" class="datetime" data-timezone="UTC" data-timestamp="1383017466">2013/10/29 03:31:06</a></div>
+	</div>
+		<div class="comment" id="comment-328">
+		<div class="who">@maxschultz</div>
+		<div class="what"><p>+1 very cool and can’t wait for the full version.</p>
+
+<p>The character animation and sashimono are excellent.</p>
+
+<p>Also, you comfortably fit a melee, a flechette and a special attack into two keyboard keys - bravo.</p>
+</div>
+		<div class="when"><a href="#comment-328" class="datetime" data-timezone="UTC" data-timestamp="1383017676">2013/10/29 03:34:36</a></div>
+	</div>
+		<div class="comment" id="comment-329">
+		<div class="who">Shaun</div>
+		<div class="what"><p>Thanks Jesse and Max!</p>
+
+<p>@maxschultz There’s actually 5 weapons in the game (not just the flechette). You acquire them by special-ing each of the five unique enemy types. And we’ve got more planned for the complete version!</p>
+</div>
+		<div class="when"><a href="#comment-329" class="datetime" data-timezone="UTC" data-timestamp="1383018124">2013/10/29 03:42:04</a></div>
+	</div>
+		<div class="comment" id="comment-330">
+		<div class="who">Timothy</div>
+		<div class="what"><p>omg kawaiii!!!</p>
+</div>
+		<div class="when"><a href="#comment-330" class="datetime" data-timezone="UTC" data-timestamp="1383019282">2013/10/29 04:01:22</a></div>
+	</div>
+		<div class="comment" id="comment-331">
+		<div class="who">Dimitri</div>
+		<div class="what"><p>I agree, this one is going to be awesome when you three complete it!</p>
+</div>
+		<div class="when"><a href="#comment-331" class="datetime" data-timezone="UTC" data-timestamp="1383025317">2013/10/29 05:41:57</a></div>
+	</div>
+		<div class="comment" id="comment-332">
+		<div class="who">Shrapnel</div>
+		<div class="what"><p>Effin’ awesome. I don’t like to say again what I already said a million times, since I don’t wanna be boring, but… RGC games need console ports. There, I said it again. =D</p>
+</div>
+		<div class="when"><a href="#comment-332" class="datetime" data-timezone="UTC" data-timestamp="1383055430">2013/10/29 14:03:50</a></div>
+	</div>
+		<div class="comment" id="comment-333">
+		<div class="who">@streetalchemist</div>
+		<div class="what"><p>Totally fantastic gentlemen. Well done and I can’t wait for the final version!</p>
+</div>
+		<div class="when"><a href="#comment-333" class="datetime" data-timezone="UTC" data-timestamp="1383143258">2013/10/30 14:27:38</a></div>
+	</div>
+		<div class="comment" id="comment-334">
+		<div class="who">Scott</div>
+		<div class="what"><p>Awesome!!!</p>
+</div>
+		<div class="when"><a href="#comment-334" class="datetime" data-timezone="UTC" data-timestamp="1383326880">2013/11/01 17:28:00</a></div>
+	</div>
+		<div class="comment" id="comment-335">
+		<div class="who">Howie</div>
+		<div class="what"><p>This is AWESOME, can’t believe it is the last of the game.</p>
+
+<p>Hope they have more of this going, I would definitely keep supporting them ~!</p>
+</div>
+		<div class="when"><a href="#comment-335" class="datetime" data-timezone="UTC" data-timestamp="1383505766">2013/11/03 19:09:26</a></div>
+	</div>
+		<div class="comment" id="comment-336">
+		<div class="who">Alex</div>
+		<div class="what"><p>these hole experience.this 6 games.TOTALY WORTH IT!</p>
+</div>
+		<div class="when"><a href="#comment-336" class="datetime" data-timezone="UTC" data-timestamp="1383766012">2013/11/06 19:26:52</a></div>
+	</div>
+		<div class="comment" id="comment-340">
+		<div class="who">Rusty</div>
+		<div class="what"><p>And….the complete version is released!</p>
+</div>
+		<div class="when"><a href="#comment-340" class="datetime" data-timezone="UTC" data-timestamp="1387588668">2013/12/21 01:17:48</a></div>
+	</div>
+		<div class="comment" id="comment-341">
+		<div class="who">Jeremy</div>
+		<div class="what"><p>Man.. this sumo devil looking dude is hard. Great game guys! So much fun! :D</p>
+</div>
+		<div class="when"><a href="#comment-341" class="datetime" data-timezone="UTC" data-timestamp="1387617565">2013/12/21 09:19:25</a></div>
+	</div>
+		<div class="comment" id="comment-344">
+		<div class="who">crisgaret</div>
+		<div class="what"><p>Yeah, best game yet. Was pretty pumped when I finally beat that “sumo devil” guy… then surprise…. it never ends : ]</p>
+</div>
+		<div class="when"><a href="#comment-344" class="datetime" data-timezone="UTC" data-timestamp="1387698057">2013/12/22 07:40:57</a></div>
+	</div>
+		<div class="comment" id="comment-346">
+		<div class="who">Rusty</div>
+		<div class="what"><p>Which upgrade path did you take in the shop? </p>
+
+<p>@Jeremy Yeah!!! Thanks Jeremy!</p>
+
+<p>@crisgarwt Yea, we wanted to squeeze in just one last surprise. :)</p>
+</div>
+		<div class="when"><a href="#comment-346" class="datetime" data-timezone="UTC" data-timestamp="1387732476">2013/12/22 17:14:36</a></div>
+	</div>
+		<div class="comment" id="comment-347">
+		<div class="who">Jeremy</div>
+		<div class="what"><p>Finally beat the devil skull dude. Man that took forever! So hard.</p>
+</div>
+		<div class="when"><a href="#comment-347" class="datetime" data-timezone="UTC" data-timestamp="1387753936">2013/12/22 23:12:16</a></div>
+	</div>
+		<div class="comment" id="comment-348">
+		<div class="who">Jeremy</div>
+		<div class="what"><p>Also, so much fun seeing my name in the credits! :D</p>
+</div>
+		<div class="when"><a href="#comment-348" class="datetime" data-timezone="UTC" data-timestamp="1387753990">2013/12/22 23:13:10</a></div>
+	</div>
+	</div>	</div><div class="copy">
+		Copyright © 2012–<span class="dateyear"></span> 
+		<a href="/">Retro Game Crunch</a>.
+	</div></div><script>
+$(function()
+{
+	$('.spoilers-toggle').on('touchstart click', function(event)
+	{
+		if(event.handled !== true)
+		{
+			$(this).parent().toggleClass('open');
+			event.handled = true;
+		}
+		return false;
+	});
+})
+</script>
+<script src="/archive.js"></script><script>cleanup();</script></body>
+</html>

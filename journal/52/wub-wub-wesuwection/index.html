@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Wub-Wub Wesuwection • Retro Game Crunch</title>
+<script>if((window.devicePixelRatio===undefined?1:window.devicePixelRatio)>1)document.cookie='HTTP_IS_RETINA=1;path=/';</script>
+<meta name="google-site-verification" content="0n15O71rkhohq8oudSJ4AhQ9ZHGrtYQGzZ-hj6_NTGI">
+<meta name="viewport" id="viewport" content="width=800">
+<link rel="stylesheet" href="/styles/rgc.q688883a0dcaa.css">
+<link rel="stylesheet" href="/scripts/highlight/styles/zenburn.css">
+<script src="/scripts/highlight/highlight.pack.js"></script>
+<script src="/scripts/jquery-1.8.3.min.js"></script>
+
+<script src="/scripts/mediaelement/mediaelement-and-player.min.js"></script>
+<link rel="stylesheet" href="/scripts/mediaelement/mediaelementplayer.css">
+<script>
+hljs.tabReplace = '    ';
+hljs.initHighlightingOnLoad();
+
+$(function()
+{
+	$('audio').mediaelementplayer(/* Options */);
+	
+	// disable :hover on touch devices
+	// based on https://gist.github.com/4404503 
+	// via https://twitter.com/javan/status/284873379062890496
+	// + https://twitter.com/pennig/status/285790598642946048
+	// re https://retrogamecrunch.com/tmp/hover
+	if ('createTouch' in document)
+	{
+		$('html').addClass('touch');
+		try
+		{
+			var ignore = /:hover\b/;
+			for (var i=0; i<document.styleSheets.length; i++)
+			{
+				var sheet = document.styleSheets[i];
+				for (var j=sheet.cssRules.length-1; j>=0; j--)
+				{
+					var rule = sheet.cssRules[j];
+					if (rule.type === CSSRule.STYLE_RULE && ignore.test(rule.selectorText))
+					{
+						sheet.deleteRule(j);
+					}
+				}
+			}
+		}
+		catch(e){}
+	}
+});
+
+var then = 1387576800000;
+var deadline = '2013-12-20 22:00:00 UTC';
+var last_mins = -1;
+window.setInterval(function()
+{
+	var now = (new Date).getTime();
+	var remaining = then - now;
+	if (remaining < 0) remaining = 0;
+
+	var sec = 1000;
+	var min = 60 * sec;
+	var hour = 60 * min;
+	var day = 24 * hour;
+
+	var days = Math.floor(remaining / day);
+	remaining -= days * day;
+	var hours = Math.floor(remaining / hour);
+	remaining -= hours * hour;
+	var mins = Math.floor(remaining / min);
+	
+	if (last_mins == mins) return; // prevent unnecessary redraws
+	last_mins = mins;
+
+	var html = '';
+
+	if (days) 	html += '<span class="remaining-days">'+days+' day'+(days>1?'s':'')+'</span> ';
+	if (hours) 	html += '<span class="remaining-days">'+hours+' hour'+(hours>1?'s':'')+'</span> ';
+	if (mins) 	html += '<span class="remaining-days">'+mins+' minute'+(mins>1?'s':'')+'</span> ';
+
+	// DELAY
+	// if (html=='') html = 'To be determined';
+	if (html=='') html = 'Just a few moments';
+
+	$('span.countdown').html(html);
+}, 1 * 1000);
+</script>
+
+
+<script>window.RufflePlayer={config:{polyfills:false,publicPath:"/scripts/ruffle/",autoplay:"on"}};</script><script src="/scripts/ruffle/ruffle.js" defer></script><script src="/scripts/flash.js" defer></script><link rel="stylesheet" href="/archive.css"><link rel="canonical" href="https://retrogamecrunch.com/journal/52/wub-wub-wesuwection/"></head>
+<body>
+	<div class="wrap wrap-top">
+		<div id="logo-unit">
+			<a id="logo" href="/"><img src="/images/logo-black.png" width="204" height="98" alt="Retro Game Crunch"></a>
+			<a id="funded" href="http://www.kickstarter.com/projects/shauninman/retro-game-crunch-six-games-in-six-months"><img src="/images/funded-with.png" width="116" height="112" alt="Funded with Kickstarter"></a>
+		</div><div id="mini-login">
+	
+</div><div id="status">
+			<div class="currently">
+				<strong>Currently</strong>
+				<a href="/games/6/shuten/">Recovering from Shūten Complete</a>
+			</div></div><ul class="nav nav-main">
+			<li><a href="/">Home</a></li>
+			<li><a href="/games/">Games</a></li>			<li><a href="/rewards/">Rewards</a></li>
+			<li><a href="/journal/" class="current">Journal</a></li>
+			<li><a href="/primer/">Primer</a></li>
+			<li><a href="/about/">About</a></li>
+			<li><a href="/contact/">Contact</a></li>
+		</ul>
+	</div><div class="wide"><div class="wrap">
+					<ul class="nav nav-alt nav-journal">
+									<li><a href="/journal/51/droppin-beats/">Droppin’ Beats</a></li>
+													<li><a href="/journal/53/refill/">Refill</a></li>
+							</ul>
+				</div></div><div class="wrap wrap-bottom">
+		<div class="content">
+		
+		
+	<div class="post">
+		<h1>Wub-Wub Wesuwection</h1>
+		<div class="byline">
+			Posted by <strong>Shaun</strong> 
+							<span class="datetime" data-timezone="UTC" data-timestamp="1377618082">2013/08/27 15:41:22</span>					</div>
+		<p>Let’s talk about <a href="/rewards/">Wub-Wub Wescue</a> and the creative process. Here’s <a href="https://twitter.com/boltcity/status/369484217349992448">a tweet</a> by <a href="https://twitter.com/boltcity">Kazu Kibuishi</a> that pretty much sums up this post if you’re short on time:</p>
+
+<blockquote>
+  <p>Creative process:<br>
+  1) This is going to be awesome<br>
+  2) This is hard<br>
+  3) This is terrible<br>
+  4) I’m terrible<br>
+  5) Hey, not bad<br>
+  6) That was awesome</p>
+</blockquote>
+
+<p>Nailed it.</p>
+
+<h2>Beaten Down</h2>
+
+<p><div class="archive-flash" data-swf="/shared/downloads/BeatDropPlatform.swf" data-background="#000000" data-flashvars="" style="display:inline-block;width:480px;height:320px;max-width:100%;" id="game-shared-downloads-BeatDropPlatform-swf"></div></p>
+
+<p><em>Controls: ARROWS to move, A to shoot, S to jump</em></p>
+
+<p>This update to the 3 day crunch version of Beat Drop probably reflects about two weeks of additional design and development (shared with the next embed). I mention a few of the additions in <a href="/journal/47/a-boy-and-his-pug/">A Boy and His Pug</a>. </p>
+
+<p>This is the first appearance of Wub-Wub as a difficult to control power-up. In addition to the sun and twister mentioned in that post this version also introduced a UFO (we were going for 80’s non-sensical eclectic) and an anvil. If you let the sun and twister hit the ground you’ll see the full screen effects I coyly mentioned.</p>
+
+<p>The intractable problem with this approach to the theme is that difficulty is ultimately tied to tempo. And this problem won’t be fixed until we ditch record catching completely.</p>
+
+<h2>Lost the Rhythm</h2>
+
+<p><div class="archive-flash" data-swf="/shared/downloads/BeatDropRhythm.swf" data-background="#000000" data-flashvars="" style="display:inline-block;width:480px;height:320px;max-width:100%;" id="game-shared-downloads-BeatDropRhythm-swf"></div></p>
+
+<p><em>Controls: ARROWS</em></p>
+
+<p>This is as far as I got with the rhythm game section we planned on building. This “level” only uses one arrow direction but it supports all four directions and WASD. </p>
+
+<p>Turns out it’s really tricky to sync visuals with audio in ActionScript. If you watch closely you might notice the records get ahead or fall behind then snap back or forward on the beat. I assign all records the same velocity to keep pace with the music but due to cumulative drift from Number’s (lack of) precision and Flash’s inconsistent frame rate I need to manually correct their position.</p>
+
+<p>One thing I’m surprised I got working as well as I did was player beat precision detection. Values range from Miss to Bad to Good to Great to Perfect.</p>
+
+<h2>A Skipping Playhead</h2>
+
+<p><div class="archive-flash" data-swf="/shared/downloads/RecordGame.swf" data-background="#000000" data-flashvars="" style="display:inline-block;width:480px;height:320px;max-width:100%;" id="game-shared-downloads-RecordGame-swf"></div></p>
+
+<p><em>Controls: ARROWS, SPACE to jump, Z/X to speak</em></p>
+
+<p>Having <a href="/journal/48/recalculating/">noted</a> a number of flaws in our original direction, Matt and I huddled and hashed out a new one. Matt <a href="/journal/51/droppin-beats/">talks a bit</a> about how he approached music for this version. This build reflects about a week’s worth of design and development.</p>
+
+<p>We tried to make the music more visibly influence the level by associating each piece of the music with a distinct level formation, transitioning smoothly from one to the next. This <em>almost</em> works.</p>
+
+<p>We were also still trying to make the record collection mechanic interesting. Unfortunately, our solution was still to distract from that mechanic. Not a good sign when the only way to make your core mechanic work is by distracting the player from it.</p>
+
+<p>After about a week we decided this whole direction still wasn’t working. But it wasn’t a complete waste. Oontz went from a record shop combing DJ to a Professor of Archaeology seeking the source of all music, the Playhead. Wub-Wub learned some new moves. And the Natives were restless. These new additions (plus snakes) all made it into, arguably, defined, the game’s final form.</p>
+
+<h2>The Final Act</h2>
+
+<p><img src="/shared/images/game-4/acts.png" alt="acts.png"></p>
+
+<p>After a few days flailing about directionless Matt and I got on video chat even though neither of us had any ideas on how to salvage this and just talked it out for an afternoon. By the end of the hours long conversation we had our fourth and final plan of action.</p>
+
+<p>What follows is my un-edited TODONE.txt from that meeting on July 28th till the launch on August 19th (reverse chronological so you might want to scroll all the way down and work your way back up):</p>
+
+<div class="spoilers"><img src="/images/btn-spoilers.png" height="30" alt="Spoilers" class="spoilers-toggle"><div class="spoilers-content">
+
+<pre><code>TODONE
+-----------------------------------------------------------
+2013-08-19
+added File &gt; Quit (plus the ctl+q shortcut) to PC app
+
+SFX bring down twinkle sound effect 80%?
+
+SFX increase native land volume
+
+implemented new game/continue
+
+tweaked snake level
+
+-----------------------------------------------------------
+2013-08-18
+MUSIC: CreditsFull
+
+SFX wall collision thud
+
+SFX: new start sound
+
+SFX: boss hit should be final hit, not after spin comes to rest
+
+BUG: disable balloon during recoil
+
+figure out app packaging (PC)
+
+try mosaic transition to nowhere for cheat confirmation
+
+increase wall collision shake
+
+adjust timing of arrow/bat level to match beat
+
+add hanging wall to a snake/arrow level
+
+set up app packaging (Mac)
+
+icon
+
+FIXED: death by falling off screen doesn't 
+let the death jingle play fully
+
+FIXED: you can pause game with off screen death
+
+tweaked boss music volume
+
+added PRAM and hasSeenCredits skipping
+
+add flashing hand to title
+
+create infinite jump cheat platforms
+
+implement cheat codes
+
+-----------------------------------------------------------
+2013-08-17
+kuranchi hidden in plain sight
+
+figure out optimum music order
+tweak levels for selected music
+
+Re-order levels (cut 8 levels)
+
+designed and implemented act structure
+
+prevent native from spawning behind wub during ending
+
+FIXED: monkey/player collision bugs (22.tmx/ladders)
+
+added basics of infinite jump cheat
+
+reposition different colored bgs and change every 4 levels
+
+write FLJS to generate bin embeds automagically
+
+
+-----------------------------------------------------------
+2013-08-16
+implemented logo, ending, and credits
+
+tightened up boss
+
+animate boss recoil and damage
+
+FIXED: bat carrying should set player.peakY
+
+-----------------------------------------------------------
+2013-08-15
+started boss level/behavior design
+
+FIXED: monkey catching bugs (precision issue)
+
+tweaked boulder spawn point
+
+designed 3 levels (28-30.tmx) plus boss.tmx
+
+revisited 4 boulder levels (reduced spawn rate)
+
+-----------------------------------------------------------
+2013-08-14
+added forced facing walls (use only to match arrow head facing)
+
+designed 1 level (24.tmx)
+
+ported 3 mg levels (25-27.tmx)
+
+-----------------------------------------------------------
+2013-08-13
+designed 2 levels (22-23.tmx)
+
+Spikes can now be rendered from full spike or just bottom row
+
+-----------------------------------------------------------
+2013-08-12
+FIXED: spikes were eating up one too many columns during entity parse
+
+designed 2 levels (20-21.tmx) (3 if you count scrapped 21a)
+
+-----------------------------------------------------------
+2013-08-10
+FIXED: bat's second swoop in 19.tmx
+FIXED: landing/flapping in wrong facing in 19.tmx
+
+designed 2 levels (18-19.tmx)
+
+tweaked monkey and bat hitboxes/velocities
+
+-----------------------------------------------------------
+2013-08-09
+added level name to hud for debug
+
+created treetop background
+
+designed 1 level (17.tmx) :\
+
+-----------------------------------------------------------
+2013-08-08
+BUG: wub continues to bounce if he walks off a platform
+
+designed 5 levels (12-16.tmx)
+
+cut the 4 boulder levels :\
+
+-----------------------------------------------------------
+2013-08-07
+stoneheads should stop arrows (but not their own)
+
+designed 6 levels (6-11.tmx)
+
+post progress update on RGC.com
+
+-----------------------------------------------------------
+2013-08-06
+fixed a bunch of bugs
+
+designed 4 levels (2-5.tmx)
+
+"paws" screen
+
+add parenths to bambooyeah 8
+
+credits
+
+sync past month's Kickstarter survey stragglers
+
+-----------------------------------------------------------
+2013-08-05
+created Bambooyeah 8 and Bambooyeah 8 Bold typefaces
+
+designed 1 level (1.tmx)
+
+misc bug fixes
+
+implemented balloon power-up including revised hud
+
+title screen
+
+-----------------------------------------------------------
+2013-08-04
+make ladder behavior more Mega Man-like
+
+background loading
+
+animate and implement bark and barking
+
+load platform, arrow, and boulder timings from tmx
+
+load song from tmx
+
+level loading
+
+hook up sound effects
+
+update Create Audio SWC.fljs to support Music and Sfx
+
+embed music
+
+embed sound effects
+
+
+-----------------------------------------------------------
+2013-08-03
+hook up yellow phonograph
+
+implement bat
+
+finish animating new bat
+
+-----------------------------------------------------------
+2013-08-02
+design and animated the new bat!
+
+implement ceiling spikes
+
+implemented monkey and snake
+
+-----------------------------------------------------------
+2013-08-01
+failed to design and animate an alternate vulture
+
+failed to design and animate the parrot
+
+-----------------------------------------------------------
+2013-07-31
+animated wub-wub being thrown
+
+redraw and animate monkey, jumping and throwing
+
+redraw and animate snake, circling and sleeping
+
+simple hud design and implementation of song learning
+with queuing and limited song durations with progress bar
+
+implemented phonographs
+
+animated/implemented wub-wub listening and singing
+
+animated/implemented drummers, caged oontz, and dragging away
+
+-----------------------------------------------------------
+2013-07-30
+implemented boulders
+
+implemented arrows
+
+implemented rhythm platforms
+
+implemented seamlessly looping audio and tempo tracking
+
+-----------------------------------------------------------
+2013-07-29
+implemented wub-wub, ground, spikes, walls and ladders
+
+started third FDT project for this game
+
+drew a shit-ton of new art assets
+
+-----------------------------------------------------------
+2013-07-28
+came up with a new direction with Matt, code name Doggy Kong
+
+panicked about the lack of fun and focus in the gameplay
+
+redrew wub-wub's run cycle
+
+palette swapped red cobra
+
+
+-----------------------------------------------------------
+2013-07-27
+unsuccessfully tried to re-imagine the mechanics to make
+them more fun
+
+unsuccessfully attempted to build a fun level with the 
+current mechanics
+</code></pre>
+
+</div></div>
+
+<p>You might notice that level production was really slow going. Then we cut as many levels as we included. Making focused levels with a coherent progression was something I struggled at. I think the last minute establishing of an act structure and subsequent self-editing made the game a lot stronger in the end.</p>
+
+<p>You might also notice that the boulder levels were designed pretty early in the level production. Boulders are hard. So hard we had intended to cut them entirely at one point. We tried a variety of different, less random behaviors. None were any easier. I eventually stumbled on the idea of barking to deflect incoming boulders. It’s not super obvious but combined with hugging the tile column directly below the boulder cave to control the drop behavior, boulders are much more manageable. They’re still difficult but, by the point we introduce them, you’re already well acquainted with monkeys, which have the same jump arc.</p>
+
+<p>In the end I think we were successful in applying the theme to multiple gameplay mechanics but were never able to get completely away from the underlying problem of difficulty being dependent on and determined by tempo.</p>
+
+<p>Anyways, that was the creative process that transformed Beat Drop into Wub-Wub Wescue. Thanks for reading—and playing!</p>
+	</div>
+	
+		<h2>1 Comment</h2>
+<div class="comments">
+		<div class="comment" id="comment-303">
+		<div class="who">Scared</div>
+		<div class="what"><p>Love seeing the behind the scenes, and the different iterations you and @8bitmatt went through to get to the final product.  </p>
+
+<p>A wise Internet once told me, “It’s not about the end product, it’s the journey to the end product that helps you grow.” I’m glad we could see this journey from your perspective.</p>
+</div>
+		<div class="when"><a href="#comment-303" class="datetime" data-timezone="UTC" data-timestamp="1377619596">2013/08/27 16:06:36</a></div>
+	</div>
+	</div>		</div><div class="copy">
+		Copyright © 2012–<span class="dateyear"></span> 
+		<a href="/">Retro Game Crunch</a>.
+	</div></div><script>
+$(function()
+{
+	$('.spoilers-toggle').on('touchstart click', function(event)
+	{
+		if(event.handled !== true)
+		{
+			$(this).parent().toggleClass('open');
+			event.handled = true;
+		}
+		return false;
+	});
+})
+</script>
+<script src="/archive.js"></script><script>cleanup();</script></body>
+</html>

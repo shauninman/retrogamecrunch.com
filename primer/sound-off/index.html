@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Sound Off • Retro Game Crunch</title>
+<script>if((window.devicePixelRatio===undefined?1:window.devicePixelRatio)>1)document.cookie='HTTP_IS_RETINA=1;path=/';</script>
+<meta name="google-site-verification" content="0n15O71rkhohq8oudSJ4AhQ9ZHGrtYQGzZ-hj6_NTGI">
+<meta name="viewport" id="viewport" content="width=800">
+<link rel="stylesheet" href="/styles/rgc.q688883a0dcaa.css">
+<link rel="stylesheet" href="/scripts/highlight/styles/zenburn.css">
+<script src="/scripts/highlight/highlight.pack.js"></script>
+<script src="/scripts/jquery-1.8.3.min.js"></script>
+
+<script src="/scripts/mediaelement/mediaelement-and-player.min.js"></script>
+<link rel="stylesheet" href="/scripts/mediaelement/mediaelementplayer.css">
+<script>
+hljs.tabReplace = '    ';
+hljs.initHighlightingOnLoad();
+
+$(function()
+{
+	$('audio').mediaelementplayer(/* Options */);
+	
+	// disable :hover on touch devices
+	// based on https://gist.github.com/4404503 
+	// via https://twitter.com/javan/status/284873379062890496
+	// + https://twitter.com/pennig/status/285790598642946048
+	// re https://retrogamecrunch.com/tmp/hover
+	if ('createTouch' in document)
+	{
+		$('html').addClass('touch');
+		try
+		{
+			var ignore = /:hover\b/;
+			for (var i=0; i<document.styleSheets.length; i++)
+			{
+				var sheet = document.styleSheets[i];
+				for (var j=sheet.cssRules.length-1; j>=0; j--)
+				{
+					var rule = sheet.cssRules[j];
+					if (rule.type === CSSRule.STYLE_RULE && ignore.test(rule.selectorText))
+					{
+						sheet.deleteRule(j);
+					}
+				}
+			}
+		}
+		catch(e){}
+	}
+});
+
+var then = 1387576800000;
+var deadline = '2013-12-20 22:00:00 UTC';
+var last_mins = -1;
+window.setInterval(function()
+{
+	var now = (new Date).getTime();
+	var remaining = then - now;
+	if (remaining < 0) remaining = 0;
+
+	var sec = 1000;
+	var min = 60 * sec;
+	var hour = 60 * min;
+	var day = 24 * hour;
+
+	var days = Math.floor(remaining / day);
+	remaining -= days * day;
+	var hours = Math.floor(remaining / hour);
+	remaining -= hours * hour;
+	var mins = Math.floor(remaining / min);
+	
+	if (last_mins == mins) return; // prevent unnecessary redraws
+	last_mins = mins;
+
+	var html = '';
+
+	if (days) 	html += '<span class="remaining-days">'+days+' day'+(days>1?'s':'')+'</span> ';
+	if (hours) 	html += '<span class="remaining-days">'+hours+' hour'+(hours>1?'s':'')+'</span> ';
+	if (mins) 	html += '<span class="remaining-days">'+mins+' minute'+(mins>1?'s':'')+'</span> ';
+
+	// DELAY
+	// if (html=='') html = 'To be determined';
+	if (html=='') html = 'Just a few moments';
+
+	$('span.countdown').html(html);
+}, 1 * 1000);
+</script>
+
+
+<link rel="stylesheet" href="/archive.css"><link rel="canonical" href="https://retrogamecrunch.com/primer/sound-off/"></head>
+<body>
+	<div class="wrap wrap-top">
+		<div id="logo-unit">
+			<a id="logo" href="/"><img src="/images/logo-black.png" width="204" height="98" alt="Retro Game Crunch"></a>
+			<a id="funded" href="http://www.kickstarter.com/projects/shauninman/retro-game-crunch-six-games-in-six-months"><img src="/images/funded-with.png" width="116" height="112" alt="Funded with Kickstarter"></a>
+		</div><div id="mini-login">
+	
+</div><div id="status">
+			<div class="currently">
+				<strong>Currently</strong>
+				<a href="/games/6/shuten/">Recovering from Shūten Complete</a>
+			</div></div><ul class="nav nav-main">
+			<li><a href="/">Home</a></li>
+			<li><a href="/games/">Games</a></li>			<li><a href="/rewards/">Rewards</a></li>
+			<li><a href="/journal/">Journal</a></li>
+			<li><a href="/primer/" class="current">Primer</a></li>
+			<li><a href="/about/">About</a></li>
+			<li><a href="/contact/">Contact</a></li>
+		</ul>
+	</div><div class="wide"><div class="wrap">
+					<ul class="nav nav-alt nav-primer">
+				<li><a href="/primer/tools/">Tools</a></li>
+				<li><a href="/primer/getting-started/">Getting Started</a></li>
+				<li><a href="/primer/level-up/">Level Up</a></li>
+				<li><a href="/primer/players-gonna-play/">Players Gonna Play</a></li>
+				<li><a href="/primer/catch-em-all/">Catch ‘em All</a></li>
+				<li><a href="/primer/pitfalls/">Pitfalls!</a></li>
+				<li><a href="/primer/sound-off/" class="current">Sound Off</a></li>
+			</ul>
+				</div></div><div class="wrap wrap-bottom">
+		<div class="content">
+		<h1>Sound Off</h1>
+
+<p>And we’re back! Last time we <a href="/primer/pitfalls/">introduced pits</a>. Now we’re going to add some sound effects and background music. For a little more about our (well, Matt’s) audio workflow, check out the <strong>MML &amp; NSF</strong> section of the <a href="/primer/tools/">Tools</a> Primer. </p>
+
+<p>Matt created custom death and collection sounds for this Primer and a short but unsurprisingly excellent background track. </p>
+
+<p><audio src="/primer/downloads/genki.mp3" type="audio/mp3" controls="controls"><a href="/primer/downloads/genki.mp3">genki.mp3</a></audio></p>
+
+<p>Download the mp3s and add them to your project’s assets folder:</p>
+
+<ul>
+<li><a href="/primer/downloads/collect.mp3">collect.mp3</a></li>
+<li><a href="/primer/downloads/death.mp3">death.mp3</a></li>
+<li><a href="/primer/downloads/genki.mp3">genki.mp3</a></li>
+</ul>
+
+<h2>Stereo Hook-up</h2>
+
+<p>Launch FDT and open ROM.as and add the following:</p>
+
+<pre><code>[Embed(source="assets/collect.mp3")] static public var Mp3Collect : Class;
+[Embed(source="assets/death.mp3")] static public var Mp3Death : Class;
+[Embed(source="assets/genki.mp3")] static public var Mp3Genki : Class;
+</code></pre>
+
+<p>ROM.as should now look like this:</p>
+
+<pre><code>package {
+    public class ROM {
+        [Embed(source="assets/bg.png")] static public var ImgBg : Class;
+        [Embed(source="assets/pits.png")] static public var ImgPits : Class;
+        [Embed(source="assets/ball.png")] static public var ImgBall : Class;
+        [Embed(source="assets/pod.png")] static public var ImgPod : Class;
+
+        [Embed(source="assets/collect.mp3")] static public var Mp3Collect : Class;
+        [Embed(source="assets/death.mp3")] static public var Mp3Death : Class;
+        [Embed(source="assets/genki.mp3")] static public var Mp3Genki : Class;
+    }
+}
+</code></pre>
+
+<p>Save ROM.as and open PlayState.as. We start our background music looping in the create() function by adding:</p>
+
+<pre><code>FlxG.playMusic(ROM.Mp3Genki, 0.75);
+</code></pre>
+
+<p>The above code sets the music’s volume to 75% so the sound effects don’t get drowned out. Speaking of sound effects, in the collectPod() function, add the following:</p>
+
+<pre><code>FlxG.play(ROM.Mp3Collect);
+</code></pre>
+
+<p>With these minor additions PlayState.as should now look like this:</p>
+
+<pre><code>package {
+    import org.flixel.*;
+    // TMX Loading
+    import net.pixelpracht.tmx.*;
+    import flash.events.Event;
+    import flash.net.URLLoader;
+    import flash.net.URLRequest;
+
+    public class PlayState extends FlxState {
+        private var hasLoaded:Boolean = false;
+        private var background:FlxTilemap = new FlxTilemap();
+        private var pits:FlxTilemap = new FlxTilemap();
+        private var ball:Ball;
+        private var podGroup:FlxGroup = new FlxGroup();
+
+        override public function create():void {
+            // initiate variables, add sprites, tilemaps, etc
+            FlxG.playMusic(ROM.Mp3Genki, 0.75);
+            loadTmxFile();
+        }
+
+        // Level loading
+        private function loadTmxFile():void {
+            var loader:URLLoader = new URLLoader();
+            loader.addEventListener(Event.COMPLETE, onTmxLoaded);
+            loader.load(new URLRequest('level.tmx'));
+        }
+
+        private function onTmxLoaded(e:Event) : void {
+            var loader:URLLoader = e.target as URLLoader;
+            var xml:XML = new XML(loader.data);
+            var tmx:TmxMap = new TmxMap(xml);
+            loadStateFromTmx(tmx);
+            hasLoaded = true; // allow updates
+        }
+
+        private function loadStateFromTmx(tmx:TmxMap) : void {
+            var csvBg:String = tmx.getLayer('bg').toCsv(tmx.getTileSet('bg'));
+            background.loadMap(csvBg, ROM.ImgBg, 16, 16, FlxTilemap.OFF,0,0,2);
+            add(background);
+
+            var csvPits:String = tmx.getLayer('pits').toCsv(tmx.getTileSet('pits'));
+            pits.loadMap(csvPits, ROM.ImgPits, 16, 16, FlxTilemap.AUTO);
+            add(pits);
+
+            var group : TmxObjectGroup = tmx.getObjectGroup('entities');
+            for each (var object:TmxObject in group.objects) {
+                spawnObject(object);
+            }
+            add(podGroup);
+            add(ball);
+
+            FlxG.camera.setBounds(0, 0, background.width, background.height, true);
+            FlxG.camera.follow(ball, FlxCamera.STYLE_TOPDOWN_TIGHT);
+        }
+
+        private function spawnObject(obj : TmxObject) : void {
+            switch(obj.type) {
+                case "Ball":
+                    ball = new Ball(obj.x, obj.y);
+                break;
+
+                case "Pod":
+                    podGroup.add(new Pod(obj.x, obj.y));
+                break;
+            }
+        }
+
+        override public function update():void {
+            // listen for user input, move sprites, etc
+
+            if (!hasLoaded) return;
+
+            if (FlxG.keys.justPressed("ENTER")) {
+                FlxG.switchState(new PlayState); // reload to test map changes
+            }
+
+            // handle user input
+            var ballVelocity:Number = 64;
+
+            ball.velocity.x = 0;
+            ball.velocity.y = 0;
+
+            if (ball.alive) {
+                if (FlxG.keys.RIGHT) {
+                    ball.velocity.x = ballVelocity;
+                }
+                else if (FlxG.keys.LEFT) {
+                    ball.velocity.x = -ballVelocity;
+                }
+
+                if (FlxG.keys.UP) {
+                    ball.velocity.y = -ballVelocity;
+                }
+                else if (FlxG.keys.DOWN) {
+                    ball.velocity.y = ballVelocity;
+                }
+            }
+
+            // update after user input
+            super.update();
+
+            // collision logic
+            FlxG.collide(background, ball);
+            FlxG.overlap(podGroup, ball, collectPod);
+
+            // it's the pits!
+            pits.overlapsWithCallback(ball, Actor.overlapPit);
+            ball.afterOverlapPit();
+
+            if (ball.didFallIntoPit &amp;&amp; ball.finished) {
+                FlxG.switchState(new PlayState);
+            }
+        }
+
+        private function collectPod(aPod:Pod, aBall:Ball):void {
+            aBall; // silence FDT warning about unused arg
+            aPod.kill();
+            FlxG.play(ROM.Mp3Collect);
+        }
+    }
+}
+</code></pre>
+
+<p>Save PlayState.as and open Ball.as. First, replace:</p>
+
+<pre><code>import org.flixel.FlxSprite;
+</code></pre>
+
+<p>with:</p>
+
+<pre><code>import org.flixel.*;
+</code></pre>
+
+<p>Then, inside the fallIntoPit() function, add:</p>
+
+<pre><code>FlxG.pauseSounds();
+FlxG.play(ROM.Mp3Death);
+</code></pre>
+
+<p>This stops the background music and plays the ball’s death squawk. </p>
+
+<p>Ball.as should now look like this:</p>
+
+<pre><code>package {
+    import org.flixel.*;
+
+    public class Ball extends Actor {
+
+        public function Ball(X : Number = 0, Y : Number = 0) {
+            super(X, Y);
+            loadGraphic(ROM.ImgBall, true, false, 16, 16);
+            addAnimation("bounce", [0,1,2,3], 10);
+            addAnimation("fall", [4,5,6,7,7,7,7,7,7,7,7,7,7,7,7], 10, false);
+            play("bounce");
+            offset.y = 4;
+        }
+
+        override public function fallIntoPit():void {
+            play("fall");
+            FlxG.pauseSounds();
+            FlxG.play(ROM.Mp3Death);
+        }
+    }
+}
+</code></pre>
+
+<p>Save Ball.as and run your game. Music and sound effects go a long way towards making a fledging game feel more real. </p>
+
+<p>And that concludes this series of Primers. This weekend is our first Crunch! Backers can continue to follow our development process in the <a href="/journal/">Journal</a> and everyone can check back once a month for <a href="/">a new game</a>!</p>
+	</div><div class="copy">
+		Copyright © 2012–<span class="dateyear"></span> 
+		<a href="/">Retro Game Crunch</a>.
+	</div></div><script>
+$(function()
+{
+	$('.spoilers-toggle').on('touchstart click', function(event)
+	{
+		if(event.handled !== true)
+		{
+			$(this).parent().toggleClass('open');
+			event.handled = true;
+		}
+		return false;
+	});
+})
+</script>
+<script src="/archive.js"></script><script>cleanup();</script></body>
+</html>

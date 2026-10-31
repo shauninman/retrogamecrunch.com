@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Getting Started • Retro Game Crunch</title>
+<script>if((window.devicePixelRatio===undefined?1:window.devicePixelRatio)>1)document.cookie='HTTP_IS_RETINA=1;path=/';</script>
+<meta name="google-site-verification" content="0n15O71rkhohq8oudSJ4AhQ9ZHGrtYQGzZ-hj6_NTGI">
+<meta name="viewport" id="viewport" content="width=800">
+<link rel="stylesheet" href="/styles/rgc.q688883a0dcaa.css">
+<link rel="stylesheet" href="/scripts/highlight/styles/zenburn.css">
+<script src="/scripts/highlight/highlight.pack.js"></script>
+<script src="/scripts/jquery-1.8.3.min.js"></script>
+
+<script src="/scripts/mediaelement/mediaelement-and-player.min.js"></script>
+<link rel="stylesheet" href="/scripts/mediaelement/mediaelementplayer.css">
+<script>
+hljs.tabReplace = '    ';
+hljs.initHighlightingOnLoad();
+
+$(function()
+{
+	$('audio').mediaelementplayer(/* Options */);
+	
+	// disable :hover on touch devices
+	// based on https://gist.github.com/4404503 
+	// via https://twitter.com/javan/status/284873379062890496
+	// + https://twitter.com/pennig/status/285790598642946048
+	// re https://retrogamecrunch.com/tmp/hover
+	if ('createTouch' in document)
+	{
+		$('html').addClass('touch');
+		try
+		{
+			var ignore = /:hover\b/;
+			for (var i=0; i<document.styleSheets.length; i++)
+			{
+				var sheet = document.styleSheets[i];
+				for (var j=sheet.cssRules.length-1; j>=0; j--)
+				{
+					var rule = sheet.cssRules[j];
+					if (rule.type === CSSRule.STYLE_RULE && ignore.test(rule.selectorText))
+					{
+						sheet.deleteRule(j);
+					}
+				}
+			}
+		}
+		catch(e){}
+	}
+});
+
+var then = 1387576800000;
+var deadline = '2013-12-20 22:00:00 UTC';
+var last_mins = -1;
+window.setInterval(function()
+{
+	var now = (new Date).getTime();
+	var remaining = then - now;
+	if (remaining < 0) remaining = 0;
+
+	var sec = 1000;
+	var min = 60 * sec;
+	var hour = 60 * min;
+	var day = 24 * hour;
+
+	var days = Math.floor(remaining / day);
+	remaining -= days * day;
+	var hours = Math.floor(remaining / hour);
+	remaining -= hours * hour;
+	var mins = Math.floor(remaining / min);
+	
+	if (last_mins == mins) return; // prevent unnecessary redraws
+	last_mins = mins;
+
+	var html = '';
+
+	if (days) 	html += '<span class="remaining-days">'+days+' day'+(days>1?'s':'')+'</span> ';
+	if (hours) 	html += '<span class="remaining-days">'+hours+' hour'+(hours>1?'s':'')+'</span> ';
+	if (mins) 	html += '<span class="remaining-days">'+mins+' minute'+(mins>1?'s':'')+'</span> ';
+
+	// DELAY
+	// if (html=='') html = 'To be determined';
+	if (html=='') html = 'Just a few moments';
+
+	$('span.countdown').html(html);
+}, 1 * 1000);
+</script>
+
+
+<link rel="stylesheet" href="/archive.css"><link rel="canonical" href="https://retrogamecrunch.com/primer/getting-started/"></head>
+<body>
+	<div class="wrap wrap-top">
+		<div id="logo-unit">
+			<a id="logo" href="/"><img src="/images/logo-black.png" width="204" height="98" alt="Retro Game Crunch"></a>
+			<a id="funded" href="http://www.kickstarter.com/projects/shauninman/retro-game-crunch-six-games-in-six-months"><img src="/images/funded-with.png" width="116" height="112" alt="Funded with Kickstarter"></a>
+		</div><div id="mini-login">
+	
+</div><div id="status">
+			<div class="currently">
+				<strong>Currently</strong>
+				<a href="/games/6/shuten/">Recovering from Shūten Complete</a>
+			</div></div><ul class="nav nav-main">
+			<li><a href="/">Home</a></li>
+			<li><a href="/games/">Games</a></li>			<li><a href="/rewards/">Rewards</a></li>
+			<li><a href="/journal/">Journal</a></li>
+			<li><a href="/primer/" class="current">Primer</a></li>
+			<li><a href="/about/">About</a></li>
+			<li><a href="/contact/">Contact</a></li>
+		</ul>
+	</div><div class="wide"><div class="wrap">
+					<ul class="nav nav-alt nav-primer">
+				<li><a href="/primer/tools/">Tools</a></li>
+				<li><a href="/primer/getting-started/" class="current">Getting Started</a></li>
+				<li><a href="/primer/level-up/">Level Up</a></li>
+				<li><a href="/primer/players-gonna-play/">Players Gonna Play</a></li>
+				<li><a href="/primer/catch-em-all/">Catch ‘em All</a></li>
+				<li><a href="/primer/pitfalls/">Pitfalls!</a></li>
+				<li><a href="/primer/sound-off/">Sound Off</a></li>
+			</ul>
+				</div></div><div class="wrap wrap-bottom">
+		<div class="content">
+		<h1>Getting Started</h1>
+
+<p>We previously wrote about <a href="/primer/tools/">the tools</a> we gravitate towards when jamming on games. Today we’re going to walk through bootstrapping a simple game using Flixel, FDT, and Tiled. By the end of this Primer series, we’ll have a playable version of this:</p>
+
+<p><img src="/ks-updates/primer-simple.gif" alt="primer-simple.gif"></p>
+
+<h2>Setup</h2>
+
+<p>These first few steps are a one-time thing. We’re going to assume you have some familiarity with ActionScript at this point. Colin Moock’s <a href="http://shop.oreilly.com/product/9780596526948.do">Essential ActionScript 3.0</a> is a great way to get up to speed if you’re unfamiliar with the language.</p>
+
+<p>First, download the <a href="http://www.adobe.com/devnet/flex/flex-sdk-download.html">Flex SDK</a>. Unzip and store in a safe place (don’t leave it in your Downloads folder). Download and install the <a href="http://www.adobe.com/support/flashplayer/downloads.html">Flash Player</a> Projector Content Debugger (note that you want the Projector not Plugin). Download and install <a href="http://fdt.powerflasher.com/buy-download/">FDT Free</a> (note that the recommended version is easily overlooked as a header and not a download link). During installation FDT will ask you to find the Flex SDK you just squirreled away. In FDT’s Preferences (FDT 5 &gt; Preferences…) drill down to FDT &gt; Tools &gt; Flash and browse to the debug Flash Player you just installed. </p>
+
+<p><img src="/primer/images/fdt-tools-flash.png" alt="fdt-tools-flash.png"></p>
+
+<p>Download and unzip the latest version of <a href="http://flixel.org/download.html">Flixel</a> (note that the downloaded file will be a zip file and the name will start with AdamAtomic-flixel-). Finally, download and install <a href="http://www.mapeditor.org/">Tiled</a> (the download link is on the right below the screenshots).</p>
+
+<p>The remaining steps are necessary <em>every</em> time you want to create a new game. Don’t be overwhelmed, this takes longer to read than to actually do!</p>
+
+<p>Open up FDT and create a new project (File &gt; New &gt; New FDT Project). Enter a project name, choose a location to save the project files, select the Web project type, delete the automatically suggested Default Package, and click the Finish button. Now switch to the Finder and navigate to the project folder you just created with FDT. In a new Finder window, open your Downloads folder. Inside you should have an AdamAtomic-flixel-* folder. Copy its org folder and paste it into your project’s src folder in the other Finder window. You’ve just added Flixel to your project!</p>
+
+<p><img src="/primer/images/fdt-explorer.png" alt="fdt-explorer.png"></p>
+
+<p>Return to FDT. We called our project Primer so we now have a Primer project in the FDT Explorer palette. If we expand the project and src folder we find a Primer.as file (you should also see the org folder you just copied over in the Finder too). Open Primer.as. Then open Debug Configurations (Run &gt; Debug Configurations…). In the list to the left double-click FDT SWF Application to automatically create a new debug configuration for your new project. Switch to the Start tab and change Viewer to Adobe Flash Player. First click the Apply button. Then the Close button below it.</p>
+
+<p><em>FDT Gotcha:</em> If the FDT interface ever reconfigures itself (hard to explain, you’ll know it when you see it) you just need to change its Perspective back to Flash FDT (Window &gt; Open Perspective &gt; Flash FDT). One of those “quirks” we mentioned yesterday.</p>
+
+<p>If you run your new project (click the little beetle icon in the top left of the FDT window) a blank white window should open in Flash Player Debugger. Time to talk Flixel!</p>
+
+<h2>Flixel</h2>
+
+<p>First some high-level, conceptual stuff regarding Flixel and organizing your games, then we’ll dig into some code.</p>
+
+<p>In Flixel, a game is organized into states (or screens). Each state draws sprites and tilemaps (among other things) and responds to user input. You might have a title state that draws the title screen as a sprite and responds to clicks to start a new game. You might have a play state that draws player and enemy sprites, foreground and background tilemaps, and responds to user input allowing the player to explore a huge map. You might have an end state that displays a cutscene made up of many animated sprites.</p>
+
+<p>In Flixel, these concepts are represented by subclasses of the FlxGame, FlxState, FlxSprite, and FlxTilemap classes. Onto the code!</p>
+
+<p>Let’s open Primer.as and extend FlxGame. First replace:</p>
+
+<pre><code>import flash.display.Sprite;
+</code></pre>
+
+<p>with:</p>
+
+<pre><code>import org.flixel.*;
+[SWF(width="480", height="320", backgroundColor="#000000")]
+</code></pre>
+
+<p>The first line imports the Flixel library (which we’ll begin using very shortly, promise). The second sets the dimensions and default background color of our game. In this example our game will be 240 pixel by 160 pixels scaled 200%.</p>
+
+<p>Now replace:</p>
+
+<pre><code>public class Primer extends Sprite {
+</code></pre>
+
+<p>with:</p>
+
+<pre><code>public class Primer extends FlxGame {
+</code></pre>
+
+<p>Inside the Primer() function definition add:</p>
+
+<pre><code>super(240,160,PlayState,2);
+</code></pre>
+
+<p>This sets our unscaled width and height to 240 pixels by 160 pixels. PlayState is the name of the default state (we’ll create this in a moment). The final argument, 2, sets the scale to 200%. Ignore the PlayState error (we’re about to define the missing class) and save and close Primer.as.</p>
+
+<p>Your Primer.as should now look like this:</p>
+
+<pre><code>package {
+    import org.flixel.*;
+    [SWF(width="480", height="320", backgroundColor="#000000")]
+
+    public class Primer extends FlxGame {
+        public function Primer() {
+            super(240,160,PlayState,2);
+        }
+    }
+}
+</code></pre>
+
+<p>Create PlayState.as (File &gt; New &gt; ActionScript Class). Enter the Class name PlayState, enter the Superclass org.flixel.FlxState, make sure “Explicitly invoke superclass constructor” is unchecked, and click the Finish button.</p>
+
+<p>First replace:</p>
+
+<pre><code>import org.flixel.FlxState;
+</code></pre>
+
+<p>with:</p>
+
+<pre><code>import org.flixel.*;
+</code></pre>
+
+<p>Then inside the PlayState class definition add the following:</p>
+
+<pre><code>override public function create():void {
+    // initiate variables, add sprites, tilemaps, etc
+}
+
+override public function update():void {
+    // listen for user input, move sprites, etc
+}
+</code></pre>
+
+<p>With these last changes your PlayState.as should look like this:</p>
+
+<pre><code>package {
+    import org.flixel.*;
+
+    public class PlayState extends FlxState {
+        override public function create():void {
+            // initiate variables, add sprites, tilemaps, etc
+        }
+
+        override public function update():void {
+            // listen for user input, move sprites, etc
+        }
+    }
+}
+</code></pre>
+
+<p>Run the project and you should see an empty black screen. Progress! Now we’re ready to start <a href="/primer/level-up/">adding things to our game</a>.</p>
+	</div><div class="copy">
+		Copyright © 2012–<span class="dateyear"></span> 
+		<a href="/">Retro Game Crunch</a>.
+	</div></div><script>
+$(function()
+{
+	$('.spoilers-toggle').on('touchstart click', function(event)
+	{
+		if(event.handled !== true)
+		{
+			$(this).parent().toggleClass('open');
+			event.handled = true;
+		}
+		return false;
+	});
+})
+</script>
+<script src="/archive.js"></script><script>cleanup();</script></body>
+</html>
