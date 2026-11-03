@@ -13,6 +13,7 @@
                 url: container.getAttribute('data-swf'),
                 autoplay: 'on',
                 splashScreen: false,
+                unmuteOverlay: 'hidden',
                 preferredRenderer: 'wgpu-webgl',
                 backgroundColor: container.getAttribute('data-background'),
                 allowScriptAccess: true,
